@@ -15,13 +15,16 @@ const std::string s_answerChillOut("Whoa, chill out!");
 
 std::string GetBobAnswer(const std::string& speech)
 {
-    if (!speech.empty() && speech.back() == '?')
+    if (!speech.empty())
     {
-        return s_answerSure;
-    }
-    else if (!speech.empty() && speech.back() == '!')
-    {
-        return s_answerChillOut;
+        if (speech.back() == '?')
+        {
+            return s_answerSure;
+        }
+        else if (speech.back() == '!')
+        {
+            return s_answerChillOut;
+        }
     }
 
     return s_answerWhatever;
