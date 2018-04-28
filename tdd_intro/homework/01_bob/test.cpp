@@ -9,7 +9,7 @@ He answers 'Whatever.' to anything else.
 */
 #include <gtest/gtest.h>
 
-const std::string s_answerWhatever("Whatever");
+const std::string s_answerWhatever("Whatever.");
 const std::string s_answerSure("Sure.");
 
 std::string GetBobAnswer(const std::string& speech)
