@@ -19,6 +19,10 @@ std::string GetBobAnswer(const std::string& speech)
     {
         return s_answerSure;
     }
+    else if (!speech.empty() && speech.back() == '!')
+    {
+        return s_answerChillOut;
+    }
 
     return s_answerWhatever;
 }
