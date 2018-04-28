@@ -14,7 +14,7 @@ const std::string s_answerSure("Sure.");
 
 std::string GetBobAnswer(const std::string& speech)
 {
-    if (speech == "?")
+    if (speech.find('?') != std::string::npos)
     {
         return s_answerSure;
     }
