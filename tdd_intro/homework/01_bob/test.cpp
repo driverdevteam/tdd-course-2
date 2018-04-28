@@ -36,3 +36,8 @@ TEST(BOB, GetBobAnswer_AskQuestion)
 {
     EXPECT_EQ(GetBobAnswer("How are you?"), s_answerSure);
 }
+
+TEST(BOB, GetBobAnswer_QuestionMarkNotLast)
+{
+    EXPECT_EQ(GetBobAnswer("What?What"), s_answerWhatever);
+}
