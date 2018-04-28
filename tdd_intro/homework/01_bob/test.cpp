@@ -20,3 +20,8 @@ TEST(BOB, GetBobAnswer_TellNothing)
 {
     EXPECT_EQ(GetBobAnswer(""), s_answerWhatever);
 }
+
+TEST(BOB, GetBobAnswer_TellQuestionMark)
+{
+    EXPECT_EQ(GetBobAnswer("?"), "Sure.");
+}
