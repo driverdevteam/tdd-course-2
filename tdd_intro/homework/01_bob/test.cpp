@@ -10,12 +10,13 @@ He answers 'Whatever.' to anything else.
 #include <gtest/gtest.h>
 
 const std::string s_answerWhatever("Whatever");
+const std::string s_answerSure("Sure.");
 
 std::string GetBobAnswer(const std::string& speech)
 {
     if (speech == "?")
     {
-        return "Sure.";
+        return s_answerSure;
     }
 
     return s_answerWhatever;
@@ -28,5 +29,5 @@ TEST(BOB, GetBobAnswer_TellNothing)
 
 TEST(BOB, GetBobAnswer_TellQuestionMark)
 {
-    EXPECT_EQ(GetBobAnswer("?"), "Sure.");
+    EXPECT_EQ(GetBobAnswer("?"), s_answerSure);
 }
