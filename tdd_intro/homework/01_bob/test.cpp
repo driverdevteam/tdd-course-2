@@ -31,3 +31,8 @@ TEST(BOB, GetBobAnswer_TellQuestionMark)
 {
     EXPECT_EQ(GetBobAnswer("?"), s_answerSure);
 }
+
+TEST(BOB, GetBobAnswer_AskQuestion)
+{
+    EXPECT_EQ(GetBobAnswer("How are you?"), s_answerSure);
+}
