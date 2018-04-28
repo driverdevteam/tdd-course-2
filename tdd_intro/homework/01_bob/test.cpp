@@ -13,6 +13,11 @@ const std::string s_answerWhatever("Whatever");
 
 std::string GetBobAnswer(const std::string& speech)
 {
+    if (speech == "?")
+    {
+        return "Sure.";
+    }
+
     return s_answerWhatever;
 }
 
