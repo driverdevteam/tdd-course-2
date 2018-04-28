@@ -59,3 +59,8 @@ TEST(BOB, GetBobAnswer_Yell)
 {
     EXPECT_EQ(GetBobAnswer("HELLO!"), s_answerChillOut);
 }
+
+TEST(BOB, GetBobAnswer_ExclamationMarkNotLast)
+{
+    EXPECT_EQ(GetBobAnswer("HI!HI"), s_answerWhatever);
+}
