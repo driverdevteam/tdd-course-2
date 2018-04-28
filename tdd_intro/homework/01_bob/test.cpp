@@ -11,7 +11,7 @@ He answers 'Whatever.' to anything else.
 
 std::string GetBobAnswer(const std::string& speech)
 {
-    return {};
+    return "Whatever";
 }
 
 TEST(BOB, GetBobAnswer_TellNothing)
