@@ -12,6 +12,7 @@ He answers 'Whatever.' to anything else.
 const std::string s_answerWhatever("Whatever.");
 const std::string s_answerSure("Sure.");
 const std::string s_answerChillOut("Whoa, chill out!");
+const std::string s_answerFine("Fine. Be that way!");
 
 std::string GetBobAnswer(const std::string& speech)
 {
@@ -63,4 +64,9 @@ TEST(BOB, GetBobAnswer_Yell)
 TEST(BOB, GetBobAnswer_ExclamationMarkNotLast)
 {
     EXPECT_EQ(GetBobAnswer("HI!HI"), s_answerWhatever);
+}
+
+TEST(BOB, GetBobAnswer_AddressBobNotSayingAnything)
+{
+    EXPECT_EQ(GetBobAnswer("Bob"), s_answerFine);
 }
