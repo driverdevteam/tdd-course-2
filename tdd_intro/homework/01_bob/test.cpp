@@ -14,7 +14,7 @@ const std::string s_answerSure("Sure.");
 const std::string s_answerChillOut("Whoa, chill out!");
 const std::string s_answerFine("Fine. Be that way!");
 const std::string s_name("Bob");
-const std::string s_nameWithDot("Bob.");
+const std::string s_nameWithDot = s_name + ".";
 
 std::string GetBobAnswer(const std::string& speech)
 {
@@ -80,4 +80,9 @@ TEST(BOB, GetBobAnswer_AddressBobNotSayingAnything)
 TEST(BOB, GetBobAnswer_AddressBobWithDot)
 {
     EXPECT_EQ(GetBobAnswer("Bob."), s_answerFine);
+}
+
+TEST(BOB, GetBobAnswer_AddressBobWithOtherWords)
+{
+    EXPECT_EQ(GetBobAnswer("Bob, wake up."), s_answerWhatever);
 }
