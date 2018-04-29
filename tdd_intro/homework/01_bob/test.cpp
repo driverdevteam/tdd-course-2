@@ -14,6 +14,7 @@ const std::string s_answerSure("Sure.");
 const std::string s_answerChillOut("Whoa, chill out!");
 const std::string s_answerFine("Fine. Be that way!");
 const std::string s_name("Bob");
+const std::string s_nameWithDot("Bob.");
 
 std::string GetBobAnswer(const std::string& speech)
 {
@@ -27,7 +28,7 @@ std::string GetBobAnswer(const std::string& speech)
         {
             return s_answerChillOut;
         }
-        else if (speech == s_name)
+        else if (speech == s_name || speech == s_nameWithDot)
         {
             return s_answerFine;
         }
