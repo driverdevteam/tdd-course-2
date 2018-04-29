@@ -75,3 +75,8 @@ TEST(BOB, GetBobAnswer_AddressBobNotSayingAnything)
 {
     EXPECT_EQ(GetBobAnswer("Bob"), s_answerFine);
 }
+
+TEST(BOB, GetBobAnswer_AddressBobWithDot)
+{
+    EXPECT_EQ(GetBobAnswer("Bob."), s_answerFine);
+}
