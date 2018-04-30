@@ -40,3 +40,8 @@ TEST(Bobtest, BobAnswer_input_empty_return_Fine_Be_that_way)
 {
     EXPECT_EQ("Fine. Be that way!", BobAnswer(""));
 }
+
+TEST(Bobtest, BobAnswer_input_qwerty_return_Whateve)
+{
+    EXPECT_EQ("Whatever.", BobAnswer("qwerty"));
+}
