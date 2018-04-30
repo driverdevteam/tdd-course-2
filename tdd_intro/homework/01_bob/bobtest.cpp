@@ -4,6 +4,11 @@
 
 std::string BobAnswer(const std::string& tellBob)
 {
+    if (tellBob.empty())
+    {
+        return "Fine. Be that way!";
+    }
+
     if (tellBob.back() == '?')
     {
         return "Sure.";
