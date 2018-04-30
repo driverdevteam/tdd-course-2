@@ -9,13 +9,14 @@ std::string BobAnswer(const std::string& tellBob)
         return "Fine. Be that way!";
     }
 
-    if (tellBob.back() == '?')
+    switch (tellBob.back())
     {
+    case '?':
         return "Sure.";
-    }
-    else if (tellBob.back() == '!')
-    {
+    case '!':
         return "Whoa, chill out!";
+    default:
+        break;
     }
 
     return "Whatever.";
