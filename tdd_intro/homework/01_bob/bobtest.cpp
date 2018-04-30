@@ -4,7 +4,7 @@
 
 std::string BobAnswer(const std::string& tellBob)
 {
-    if (tellBob == "?")
+    if (tellBob.back() == '?')
     {
         return "Sure.";
     }
