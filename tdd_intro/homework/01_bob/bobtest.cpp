@@ -13,6 +13,10 @@ std::string BobAnswer(const std::string& tellBob)
     {
         return "Sure.";
     }
+    else if (tellBob == "qwerty")
+    {
+        return "Whatever.";
+    }
     return "Whoa, chill out!";
 }
 
