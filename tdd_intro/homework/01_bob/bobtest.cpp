@@ -4,7 +4,11 @@
 
 std::string BobAnswer(const std::string& tellBob)
 {
-    return "Sure.";
+    if (tellBob == "?")
+    {
+        return "Sure.";
+    }
+    return "Whoa, chill out!";
 }
 
 TEST(Bobtest, BobAnswer_input_single_question_mark_return_shure)
