@@ -55,3 +55,8 @@ TEST(Bobtest, BobAnswer_input_text_with_question_mark_not_last_return_Whateve)
 {
     EXPECT_EQ("Whatever.", BobAnswer("How are you?."));
 }
+
+TEST(Bobtest, BobAnswer_input_text_with_exclamation_mark_not_last_return_Whateve)
+{
+    EXPECT_EQ("Whatever.", BobAnswer("Shut up!."));
+}
