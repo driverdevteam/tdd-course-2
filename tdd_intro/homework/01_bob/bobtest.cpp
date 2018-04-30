@@ -17,6 +17,7 @@ std::string BobAnswer(const std::string& tellBob)
     {
         return "Whoa, chill out!";
     }
+
     return "Whatever.";
 }
 
@@ -48,4 +49,9 @@ TEST(Bobtest, BobAnswer_input_empty_return_Fine_Be_that_way)
 TEST(Bobtest, BobAnswer_input_qwerty_return_Whateve)
 {
     EXPECT_EQ("Whatever.", BobAnswer("qwerty"));
+}
+
+TEST(Bobtest, BobAnswer_input_text_with_question_mark_not_last_return_Whateve)
+{
+    EXPECT_EQ("Whatever.", BobAnswer("How are you?."));
 }
