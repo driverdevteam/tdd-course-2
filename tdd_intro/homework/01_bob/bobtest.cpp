@@ -13,7 +13,7 @@ std::string BobAnswer(const std::string& tellBob)
     {
         return "Sure.";
     }
-    else if (tellBob == "!")
+    else if (tellBob.back() == '!')
     {
         return "Whoa, chill out!";
     }
