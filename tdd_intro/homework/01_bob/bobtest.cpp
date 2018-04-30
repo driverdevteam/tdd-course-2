@@ -28,6 +28,10 @@ TEST(Bobtest, BobAnswer_input_exclamation_mark_return_Whoa_chill_out)
 
 TEST(Bobtest, BobAnswer_input_text_with_exclamation_mark_return_Whoa_chill_out)
 {
-    EXPECT_EQ("Whoa, chill out!", BobAnswer("!"));
+    EXPECT_EQ("Whoa, chill out!", BobAnswer("Shut up!"));
 }
 
+TEST(Bobtest, BobAnswer_input_empty_return_Fine_Be_that_way)
+{
+    EXPECT_EQ("Fine. Be that way!", BobAnswer(""));
+}
