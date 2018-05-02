@@ -10,12 +10,17 @@ He answers 'Whatever.' to anything else.
 #include <gtest/gtest.h>
 #include <string>
 
+namespace
+{
+    const std::string sureString = "Sure";
+}
+
 std::string GetAnswerFromBob(std::string&& str)
 {
-    return "Sure";
+    return sureString;
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsSure)
 {
-    EXPECT_EQ("Sure", GetAnswerFromBob("Bobby?"));
+    EXPECT_EQ(sureString, GetAnswerFromBob("Bobby?"));
 }
