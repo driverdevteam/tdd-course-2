@@ -13,6 +13,7 @@ He answers 'Whatever.' to anything else.
 namespace
 {
     const std::string sureString = "Sure";
+    const std::string whoaString = "Whoa, chill out!";
 }
 
 std::string GetAnswerFromBob(std::string&& str)
@@ -22,7 +23,7 @@ std::string GetAnswerFromBob(std::string&& str)
         return sureString;
     }
 
-    return "Whoa, chill out!";
+    return whoaString;
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsSure)
@@ -32,5 +33,5 @@ TEST(BobTaskTests, GetAnswerFromBob_IsSure)
 
 TEST(BobTaskTests, GetAnswerFromBob_IsWhoaChillOut)
 {
-    EXPECT_EQ("Whoa, chill out!", GetAnswerFromBob("Bobby!"));
+    EXPECT_EQ(whoaString, GetAnswerFromBob("Bobby!"));
 }
