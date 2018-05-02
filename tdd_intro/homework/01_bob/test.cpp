@@ -17,7 +17,12 @@ namespace
 
 std::string GetAnswerFromBob(std::string&& str)
 {
-    return sureString;
+    if (str.find('?') != str.npos)
+    {
+        return sureString;
+    }
+
+    return "Whoa, chill out!";
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsSure)
