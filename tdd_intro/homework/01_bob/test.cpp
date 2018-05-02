@@ -27,8 +27,12 @@ std::string GetAnswerFromBob(std::string&& str)
     {
         return whoaString;
     }
+    if (str.empty())
+    {
+        return fineString;
+    }
 
-    return fineString;
+    return "Whatever.";
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsSure)
