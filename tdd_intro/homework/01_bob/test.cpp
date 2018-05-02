@@ -22,8 +22,12 @@ std::string GetAnswerFromBob(std::string&& str)
     {
         return sureString;
     }
+    if (str.find('!') != str.npos)
+    {
+        return whoaString;
+    }
 
-    return whoaString;
+    return "Fine. Be that way!";
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsSure)
