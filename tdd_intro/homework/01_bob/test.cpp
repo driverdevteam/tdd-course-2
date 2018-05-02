@@ -24,3 +24,8 @@ TEST(BobTaskTests, GetAnswerFromBob_IsSure)
 {
     EXPECT_EQ(sureString, GetAnswerFromBob("Bobby?"));
 }
+
+TEST(BobTaskTests, GetAnswerFromBob_IsWhoaChillOut)
+{
+    EXPECT_EQ("Whoa, chill out!", GetAnswerFromBob("Bobby!"));
+}
