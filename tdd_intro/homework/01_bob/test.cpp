@@ -12,54 +12,54 @@ He answers 'Whatever.' to anything else.
 
 namespace
 {
-    const std::string sureString = "Sure.";
-    const std::string whoaString = "Whoa, chill out!";
-    const std::string fineString = "Fine. Be that way!";
-    const std::string whateverString = "Whatever.";
+    const std::string sureAnswerString = "Sure.";
+    const std::string whoaAnsertString = "Whoa, chill out!";
+    const std::string fineBeThatWayAnswerString = "Fine. Be that way!";
+    const std::string whateverAnswerString = "Whatever.";
 }
 
 std::string GetAnswerFromBob(std::string&& str)
 {
     if (str.empty())
     {
-        return fineString;
+        return fineBeThatWayAnswerString;
     }
     switch(str.back())
     {
     case '?':
-        return sureString;
+        return sureAnswerString;
         break;
     case '!':
-        return whoaString;
+        return whoaAnsertString;
         break;
     default:
         break;
     }
 
-    return whateverString;
+    return whateverAnswerString;
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsSure)
 {
-    EXPECT_EQ(sureString, GetAnswerFromBob("Bobby?"));
+    EXPECT_EQ(sureAnswerString, GetAnswerFromBob("Bobby?"));
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsWhoaChillOut)
 {
-    EXPECT_EQ(whoaString, GetAnswerFromBob("Bobby!"));
+    EXPECT_EQ(whoaAnsertString, GetAnswerFromBob("Bobby!"));
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsFineBeThatWay)
 {
-    EXPECT_EQ(fineString, GetAnswerFromBob(""));
+    EXPECT_EQ(fineBeThatWayAnswerString, GetAnswerFromBob(""));
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsWhatever)
 {
-    EXPECT_EQ(whateverString, GetAnswerFromBob("Bobby.Hey.Bobby.Go.go.Go."));
+    EXPECT_EQ(whateverAnswerString, GetAnswerFromBob("Bobby.Hey.Bobby.Go.go.Go."));
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsQuestionInTheStartAndExclamationInTheEnd)
 {
-    EXPECT_EQ(whoaString, GetAnswerFromBob("Bobby?Hey.Bobby.Bobbo.Bibbif.Go!"));
+    EXPECT_EQ(whoaAnsertString, GetAnswerFromBob("Bobby?Hey.Bobby.Bobbo.Bibbif.Go!"));
 }
