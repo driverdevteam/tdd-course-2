@@ -12,7 +12,7 @@ He answers 'Whatever.' to anything else.
 
 namespace
 {
-    const std::string sureString = "Sure";
+    const std::string sureString = "Sure.";
     const std::string whoaString = "Whoa, chill out!";
     const std::string fineString = "Fine. Be that way!";
 }
@@ -45,3 +45,9 @@ TEST(BobTaskTests, GetAnswerFromBob_IsFineBeThatWay)
 {
     EXPECT_EQ(fineString, GetAnswerFromBob(""));
 }
+
+TEST(BobTaskTests, GetAnswerFromBob_IsWhatever)
+{
+    EXPECT_EQ("Whatever.", GetAnswerFromBob("Bobby.Hey.Bobby.Go.go.Go."));
+}
+
