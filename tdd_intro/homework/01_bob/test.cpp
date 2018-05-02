@@ -12,7 +12,7 @@ He answers 'Whatever.' to anything else.
 
 std::string GetAnswerFromBob(std::string&& str)
 {
-    return str;
+    return "Sure";
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsSure)
