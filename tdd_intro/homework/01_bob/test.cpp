@@ -20,18 +20,20 @@ namespace
 
 std::string GetAnswerFromBob(std::string&& str)
 {
-
-    if (str.find('!') != str.npos)
-    {
-        return whoaString;
-    }
-    if (str.find('?') != str.npos)
-    {
-        return sureString;
-    }
     if (str.empty())
     {
         return fineString;
+    }
+    switch(str.back())
+    {
+    case '?':
+        return sureString;
+        break;
+    case '!':
+        return whoaString;
+        break;
+    default:
+        break;
     }
 
     return whateverString;
