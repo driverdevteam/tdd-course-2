@@ -8,3 +8,14 @@ He says 'Fine. Be that way!' if you address him without actually saying anything
 He answers 'Whatever.' to anything else.
 */
 #include <gtest/gtest.h>
+#include <string>
+
+std::string GetAnswerFromBob(std::string&& str)
+{
+    return str;
+}
+
+TEST(BobTaskTests, GetAnswerFromBob_IsSure)
+{
+    EXPECT_EQ("Sure", GetAnswerFromBob("Bobby?"));
+}
