@@ -20,13 +20,14 @@ namespace
 
 std::string GetAnswerFromBob(std::string&& str)
 {
-    if (str.find('?') != str.npos)
-    {
-        return sureString;
-    }
+
     if (str.find('!') != str.npos)
     {
         return whoaString;
+    }
+    if (str.find('?') != str.npos)
+    {
+        return sureString;
     }
     if (str.empty())
     {
