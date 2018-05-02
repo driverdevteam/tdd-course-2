@@ -14,6 +14,7 @@ namespace
 {
     const std::string sureString = "Sure";
     const std::string whoaString = "Whoa, chill out!";
+    const std::string fineString = "Fine. Be that way!";
 }
 
 std::string GetAnswerFromBob(std::string&& str)
@@ -27,7 +28,7 @@ std::string GetAnswerFromBob(std::string&& str)
         return whoaString;
     }
 
-    return "Fine. Be that way!";
+    return fineString;
 }
 
 TEST(BobTaskTests, GetAnswerFromBob_IsSure)
@@ -42,5 +43,5 @@ TEST(BobTaskTests, GetAnswerFromBob_IsWhoaChillOut)
 
 TEST(BobTaskTests, GetAnswerFromBob_IsFineBeThatWay)
 {
-    EXPECT_EQ("Fine. Be that way!", GetAnswerFromBob(""));
+    EXPECT_EQ(fineString, GetAnswerFromBob(""));
 }
