@@ -56,3 +56,7 @@ TEST(BobTaskTests, GetAnswerFromBob_IsWhatever)
     EXPECT_EQ(whateverString, GetAnswerFromBob("Bobby.Hey.Bobby.Go.go.Go."));
 }
 
+TEST(BobTaskTests, GetAnswerFromBob_IsQuestionInTheStartAndExclamationInTheEnd)
+{
+    EXPECT_EQ(whoaString, GetAnswerFromBob("Bobby?Hey.Bobby.Bobbo.Bibbif.Go!"));
+}
