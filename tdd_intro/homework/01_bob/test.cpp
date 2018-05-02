@@ -35,3 +35,8 @@ TEST(BobTaskTests, GetAnswerFromBob_IsWhoaChillOut)
 {
     EXPECT_EQ(whoaString, GetAnswerFromBob("Bobby!"));
 }
+
+TEST(BobTaskTests, GetAnswerFromBob_IsFineBeThatWay)
+{
+    EXPECT_EQ("Fine. Be that way!", GetAnswerFromBob(""));
+}
