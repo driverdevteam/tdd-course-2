@@ -11,3 +11,9 @@ TEST(Bob, AskNothing)
     std::string answer = AskBob("");
     EXPECT_EQ("Whatever.", answer);
 }
+
+TEST(Bob, AskQuestion)
+{
+    std::string answer = AskBob("English, Bob, do you speak it?");
+    EXPECT_EQ("Sure.", answer);
+}
