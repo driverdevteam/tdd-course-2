@@ -37,3 +37,9 @@ TEST(Bob, ThrowAnAngryLook)
     std::string answer = AskBob("!");
     EXPECT_EQ("Whoa, chill out!", answer);
 }
+
+TEST(Bob, ShoutAtHim)
+{
+    std::string answer = AskBob("Gerrarahere!");
+    EXPECT_EQ("Whoa, chill out!", answer);
+}
