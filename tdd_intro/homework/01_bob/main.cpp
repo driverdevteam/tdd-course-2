@@ -3,6 +3,10 @@
 
 std::string AskBob(const std::string& question)
 {
+    if (question == "English, Bob, do you speak it?")
+    {
+        return "Sure.";
+    }
     return "Whatever.";
 }
 
