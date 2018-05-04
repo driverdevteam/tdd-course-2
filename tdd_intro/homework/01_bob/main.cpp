@@ -3,7 +3,7 @@
 
 std::string AskBob(const std::string& question)
 {
-    if (question == "English, Bob, do you speak it?")
+    if (!question.empty() && question.back() == '?')
     {
         return "Sure.";
     }
