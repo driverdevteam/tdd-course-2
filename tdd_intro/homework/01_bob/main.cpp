@@ -16,8 +16,14 @@ TEST(Bob, AskNothing)
     EXPECT_EQ("Whatever.", answer);
 }
 
-TEST(Bob, AskQuestion)
+TEST(Bob, AskQuestion_English)
 {
     std::string answer = AskBob("English, Bob, do you speak it?");
+    EXPECT_EQ("Sure.", answer);
+}
+
+TEST(Bob, AskQuestion_German)
+{
+    std::string answer = AskBob("German, Bob, do you speak it?");
     EXPECT_EQ("Sure.", answer);
 }
