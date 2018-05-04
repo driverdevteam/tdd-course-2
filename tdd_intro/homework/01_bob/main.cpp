@@ -7,7 +7,7 @@ std::string AskBob(const std::string& question)
     {
         return "Fine. Be that way!";
     }
-    if (!question.empty())
+    else
     {
         if (question.back() == '?')
         {
