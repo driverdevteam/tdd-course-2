@@ -27,3 +27,9 @@ TEST(Bob, AskQuestion_German)
     std::string answer = AskBob("German, Bob, do you speak it?");
     EXPECT_EQ("Sure.", answer);
 }
+
+TEST(Bob, ThrowAnAngryLook)
+{
+    std::string answer = AskBob("!");
+    EXPECT_EQ("Whoa, chill out!", answer);
+}
