@@ -3,6 +3,10 @@
 
 std::string AskBob(const std::string& question)
 {
+    if (question.empty())
+    {
+        return "Fine. Be that way!";
+    }
     if (!question.empty())
     {
         if (question.back() == '?')
