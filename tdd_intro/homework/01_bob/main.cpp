@@ -3,13 +3,16 @@
 
 std::string AskBob(const std::string& question)
 {
-    if (!question.empty() && question.back() == '?')
+    if (!question.empty())
     {
-        return "Sure.";
-    }
-    else if (!question.empty() && question.back() == '!')
-    {
-        return "Whoa, chill out!";
+        if (question.back() == '?')
+        {
+            return "Sure.";
+        }
+        else if (question.back() == '!')
+        {
+            return "Whoa, chill out!";
+        }
     }
     return "Whatever.";
 }
