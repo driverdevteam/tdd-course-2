@@ -7,6 +7,10 @@ std::string AskBob(const std::string& question)
     {
         return "Sure.";
     }
+    else if (question == "!")
+    {
+        return "Whoa, chill out!";
+    }
     return "Whatever.";
 }
 
