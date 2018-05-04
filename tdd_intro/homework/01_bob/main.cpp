@@ -50,3 +50,9 @@ TEST(Bob, ShoutAtHim)
     std::string answer = AskBob("Gerrarahere!");
     EXPECT_EQ("Whoa, chill out!", answer);
 }
+
+TEST(Bob, BlaBlaBla)
+{
+    std::string answer = AskBob("Bla-bla-bla");
+    EXPECT_EQ("Whatever.", answer);
+}
