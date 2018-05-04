@@ -3,7 +3,7 @@
 
 std::string AskBob(const std::string& question)
 {
-    return "";
+    return "Whatever.";
 }
 
 TEST(Bob, AskNothing)
