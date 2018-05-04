@@ -20,7 +20,7 @@ std::string AskBob(const std::string& question)
 TEST(Bob, AskNothing)
 {
     std::string answer = AskBob("");
-    EXPECT_EQ("Whatever.", answer);
+    EXPECT_EQ("Fine. Be that way!", answer);
 }
 
 TEST(Bob, AskQuestion_English)
