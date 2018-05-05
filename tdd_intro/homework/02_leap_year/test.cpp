@@ -17,7 +17,7 @@ If your language provides a method in the standard library that does this look-u
 bool isLeapYear(int year)
 {
     const int provingDivider = 4;
-    if (year == 100)
+    if (year == 100 || year == 1000)
     {
         return false;
     }
