@@ -16,7 +16,8 @@ If your language provides a method in the standard library that does this look-u
 
 bool isLeapYear(int year)
 {
-    if (year == 4 || year == 8)
+    const int provingDivider = 4;
+    if (year % provingDivider == 0)
     {
         return true;
     }
@@ -25,10 +26,12 @@ bool isLeapYear(int year)
 
 TEST(isLeapYear, isLeapYear_FirstLeapYear)
 {
-    EXPECT_EQ(isLeapYear(4), true);
+    const int year = 4;
+    EXPECT_EQ(isLeapYear(year), true);
 }
 
-TEST(isLeapYear, isLeapYear_OtherSimpleLearYear)
+TEST(isLeapYear, isLeapYear_OtherSimpleLeapYear)
 {
-    EXPECT_EQ(isLeapYear(8), true);
+    const int year = 8;
+    EXPECT_EQ(isLeapYear(year), true);
 }
