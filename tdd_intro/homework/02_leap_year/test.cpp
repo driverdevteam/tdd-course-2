@@ -16,17 +16,12 @@ If your language provides a method in the standard library that does this look-u
 
 bool isLeapYear(int year)
 {
-    const int provingDivider = 4;
+    const int firstProvingDivider = 4;
     const int unprovingDivider = 100;
-    if (year == 2000 || year == 4000)
-    {
-        return true;
-    }
-    if (year % unprovingDivider == 0)
-    {
-        return false;
-    }
-    else if (year % provingDivider == 0)
+    const int totalProvingDivider = 400;
+
+    if ((year % firstProvingDivider == 0 && year % unprovingDivider != 0)
+        || year % totalProvingDivider == 0)
     {
         return true;
     }
