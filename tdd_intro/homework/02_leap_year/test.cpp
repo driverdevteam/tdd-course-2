@@ -63,3 +63,9 @@ TEST(isLeapYear, isLeapYear_TwoThoursandYear)
     const int year = 2000;
     EXPECT_EQ(isLeapYear(year), true);
 }
+
+TEST(isLeapYear, isLeapYear_FourThoursandYear)
+{
+    const int year = 4000;
+    EXPECT_EQ(isLeapYear(year), true);
+}
