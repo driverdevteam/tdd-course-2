@@ -27,3 +27,8 @@ TEST(isLeapYear, isLeapYear_FirstLeapYear)
 {
     EXPECT_EQ(isLeapYear(4), true);
 }
+
+TEST(isLeapYear, isLeapYear_OtherSimpleLearYear)
+{
+    EXPECT_EQ(isLeapYear(8), true);
+}
