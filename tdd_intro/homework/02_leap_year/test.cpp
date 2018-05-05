@@ -20,10 +20,13 @@ bool isLeapYear(int year)
     const int unprovingDivider = 100;
     const int totalProvingDivider = 400;
 
-    if ((year % firstProvingDivider == 0 && year % unprovingDivider != 0)
-        || year % totalProvingDivider == 0)
+    if (year != 0)
     {
-        return true;
+        if ((year % firstProvingDivider == 0 && year % unprovingDivider != 0)
+            || year % totalProvingDivider == 0)
+        {
+            return true;
+        }
     }
 
     return false;
