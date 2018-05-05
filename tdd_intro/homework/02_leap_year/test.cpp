@@ -73,3 +73,9 @@ TEST(isLeapYear, isLeapYear_ZeroYear)
     const int year = 0;
     EXPECT_EQ(isLeapYear(year), false);
 }
+
+TEST(isLeapYear, isLeapYear_NegativeYear)
+{
+    const int year = -4;
+    EXPECT_EQ(isLeapYear(year), false);
+}
