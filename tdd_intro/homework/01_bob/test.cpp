@@ -14,13 +14,13 @@ const std::string fine = "Fine. Be that way!";
 
 std::string BobAnswer(const std::string& phrase)
 {
-    if (phrase == "!")
-    {
-        return "Whoa, chill out!";
-    }
-    else if(phrase == "")
+    if(phrase == "")
     {
         return fine;
+    }
+    else if (phrase.back() == '!')
+    {
+        return "Whoa, chill out!";
     }
     else
     {
