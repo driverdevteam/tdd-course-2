@@ -61,3 +61,9 @@ TEST(BOB_ANSWER, ASK_WITH_QUESTION_ANSWER_Sure)
 {
     EXPECT_EQ("Sure.", BobAnswer("?"));
 }
+
+TEST(BOB_ANSWER, ASK_WITH_QUESTION_WITH_WORDS_ANSWER_Sure)
+{
+    EXPECT_EQ("Sure.", BobAnswer("HELLO?"));
+}
+
