@@ -26,12 +26,17 @@ TEST(LeapYearTests, IsLeapYear_1997)
     EXPECT_EQ(false, IsLeapYear(1997));
 }
 
-TEST(LeapYearTests, IsLeapYear_2000)
+TEST(LeapYearTests, IsLeapYear_1900)
 {
-    EXPECT_EQ(false, IsLeapYear(2000));
+    EXPECT_EQ(false, IsLeapYear(1900));
 }
 
 TEST(LeapYearTests, IsLeapYear_2100)
 {
     EXPECT_EQ(false, IsLeapYear(2100));
+}
+
+TEST(LeapYearTests, IsLeapYear_2000)
+{
+    EXPECT_EQ(true, IsLeapYear(2000));
 }
