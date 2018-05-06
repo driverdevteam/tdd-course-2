@@ -20,10 +20,13 @@ bool IsLeapYear(unsigned int year)
     return true;
 }
 
-TEST(LeapYearTests, IsLeapYear_true)
+TEST(LeapYearTests, IsLeapYear_0)
 {
-    EXPECT_EQ(true, IsLeapYear(1996));
+    EXPECT_EQ(true, IsLeapYear(0));
 }
 
 
-
+TEST(LeapYearTests, IsLeapYear_1997)
+{
+    EXPECT_EQ(false, IsLeapYear(1997));
+}
