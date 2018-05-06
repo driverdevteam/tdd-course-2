@@ -13,3 +13,38 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+
+bool IsLeapYear(int year)
+{
+    constexpr int firstDevider = 4;
+    constexpr int secondDevider = 100;
+
+    if (year  <= 0)
+    {
+        return false;
+    }
+
+    return year % firstDevider == 0 && year % secondDevider != 0 ||
+           year % (firstDevider * secondDevider) == 0 ? true : false;
+}
+
+TEST(LeapYearTests, IsLeapYear_1997)
+{
+    EXPECT_EQ(false, IsLeapYear(1997));
+}
+
+TEST(LeapYearTests, IsLeapYear_1900)
+{
+    EXPECT_EQ(false, IsLeapYear(1900));
+}
+
+TEST(LeapYearTests, IsLeapYear_2100)
+{
+    EXPECT_EQ(false, IsLeapYear(2100));
+}
+
+TEST(LeapYearTests, IsLeapYear_neg_4)
+{
+    EXPECT_EQ(false, IsLeapYear(-4));
+}
