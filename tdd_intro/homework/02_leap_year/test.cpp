@@ -17,7 +17,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(unsigned int year)
 {
-    return false;
+    return true;
 }
 
 TEST(LeapYearTests, IsLeapYear_true)
