@@ -9,29 +9,32 @@ He answers 'Whatever.' to anything else.
 */
 #include <gtest/gtest.h>
 
+const std::string whatever = "Whatever";
+const std::string fine = "Fine. Be that way!";
+
 std::string BobAnswer(const std::string& phrase)
 {
     if(phrase == "")
     {
-        return "Fine. Be that way!";
+        return fine;
     }
     else
     {
-        return "Whatever";
+        return whatever;
     }
 }
 
 TEST(BOB_ANSWER, ASK_NOTHIN_ANSWER_FINE)
 {
-    EXPECT_EQ("Fine. Be that way!", BobAnswer(""));
+    EXPECT_EQ(fine, BobAnswer(""));
 }
 
 TEST(BOB_ANSWER, ASK_TEST_ANSWER_Whatever)
 {
-    EXPECT_EQ("Whatever", BobAnswer("TEST"));
+    EXPECT_EQ(whatever, BobAnswer("TEST"));
 }
 
 TEST(BOB_ANSWER, ASK_TEST1_ANSWER_Whatever)
 {
-    EXPECT_EQ("Whatever", BobAnswer("TEST1"));
+    EXPECT_EQ(whatever, BobAnswer("TEST1"));
 }
