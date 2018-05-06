@@ -18,7 +18,7 @@ std::string BobAnswer(const std::string& phrase)
     {
         return fine;
     }
-    else if(phrase == "?")
+    else if(phrase.back() == '?')
     {
         return "Sure.";
     }
