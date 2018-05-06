@@ -11,6 +11,8 @@ He answers 'Whatever.' to anything else.
 
 const std::string whatever = "Whatever";
 const std::string fine = "Fine. Be that way!";
+const std::string sure = "Sure.";
+const std::string whoa = "Whoa, chill out!";
 
 std::string BobAnswer(const std::string& phrase)
 {
@@ -20,11 +22,11 @@ std::string BobAnswer(const std::string& phrase)
     }
     else if(phrase.back() == '?')
     {
-        return "Sure.";
+        return sure;
     }
     else if (phrase.back() == '!')
     {
-        return "Whoa, chill out!";
+        return whoa;
     }
     else
     {
@@ -49,21 +51,21 @@ TEST(BOB_ANSWER, ASK_TEST1_ANSWER_Whatever)
 
 TEST(BOB_ANSWER, ASK_With_Yell_ANSWER_Whoa)
 {
-    EXPECT_EQ("Whoa, chill out!", BobAnswer("!"));
+    EXPECT_EQ(whoa, BobAnswer("!"));
 }
 
 TEST(BOB_ANSWER, ASK_WITH_YELL_AND_WORDS_ANSWER_WHOA)
 {
-    EXPECT_EQ("Whoa, chill out!", BobAnswer("HELLO!"));
+    EXPECT_EQ(whoa, BobAnswer("HELLO!"));
 }
 
 TEST(BOB_ANSWER, ASK_WITH_QUESTION_ANSWER_Sure)
 {
-    EXPECT_EQ("Sure.", BobAnswer("?"));
+    EXPECT_EQ(sure, BobAnswer("?"));
 }
 
 TEST(BOB_ANSWER, ASK_WITH_QUESTION_WITH_WORDS_ANSWER_Sure)
 {
-    EXPECT_EQ("Sure.", BobAnswer("HELLO?"));
+    EXPECT_EQ(sure, BobAnswer("HELLO?"));
 }
 
