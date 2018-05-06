@@ -17,7 +17,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(unsigned int year)
 {
-    return year % 4 == 0 ? true : false ;
+    return year % 4 == 0 ? true : false;
 }
 
 TEST(LeapYearTests, IsLeapYear_0)
@@ -29,4 +29,9 @@ TEST(LeapYearTests, IsLeapYear_0)
 TEST(LeapYearTests, IsLeapYear_1997)
 {
     EXPECT_EQ(false, IsLeapYear(1997));
+}
+
+TEST(LeapYearTests, IsLeapYear_2000)
+{
+    EXPECT_EQ(false, IsLeapYear(2000));
 }
