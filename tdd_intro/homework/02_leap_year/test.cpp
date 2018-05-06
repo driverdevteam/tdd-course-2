@@ -20,7 +20,7 @@ bool IsLeapYear(int year)
     constexpr int firstDevider = 4;
     constexpr int secondDevider = 100;
 
-    if (year  < 0)
+    if (year  <= 0)
     {
         return false;
     }
