@@ -9,9 +9,16 @@ He answers 'Whatever.' to anything else.
 */
 #include <gtest/gtest.h>
 
-std::string BobAnswer(const std::string&)
+std::string BobAnswer(const std::string& phrase)
 {
-    return "Fine. Be that way!";
+    if(phrase == "")
+    {
+        return "Fine. Be that way!";
+    }
+    else
+    {
+        return "Whatever";
+    }
 }
 
 TEST(BOB_ANSWER, ASK_NOTHIN_ANSWER_FINE)
