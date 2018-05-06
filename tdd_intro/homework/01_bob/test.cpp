@@ -18,3 +18,8 @@ TEST(BOB_ANSWER, ASK_NOTHIN_ANSWER_FINE)
 {
     EXPECT_EQ("Fine. Be that way!", BobAnswer(""));
 }
+
+TEST(BOB_ANSWER, ASK_TEST_ANSWER_Whatever)
+{
+    EXPECT_EQ("Whatever", BobAnswer("TEST"));
+}
