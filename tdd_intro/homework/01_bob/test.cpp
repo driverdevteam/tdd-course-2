@@ -52,3 +52,8 @@ TEST(BOB_ANSWER, ASK_WITH_YELL_AND_WORDS_ANSWER_WHOA)
 {
     EXPECT_EQ("Whoa, chill out!", BobAnswer("HELLO!"));
 }
+
+TEST(BOB_ANSWER, ASK_WITH_QUESTION_ANSWER_Sure)
+{
+    EXPECT_EQ("Sure.", BobAnswer("?"));
+}
