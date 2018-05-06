@@ -47,3 +47,8 @@ TEST(BOB_ANSWER, ASK_With_Yell_ANSWER_Whoa)
 {
     EXPECT_EQ("Whoa, chill out!", BobAnswer("!"));
 }
+
+TEST(BOB_ANSWER, ASK_WITH_YELL_AND_WORDS_ANSWER_WHOA)
+{
+    EXPECT_EQ("Whoa, chill out!", BobAnswer("HELLO!"));
+}
