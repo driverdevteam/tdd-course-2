@@ -15,10 +15,15 @@ If your language provides a method in the standard library that does this look-u
 #include <gtest/gtest.h>
 
 
-bool IsLeapYear(unsigned int year)
+bool IsLeapYear(int year)
 {
-    constexpr unsigned int firstDevider = 4;
-    constexpr unsigned int secondDevider = 100;
+    constexpr int firstDevider = 4;
+    constexpr int secondDevider = 100;
+
+    if (year  < 0)
+    {
+        return false;
+    }
 
     return year % firstDevider == 0 && year % secondDevider != 0 ||
            year % (firstDevider * secondDevider) == 0 ? true : false;
