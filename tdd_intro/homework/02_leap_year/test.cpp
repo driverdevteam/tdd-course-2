@@ -33,3 +33,8 @@ TEST(IsLeapYearTest, Input1996_ExpectTrue)
 {
     EXPECT_TRUE(IsLeapYear(1996));
 }
+
+TEST(IsLeapYearTest, Input2004_ExpectTrue)
+{
+    EXPECT_TRUE(IsLeapYear(2004));
+}
