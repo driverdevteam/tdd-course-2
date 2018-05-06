@@ -17,8 +17,10 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(unsigned int year)
 {
-
-    return year % 4 == 0 && year % 100 != 0 || year % 400 == 0 ? true : false;
+    constexpr unsigned int firstDevider = 4;
+    constexpr unsigned int secondDevider = 100;
+    return year % firstDevider == 0 && year % secondDevider != 0 ||
+           year % (firstDevider * secondDevider) == 0 ? true : false;
 }
 
 TEST(LeapYearTests, IsLeapYear_1997)
