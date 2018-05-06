@@ -19,6 +19,7 @@ bool IsLeapYear(unsigned int year)
 {
     constexpr unsigned int firstDevider = 4;
     constexpr unsigned int secondDevider = 100;
+
     return year % firstDevider == 0 && year % secondDevider != 0 ||
            year % (firstDevider * secondDevider) == 0 ? true : false;
 }
@@ -38,7 +39,7 @@ TEST(LeapYearTests, IsLeapYear_2100)
     EXPECT_EQ(false, IsLeapYear(2100));
 }
 
-TEST(LeapYearTests, IsLeapYear_2000)
+TEST(LeapYearTests, IsLeapYear_neg_4)
 {
-    EXPECT_EQ(true, IsLeapYear(2000));
+    EXPECT_EQ(false, IsLeapYear(-4));
 }
