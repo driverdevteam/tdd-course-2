@@ -38,3 +38,8 @@ TEST(BOB_ANSWER, ASK_TEST1_ANSWER_Whatever)
 {
     EXPECT_EQ(whatever, BobAnswer("TEST1"));
 }
+
+TEST(BOB_ANSWER, ASK_With_Yell_ANSWER_Whoa)
+{
+    EXPECT_EQ("Whoa, chill out!", BobAnswer("!"));
+}
