@@ -18,6 +18,10 @@ std::string BobAnswer(const std::string& phrase)
     {
         return fine;
     }
+    else if(phrase == "?")
+    {
+        return "Sure.";
+    }
     else if (phrase.back() == '!')
     {
         return "Whoa, chill out!";
