@@ -30,3 +30,8 @@ TEST(BOB_ANSWER, ASK_TEST_ANSWER_Whatever)
 {
     EXPECT_EQ("Whatever", BobAnswer("TEST"));
 }
+
+TEST(BOB_ANSWER, ASK_TEST1_ANSWER_Whatever)
+{
+    EXPECT_EQ("Whatever", BobAnswer("TEST1"));
+}
