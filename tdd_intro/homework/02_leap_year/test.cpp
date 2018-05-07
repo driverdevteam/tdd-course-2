@@ -17,12 +17,16 @@ If your language provides a method in the standard library that does this look-u
 
 bool CheckLeapYear(const int& year)
 {
-    if(year == 4)
+    if(!year)
     {
-        return true;
+        return false;
+    }
+    if(year % 4)
+    {
+        return false;
     }
 
-    return false;
+    return true;
 }
 
 TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_0_OUTPUT_false)
