@@ -14,7 +14,8 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
-bool IsLeapYear(int year)
+using Year = int;
+bool IsLeapYear(Year year)
 {
     if (year % 4 == 0)
     {
@@ -26,77 +27,25 @@ bool IsLeapYear(int year)
     return false;
 }
 
-TEST(LeapYear, IsLeap_0)
+class Year_IsLeap: public ::testing::TestWithParam<Year> { };
+class Year_IsNotLeap: public ::testing::TestWithParam<Year> { };
+
+INSTANTIATE_TEST_CASE_P(IsLeapYear, Year_IsLeap,
+    ::testing::Values(0, 4, 8, 20, 104, 400, 800, 1996, 2000));
+
+INSTANTIATE_TEST_CASE_P(IsNotLeapYear, Year_IsNotLeap,
+    ::testing::Values(1, 2, 3, 5, 7, 13, 99, 101, 200, 300, 900, 1900, 1997, 2001));
+
+TEST_P(Year_IsLeap, Test)
 {
-    EXPECT_TRUE(IsLeapYear(0));
+    auto year = GetParam();
+    EXPECT_TRUE(IsLeapYear(year)) << "Test failed for value " << year;
+    EXPECT_TRUE(IsLeapYear(year * -1)) << "Test failed for negative value -" << year;
 }
 
-TEST(LeapYear, IsNotLeap_1)
+TEST_P(Year_IsNotLeap, Test)
 {
-    EXPECT_FALSE(IsLeapYear(1));
-}
-
-TEST(LeapYear, IsLeap_4)
-{
-    EXPECT_TRUE(IsLeapYear(4));
-}
-
-TEST(LeapYear, IsNotLeap_100)
-{
-    EXPECT_FALSE(IsLeapYear(100));
-}
-
-TEST(LeapYear, IsNotLeap_200)
-{
-    EXPECT_FALSE(IsLeapYear(200));
-}
-
-TEST(LeapYear, IsLeap_256)
-{
-    EXPECT_TRUE(IsLeapYear(256));
-}
-
-TEST(LeapYear, IsLeap_400)
-{
-    EXPECT_TRUE(IsLeapYear(400));
-}
-
-TEST(LeapYear, IsLeap_2000)
-{
-    EXPECT_TRUE(IsLeapYear(2000));
-}
-
-TEST(LeapYear, IsNotLeap_negative1)
-{
-    EXPECT_FALSE(IsLeapYear(-1));
-}
-
-TEST(LeapYear, IsLeap_negative4)
-{
-    EXPECT_TRUE(IsLeapYear(-4));
-}
-
-TEST(LeapYear, IsNotLeap_negative100)
-{
-    EXPECT_FALSE(IsLeapYear(-100));
-}
-
-TEST(LeapYear, IsNotLeap_negative200)
-{
-    EXPECT_FALSE(IsLeapYear(-200));
-}
-
-TEST(LeapYear, IsLeap_negative256)
-{
-    EXPECT_TRUE(IsLeapYear(-256));
-}
-
-TEST(LeapYear, IsLeap_negative400)
-{
-    EXPECT_TRUE(IsLeapYear(-400));
-}
-
-TEST(LeapYear, IsLeap_negative2000)
-{
-    EXPECT_TRUE(IsLeapYear(-2000));
+    auto year = GetParam();
+    EXPECT_FALSE(IsLeapYear(year)) << "Test failed for value " << year;
+    EXPECT_FALSE(IsLeapYear(year * -1)) << "Test failed for negative value -" << year;
 }
