@@ -13,3 +13,47 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+
+bool CheckLeapYear(const int& year)
+{
+    if(!year)
+    {
+        return false;
+    }
+
+    if( year % 4 == 0)
+    {
+        if(year % 400 == 0 || year % 100)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_0_OUTPUT_false)
+{
+    EXPECT_EQ(false, CheckLeapYear(0));
+}
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_4_OUTPUT_TRUE)
+{
+     EXPECT_EQ(true, CheckLeapYear(4));
+}
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_8_OUTPUT_TRUE)
+{
+    EXPECT_EQ(true, CheckLeapYear(8));
+}
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_100_OUTPUT_false)
+{
+    EXPECT_EQ(false, CheckLeapYear(100));
+}
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_400_OUTPUT_true)
+{
+     EXPECT_EQ(true, CheckLeapYear(400));
+}
