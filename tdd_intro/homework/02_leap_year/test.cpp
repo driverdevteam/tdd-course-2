@@ -21,12 +21,13 @@ bool CheckLeapYear(const int& year)
     {
         return false;
     }
-    if(year % 4)
+
+    if(year % 4 == 0 && year%100)
     {
-        return false;
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_0_OUTPUT_false)
@@ -42,4 +43,9 @@ TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_4_OUTPUT_TRUE)
 TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_8_OUTPUT_TRUE)
 {
     EXPECT_EQ(true, CheckLeapYear(8));
+}
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_100_OUTPUT_false)
+{
+    EXPECT_EQ(false, CheckLeapYear(100));
 }
