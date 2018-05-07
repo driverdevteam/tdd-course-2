@@ -13,3 +13,14 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+
+bool CheckLeapYear(const int&)
+{
+    return false;
+}
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_0_OUTPUT_false)
+{
+    EXPECT_EQ(false, CheckLeapYear(0));
+}
