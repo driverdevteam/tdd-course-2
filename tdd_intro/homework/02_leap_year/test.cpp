@@ -24,3 +24,8 @@ TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_0_OUTPUT_false)
 {
     EXPECT_EQ(false, CheckLeapYear(0));
 }
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_4_OUTPUT_TRUE)
+{
+     EXPECT_EQ(true, CheckLeapYear(4));
+}
