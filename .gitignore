@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Compiler generated files
+*.ilk
+*.pdb
+
+# Qt Creator generated files
+Makefile
+Makefile.*
+.qmake*
+tdd_intro/*pro.user.*
