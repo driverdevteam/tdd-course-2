@@ -28,3 +28,8 @@ TEST(LeapYear, IsNotLeap_1)
 {
     EXPECT_FALSE(IsLeapYear(1));
 }
+
+TEST(LeapYear, IsLeap_4)
+{
+    EXPECT_TRUE(IsLeapYear(4));
+}
