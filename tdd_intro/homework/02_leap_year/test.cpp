@@ -22,7 +22,7 @@ bool CheckLeapYear(const int& year)
         return false;
     }
 
-    if(year % 4 == 0 && year%100)
+    if(year % 4 == 0 && year % 100)
     {
         return true;
     }
@@ -48,4 +48,9 @@ TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_8_OUTPUT_TRUE)
 TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_100_OUTPUT_false)
 {
     EXPECT_EQ(false, CheckLeapYear(100));
+}
+
+TEST(CHECK_LEAP_YEAR, CHECK_YEAR_INPUT_400_OUTPUT_true)
+{
+     EXPECT_EQ(true, CheckLeapYear(400));
 }
