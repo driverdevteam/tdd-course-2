@@ -51,7 +51,52 @@ TEST(LeapYear, IsNotLeap_200)
     EXPECT_FALSE(IsLeapYear(200));
 }
 
+TEST(LeapYear, IsLeap_256)
+{
+    EXPECT_TRUE(IsLeapYear(256));
+}
+
 TEST(LeapYear, IsLeap_400)
 {
     EXPECT_TRUE(IsLeapYear(400));
+}
+
+TEST(LeapYear, IsLeap_2000)
+{
+    EXPECT_TRUE(IsLeapYear(2000));
+}
+
+TEST(LeapYear, IsNotLeap_negative1)
+{
+    EXPECT_FALSE(IsLeapYear(-1));
+}
+
+TEST(LeapYear, IsLeap_negative4)
+{
+    EXPECT_TRUE(IsLeapYear(-4));
+}
+
+TEST(LeapYear, IsNotLeap_negative100)
+{
+    EXPECT_FALSE(IsLeapYear(-100));
+}
+
+TEST(LeapYear, IsNotLeap_negative200)
+{
+    EXPECT_FALSE(IsLeapYear(-200));
+}
+
+TEST(LeapYear, IsLeap_negative256)
+{
+    EXPECT_TRUE(IsLeapYear(-256));
+}
+
+TEST(LeapYear, IsLeap_negative400)
+{
+    EXPECT_TRUE(IsLeapYear(-400));
+}
+
+TEST(LeapYear, IsLeap_negative2000)
+{
+    EXPECT_TRUE(IsLeapYear(-2000));
 }
