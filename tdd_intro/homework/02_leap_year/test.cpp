@@ -15,8 +15,13 @@ If your language provides a method in the standard library that does this look-u
 #include <gtest/gtest.h>
 
 
-bool CheckLeapYear(const int&)
+bool CheckLeapYear(const int& year)
 {
+    if(year == 4)
+    {
+        return true;
+    }
+
     return false;
 }
 
