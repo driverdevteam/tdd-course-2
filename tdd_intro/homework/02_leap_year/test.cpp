@@ -16,7 +16,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(int year)
 {
-    if (year == 4441)
+    if (year == 4441 || year == 1111 )
     {
         return false;
     }
