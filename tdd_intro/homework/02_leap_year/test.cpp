@@ -23,3 +23,9 @@ TEST(IsLeapYear, take_4444_return_true)
 {
     EXPECT_TRUE(IsLeapYear(4444));
 }
+
+TEST(IsLeapYear, take_4441_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(4441));
+}
+
