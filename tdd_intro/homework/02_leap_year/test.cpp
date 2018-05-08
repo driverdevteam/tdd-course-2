@@ -16,7 +16,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(int year)
 {
-    if (year != 1000 && year != 1500 && year % 400 != 0 && year % 100 == 0 || year % 4 != 0)
+    if (year < 1000 && year != 1500 && year % 400 != 0 && year % 100 == 0 || year % 4 != 0)
     {
         return false;
     }
@@ -67,4 +67,9 @@ TEST(IsLeapYear, take_1500_return_true)
 TEST(IsLeapYear, take_1000_return_true)
 {
     EXPECT_TRUE(IsLeapYear(1000));
+}
+
+TEST(IsLeapYear, take_999_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(999));
 }
