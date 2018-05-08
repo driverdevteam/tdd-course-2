@@ -48,3 +48,8 @@ TEST(IsLeapYear, take_4100_return_false)
 {
     EXPECT_FALSE(IsLeapYear(4100));
 }
+
+TEST(IsLeapYear, take_2000_return_true)
+{
+    EXPECT_TRUE(IsLeapYear(2000));
+}
