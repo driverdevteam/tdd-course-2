@@ -74,4 +74,12 @@ TEST(IsLeapYear, take_999_return_false)
     EXPECT_FALSE(IsLeapYear(999));
 }
 
+TEST(IsLeapYear, acceptance)
+{
+    EXPECT_FALSE(IsLeapYear(1997));
+    EXPECT_TRUE(IsLeapYear(1996));
+    EXPECT_FALSE(IsLeapYear(1900));
+    EXPECT_TRUE(IsLeapYear(2000));
+}
+
 
