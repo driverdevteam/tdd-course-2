@@ -33,3 +33,7 @@ TEST(IsLeapYear, take_4441_return_false)
     EXPECT_FALSE(IsLeapYear(4441));
 }
 
+TEST(IsLeapYear, take_1111_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(1111));
+}
