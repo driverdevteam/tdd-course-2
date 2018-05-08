@@ -20,6 +20,7 @@ bool IsLeapYear(int year)
     {
         return false;
     }
+
     return true;
 }
 
@@ -36,4 +37,9 @@ TEST(IsLeapYear, take_4441_return_false)
 TEST(IsLeapYear, take_1111_return_false)
 {
     EXPECT_FALSE(IsLeapYear(1111));
+}
+
+TEST(IsLeapYear, take_2100_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(1000));
 }
