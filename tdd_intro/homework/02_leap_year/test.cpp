@@ -13,3 +13,8 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+TEST(IsLeapYear, take_4444_return_true)
+{
+    EXPECT_TRUE(IsLeapYear(4444));
+}
