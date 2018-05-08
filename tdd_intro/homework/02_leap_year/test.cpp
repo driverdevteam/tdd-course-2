@@ -13,3 +13,73 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+bool IsLeapYear(int year)
+{
+    if (year > 1582)
+    {
+        return year % 400 == 0 || year % 100 != 0 && year % 4 == 0;
+    }
+
+    return year % 4 == 0;
+}
+
+TEST(IsLeapYear, take_4444_return_true)
+{
+    EXPECT_TRUE(IsLeapYear(4444));
+}
+
+TEST(IsLeapYear, take_4441_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(4441));
+}
+
+TEST(IsLeapYear, take_1111_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(1111));
+}
+
+TEST(IsLeapYear, take_2100_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(2100));
+}
+
+TEST(IsLeapYear, take_4100_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(4100));
+}
+
+TEST(IsLeapYear, take_2000_return_true)
+{
+    EXPECT_TRUE(IsLeapYear(2000));
+}
+
+TEST(IsLeapYear, take_4000_return_true)
+{
+    EXPECT_TRUE(IsLeapYear(4000));
+}
+
+TEST(IsLeapYear, take_1500_return_true)
+{
+    EXPECT_TRUE(IsLeapYear(1500));
+}
+
+TEST(IsLeapYear, take_1000_return_true)
+{
+    EXPECT_TRUE(IsLeapYear(1000));
+}
+
+TEST(IsLeapYear, take_999_return_false)
+{
+    EXPECT_FALSE(IsLeapYear(999));
+}
+
+TEST(IsLeapYear, acceptance)
+{
+    EXPECT_FALSE(IsLeapYear(1997));
+    EXPECT_TRUE(IsLeapYear(1996));
+    EXPECT_FALSE(IsLeapYear(1900));
+    EXPECT_TRUE(IsLeapYear(2000));
+}
+
+
