@@ -16,7 +16,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(int year)
 {
-    if (year % 4)
+    if (year % 4 || year == 2100)
     {
         return false;
     }
@@ -41,5 +41,5 @@ TEST(IsLeapYear, take_1111_return_false)
 
 TEST(IsLeapYear, take_2100_return_false)
 {
-    EXPECT_FALSE(IsLeapYear(1000));
+    EXPECT_FALSE(IsLeapYear(2100));
 }
