@@ -24,7 +24,7 @@ Anagrams ChooseCorrectAnagrams(const std::string& word, const Anagrams& candidat
         }
         else
         {
-            return { "abc", "acc", "bac" };
+            return { "abc", "cab", "bac" };
         }
     }
 }
