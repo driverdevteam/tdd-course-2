@@ -14,8 +14,13 @@ using Anagrams = std::set<std::string>;
 Anagrams ChooseCorrectAnagrams(const std::string& word, const Anagrams& candidates)
 {
     Anagrams anagrams;
-    for (std::string candidate : candidates)
+    for (auto candidate : candidates)
     {
+        if (word.length() != candidate.length())
+        {
+            continue;
+        }
+
         bool matched = true;
         auto candidateLettersSet = candidate;
         for (auto letter : word)
