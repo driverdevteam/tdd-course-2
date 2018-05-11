@@ -22,7 +22,7 @@ Anagrams ChooseCorrectAnagrams(const std::string& word, const Anagrams& candidat
     }
 }
 
-TEST(Anagrams, Simple_ab)
+TEST(Anagrams, AllCandidatesMatch_ab)
 {
     Anagrams candidates = { "ab" };
     Anagrams anagrams = ChooseCorrectAnagrams("ab", candidates);
@@ -30,9 +30,16 @@ TEST(Anagrams, Simple_ab)
 }
 
 
-TEST(Anagrams, Simple_abc)
+TEST(Anagrams, AllCandidatesMatch_abc)
 {
     Anagrams candidates = { "abc", "acb", "bac" };
     Anagrams anagrams = ChooseCorrectAnagrams("abc", candidates);
     EXPECT_EQ(candidates, anagrams);
+}
+
+TEST(Anagrams, NotAllCandidatesMatch_abc)
+{
+    Anagrams candidates = { "abc", "aec", "acc", "bac", "bad" };
+    Anagrams anagrams = ChooseCorrectAnagrams("abc", candidates);
+    EXPECT_EQ(Anagrams({ "abc", "acc", "bac" }), anagrams);
 }
