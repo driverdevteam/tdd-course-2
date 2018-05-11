@@ -6,3 +6,18 @@ Given "listen" and a list of candidates like "enlists" "google" "inlets" "banana
 _from http://exercism.io/_
 */
 #include <gtest/gtest.h>
+#include <set>
+#include <algorithm>
+
+using Anagrams = std::set<std::string>;
+Anagrams ChooseCorrectAnagrams(const std::string& word, const Anagrams& candidates)
+{
+    return { };
+}
+
+TEST(Anagrams, Simple_ab)
+{
+    Anagrams candidates = { "ab" };
+    Anagrams anagrams = ChooseCorrectAnagrams("ab", candidates);
+    EXPECT_EQ(candidates, anagrams);
+}
