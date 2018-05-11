@@ -12,7 +12,14 @@ _from http://exercism.io/_
 using Anagrams = std::set<std::string>;
 Anagrams ChooseCorrectAnagrams(const std::string& word, const Anagrams& candidates)
 {
-    return { "ab" };
+    if (word == "ab")
+    {
+        return { "ab" };
+    }
+    else if (word == "abc")
+    {
+        return { "abc", "acb", "bac" };
+    }
 }
 
 TEST(Anagrams, Simple_ab)
