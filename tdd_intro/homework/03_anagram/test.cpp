@@ -21,3 +21,11 @@ TEST(Anagrams, Simple_ab)
     Anagrams anagrams = ChooseCorrectAnagrams("ab", candidates);
     EXPECT_EQ(candidates, anagrams);
 }
+
+
+TEST(Anagrams, Simple_abc)
+{
+    Anagrams candidates = { "abc", "acb", "bac" };
+    Anagrams anagrams = ChooseCorrectAnagrams("abc", candidates);
+    EXPECT_EQ(candidates, anagrams);
+}
