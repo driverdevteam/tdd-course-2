@@ -7,26 +7,36 @@ _from http://exercism.io/_
 */
 #include <gtest/gtest.h>
 #include <set>
+#include <string>
 #include <algorithm>
 
 using Anagrams = std::set<std::string>;
 Anagrams ChooseCorrectAnagrams(const std::string& word, const Anagrams& candidates)
 {
-    if (word == "ab")
+    Anagrams anagrams;
+    for (std::string candidate : candidates)
     {
-        return { "ab" };
-    }
-    else if (word == "abc")
-    {
-        if (candidates == Anagrams({ "abc", "acb", "bac" }))
+        bool matched = true;
+        auto candidateLettersSet = candidate;
+        for (auto letter : word)
         {
-            return { "abc", "acb", "bac" };
+            auto letterPos = candidateLettersSet.find(letter);
+            if (letterPos == candidateLettersSet.npos)
+            {
+                matched = false;
+                break;
+            }
+            else
+            {
+                candidateLettersSet.erase(letterPos, 1);
+            }
         }
-        else
+        if (matched)
         {
-            return { "abc", "cab", "bac" };
+            anagrams.insert(candidate);
         }
     }
+    return anagrams;
 }
 
 TEST(Anagrams, AllCandidatesMatch_ab)
