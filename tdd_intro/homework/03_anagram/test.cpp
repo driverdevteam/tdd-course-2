@@ -45,7 +45,7 @@ TEST(Anagrams, AllCandidatesMatch_abc)
 
 TEST(Anagrams, NotAllCandidatesMatch_abc)
 {
-    Anagrams candidates = { "abc", "aec", "acc", "bac", "bad" };
+    Anagrams candidates = { "abc", "aec", "cab", "bac", "bad" };
     Anagrams anagrams = ChooseCorrectAnagrams("abc", candidates);
-    EXPECT_EQ(Anagrams({ "abc", "acc", "bac" }), anagrams);
+    EXPECT_EQ(Anagrams({ "abc", "cab", "bac" }), anagrams);
 }
