@@ -59,3 +59,10 @@ TEST(Anagrams, NotAllCandidatesMatch_abc)
     Anagrams anagrams = ChooseCorrectAnagrams("abc", candidates);
     EXPECT_EQ(Anagrams({ "abc", "cab", "bac" }), anagrams);
 }
+
+TEST(Anagrams, AcceptanceTest)
+{
+    Anagrams candidates = { "enlists", "google", "inlets", "banana" };
+    Anagrams anagrams = ChooseCorrectAnagrams("listen", candidates);
+    EXPECT_EQ(Anagrams({ "inlets" }), anagrams);
+}
