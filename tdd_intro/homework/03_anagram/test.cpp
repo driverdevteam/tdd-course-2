@@ -7,6 +7,7 @@ _from http://exercism.io/_
 */
 #include <gtest/gtest.h>
 #include <stdexcept>
+#include <algorithm>
 
 using AnagramList = std::vector<std::string>;
 
@@ -19,6 +20,11 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
     else if (anagrams.empty())
     {
         throw std::runtime_error("Anagram list can not be empty.");
+    }
+
+    if (std::find(anagrams.begin(), anagrams.end(), word) != anagrams.end())
+    {
+        return anagrams;
     }
 
     return {};
@@ -37,4 +43,9 @@ TEST(GetAnagramFromListTest, InputStringAndListWithoutString_ReturnEmptyList)
 TEST(GetAnagramFromListTest, InputWordAndEmptyList_ThrowException)
 {
     EXPECT_THROW(GetAnagramFromList("Word", {}), std::runtime_error);
+}
+
+TEST(GetAnagramFromListTest, InputStringAndListWithString_ReturnListWithString)
+{
+    EXPECT_EQ(AnagramList{"String"}, GetAnagramFromList("String", {"String"}));
 }
