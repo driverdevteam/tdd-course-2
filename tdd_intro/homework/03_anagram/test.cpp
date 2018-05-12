@@ -31,12 +31,17 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
         throw std::runtime_error("Anagram list can not be empty.");
     }
 
-    if (std::find(anagrams.begin(), anagrams.end(), word) != anagrams.end())
+    AnagramList foundAnagrams;
+
+    for (std::string anagram : anagrams)
     {
-        return anagrams;
+        if (word == anagram)
+        {
+            foundAnagrams.push_back(anagram);
+        }
     }
 
-    return {};
+    return foundAnagrams;
 }
 
 TEST(GetAnagramFromListTest, InputEmptyString_ThrowException)
