@@ -45,7 +45,7 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
 
     AnagramList foundAnagrams;
 
-    for (std::string anagram : anagrams)
+    for (const std::string& anagram : anagrams)
     {
         bool isAnagram = true;
 
