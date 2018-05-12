@@ -58,3 +58,9 @@ TEST(GetAnagramFromListTest, InputStringAndListWithString_ReturnListWithString)
 {
     EXPECT_EQ(AnagramList{GetString()}, GetAnagramFromList(GetString(), {GetString()}));
 }
+
+TEST(GetAnagramFromListTest, InputStringAndListWithManyString_ReturnListWithString)
+{
+    EXPECT_EQ(AnagramList{GetString()},
+              GetAnagramFromList(GetString(), {"0", GetString(), "1", "2"}));
+}
