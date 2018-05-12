@@ -8,8 +8,9 @@ _from http://exercism.io/_
 #include <gtest/gtest.h>
 #include <stdexcept>
 
+using AnagramList = std::vector<std::string>;
 
-std::string GetAnagramFromList(const std::string& word, const std::vector<std::string>& anagrams)
+std::string GetAnagramFromList(const std::string& word, const AnagramList& anagrams)
 {
     throw std::runtime_error("Word can not be empty.");
     return {};
