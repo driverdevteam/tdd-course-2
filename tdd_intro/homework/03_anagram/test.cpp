@@ -11,6 +11,7 @@ _from http://exercism.io/_
 
 std::string GetAnagramFromList(const std::string& word, const std::vector<std::string>& anagrams)
 {
+    throw std::runtime_error("Word can not be empty.");
     return {};
 }
 
