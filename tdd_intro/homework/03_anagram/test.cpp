@@ -127,3 +127,9 @@ TEST(GetAnagramFromListTest, InputAbcbcAndListWithAbcbb_ReturnEmptyList)
 {
     EXPECT_EQ(AnagramList{}, GetAnagramFromList("Abcbc", {"Abcbb"}));
 }
+
+TEST(GetAnagramFromListTest, AcceptanceTest)
+{
+    EXPECT_EQ(AnagramList{"inlets"},
+              GetAnagramFromList("listen", {"enlists", "google", "inlets", "banana"}));
+}
