@@ -47,7 +47,18 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
 
     for (std::string anagram : anagrams)
     {
-        if (word == anagram || anagram == GetStringAnagram())
+        bool isAnagram = true;
+
+        for (const char& ch : word)
+        {
+            if (anagram.find(ch) == std::string::npos)
+            {
+                isAnagram = false;
+                break;
+            }
+        }
+
+        if (isAnagram)
         {
             foundAnagrams.push_back(anagram);
         }
