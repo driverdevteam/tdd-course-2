@@ -8,6 +8,7 @@ _from http://exercism.io/_
 #include <gtest/gtest.h>
 #include <stdexcept>
 #include <algorithm>
+#include <map>
 
 namespace
 {
@@ -32,6 +33,24 @@ namespace
     }
 }
 
+bool IsAnagram(const std::map<char, size_t>& letters, const std::string& anagram)
+{
+    for (const auto& letter : letters)
+    {
+        size_t pos = -1;
+        for (size_t i = 0; i < letter.second; ++i)
+        {
+            pos = anagram.find(letter.first, pos + 1);
+            if (pos == std::string::npos)
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagrams)
 {
     if (word.empty())
@@ -43,6 +62,12 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
         throw std::runtime_error("Anagram list can not be empty.");
     }
 
+    std::map<char, size_t> letters;
+    for (const char& ch : word)
+    {
+        ++letters[ch];
+    }
+
     AnagramList foundAnagrams;
 
     for (const std::string& anagram : anagrams)
@@ -52,18 +77,7 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
             continue;
         }
 
-        bool isAnagram = true;
-
-        for (const char& ch : word)
-        {
-            if (anagram.find(ch) == std::string::npos)
-            {
-                isAnagram = false;
-                break;
-            }
-        }
-
-        if (isAnagram)
+        if (IsAnagram(letters, anagram))
         {
             foundAnagrams.push_back(anagram);
         }
