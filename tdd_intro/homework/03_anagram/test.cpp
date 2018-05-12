@@ -10,7 +10,7 @@ _from http://exercism.io/_
 
 using AnagramList = std::vector<std::string>;
 
-std::string GetAnagramFromList(const std::string& word, const AnagramList& anagrams)
+AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagrams)
 {
     throw std::runtime_error("Word can not be empty.");
     return {};
