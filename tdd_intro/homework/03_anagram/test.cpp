@@ -12,7 +12,11 @@ using AnagramList = std::vector<std::string>;
 
 AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagrams)
 {
-    throw std::runtime_error("Word can not be empty.");
+    if (word.empty())
+    {
+        throw std::runtime_error("Word can not be empty.");
+    }
+
     return {};
 }
 
