@@ -22,11 +22,6 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
         throw std::runtime_error("Anagram list can not be empty.");
     }
 
-    if (std::find(anagrams.begin(), anagrams.end(), word) != anagrams.end())
-    {
-        return anagrams;
-    }
-
     return {};
 }
 
