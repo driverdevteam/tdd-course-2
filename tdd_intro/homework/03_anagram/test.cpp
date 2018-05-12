@@ -29,3 +29,8 @@ TEST(GetAnagramFromListTest, InputStringAndListWithoutString_ReturnEmptyList)
 {
     EXPECT_EQ(AnagramList(), GetAnagramFromList("String", {"1", "2"}));
 }
+
+TEST(GetAnagramFromListTest, InputWordAndEmptyList_ThrowException)
+{
+    EXPECT_THROW(GetAnagramFromList("Word", {}), std::runtime_error);
+}
