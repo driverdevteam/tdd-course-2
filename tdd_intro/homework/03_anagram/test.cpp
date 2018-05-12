@@ -47,6 +47,11 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
 
     for (const std::string& anagram : anagrams)
     {
+        if (anagram.size() != word.size())
+        {
+            continue;
+        }
+
         bool isAnagram = true;
 
         for (const char& ch : word)
