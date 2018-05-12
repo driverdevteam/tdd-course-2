@@ -9,7 +9,16 @@ _from http://exercism.io/_
 #include <stdexcept>
 #include <algorithm>
 
-using AnagramList = std::vector<std::string>;
+namespace
+{
+    using AnagramList = std::vector<std::string>;
+
+    std::string GetString()
+    {
+        static const std::string str("String");
+        return str;
+    }
+}
 
 AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagrams)
 {
@@ -22,6 +31,11 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
         throw std::runtime_error("Anagram list can not be empty.");
     }
 
+    if (std::find(anagrams.begin(), anagrams.end(), word) != anagrams.end())
+    {
+        return anagrams;
+    }
+
     return {};
 }
 
@@ -32,7 +46,7 @@ TEST(GetAnagramFromListTest, InputEmptyString_ThrowException)
 
 TEST(GetAnagramFromListTest, InputStringAndListWithoutString_ReturnEmptyList)
 {
-    EXPECT_EQ(AnagramList(), GetAnagramFromList("String", {"1", "2"}));
+    EXPECT_EQ(AnagramList(), GetAnagramFromList(GetString(), {"1", "2"}));
 }
 
 TEST(GetAnagramFromListTest, InputWordAndEmptyList_ThrowException)
@@ -42,5 +56,5 @@ TEST(GetAnagramFromListTest, InputWordAndEmptyList_ThrowException)
 
 TEST(GetAnagramFromListTest, InputStringAndListWithString_ReturnListWithString)
 {
-    EXPECT_EQ(AnagramList{"String"}, GetAnagramFromList("String", {"String"}));
+    EXPECT_EQ(AnagramList{GetString()}, GetAnagramFromList(GetString(), {GetString()}));
 }
