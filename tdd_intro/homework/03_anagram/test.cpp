@@ -18,6 +18,12 @@ namespace
         static const std::string str("String");
         return str;
     }
+
+    std::string GetStringAnagram()
+    {
+        static const std::string str("Singtr");
+        return str;
+    }
 }
 
 AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagrams)
@@ -64,8 +70,8 @@ TEST(GetAnagramFromListTest, InputStringAndListWithString_ReturnListWithString)
     EXPECT_EQ(AnagramList{GetString()}, GetAnagramFromList(GetString(), {GetString()}));
 }
 
-TEST(GetAnagramFromListTest, InputStringAndListWithManyString_ReturnListWithString)
+TEST(GetAnagramFromListTest, InputStringAndListWithSingtr_ReturnListWithSingtr)
 {
-    EXPECT_EQ(AnagramList{GetString()},
-              GetAnagramFromList(GetString(), {"0", GetString(), "1", "2"}));
+    EXPECT_EQ(AnagramList{GetStringAnagram()},
+              GetAnagramFromList(GetString(), {"0", GetStringAnagram()}));
 }
