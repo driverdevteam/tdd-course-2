@@ -16,6 +16,10 @@ AnagramList GetAnagramFromList(const std::string& word, const AnagramList& anagr
     {
         throw std::runtime_error("Word can not be empty.");
     }
+    else if (anagrams.empty())
+    {
+        throw std::runtime_error("Anagram list can not be empty.");
+    }
 
     return {};
 }
