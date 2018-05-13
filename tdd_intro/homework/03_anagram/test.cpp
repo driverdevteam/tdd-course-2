@@ -11,18 +11,19 @@ using Candidates = std::vector<std::string>;
 namespace
 {
     const std::string anagrama = "listen";
+    const Candidates anagramCandidates = {"enlists", "google", "inlets"};
 }
 
-Candidates GetAnagramList(const std::string& str, Candidates& candidates)
+Candidates GetAnagramList(const std::string& str, const Candidates& candidates)
 {
     Candidates anagrams;
     for (const auto &value :candidates)
     {
-        if (value == "listen")
+        if (value == anagrama)
         {
             anagrams.push_back(value);
         }
-        else if (value == "enlists")
+        else if (value == anagramCandidates[0])
         {
             anagrams.push_back(value);
         }
@@ -36,11 +37,10 @@ TEST(AnagramTests, TakeListWithValue_Return_Value)
 }
 TEST(AnagramTests, TakeListWith2Values_Expect_Value)
 {
-    Candidates vec = {"enlists", "google"};
-    EXPECT_EQ(Candidates({"enlists"}), GetAnagramList(anagrama, vec));
+    Candidates vec = {anagramCandidates[0], anagramCandidates[1]};
+    EXPECT_EQ(Candidates({anagramCandidates[0]}), GetAnagramList(anagrama, vec));
 }
 TEST(AnagramTests, TakeListWith3Values_Expect_Value)
 {
-    Candidates vec = {"google", "enlists", "inlets"};
-    EXPECT_EQ(Candidates({"enlists"}), GetAnagramList(anagrama, vec));
+    EXPECT_EQ(Candidates({anagramCandidates[0]}), GetAnagramList(anagrama, anagramCandidates));
 }
