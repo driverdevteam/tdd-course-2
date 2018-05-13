@@ -8,18 +8,22 @@ _from http://exercism.io/_
 #include <gtest/gtest.h>
 using Candidates = std::vector<std::string>;
 
+namespace
+{
+    const std::string anagrama = "listen";
+}
+
 Candidates GetAnagramList(const std::string& str, Candidates& candidates)
 {
     return Candidates({candidates[0]});
 }
 TEST(AnagramTests, TakeListWithValue_Return_Value)
 {
-    Candidates vec = {"listen"};
-    EXPECT_EQ(vec, GetAnagramList("listen", vec));
+    Candidates vec = {anagrama};
+    EXPECT_EQ(vec, GetAnagramList(anagrama, vec));
 }
-
-TEST(AnagramTests, TakeListWith2Values_Return_Value)
+TEST(AnagramTests, TakeListWith2Values_Expect_Value)
 {
     Candidates vec = {"enlists", "google"};
-    EXPECT_EQ(Candidates({"enlists"}), GetAnagramList("listen", vec));
+    EXPECT_EQ(Candidates({"enlists"}), GetAnagramList(anagrama, vec));
 }
