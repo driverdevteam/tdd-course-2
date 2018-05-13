@@ -16,7 +16,7 @@ std::vector<std::string> GetAnagrams(const std::string& word,
     return std::vector<std::string>({"word"});
 }
 
-TEST(GetAnagrams, GiveOnlyOneWord_ReturnIt)
+TEST(GetAnagrams, GiveOnlyOneWord_word_ReturnIt)
 {
     std::vector<std::string> expectedAnagrams;
     std::vector<std::string> givenWords;
@@ -25,3 +25,14 @@ TEST(GetAnagrams, GiveOnlyOneWord_ReturnIt)
     expectedAnagrams = givenWords;
     EXPECT_EQ(expectedAnagrams, GetAnagrams("word", givenWords));
 }
+
+TEST(GetAnagrams, GiveOnlyOneWord_hello_ReturnIt)
+{
+    std::vector<std::string> expectedAnagrams;
+    std::vector<std::string> givenWords;
+
+    givenWords.push_back("hello");
+    expectedAnagrams = givenWords;
+    EXPECT_EQ(expectedAnagrams, GetAnagrams("hello", givenWords));
+}
+
