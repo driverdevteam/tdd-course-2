@@ -66,3 +66,8 @@ TEST(AnagramTests, TakeAnagramAnd3Values_Expect3Values)
     EXPECT_EQ(myCandidates,
               GetAnagramList(s_additionalAnagrama, myCandidates));
 }
+
+TEST(AnagramTests, TakeEmptyAnagrama_Expect_empty)
+{
+    EXPECT_EQ(Candidates(), GetAnagramList("", s_anagramCandidates));
+}
