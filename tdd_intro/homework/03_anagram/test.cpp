@@ -10,20 +10,20 @@ using Candidates = std::vector<std::string>;
 
 namespace
 {
-    const std::string anagrama = "listen";
-    const Candidates anagramCandidates = {"enlists", "google", "inlets"};
+    const std::string s_anagrama = "listen";
+    const Candidates s_anagramCandidates = {"enlists", "google", "inlets"};
 }
 
-Candidates GetAnagramList(const std::string& anagram, const Candidates& candidates)
+Candidates GetAnagramList(const std::string& anagrama, const Candidates& candidates)
 {
     Candidates anagrams;
     for (const auto &value :candidates)
     {
-        if (value == anagram)
+        if (value == anagrama)
         {
             anagrams.push_back(value);
         }
-        else if (value == anagramCandidates[0])
+        else if (value == s_anagramCandidates[0])
         {
             anagrams.push_back(value);
         }
@@ -36,17 +36,17 @@ Candidates GetAnagramList(const std::string& anagram, const Candidates& candidat
 }
 TEST(AnagramTests, TakeListWithValue_Return_Value)
 {
-    Candidates vec = {anagrama};
-    EXPECT_EQ(vec, GetAnagramList(anagrama, vec));
+    Candidates vec = {s_anagrama};
+    EXPECT_EQ(vec, GetAnagramList(s_anagrama, vec));
 }
 TEST(AnagramTests, TakeListWith2Values_Expect_Value)
 {
-    Candidates vec = {anagramCandidates[0], anagramCandidates[1]};
-    EXPECT_EQ(Candidates({anagramCandidates[0]}), GetAnagramList(anagrama, vec));
+    Candidates vec = {s_anagramCandidates[0], s_anagramCandidates[1]};
+    EXPECT_EQ(Candidates({s_anagramCandidates[0]}), GetAnagramList(s_anagrama, vec));
 }
 TEST(AnagramTests, TakeListWith3Values_Expect_Value)
 {
-    EXPECT_EQ(Candidates({anagramCandidates[0]}), GetAnagramList(anagrama, anagramCandidates));
+    EXPECT_EQ(Candidates({s_anagramCandidates[0]}), GetAnagramList(s_anagrama, s_anagramCandidates));
 }
 TEST(AnagramTests, TakeAnagramAnd3Values_Expect2Values)
 {
