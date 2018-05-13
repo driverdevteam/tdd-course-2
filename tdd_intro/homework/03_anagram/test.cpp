@@ -27,3 +27,8 @@ TEST(AnagramTests, TakeListWith2Values_Expect_Value)
     Candidates vec = {"enlists", "google"};
     EXPECT_EQ(Candidates({"enlists"}), GetAnagramList(anagrama, vec));
 }
+TEST(AnagramTests, TakeListWith3Values_Expect_Value)
+{
+    Candidates vec = {"google", "enlists", "inlets"};
+    EXPECT_EQ(Candidates({"enlists"}), GetAnagramList(anagrama, vec));
+}
