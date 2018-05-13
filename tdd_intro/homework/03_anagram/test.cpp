@@ -13,14 +13,17 @@ namespace
 {
     const std::string s_anagrama = "listen";
     const Candidates s_anagramCandidates = {"inlets", "google", "enlists"};
+    const std::string s_additionalAnagrama = "abets";
+    const Candidates  s_additionalCandidates = {"baste", "betas", "rokki"};
 }
 
 Candidates GetAnagramList(const std::string& anagrama, const Candidates& candidates)
 {
     Candidates anagrams;
-    std::string sortedAnagrama = anagrama;
     std::string sortedValue;
+    std::string sortedAnagrama = anagrama;
     std::sort(sortedAnagrama.begin(), sortedAnagrama.end());
+
     for (const auto& value :candidates)
     {
         sortedValue = value;
@@ -45,19 +48,21 @@ TEST(AnagramTests, TakeListWith2Values_Expect_Value)
 }
 TEST(AnagramTests, TakeListWith3Values_Expect_Value)
 {
-    EXPECT_EQ(Candidates({s_anagramCandidates[0]}), GetAnagramList(s_anagrama, s_anagramCandidates));
+    EXPECT_EQ(Candidates({s_anagramCandidates[0]}),
+              GetAnagramList(s_anagrama, s_anagramCandidates));
 }
 TEST(AnagramTests, TakeAnagramAnd3Values_Expect2Values)
 {
-    const std::string myAnagrama = "abets";
-    const Candidates  myCandidates = {"baste", "betas", "rokki"};
 
-    EXPECT_EQ(Candidates({myCandidates[0], myCandidates[1]}), GetAnagramList(myAnagrama, myCandidates));
+
+    EXPECT_EQ(Candidates({s_additionalCandidates[0], s_additionalCandidates[1]}),
+              GetAnagramList(s_additionalAnagrama, s_additionalCandidates));
 }
 TEST(AnagramTests, TakeAnagramAnd3Values_Expect3Values)
 {
-    const std::string myAnagrama = "abets";
-    const Candidates  myCandidates = {"baste", "betas", "abste"};
-
-    EXPECT_EQ(myCandidates, GetAnagramList(myAnagrama, myCandidates));
+    const Candidates myCandidates({s_additionalCandidates[0],
+                                   s_additionalCandidates[1],
+                                   "abste"});
+    EXPECT_EQ(myCandidates,
+              GetAnagramList(s_additionalAnagrama, myCandidates));
 }
