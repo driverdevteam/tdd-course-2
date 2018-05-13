@@ -9,7 +9,7 @@ _from http://exercism.io/_
 
 std::vector<std::string> GetAnagramList(const std::string& str, std::vector<std::string>& candidates)
 {
-    return {};
+    return candidates;
 }
 TEST(AnagramTests, TakeListWithValue_Return_Value)
 {
