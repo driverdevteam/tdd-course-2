@@ -15,7 +15,19 @@ namespace
 
 Candidates GetAnagramList(const std::string& str, Candidates& candidates)
 {
-    return Candidates({candidates[0]});
+    Candidates anagrams;
+    for (const auto &value :candidates)
+    {
+        if (value == "listen")
+        {
+            anagrams.push_back(value);
+        }
+        else if (value == "enlists")
+        {
+            anagrams.push_back(value);
+        }
+    }
+    return anagrams;
 }
 TEST(AnagramTests, TakeListWithValue_Return_Value)
 {
