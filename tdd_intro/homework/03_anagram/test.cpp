@@ -6,13 +6,14 @@ Given "listen" and a list of candidates like "enlists" "google" "inlets" "banana
 _from http://exercism.io/_
 */
 #include <gtest/gtest.h>
+using Candidates = std::vector<std::string>;
 
-std::vector<std::string> GetAnagramList(const std::string& str, std::vector<std::string>& candidates)
+Candidates GetAnagramList(const std::string& str, Candidates& candidates)
 {
     return candidates;
 }
 TEST(AnagramTests, TakeListWithValue_Return_Value)
 {
-    std::vector<std::string> vec = {"listen"};
+    Candidates vec = {"listen"};
     EXPECT_EQ(vec, GetAnagramList("listen", vec));
 }
