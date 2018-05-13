@@ -15,7 +15,7 @@ using String_vt = std::vector<std::string>;
 String_vt GetAnagrams(const std::string& word,
                       const String_vt& wordList)
 {
-    return String_vt({word});
+    return String_vt({wordList});
 }
 
 TEST(GetAnagrams, GiveOnlyOneWord_word_ReturnIt)
