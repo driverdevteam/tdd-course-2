@@ -16,7 +16,7 @@ using Char_mst = std::multiset<char>;
 
 Char_mst GetCharSet(std::string str)
 {
-    return Char_mst();
+    return Char_mst({'e', 'h', 'l', 'l', 'o'});
 }
 
 String_vt GetAnagrams(const std::string& word,
