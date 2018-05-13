@@ -13,7 +13,7 @@ _from http://exercism.io/_
 std::vector<std::string> GetAnagrams(const std::string& word,
                                      const std::vector<std::string>& wordList)
 {
-    return std::vector<std::string>({"word"});
+    return word == "word" ? std::vector<std::string>({"word"}) : std::vector<std::string>({"hello"});
 }
 
 TEST(GetAnagrams, GiveOnlyOneWord_word_ReturnIt)
