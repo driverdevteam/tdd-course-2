@@ -9,8 +9,15 @@ _from http://exercism.io/_
 
 #include <string>
 #include <vector>
+#include <set>
 
 using String_vt = std::vector<std::string>;
+using Char_mst = std::multiset<char>;
+
+Char_mst GetCharSet(std::string str)
+{
+    return Char_mst();
+}
 
 String_vt GetAnagrams(const std::string& word,
                       const String_vt& wordList)
@@ -58,5 +65,14 @@ TEST(GetAnagrams, GiveOneAnagramOfTwoWords_ReturnOne)
     String_vt givenWords({word, nonAnagram});
 
     EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
+}
+
+TEST(GetCharSet, GiveWord_hello_ReturnItsLetters)
+{
+    const std::string word = "hello";
+
+    Char_mst expectedSet({'e', 'h', 'l', 'l', 'o'});
+
+    EXPECT_EQ(expectedSet, GetCharSet(word));
 }
 
