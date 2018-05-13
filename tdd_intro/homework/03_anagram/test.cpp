@@ -101,3 +101,13 @@ TEST(GetCharSet, GiveWord_world_ReturnItsLetters)
 
     EXPECT_EQ(expectedSet, GetCharSet(word));
 }
+
+TEST(GetCharSet, AcceptanceTest)
+{
+    const std::string word = "listen";
+
+    String_vt expectedAnagrams({"inlets"});
+    String_vt givenWords({"enlists", "google", "inlets", "banana"});
+
+    EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
+}
