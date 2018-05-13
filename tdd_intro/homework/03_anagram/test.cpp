@@ -10,29 +10,35 @@ _from http://exercism.io/_
 #include <string>
 #include <vector>
 
-std::vector<std::string> GetAnagrams(const std::string& word,
-                                     const std::vector<std::string>& wordList)
+using String_vt = std::vector<std::string>;
+
+String_vt GetAnagrams(const std::string& word,
+                      const String_vt& wordList)
 {
-    return word == "word" ? std::vector<std::string>({"word"}) : std::vector<std::string>({"hello"});
+    return String_vt({word});
 }
 
 TEST(GetAnagrams, GiveOnlyOneWord_word_ReturnIt)
 {
-    std::vector<std::string> expectedAnagrams;
-    std::vector<std::string> givenWords;
+    String_vt expectedAnagrams;
+    String_vt givenWords;
 
-    givenWords.push_back("word");
+    const std::string word("word");
+
+    givenWords.push_back(word);
     expectedAnagrams = givenWords;
-    EXPECT_EQ(expectedAnagrams, GetAnagrams("word", givenWords));
+    EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
 }
 
 TEST(GetAnagrams, GiveOnlyOneWord_hello_ReturnIt)
 {
-    std::vector<std::string> expectedAnagrams;
-    std::vector<std::string> givenWords;
+    String_vt expectedAnagrams;
+    String_vt givenWords;
 
-    givenWords.push_back("hello");
+    const std::string word("hello");
+
+    givenWords.push_back(word);
     expectedAnagrams = givenWords;
-    EXPECT_EQ(expectedAnagrams, GetAnagrams("hello", givenWords));
+    EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
 }
 
