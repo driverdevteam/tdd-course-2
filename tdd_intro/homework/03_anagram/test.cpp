@@ -55,3 +55,10 @@ TEST(AnagramTests, TakeAnagramAnd3Values_Expect2Values)
 
     EXPECT_EQ(Candidates({myCandidates[0], myCandidates[1]}), GetAnagramList(myAnagrama, myCandidates));
 }
+TEST(AnagramTests, TakeAnagramAnd3Values_Expect3Values)
+{
+    const std::string myAnagrama = "abets";
+    const Candidates  myCandidates = {"baste", "betas", "abste"};
+
+    EXPECT_EQ(myCandidates, GetAnagramList(myAnagrama, myCandidates));
+}
