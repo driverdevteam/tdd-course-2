@@ -20,40 +20,31 @@ String_vt GetAnagrams(const std::string& word,
 
 TEST(GetAnagrams, GiveOnlyOneWord_word_ReturnIt)
 {
-    String_vt expectedAnagrams;
-    String_vt givenWords;
-
     const std::string word("word");
 
-    givenWords.push_back(word);
-    expectedAnagrams = givenWords;
+    String_vt expectedAnagrams({word});
+    String_vt givenWords = expectedAnagrams;
+
     EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
 }
 
 TEST(GetAnagrams, GiveOnlyOneWord_hello_ReturnIt)
 {
-    String_vt expectedAnagrams;
-    String_vt givenWords;
-
     const std::string word("hello");
 
-    givenWords.push_back(word);
-    expectedAnagrams = givenWords;
+    String_vt expectedAnagrams({word});
+    String_vt givenWords = expectedAnagrams;
+
     EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
 }
 
 TEST(GetAnagrams, GiveTwoAnagrams_ReturnThem)
 {
-    String_vt expectedAnagrams;
-    String_vt givenWords;
+    const std::string word("word");
+    const std::string anagram("rowd");
 
-    const std::string word = "word";
-    const std::string anagram = "rowd";
-
-    givenWords.push_back(word);
-    givenWords.push_back(anagram);
-
-    expectedAnagrams = givenWords;
+    String_vt expectedAnagrams({word, anagram});
+    String_vt givenWords = expectedAnagrams;
 
     EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
 }
