@@ -10,7 +10,7 @@ using Candidates = std::vector<std::string>;
 
 Candidates GetAnagramList(const std::string& str, Candidates& candidates)
 {
-    return candidates;
+    return Candidates({candidates[0]});
 }
 TEST(AnagramTests, TakeListWithValue_Return_Value)
 {
