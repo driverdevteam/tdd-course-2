@@ -27,7 +27,19 @@ Char_mst GetCharSet(std::string str)
 String_vt GetAnagrams(const std::string& word,
                       const String_vt& wordList)
 {
-    return String_vt({wordList});
+    String_vt result;
+
+    const Char_mst wordCharSet = GetCharSet(word);
+
+    for (const std::string& curWord : wordList)
+    {
+        if (GetCharSet(curWord) == wordCharSet)
+        {
+            result.push_back(curWord);
+        }
+    }
+
+    return result;
 }
 
 TEST(GetAnagrams, GiveOnlyOneWord_word_ReturnIt)
