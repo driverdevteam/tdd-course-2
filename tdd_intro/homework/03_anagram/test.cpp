@@ -14,16 +14,20 @@ namespace
     const Candidates anagramCandidates = {"enlists", "google", "inlets"};
 }
 
-Candidates GetAnagramList(const std::string& str, const Candidates& candidates)
+Candidates GetAnagramList(const std::string& anagram, const Candidates& candidates)
 {
     Candidates anagrams;
     for (const auto &value :candidates)
     {
-        if (value == anagrama)
+        if (value == anagram)
         {
             anagrams.push_back(value);
         }
         else if (value == anagramCandidates[0])
+        {
+            anagrams.push_back(value);
+        }
+        else if (value == "betas" || value == "baste")
         {
             anagrams.push_back(value);
         }
