@@ -76,3 +76,11 @@ TEST(GetCharSet, GiveWord_hello_ReturnItsLetters)
     EXPECT_EQ(expectedSet, GetCharSet(word));
 }
 
+TEST(GetCharSet, GiveWord_world_ReturnItsLetters)
+{
+    const std::string word = "world";
+
+    Char_mst expectedSet({'d', 'l', 'o', 'r', 'w'});
+
+    EXPECT_EQ(expectedSet, GetCharSet(word));
+}
