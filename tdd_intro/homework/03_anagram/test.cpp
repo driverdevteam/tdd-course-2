@@ -42,3 +42,19 @@ TEST(GetAnagrams, GiveOnlyOneWord_hello_ReturnIt)
     EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
 }
 
+TEST(GetAnagrams, GiveTwoAnagrams_ReturnThem)
+{
+    String_vt expectedAnagrams;
+    String_vt givenWords;
+
+    const std::string word = "word";
+    const std::string anagram = "rowd";
+
+    givenWords.push_back(word);
+    givenWords.push_back(anagram);
+
+    expectedAnagrams = givenWords;
+
+    EXPECT_EQ(expectedAnagrams, GetAnagrams(word, givenWords));
+}
+
