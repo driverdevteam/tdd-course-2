@@ -9,16 +9,17 @@ _from http://exercism.io/_
 
 using Candidates = std::vector<std::string>;
 
-Candidates GetAnagram(const std::string& anagrama, Candidates&)
+Candidates GetAnagram(const std::string& anagrama, Candidates& candidates)
 {
-    if(anagrama.empty())
+
+    if(anagrama.empty() || candidates[0] != anagrama)
     {
         return Candidates();
     }
 
-    Candidates candidates;
-    candidates.push_back(anagrama);
-    return candidates;
+    Candidates result;
+    result.push_back(anagrama);
+    return result;
 }
 
 TEST(ANAGRAM, GetAnagram)
