@@ -9,12 +9,26 @@ _from http://exercism.io/_
 
 using Candidates = std::vector<std::string>;
 
- Candidates GetAnagram(const std::string&, Candidates&)
+Candidates GetAnagram(const std::string& anagrama, Candidates&)
 {
-    return Candidates();
+    if(anagrama.empty())
+    {
+        return Candidates();
+    }
+
+    Candidates candidates;
+    candidates.push_back("a");
+    return candidates;
 }
 
 TEST(ANAGRAM, GetAnagram)
 {
     EXPECT_EQ(0, GetAnagram("", Candidates()).size());
+}
+
+TEST(ANAGRAM, GetAnagramInput_A_and_A_candidatesReturnA)
+{
+    Candidates candidates;
+    candidates.push_back("a");
+    EXPECT_EQ(candidates, GetAnagram("a", candidates));
 }
