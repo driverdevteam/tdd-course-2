@@ -39,3 +39,9 @@ TEST(ANAGRAM, GetAnagramInput_B_and_B_candidatesReturnB)
     candidates.push_back("b");
     EXPECT_EQ(candidates, GetAnagram("b", candidates));
 }
+TEST(ANAGRAM, GetAnagramInput_A_and_B_candidatesReturnEMPTY)
+{
+    Candidates candidates;
+    candidates.push_back("b");
+    EXPECT_EQ(0, GetAnagram("a", candidates).size());
+}
