@@ -7,12 +7,14 @@ _from http://exercism.io/_
 */
 #include <gtest/gtest.h>
 
-std::vector<std::string> GetAnagram(const std::string&, std::vector<std::string>&)
+using Candidates = std::vector<std::string>;
+
+ Candidates GetAnagram(const std::string&, Candidates&)
 {
-    return std::vector<std::string>();
+    return Candidates();
 }
 
 TEST(ANAGRAM, GetAnagram)
 {
-    EXPECT_EQ(0,GetAnagram("", std::vector<std::string>()).size());
+    EXPECT_EQ(0, GetAnagram("", Candidates()).size());
 }
