@@ -83,3 +83,17 @@ TEST(ANAGRAM, GetAnagramInput_AB_and_B_BA_candidatesReturnBA)
     expect.push_back("ba");
     EXPECT_EQ(expect, GetAnagram("ab", candidates));
 }
+
+TEST(ANAGRAM, GetAnagramInput_listen_and_list_words_candidatesReturnInlets)
+{
+    Candidates candidates;
+    candidates.push_back("enlists");
+    candidates.push_back("google");
+    candidates.push_back("inlets");
+    candidates.push_back("banana");
+
+    Candidates expect;
+    expect.push_back("inlets");
+    EXPECT_EQ(expect, GetAnagram("listen", candidates));
+
+}
