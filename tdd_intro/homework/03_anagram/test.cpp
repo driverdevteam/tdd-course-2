@@ -17,7 +17,7 @@ Candidates GetAnagram(const std::string& anagrama, Candidates&)
     }
 
     Candidates candidates;
-    candidates.push_back("a");
+    candidates.push_back(anagrama);
     return candidates;
 }
 
