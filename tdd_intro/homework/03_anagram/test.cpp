@@ -11,17 +11,21 @@ using Candidates = std::vector<std::string>;
 
 Candidates GetAnagram(const std::string& anagrama, Candidates& candidates)
 {
+    std::string sortedAnagrama = anagrama;
+    std::sort(sortedAnagrama.begin(), sortedAnagrama.end());
+    Candidates result;
 
     for (const auto& value :candidates)
     {
-        if(value == anagrama)
+        std::string sortedValue = value;
+        std::sort(sortedValue.begin(), sortedValue.end());
+
+        if(sortedValue == sortedAnagrama)
         {
-            Candidates result;
-            result.push_back(anagrama);
-            return result;
+            result.push_back(value);
         }
     }
-    return Candidates();
+    return result;
 }
 
 TEST(ANAGRAM, GetAnagram)
@@ -67,5 +71,15 @@ TEST(ANAGRAM, GetAnagramInput_AB_and_B_A_candidatesReturnEMPTY)
     candidates.push_back("b");
     candidates.push_back("a");
     EXPECT_EQ(0, GetAnagram("ab", candidates).size());
+}
 
+TEST(ANAGRAM, GetAnagramInput_AB_and_B_BA_candidatesReturnBA)
+{
+    Candidates candidates;
+    candidates.push_back("b");
+    candidates.push_back("ba");
+
+    Candidates expect;
+    expect.push_back("ba");
+    EXPECT_EQ(expect, GetAnagram("ab", candidates));
 }
