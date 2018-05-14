@@ -12,14 +12,16 @@ using Candidates = std::vector<std::string>;
 Candidates GetAnagram(const std::string& anagrama, Candidates& candidates)
 {
 
-    if(anagrama.empty() || candidates[0] != anagrama)
+    for (const auto& value :candidates)
     {
-        return Candidates();
+        if(value == anagrama)
+        {
+            Candidates result;
+            result.push_back(anagrama);
+            return result;
+        }
     }
-
-    Candidates result;
-    result.push_back(anagrama);
-    return result;
+    return Candidates();
 }
 
 TEST(ANAGRAM, GetAnagram)
