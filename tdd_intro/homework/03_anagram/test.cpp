@@ -38,7 +38,7 @@ bool IsAnagrams(const std::string& left, const std::string& right)
     return tmpRight.empty();
 }
 
-WordList GetAnagramsFromGivenList(const std::string& word, const WordList& pretender)
+WordList GetAnagramsFromGivenList(const std::string& word, const WordList& pretenders)
 {
     return WordList();
 }
@@ -77,3 +77,18 @@ TEST(GetAnagramsFromGivenListTest, InsertEmptyListReturnEmptyList)
 {
     EXPECT_TRUE(GetAnagramsFromGivenList("Word", WordList()).empty());
 }
+
+TEST(GetAnagramsFromGivenListTest, InsertListSingleWordAnagramReturnListWithSingleWord)
+{
+    WordList pretenders {"fluster"};
+    WordList anagrams = GetAnagramsFromGivenList("restful", pretenders);
+
+    ASSERT_EQ(1, anagrams.size());
+    EXPECT_EQ(pretenders.at(0), anagrams.at(0));
+}
+
+//TEST(GetAnagramsFromGivenListTest, InsertListWithemptyWordsReturnEmptyList)
+//{
+//    WordList pretenders {"", "", ""};
+//    EXPECT_TRUE(GetAnagramsFromGivenList("", pretenders).empty());
+//}
