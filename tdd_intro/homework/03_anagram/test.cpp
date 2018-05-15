@@ -39,3 +39,8 @@ TEST(IsAnagramsTest, InsertSingleWordAndPhraseAnagramsReturnTrue)
 {
     EXPECT_TRUE(IsAnagrams("adultery", "true lady"));
 }
+
+TEST(IsAnagramsTest, InsertSameWordsReturnFalse)
+{
+    EXPECT_FALSE(IsAnagrams("word", "word"));
+}
