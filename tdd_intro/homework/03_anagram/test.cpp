@@ -21,3 +21,8 @@ TEST(IsAnagramsTest, InsertSingleWordsAnagramsReturnTrue)
 {
     EXPECT_TRUE(IsAnagrams("restful", "fluster"));
 }
+
+TEST(IsAnagramsTest, InsertSingleWordAndPhraseAnagramsReturnTrue)
+{
+    EXPECT_TRUE(IsAnagrams("adultery", "true lady"));
+}
