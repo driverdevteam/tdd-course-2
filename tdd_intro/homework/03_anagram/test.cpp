@@ -6,3 +6,8 @@ Given "listen" and a list of candidates like "enlists" "google" "inlets" "banana
 _from http://exercism.io/_
 */
 #include <gtest/gtest.h>
+
+TEST(IsAnagramsTest, InsertEmptyStringsReturnFalse)
+{
+    EXPECT_FALSE(IsAnagrams(std::string(), std::string()));
+}
