@@ -16,3 +16,8 @@ TEST(IsAnagramsTest, InsertEmptyStringsReturnFalse)
 {
     EXPECT_FALSE(IsAnagrams(std::string(), std::string()));
 }
+
+TEST(IsAnagramsTest, InsertSingleWordsAnagramsReturnTrue)
+{
+    EXPECT_TRUE(IsAnagrams("restful", "fluster"));
+}
