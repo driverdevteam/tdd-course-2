@@ -65,3 +65,8 @@ TEST(IsAnagramsTest, InsertSingleWordsAnagramsWithExtraCharacterReturnFalse)
 {
     EXPECT_FALSE(IsAnagrams("restful", "flusterA"));
 }
+
+TEST(GetAnagramsFromGivenListTest, InsertEmptyListReturnEmptyList)
+{
+    EXPECT_EQ(GetAnagramsFromGivenList("Word", std::vector<std::string>()).empty());
+}
