@@ -44,3 +44,8 @@ TEST(IsAnagramsTest, InsertSameWordsReturnFalse)
 {
     EXPECT_FALSE(IsAnagrams("word", "word"));
 }
+
+TEST(IsAnagramsTest, InsertSameWordsWithDifferentRegisterReturnFalse)
+{
+    EXPECT_FALSE(IsAnagrams("Word", "word"));
+}
