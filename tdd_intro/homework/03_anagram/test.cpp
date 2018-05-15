@@ -92,8 +92,8 @@ TEST(GetAnagramsFromGivenListTest, InsertListSingleWordAnagramReturnListWithSing
     EXPECT_EQ(pretenders.at(0), anagrams.at(0));
 }
 
-//TEST(GetAnagramsFromGivenListTest, InsertListWithemptyWordsReturnEmptyList)
-//{
-//    WordList pretenders {"", "", ""};
-//    EXPECT_TRUE(GetAnagramsFromGivenList("", pretenders).empty());
-//}
+TEST(GetAnagramsFromGivenListTest, InsertListWithemptyWordsReturnEmptyList)
+{
+    WordList pretenders {"", "", ""};
+    EXPECT_TRUE(GetAnagramsFromGivenList("", pretenders).empty());
+}
