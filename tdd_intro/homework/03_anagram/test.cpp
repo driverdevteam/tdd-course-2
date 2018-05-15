@@ -14,6 +14,11 @@ bool IsAnagrams(const std::string& left, const std::string& right)
         return false;
     }
 
+    if (left == right)
+    {
+        return false;
+    }
+
     for (const auto& ch : left)
     {
         if (right.find(ch) == std::string::npos)
