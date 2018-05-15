@@ -36,6 +36,11 @@ bool IsAnagrams(const std::string& left, const std::string& right)
     return tmpRight.empty();
 }
 
+std::vector<std::string> GetAnagramsFromGivenList(const std::string& word, const std::vector<std::string>& pretender)
+{
+    return std::vector<std::string>();
+}
+
 TEST(IsAnagramsTest, InsertEmptyStringsReturnFalse)
 {
     EXPECT_FALSE(IsAnagrams(std::string(), std::string()));
@@ -68,5 +73,5 @@ TEST(IsAnagramsTest, InsertSingleWordsAnagramsWithExtraCharacterReturnFalse)
 
 TEST(GetAnagramsFromGivenListTest, InsertEmptyListReturnEmptyList)
 {
-    EXPECT_EQ(GetAnagramsFromGivenList("Word", std::vector<std::string>()).empty());
+    EXPECT_TRUE(GetAnagramsFromGivenList("Word", std::vector<std::string>()).empty());
 }
