@@ -7,6 +7,8 @@ _from http://exercism.io/_
 */
 #include <gtest/gtest.h>
 
+using WordList = std::vector<std::string>;
+
 bool IsAnagrams(const std::string& left, const std::string& right)
 {
     if (left.empty() || right.empty() || left == right)
@@ -36,9 +38,9 @@ bool IsAnagrams(const std::string& left, const std::string& right)
     return tmpRight.empty();
 }
 
-std::vector<std::string> GetAnagramsFromGivenList(const std::string& word, const std::vector<std::string>& pretender)
+WordList GetAnagramsFromGivenList(const std::string& word, const WordList& pretender)
 {
-    return std::vector<std::string>();
+    return WordList();
 }
 
 TEST(IsAnagramsTest, InsertEmptyStringsReturnFalse)
@@ -73,5 +75,5 @@ TEST(IsAnagramsTest, InsertSingleWordsAnagramsWithExtraCharacterReturnFalse)
 
 TEST(GetAnagramsFromGivenListTest, InsertEmptyListReturnEmptyList)
 {
-    EXPECT_TRUE(GetAnagramsFromGivenList("Word", std::vector<std::string>()).empty());
+    EXPECT_TRUE(GetAnagramsFromGivenList("Word", WordList()).empty());
 }
