@@ -14,15 +14,26 @@ bool IsAnagrams(const std::string& left, const std::string& right)
         return false;
     }
 
+    std::string tmpRight = right;
+    tmpRight.erase(std::remove_if(tmpRight.begin(), tmpRight.end(), isspace));
+
     for (const auto& ch : left)
     {
-        if (right.find(ch) == std::string::npos)
+        if (ch == ' ')
+        {
+            continue;
+        }
+
+        const size_t pos = tmpRight.find(ch);
+        if (pos == std::string::npos)
         {
             return false;
         }
+
+        tmpRight = tmpRight.erase(pos, 1);
     }
 
-    return true;
+    return tmpRight.empty();
 }
 
 TEST(IsAnagramsTest, InsertEmptyStringsReturnFalse)
