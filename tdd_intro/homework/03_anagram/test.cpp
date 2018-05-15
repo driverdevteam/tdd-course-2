@@ -9,7 +9,20 @@ _from http://exercism.io/_
 
 bool IsAnagrams(const std::string& left, const std::string& right)
 {
-    return left == "restful" || left == "adultery";
+    if (left.empty() || right.empty())
+    {
+        return false;
+    }
+
+    for (const auto& ch : left)
+    {
+        if (right.find(ch) == std::string::npos)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 TEST(IsAnagramsTest, InsertEmptyStringsReturnFalse)
