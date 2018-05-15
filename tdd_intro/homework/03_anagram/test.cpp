@@ -101,3 +101,11 @@ TEST(GetAnagramsFromGivenListTest, InsertListWithemptyWordsReturnEmptyList)
     WordList pretenders {"", "", ""};
     EXPECT_TRUE(GetAnagramsFromGivenList("", pretenders).empty());
 }
+
+TEST(GetAnagramsFromGivenListTest, acceptance)
+{
+    WordList pretenders {"enlists", "google", "inlets", "banana"};
+    WordList anagrams = GetAnagramsFromGivenList("listen", pretenders);
+    ASSERT_EQ(1, anagrams.size());
+    EXPECT_EQ("inlets", anagrams.at(0));
+}
