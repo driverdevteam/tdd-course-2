@@ -49,3 +49,8 @@ TEST(IsAnagramsTest, InsertSameWordsWithDifferentRegisterReturnFalse)
 {
     EXPECT_FALSE(IsAnagrams("Word", "word"));
 }
+
+TEST(IsAnagramsTest, InsertSingleWordsAnagramsWithExtraCharacterReturnFalse)
+{
+    EXPECT_FALSE(IsAnagrams("restful", "flusterA"));
+}
