@@ -40,7 +40,12 @@ bool IsAnagrams(const std::string& left, const std::string& right)
 
 WordList GetAnagramsFromGivenList(const std::string& word, const WordList& pretenders)
 {
-    return WordList();
+    if (pretenders.empty())
+    {
+        return WordList();
+    }
+
+    return pretenders;
 }
 
 TEST(IsAnagramsTest, InsertEmptyStringsReturnFalse)
