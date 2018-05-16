@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-
+#include <string>
 /*
 Write a function to convert from normal numbers to Roman Numerals.
 
@@ -18,3 +18,79 @@ In Roman numerals 1990 is MCMXC:
 
 1998 is written as MCMXCVIII.
 */
+
+std::string Co
+
+std::string ConvertToRoman(unsigned short num)
+{
+    if(num == 10)
+    {
+        return std::string("X");
+    }
+    else if (num == 0)
+    {
+        return std::string();
+    }
+
+    std::string result;
+    if (num / 5 > 0)
+    {
+        result = "V";
+        num -= 5;
+    }
+
+    if (num == 4)
+    {
+        result = "IV";
+    }
+    else if (num == 9)
+    {
+        result = "IX";
+    }
+    else
+    {
+        while (num--)
+        {
+            result += "I";
+        }
+    }
+    return result;
+}
+
+TEST(ConvertToRomanTest, insert_zero_return_empty_string)
+{
+    EXPECT_EQ("", ConvertToRoman(0));
+}
+
+TEST(ConvertToRomanTest, insert_one_return_I)
+{
+    EXPECT_EQ("I", ConvertToRoman(1));
+}
+
+TEST(ConvertToRomanTest, insert_2_return_II)
+{
+    EXPECT_EQ("II", ConvertToRoman(2));
+}
+
+TEST(ConvertToRomanTest, insert_5_return_V)
+{
+    EXPECT_EQ("V", ConvertToRoman(5));
+}
+
+TEST(ConvertToRomanTest, insert_4_return_IV)
+{
+     EXPECT_EQ("IV", ConvertToRoman(4));
+}
+
+TEST(ConvertToRomanTest, insert_10_return_X)
+{
+     EXPECT_EQ("X", ConvertToRoman(10));
+}
+
+TEST(ConvertToRomanTest, AcceptanceLess10)
+{
+    EXPECT_EQ("III", ConvertToRoman(3));
+    EXPECT_EQ("VI", ConvertToRoman(6));
+    EXPECT_EQ("VII", ConvertToRoman(7));
+    EXPECT_EQ("VIII", ConvertToRoman(8));
+}
