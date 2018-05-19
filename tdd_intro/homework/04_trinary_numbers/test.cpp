@@ -71,3 +71,8 @@ TEST(TrinaryStringToNumberTest, In1_Out1)
 {
     EXPECT_EQ(1, TrinaryStringToNumber("1"));
 }
+
+TEST(TrinaryStringToNumberTest, InSymbol_Out0)
+{
+    EXPECT_EQ(0, TrinaryStringToNumber("a"));
+}
