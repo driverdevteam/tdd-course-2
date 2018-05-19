@@ -116,3 +116,12 @@ TEST(TrinaryStringToNumberTest, InHugeNumber_Out0)
 {
     EXPECT_EQ(0, TrinaryStringToNumber("120021102002022201221111210"));
 }
+
+TEST(TrinaryStringToNumberTest, AcceptanceTest)
+{
+    EXPECT_EQ(302,        TrinaryStringToNumber("102012"));
+    EXPECT_EQ(0,          TrinaryStringToNumber("-1"));
+    EXPECT_EQ(4294967295, TrinaryStringToNumber("102002022201221111210"));
+    EXPECT_EQ(0,          TrinaryStringToNumber("102002022201221111211"));
+    EXPECT_EQ(1,          TrinaryStringToNumber("000000000000000000000000000000000000000000000000000000001"));
+}
