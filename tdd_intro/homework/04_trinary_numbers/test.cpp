@@ -22,7 +22,7 @@ char TrinaryCharToDigit(char trinaryChar)
 {
     if (trinaryChar < '0' || '2' < trinaryChar)
     {
-        throw std::out_of_range("Trinary char must be 0, 1 or 2.0");
+        throw std::out_of_range("Trinary char must be 0, 1 or 2.");
     }
     return trinaryChar - '0';
 }
