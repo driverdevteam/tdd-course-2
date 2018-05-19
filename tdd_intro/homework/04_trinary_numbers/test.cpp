@@ -33,12 +33,9 @@ unsigned long TrinaryStringToNumber(const std::string& trinatyString)
 
     try
     {
-        if (!trinatyString.empty())
+        for (size_t i = 0; i < trinatyString.size(); ++i)
         {
-            for (size_t i = 0; i < trinatyString.size(); ++i)
-            {
-                result += TrinaryCharToDigit(trinatyString[i]);
-            }
+            result += TrinaryCharToDigit(trinatyString[i]);
         }
     }
     catch (const std::out_of_range&)
