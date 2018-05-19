@@ -35,3 +35,8 @@ TEST(TrinaryCharToDigitTest, In1_Out1)
 {
     EXPECT_EQ(1, TrinaryCharToDigit('1'));
 }
+
+TEST(TrinaryCharToDigitTest, In2_Out2)
+{
+    EXPECT_EQ(2, TrinaryCharToDigit('2'));
+}
