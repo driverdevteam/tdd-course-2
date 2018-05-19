@@ -22,7 +22,7 @@ char TrinaryCharToDigit(char trinaryChar)
 {
     if (trinaryChar == '3')
     {
-        throw std::out_of_range("Trinary char must be 0, 1 or 2.");
+        throw std::out_of_range("Trinary char must be 0, 1 or 2.0");
     }
     return trinaryChar - '0';
 }
@@ -45,4 +45,9 @@ TEST(TrinaryCharToDigitTest, In2_Out2)
 TEST(TrinaryCharToDigitTest, In3_ThrowOutOfRange)
 {
     EXPECT_THROW(TrinaryCharToDigit('3'), std::out_of_range);
+}
+
+TEST(TrinaryCharToDigitTest, InSymbol_ThrowOutOfRange)
+{
+    EXPECT_THROW(TrinaryCharToDigit('a'), std::out_of_range);
 }
