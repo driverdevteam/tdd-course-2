@@ -27,6 +27,11 @@ char TrinaryCharToDigit(char trinaryChar)
     return trinaryChar - '0';
 }
 
+unsigned long TrinaryStringToNumber(const std::string& trinatyString)
+{
+    return -1;
+}
+
 TEST(TrinaryCharToDigitTest, In0_Out0)
 {
     EXPECT_EQ(0, TrinaryCharToDigit('0'));
@@ -50,4 +55,9 @@ TEST(TrinaryCharToDigitTest, In3_ThrowOutOfRange)
 TEST(TrinaryCharToDigitTest, InSymbol_ThrowOutOfRange)
 {
     EXPECT_THROW(TrinaryCharToDigit('a'), std::out_of_range);
+}
+
+TEST(TrinaryStringToNumberTest, InEmptyString_Out0)
+{
+    EXPECT_EQ(0, TrinaryStringToNumber(""));
 }
