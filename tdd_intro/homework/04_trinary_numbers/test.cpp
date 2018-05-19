@@ -29,20 +29,20 @@ char TrinaryCharToDigit(char trinaryChar)
 
 unsigned long TrinaryStringToNumber(const std::string& trinatyString)
 {
-    if (trinatyString.empty())
-    {
-        return 0;
-    }
+    unsigned long result(0);
 
     try
     {
-        return TrinaryCharToDigit(trinatyString.front());
+        if (!trinatyString.empty())
+        {
+            result = TrinaryCharToDigit(trinatyString.front());
+        }
     }
     catch (const std::out_of_range&)
     {
     }
 
-    return 0;
+    return result;
 }
 
 TEST(TrinaryCharToDigitTest, In0_Out0)
