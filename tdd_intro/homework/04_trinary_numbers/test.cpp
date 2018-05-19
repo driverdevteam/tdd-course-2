@@ -30,6 +30,7 @@ char TrinaryCharToDigit(char trinaryChar)
 unsigned long TrinaryStringToNumber(const std::string& trinatyString)
 {
     unsigned long result(0);
+    unsigned long prevResult(0);
 
     try
     {
@@ -38,6 +39,14 @@ unsigned long TrinaryStringToNumber(const std::string& trinatyString)
         {
             result += TrinaryCharToDigit(trinatyString[i]) *
                     static_cast<unsigned long>(std::pow(3, lastIndex - i));
+
+            if (result < prevResult)
+            {
+                result = 0;
+                break;
+            }
+
+            prevResult = result;
         }
     }
     catch (const std::out_of_range&)
