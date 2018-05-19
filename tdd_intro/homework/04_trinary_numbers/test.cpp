@@ -23,6 +23,10 @@ char TrinaryCharToDigit(char trinaryChar)
     {
         return 1;
     }
+    if (trinaryChar == '2')
+    {
+        return 2;
+    }
     return 0;
 }
 
