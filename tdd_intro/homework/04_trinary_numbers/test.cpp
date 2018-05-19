@@ -19,6 +19,10 @@ If your language provides a method in the standard library to perform the conver
 
 char TrinaryCharToDigit(char trinaryChar)
 {
+    if (trinaryChar == '1')
+    {
+        return 1;
+    }
     return 0;
 }
 
