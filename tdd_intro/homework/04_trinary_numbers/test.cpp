@@ -34,7 +34,15 @@ unsigned long TrinaryStringToNumber(const std::string& trinatyString)
         return 0;
     }
 
-    return TrinaryCharToDigit(trinatyString.front());
+    try
+    {
+        return TrinaryCharToDigit(trinatyString.front());
+    }
+    catch (const std::out_of_range&)
+    {
+    }
+
+    return 0;
 }
 
 TEST(TrinaryCharToDigitTest, In0_Out0)
