@@ -19,15 +19,7 @@ If your language provides a method in the standard library to perform the conver
 
 char TrinaryCharToDigit(char trinaryChar)
 {
-    if (trinaryChar == '1')
-    {
-        return 1;
-    }
-    if (trinaryChar == '2')
-    {
-        return 2;
-    }
-    return 0;
+    return trinaryChar - '0';
 }
 
 TEST(TrinaryCharToDigitTest, In0_Out0)
