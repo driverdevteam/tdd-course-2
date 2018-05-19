@@ -19,7 +19,7 @@ If your language provides a method in the standard library to perform the conver
 
 char TrinaryCharToDigit(char trinaryChar)
 {
-    return trinaryChar;
+    return 0;
 }
 
 TEST(TrinaryCharToDigitTest, In0_Out0)
