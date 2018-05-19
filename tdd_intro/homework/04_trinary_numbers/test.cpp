@@ -40,6 +40,7 @@ unsigned long TrinaryStringToNumber(const std::string& trinatyString)
     }
     catch (const std::out_of_range&)
     {
+        result = 0;
     }
 
     return result;
