@@ -102,3 +102,8 @@ TEST(TrinaryStringToNumberTest, In10_Out3)
 {
     EXPECT_EQ(3, TrinaryStringToNumber("10"));
 }
+
+TEST(TrinaryStringToNumberTest, InHugeNumber_Out0)
+{
+    EXPECT_EQ(0, TrinaryStringToNumber("120021102002022201221111210"));
+}
