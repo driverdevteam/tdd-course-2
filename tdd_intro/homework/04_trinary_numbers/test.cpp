@@ -95,3 +95,8 @@ TEST(TrinaryStringToNumberTest, In1a_Out0)
 {
     EXPECT_EQ(0, TrinaryStringToNumber("1a"));
 }
+
+TEST(TrinaryStringToNumberTest, In10_Out3)
+{
+    EXPECT_EQ(3, TrinaryStringToNumber("10"));
+}
