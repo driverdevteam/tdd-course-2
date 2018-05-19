@@ -29,7 +29,7 @@ char TrinaryCharToDigit(char trinaryChar)
 
 unsigned long TrinaryStringToNumber(const std::string& trinatyString)
 {
-    return -1;
+    return 0;
 }
 
 TEST(TrinaryCharToDigitTest, In0_Out0)
