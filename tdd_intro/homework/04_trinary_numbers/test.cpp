@@ -20,6 +20,10 @@ If your language provides a method in the standard library to perform the conver
 
 char TrinaryCharToDigit(char trinaryChar)
 {
+    if (trinaryChar == '3')
+    {
+        throw std::out_of_range("Trinary char must be 0, 1 or 2.");
+    }
     return trinaryChar - '0';
 }
 
