@@ -21,7 +21,7 @@ If your language provides a method in the standard library to perform the conver
 
 std::string TrinaryToDecimal(const std::string& trinary)
 {
-    return std::string();
+    return "0";
 }
 
 TEST(TrinaryToDecimal, Get_0_Return_0)
