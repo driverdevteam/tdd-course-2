@@ -29,7 +29,6 @@ NumsVector ConvertNumToVector(unsigned int num)
                    std::back_inserter(result),
                    [=](char value) {unsigned int val = static_cast<unsigned int>(value) - 48;
                                     return val <=2? val : 0;});
-
     return result;
 }
 
@@ -43,7 +42,16 @@ unsigned int ConvertTrinaryToDecimal(unsigned int value)
     {
         return 9;
     }
-    return value;
+    NumsVector splittedNums = ConvertNumToVector(value);
+    const size_t numsSize = splittedNums.size();
+    unsigned int result = 0;
+
+    for (size_t i = 0, j = numsSize - 1; i < numsSize; ++i, --j)
+    {
+        result += static_cast<unsigned int>(std::pow(splittedNums[i], j));
+    }
+
+    return result;
 }
 
 TEST(TrinatyNumsTests, Input_101_Take_10)
