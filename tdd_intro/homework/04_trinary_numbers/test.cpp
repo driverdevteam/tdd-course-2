@@ -47,3 +47,8 @@ TEST(TrinatyNumsTests, Input_100_Take_9)
     EXPECT_EQ(9, ConvertTrinaryToDecimal(100));
 }
 
+TEST(TrinatyNumsTests, NumToVec_Input_0_get_0)
+{
+    EXPECT_EQ(NumsVector({0}), ConvertNumToVector(0));
+}
+
