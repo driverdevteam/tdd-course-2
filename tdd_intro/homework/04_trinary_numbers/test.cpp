@@ -28,3 +28,8 @@ TEST(TrinaryToDecimal, Get_0_Return_0)
 {
     EXPECT_EQ(TrinaryToDecimal("0"), "0");
 }
+
+TEST(TrinaryToDecimal, Get_1_Return_1)
+{
+    EXPECT_EQ(TrinaryToDecimal("1"), "1");
+}
