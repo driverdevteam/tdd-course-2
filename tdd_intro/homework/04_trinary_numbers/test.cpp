@@ -23,6 +23,10 @@ unsigned int ConvertTrinaryToDecimal(unsigned int value)
     {
         return 10;
     }
+    if (value == 100)
+    {
+        return 9;
+    }
     return value;
 }
 
