@@ -33,3 +33,8 @@ TEST(TrinaryToDecimal, Get_1_Return_1)
 {
     EXPECT_EQ(TrinaryToDecimal("1"), "1");
 }
+
+TEST(TrinaryToDecimal, Get_10_Return_3)
+{
+    EXPECT_EQ(TrinaryToDecimal("10"), "3");
+}
