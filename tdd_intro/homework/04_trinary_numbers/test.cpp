@@ -61,6 +61,11 @@ TEST(TrinaryToDecimal, Get_21_Return_7)
     EXPECT_EQ(TrinaryToDecimal("21"), "7");
 }
 
+TEST(TrinaryToDecimal, Get_NotTrinary_Return_0)
+{
+    EXPECT_EQ(TrinaryToDecimal("14"), "0");
+}
+
 TEST(CharToInt, Char_1_To_Number_1)
 {
     EXPECT_EQ(CharToInt('1'), 1);
