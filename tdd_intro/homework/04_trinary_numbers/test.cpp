@@ -19,22 +19,30 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
+const unsigned int s_nonTrinaryErrorCode = 3;
+
 unsigned int TrinaryCharToInt(char symbol)
 {
-    if (symbol >= '0' && symbol < '3')
+    const char zeroChar = '0';
+    const char threeChar = '3';
+
+    if (symbol >= zeroChar && symbol < threeChar)
     {
         const unsigned int zero_value = 48;
         return static_cast<unsigned int>(symbol) - zero_value;
     }
 
-    return 3;
+    return s_nonTrinaryErrorCode;
 }
 
 std::string TrinaryToDecimal(std::string trinary)
 {
+    const std::string zeroStr = "0";
+    const unsigned int trinarySystemBase = 3;
+
     if (trinary.empty())
     {
-        return "0";
+        return zeroStr;
     }
     else if (trinary.length())
     {
@@ -43,13 +51,13 @@ std::string TrinaryToDecimal(std::string trinary)
         unsigned int number;
         for (size_t i = 0; i < trinary.length(); ++i)
         {
-            if ((number = TrinaryCharToInt(trinary[i])) != 3)
+            if ((number = TrinaryCharToInt(trinary[i])) != s_nonTrinaryErrorCode)
             {
-                decimal += TrinaryCharToInt(trinary[i]) * static_cast<unsigned int>(pow(3, i));
+                decimal += TrinaryCharToInt(trinary[i]) * static_cast<unsigned int>(pow(trinarySystemBase, i));
             }
             else
             {
-                return "0";
+                return zeroStr;
             }
         }
         return std::to_string(decimal);
