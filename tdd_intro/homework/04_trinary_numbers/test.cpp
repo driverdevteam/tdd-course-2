@@ -27,7 +27,8 @@ NumsVector ConvertNumToVector(unsigned int num)
     NumsVector result;
     std::transform(nums.begin(), nums.end(),
                    std::back_inserter(result),
-                   [=](char value) {return static_cast<unsigned int>(value) - 48;});
+                   [=](char value) {unsigned int val = static_cast<unsigned int>(value) - 48;
+                                    return val <=2? val : 0;});
 
     return result;
 }
