@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <string>
+
 /*
 Convert a trinary number, represented as a string (e.g. '102012'), to its decimal equivalent using first principles.
 
@@ -16,3 +18,13 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
+
+std::string TrinaryToDecimal(const std::string& trinary)
+{
+    return std::string();
+}
+
+TEST(TrinaryToDecimal, Get_0_Return_0)
+{
+    EXPECT_EQ(TrinaryToDecimal("0"), "0");
+}
