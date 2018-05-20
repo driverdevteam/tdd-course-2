@@ -19,7 +19,12 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
-std::string TrinaryToDecimal(const std::string& trinary)
+unsigned int CharToInt(char symbol)
+{
+    return 0;
+}
+
+std::string TrinaryToDecimal(std::string trinary)
 {
     if (trinary == "10")
     {
@@ -50,4 +55,9 @@ TEST(TrinaryToDecimal, Get_10_Return_3)
 TEST(TrinaryToDecimal, Get_21_Return_7)
 {
     EXPECT_EQ(TrinaryToDecimal("21"), "7");
+}
+
+TEST(CharToInt, Char_1_To_Number_1)
+{
+    EXPECT_EQ(CharToInt('1'), 1);
 }
