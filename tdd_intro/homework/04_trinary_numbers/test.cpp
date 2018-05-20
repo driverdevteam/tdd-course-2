@@ -34,14 +34,6 @@ NumsVector ConvertNumToVector(unsigned int num)
 
 unsigned int ConvertTrinaryToDecimal(unsigned int value)
 {
-    if (value == 101)
-    {
-        return 10;
-    }
-    if (value == 100)
-    {
-        return 9;
-    }
     NumsVector splittedNums = ConvertNumToVector(value);
     const size_t numsSize = splittedNums.size();
     unsigned int result = 0;
@@ -54,12 +46,12 @@ unsigned int ConvertTrinaryToDecimal(unsigned int value)
     return result;
 }
 
-TEST(TrinatyNumsTests, Input_101_Take_10)
+TEST(TrinatyNumsTests, Input_101_get_10)
 {
     EXPECT_EQ(10, ConvertTrinaryToDecimal(101));
 }
 
-TEST(TrinatyNumsTests, Input_100_Take_9)
+TEST(TrinatyNumsTests, Input_100_get_9)
 {
     EXPECT_EQ(9, ConvertTrinaryToDecimal(100));
 }
