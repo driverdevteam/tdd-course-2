@@ -52,3 +52,7 @@ TEST(TrinatyNumsTests, NumToVec_Input_0_get_0)
     EXPECT_EQ(NumsVector({0}), ConvertNumToVector(0));
 }
 
+TEST(TrinatyNumsTests, NumToVec_Input_101_get_101)
+{
+    EXPECT_EQ(NumsVector({1, 0, 1}), ConvertNumToVector(101));
+}
