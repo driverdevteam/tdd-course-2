@@ -48,7 +48,7 @@ unsigned int ConvertTrinaryToDecimal(unsigned int value)
 
     for (size_t i = 0, j = numsSize - 1; i < numsSize; ++i, --j)
     {
-        result += static_cast<unsigned int>(std::pow(splittedNums[i], j));
+        result += static_cast<unsigned int>(splittedNums[i] * std::pow(3, j));
     }
 
     return result;
