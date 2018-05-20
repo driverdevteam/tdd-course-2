@@ -19,7 +19,7 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
-unsigned int CharToInt(char symbol)
+unsigned int TrinaryCharToInt(char symbol)
 {
     const unsigned int zero_value = 48;
     return static_cast<unsigned int>(symbol) - zero_value;
@@ -33,7 +33,7 @@ std::string TrinaryToDecimal(std::string trinary)
         unsigned int decimal = 0;
         for (size_t i = 0; i < trinary.length(); ++i)
         {
-            decimal += CharToInt(trinary[i]) * static_cast<unsigned int>(pow(3, i));
+            decimal += TrinaryCharToInt(trinary[i]) * static_cast<unsigned int>(pow(3, i));
         }
         return std::to_string(decimal);
     }
@@ -66,12 +66,17 @@ TEST(TrinaryToDecimal, Get_NotTrinary_Return_0)
     EXPECT_EQ(TrinaryToDecimal("14"), "0");
 }
 
-TEST(CharToInt, Char_1_To_Number_1)
+TEST(TrinaryCharToInt, Char_1_To_Number_1)
 {
-    EXPECT_EQ(CharToInt('1'), 1);
+    EXPECT_EQ(TrinaryCharToInt('1'), 1);
 }
 
-TEST(CharToInt, Char_2_To_Number_2)
+TEST(TrinaryCharToInt, Char_2_To_Number_2)
 {
-    EXPECT_EQ(CharToInt('2'), 2);
+    EXPECT_EQ(TrinaryCharToInt('2'), 2);
+}
+
+TEST(TrinaryCharToInt, Char_4_To_ErrorCode_3)
+{
+    EXPECT_EQ(TrinaryCharToInt('4'), 3);
 }
