@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
-
+#include <string>
+#include <iterator>
+#include <algorithm>
 /*
 Convert a trinary number, represented as a string (e.g. '102012'), to its decimal equivalent using first principles.
 
@@ -21,7 +23,13 @@ using NumsVector = std::vector<unsigned int>;
 
 NumsVector ConvertNumToVector(unsigned int num)
 {
-    return NumsVector({num});
+    std::string nums = std::to_string(num);
+    NumsVector result;
+    std::transform(nums.begin(), nums.end(),
+                   std::back_inserter(result),
+                   [=](char value) {return static_cast<unsigned int>(value) - 48;});
+
+    return result;
 }
 
 unsigned int ConvertTrinaryToDecimal(unsigned int value)
