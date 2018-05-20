@@ -16,3 +16,13 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
+
+unsigned int ConvertTrinaryToDecimal(unsigned int value)
+{
+    return value;
+}
+
+TEST(TrinatyNumsTests, Input_0_Take_0)
+{
+    EXPECT_EQ(10, ConvertTrinaryToDecimal(101));
+}
