@@ -25,6 +25,10 @@ std::string TrinaryToDecimal(const std::string& trinary)
     {
         return "3";
     }
+    else if (trinary == "21")
+    {
+        return "7";
+    }
     return trinary;
 }
 
