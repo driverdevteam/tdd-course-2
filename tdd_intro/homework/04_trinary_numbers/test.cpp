@@ -30,3 +30,9 @@ TEST(TrinatyNumsTests, Input_101_Take_10)
 {
     EXPECT_EQ(10, ConvertTrinaryToDecimal(101));
 }
+
+TEST(TrinatyNumsTests, Input_100_Take_9)
+{
+    EXPECT_EQ(9, ConvertTrinaryToDecimal(100));
+}
+
