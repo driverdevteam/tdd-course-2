@@ -36,9 +36,17 @@ std::string TrinaryToDecimal(std::string trinary)
     {
         reverse(trinary.begin(), trinary.end());
         unsigned int decimal = 0;
+        unsigned int number;
         for (size_t i = 0; i < trinary.length(); ++i)
         {
-            decimal += TrinaryCharToInt(trinary[i]) * static_cast<unsigned int>(pow(3, i));
+            if ((number = TrinaryCharToInt(trinary[i])) != 3)
+            {
+                decimal += TrinaryCharToInt(trinary[i]) * static_cast<unsigned int>(pow(3, i));
+            }
+            else
+            {
+                return "0";
+            }
         }
         return std::to_string(decimal);
     }
