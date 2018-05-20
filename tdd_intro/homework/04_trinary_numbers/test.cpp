@@ -61,3 +61,8 @@ TEST(CharToInt, Char_1_To_Number_1)
 {
     EXPECT_EQ(CharToInt('1'), 1);
 }
+
+TEST(CharToInt, Char_2_To_Number_2)
+{
+    EXPECT_EQ(CharToInt('2'), 2);
+}
