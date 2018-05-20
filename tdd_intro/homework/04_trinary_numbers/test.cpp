@@ -26,7 +26,7 @@ unsigned int ConvertTrinaryToDecimal(unsigned int value)
     return value;
 }
 
-TEST(TrinatyNumsTests, Input_0_Take_0)
+TEST(TrinatyNumsTests, Input_101_Take_10)
 {
     EXPECT_EQ(10, ConvertTrinaryToDecimal(101));
 }
