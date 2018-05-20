@@ -21,7 +21,7 @@ using NumsVector = std::vector<unsigned int>;
 
 NumsVector ConvertNumToVector(unsigned int num)
 {
-    return NumsVector();
+    return NumsVector({num});
 }
 
 unsigned int ConvertTrinaryToDecimal(unsigned int value)
