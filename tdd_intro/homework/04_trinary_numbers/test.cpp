@@ -32,7 +32,11 @@ unsigned int TrinaryCharToInt(char symbol)
 
 std::string TrinaryToDecimal(std::string trinary)
 {
-    if (trinary.length())
+    if (trinary.empty())
+    {
+        return "0";
+    }
+    else if (trinary.length())
     {
         reverse(trinary.begin(), trinary.end());
         unsigned int decimal = 0;
