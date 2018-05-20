@@ -21,7 +21,7 @@ If your language provides a method in the standard library to perform the conver
 
 unsigned int CharToInt(char symbol)
 {
-    return 1;
+    return symbol == '1' ? 1 : 2;
 }
 
 std::string TrinaryToDecimal(std::string trinary)
