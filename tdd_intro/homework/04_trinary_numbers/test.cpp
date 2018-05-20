@@ -21,8 +21,13 @@ If your language provides a method in the standard library to perform the conver
 
 unsigned int TrinaryCharToInt(char symbol)
 {
-    const unsigned int zero_value = 48;
-    return static_cast<unsigned int>(symbol) - zero_value;
+    if (symbol >= '0' && symbol < '3')
+    {
+        const unsigned int zero_value = 48;
+        return static_cast<unsigned int>(symbol) - zero_value;
+    }
+
+    return 3;
 }
 
 std::string TrinaryToDecimal(std::string trinary)
