@@ -27,14 +27,17 @@ unsigned int CharToInt(char symbol)
 
 std::string TrinaryToDecimal(std::string trinary)
 {
-    if (trinary == "10")
+    if (trinary.length())
     {
-        return "3";
+        reverse(trinary.begin(), trinary.end());
+        unsigned int decimal = 0;
+        for (size_t i = 0; i < trinary.length(); ++i)
+        {
+            decimal += CharToInt(trinary[i]) * static_cast<unsigned int>(pow(3, i));
+        }
+        return std::to_string(decimal);
     }
-    else if (trinary == "21")
-    {
-        return "7";
-    }
+
     return trinary;
 }
 
