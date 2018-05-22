@@ -45,18 +45,12 @@ std::string GetRomanDecimalToken(unsigned short num)
 std::string ArabicToRoman(unsigned short num)
 {
     std::string result;
-    if (num > 10)
+    while (num >= 10)
     {
-        result = GetRomanDecimalToken(10);
-        if (num >= 20)
-        {
-            num -= 10;
-        }
-        else
-        {
-            num %= 10;
-        }
+        result += GetRomanDecimalToken(10);
+        num -= 10;
     }
+    num %= 10;
     result += GetRomanDecimalToken(num);
 
     return result;
@@ -137,4 +131,9 @@ TEST(Roman, AcceptanceFrom12To19)
 TEST(Roman, Arabic20_RomanXX)
 {
     EXPECT_EQ("XX", ArabicToRoman(20));
+}
+
+TEST(Roman, Arabic21_RomanXX)
+{
+    EXPECT_EQ("XXI", ArabicToRoman(21));
 }
