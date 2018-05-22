@@ -70,7 +70,7 @@ TEST(GetTrynaryFromString, INPUT_2_RETURN_2)
     EXPECT_EQ(2, GetTrynaryFromString(input));
 }
 
-TEST(GetTrynaryFromString, INPUT_9_RETURN_9)
+TEST(GetTrynaryFromString, INPUT_9_RETURN_0)
 {
     std::string input = "9";
     EXPECT_EQ(0, GetTrynaryFromString(input));
