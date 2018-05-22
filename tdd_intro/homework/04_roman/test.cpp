@@ -18,13 +18,10 @@ void ChoosePrefixAndSuffix(unsigned short num, char five, char ten, std::string&
     }
 }
 
-std::string GetRomanDecimalToken(unsigned short num, char one, char five, char ten)
+std::string BuildRomanDecimalToken(unsigned short num, char one, const std::string& prefix, const std::string& suffix)
 {
-    std::string prefix;
-    std::string suffix;
-    ChoosePrefixAndSuffix(num, five, ten, prefix, suffix);
-
     std::string result;
+
     unsigned short onesLeft = num % 5;
     if (onesLeft == 0 && num > 0)
     {
@@ -44,6 +41,14 @@ std::string GetRomanDecimalToken(unsigned short num, char one, char five, char t
     }
 
     return result;
+}
+
+std::string GetRomanDecimalToken(unsigned short num, char one, char five, char ten)
+{
+    std::string prefix;
+    std::string suffix;
+    ChoosePrefixAndSuffix(num, five, ten, prefix, suffix);
+    return BuildRomanDecimalToken(num, one, prefix, suffix);
 }
 
 std::string ArabicToRoman(unsigned short num)
