@@ -17,6 +17,10 @@ std::string ArabicToRoman(unsigned short num)
     {
         result = "V";
     }
+    else if (num == 6)
+    {
+        result = "VI";
+    }
     else
     {
         while (num--)
