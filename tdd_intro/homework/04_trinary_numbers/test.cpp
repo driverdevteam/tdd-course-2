@@ -68,6 +68,12 @@ TEST(GetTrynaryFromString, INPUT_2_RETURN_2)
     EXPECT_EQ(2, GetTrynaryFromString(input));
 }
 
+TEST(GetTrynaryFromString, INPUT_9_RETURN_9)
+{
+    std::string input = "9";
+    EXPECT_EQ(0, GetTrynaryFromString(input));
+}
+
 //-----------------------------------------------------------
 TEST(GetNumbersListFromString, INPUT_0_RETURN_0)
 {
