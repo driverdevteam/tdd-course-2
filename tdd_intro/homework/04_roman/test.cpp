@@ -9,9 +9,16 @@ std::string ArabicToRoman(unsigned short num)
 {
     std::string result;
 
-    while (num--)
+    if (num == 4)
     {
-        result += "I";
+        result = "IV";
+    }
+    else
+    {
+        while (num--)
+        {
+            result += "I";
+        }
     }
 
     return result;
