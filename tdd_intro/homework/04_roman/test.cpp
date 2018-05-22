@@ -15,10 +15,14 @@ std::string ArabicToRoman(unsigned short num)
     {
         suffix = "V";
     }
-    else
+    else if (num <= 10)
     {
         prefix = "V";
         suffix = "X";
+    }
+    else
+    {
+        prefix = "X";
     }
 
     unsigned short onesLeft = num % 5;
