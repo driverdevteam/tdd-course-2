@@ -17,9 +17,9 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
-std::vector<int> GetNumbersListFromString(const std::string&)
+std::vector<int> GetNumbersListFromString(const std::string& numbers)
 {
-    return std::vector<int>{0};
+    return std::vector<int>{static_cast<int>(numbers[0]) - 48};
 }
 
 int GetTrynaryFromString(std::string&)
