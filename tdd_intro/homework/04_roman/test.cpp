@@ -137,3 +137,9 @@ TEST(Roman, Arabic21_RomanXX)
 {
     EXPECT_EQ("XXI", ArabicToRoman(21));
 }
+
+TEST(Roman, Arabic40_RomanXL)
+{
+    EXPECT_EQ("XL", ArabicToRoman(40));
+}
+
