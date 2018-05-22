@@ -114,3 +114,15 @@ TEST(Roman, Arabic11_RomanXI)
 {
     EXPECT_EQ("XI", ArabicToRoman(11));
 }
+
+TEST(Roman, AcceptanceFrom12To19)
+{
+    EXPECT_EQ("XII", ArabicToRoman(12));
+    EXPECT_EQ("XIII", ArabicToRoman(13));
+    EXPECT_EQ("XIV", ArabicToRoman(14));
+    EXPECT_EQ("XV", ArabicToRoman(15));
+    EXPECT_EQ("XVI", ArabicToRoman(16));
+    EXPECT_EQ("XVII", ArabicToRoman(17));
+    EXPECT_EQ("XVIII", ArabicToRoman(18));
+    EXPECT_EQ("XIX", ArabicToRoman(19));
+}
