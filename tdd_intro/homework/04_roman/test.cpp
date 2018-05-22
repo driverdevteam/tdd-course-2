@@ -57,11 +57,11 @@ std::string ArabicToRoman(unsigned short num)
     if (num > 100)
     {
         result = GetRomanDecimalToken(num / 100, 'C', 'D', 'M');
-        num %= 10;
+        num %= 100;
     }
     if (num > 10)
     {
-        result = GetRomanDecimalToken(num / 10, 'X', 'L', 'C');
+        result += GetRomanDecimalToken(num / 10, 'X', 'L', 'C');
         num %= 10;
     }
     result += GetRomanDecimalToken(num, 'I', 'V', 'X');
