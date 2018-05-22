@@ -13,9 +13,13 @@ std::string ArabicToRoman(unsigned short num)
         {
             return "I";
         }
-        else
+        else if (num == 2)
         {
             return "II";
+        }
+        else
+        {
+            return "III";
         }
     }
 
