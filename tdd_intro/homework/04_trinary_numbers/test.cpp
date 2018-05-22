@@ -17,12 +17,14 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
+int s_charNumberPos = 48;
+
 std::vector<int> GetNumbersListFromString(const std::string& numbers)
 {
     std::vector<int> result;
     for(char symb: numbers)
     {
-        int numeral = static_cast<int>(symb) - 48;
+        int numeral = static_cast<int>(symb) - s_charNumberPos;
         result.push_back(numeral);
     }
     return std::vector<int>{result};
