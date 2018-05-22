@@ -126,3 +126,8 @@ TEST(Roman, AcceptanceFrom12To19)
     EXPECT_EQ("XVIII", ArabicToRoman(18));
     EXPECT_EQ("XIX", ArabicToRoman(19));
 }
+
+TEST(Roman, Arabic20_RomanXX)
+{
+    EXPECT_EQ("XX", ArabicToRoman(20));
+}
