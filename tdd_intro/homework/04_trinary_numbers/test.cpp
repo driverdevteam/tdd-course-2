@@ -57,6 +57,12 @@ TEST(GetTrynaryFromString, INPUT_1_RETURN_1)
     std::string input = "1";
     EXPECT_EQ(1, GetTrynaryFromString(input));
 }
+TEST(GetTrynaryFromString, INPUT_2_RETURN_2)
+{
+    std::string input = "2";
+    EXPECT_EQ(2, GetTrynaryFromString(input));
+}
+
 //-----------------------------------------------------------
 TEST(GetNumbersListFromString, INPUT_0_RETURN_0)
 {
