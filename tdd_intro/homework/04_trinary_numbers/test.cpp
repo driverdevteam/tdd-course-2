@@ -85,7 +85,7 @@ TEST(GetIntFromTrynaryNumb, INPUT_0_0_return_0)
     EXPECT_EQ(0, GetIntFromTrynaryNumb(0, 0));
 }
 
-TEST(GetIntFromTrynaryNumb, INPUT_1_0_return_0)
+TEST(GetIntFromTrynaryNumb, INPUT_1_0_return_1)
 {
     EXPECT_EQ(1, GetIntFromTrynaryNumb(1, 0));
 }
