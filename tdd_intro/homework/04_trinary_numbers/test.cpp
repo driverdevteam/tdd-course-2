@@ -27,4 +27,12 @@ TEST(GetTrynaryFromString, INPUT_0_RETURN_0)
     std::string input = "0";
     EXPECT_EQ(0, GetTrynaryFromString(input));
 }
+TEST(GetTrynaryFromString, INPUT_3_RETURN_0)
+{
+    std::string input = "3";
+    EXPECT_EQ(0, GetTrynaryFromString(input));
+}
+
+
+
 
