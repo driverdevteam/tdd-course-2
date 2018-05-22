@@ -55,7 +55,10 @@ std::string ArabicToRoman(unsigned short num)
     }
     else
     {
-        result += GetRomanDecimalToken(10);
+        if (num != 50)
+        {
+            result += GetRomanDecimalToken(10);
+        }
         result += "L";
     }
     num %= 10;
@@ -149,5 +152,10 @@ TEST(Roman, Arabic21_RomanXX)
 TEST(Roman, Arabic40_RomanXL)
 {
     EXPECT_EQ("XL", ArabicToRoman(40));
+}
+
+TEST(Roman, Arabic50_RomanXL)
+{
+    EXPECT_EQ("L", ArabicToRoman(50));
 }
 
