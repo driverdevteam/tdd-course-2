@@ -17,22 +17,38 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
+std::vector<int> GetNumbersListFromString(const std::string&)
+{
+    return std::vector<int>{0};
+}
+
 int GetTrynaryFromString(std::string&)
 {
     return 0;
 }
+
+
 
 TEST(GetTrynaryFromString, INPUT_0_RETURN_0)
 {
     std::string input = "0";
     EXPECT_EQ(0, GetTrynaryFromString(input));
 }
+
 TEST(GetTrynaryFromString, INPUT_3_RETURN_0)
 {
     std::string input = "3";
     EXPECT_EQ(0, GetTrynaryFromString(input));
 }
 
+TEST(GetNumbersListFromString, INPUT_0_RETURN_0)
+{
+    std::string input = "0";
+    std::vector<int> expect;
+    expect.push_back(0);
+    EXPECT_EQ(expect, GetNumbersListFromString(input));
+
+}
 
 
 
