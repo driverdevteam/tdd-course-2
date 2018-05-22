@@ -14,3 +14,8 @@ TEST(Roman, NullToEmpty)
 {
     EXPECT_EQ("", ArabicToRoman(0));
 }
+
+TEST(Roman, Arabic1_RomanI)
+{
+    EXPECT_EQ("I", ArabicToRoman(1));
+}
