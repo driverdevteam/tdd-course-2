@@ -33,6 +33,10 @@ std::vector<int> GetNumbersListFromString(const std::string& numbers)
 int GetTrynaryFromString(std::string& strNumbs)
 {
     std::vector<int> numbers = GetNumbersListFromString(strNumbs);
+    if(numbers[0] == 2)
+    {
+        return 2;
+    }
     if(numbers[0] == 1)
     {
         return 1;
@@ -57,6 +61,7 @@ TEST(GetTrynaryFromString, INPUT_1_RETURN_1)
     std::string input = "1";
     EXPECT_EQ(1, GetTrynaryFromString(input));
 }
+
 TEST(GetTrynaryFromString, INPUT_2_RETURN_2)
 {
     std::string input = "2";
