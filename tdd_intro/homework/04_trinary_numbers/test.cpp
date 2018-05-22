@@ -27,8 +27,6 @@ int GetTrynaryFromString(std::string&)
     return 0;
 }
 
-
-
 TEST(GetTrynaryFromString, INPUT_0_RETURN_0)
 {
     std::string input = "0";
@@ -47,8 +45,16 @@ TEST(GetNumbersListFromString, INPUT_0_RETURN_0)
     std::vector<int> expect;
     expect.push_back(0);
     EXPECT_EQ(expect, GetNumbersListFromString(input));
-
 }
+TEST(GetNumbersListFromString, INPUT_1_RETURN_1)
+{
+    std::string input = "1";
+    std::vector<int> expect;
+    expect.push_back(1);
+    EXPECT_EQ(expect, GetNumbersListFromString(input));
+}
+
+
 
 
 
