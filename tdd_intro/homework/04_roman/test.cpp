@@ -5,7 +5,7 @@
 Convert arabic numbers to Roman
 */
 
-std::string ArabicToRoman(unsigned short num)
+std::string GetRomanDecimalToken(unsigned short num)
 {
     std::string result;
     std::string prefix;
@@ -19,10 +19,6 @@ std::string ArabicToRoman(unsigned short num)
     {
         prefix = "V";
         suffix = "X";
-    }
-    else
-    {
-        prefix = "X";
     }
 
     unsigned short onesLeft = num % 5;
@@ -42,6 +38,19 @@ std::string ArabicToRoman(unsigned short num)
     {
         result = "I" + suffix;
     }
+
+    return result;
+}
+
+std::string ArabicToRoman(unsigned short num)
+{
+    std::string result;
+    if (num > 10)
+    {
+        result = GetRomanDecimalToken(10);
+        num %= 10;
+    }
+    result += GetRomanDecimalToken(num);
 
     return result;
 }
@@ -104,9 +113,4 @@ TEST(Roman, Arabic10_RomanX)
 TEST(Roman, Arabic11_RomanXI)
 {
     EXPECT_EQ("XI", ArabicToRoman(11));
-}
-
-TEST(Roman, Arabic15_RomanXV)
-{
-    EXPECT_EQ("XV", ArabicToRoman(15));
 }
