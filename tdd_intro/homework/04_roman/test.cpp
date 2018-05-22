@@ -7,23 +7,14 @@ Convert arabic numbers to Roman
 
 std::string ArabicToRoman(unsigned short num)
 {
-    if (num != 0)
+    std::string result;
+
+    while (num--)
     {
-        if (num == 1)
-        {
-            return "I";
-        }
-        else if (num == 2)
-        {
-            return "II";
-        }
-        else
-        {
-            return "III";
-        }
+        result += "I";
     }
 
-    return "";
+    return result;
 }
 
 TEST(Roman, NullToEmpty)
