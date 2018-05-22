@@ -13,21 +13,14 @@ std::string ArabicToRoman(unsigned short num)
     {
         result = "IV";
     }
-    else if (num == 5)
+    else if (num >= 5)
     {
         result = "V";
-    }
-    else if (num == 6)
-    {
-        result = "VI";
-    }
-    else if (num == 7)
-    {
-        result = "VII";
-    }
-    else if (num == 8)
-    {
-        result = "VIII";
+        num -= 5;
+        while (num--)
+        {
+            result += "I";
+        }
     }
     else
     {
