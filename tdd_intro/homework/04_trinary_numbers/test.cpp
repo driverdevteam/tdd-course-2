@@ -18,6 +18,10 @@ If your language provides a method in the standard library to perform the conver
 */
 
 int s_charNumberPos = 48;
+int s_zero = 0;
+int s_first = 1;
+int s_second = 2;
+int s_thirt = 3;
 
 std::vector<int> GetNumbersListFromString(const std::string& numbers)
 {
@@ -32,7 +36,7 @@ std::vector<int> GetNumbersListFromString(const std::string& numbers)
 
 int GetIntFromTrynaryNumb(const int numb, int index)
 {
-    return numb * static_cast<int>(pow(3, index));
+    return numb * static_cast<int>(pow(s_thirt, index));
 }
 
 int GetTrynaryFromString(std::string& strNumbs)
@@ -41,9 +45,9 @@ int GetTrynaryFromString(std::string& strNumbs)
     int result =0;
     for(int i= numbers.size() -1, j=0; i>=0; --i, ++j)
     {
-        if(numbers[j] > 2 ||  numbers[j]< 0)
+        if(numbers[j] > s_second ||  numbers[j]< s_zero)
         {
-           return 0;
+           return s_zero;
         }
         result += GetIntFromTrynaryNumb(numbers[j], i);
     }
@@ -86,6 +90,7 @@ TEST(GetTrynaryFromString, INPUT_11_RETURN_2)
     std::string input = "11";
     EXPECT_EQ(4, GetTrynaryFromString(input));
 }
+
 TEST(GetTrynaryFromString, INPUT_102012_RETURN_302)
 {
     std::string input = "102012";
@@ -95,12 +100,12 @@ TEST(GetTrynaryFromString, INPUT_102012_RETURN_302)
 //------------------------------------------------------------
 TEST(GetIntFromTrynaryNumb, INPUT_0_0_return_0)
 {
-    EXPECT_EQ(0, GetIntFromTrynaryNumb(0, 0));
+    EXPECT_EQ(s_zero, GetIntFromTrynaryNumb(0, 0));
 }
 
 TEST(GetIntFromTrynaryNumb, INPUT_1_0_return_1)
 {
-    EXPECT_EQ(1, GetIntFromTrynaryNumb(1, 0));
+    EXPECT_EQ(s_first, GetIntFromTrynaryNumb(1, 0));
 }
 
 TEST(GetIntFromTrynaryNumb, INPUT_2_2_return_18)
@@ -127,8 +132,8 @@ TEST(GetNumbersListFromString, INPUT_12_RETURN_12)
 {
     std::string input = "12";
     std::vector<int> expect;
-    expect.push_back(1);
-    expect.push_back(2);
+    expect.push_back(s_first);
+    expect.push_back(s_second);
     EXPECT_EQ(expect, GetNumbersListFromString(input));
 }
 TEST(GetNumbersListFromString, INPUT_12345_RETURN_12345)
