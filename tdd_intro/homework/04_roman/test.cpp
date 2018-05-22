@@ -77,3 +77,9 @@ TEST(Roman, Arabic8_RomanVIII)
 {
     EXPECT_EQ("VIII", ArabicToRoman(8));
 }
+
+TEST(Roman, Arabic9_RomanIX)
+{
+    EXPECT_EQ("IX", ArabicToRoman(9));
+}
+
