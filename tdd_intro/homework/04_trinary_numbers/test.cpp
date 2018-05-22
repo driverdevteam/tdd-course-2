@@ -38,13 +38,10 @@ int GetIntFromTrynaryNumb(const int numb, int index)
 int GetTrynaryFromString(std::string& strNumbs)
 {
     std::vector<int> numbers = GetNumbersListFromString(strNumbs);
-    if(numbers[0] == 2)
+
+    if(numbers[0] < 3 &&  numbers[0]>= 0)
     {
-        return numbers[0] * static_cast<int>(pow(3,0));
-    }
-    if(numbers[0] == 1)
-    {
-        return numbers[0] * static_cast<int>(pow(3,0));
+        return GetIntFromTrynaryNumb(numbers[0], 0);
     }
     return 0;
 }
