@@ -8,34 +8,35 @@ Convert arabic numbers to Roman
 std::string ArabicToRoman(unsigned short num)
 {
     std::string result;
+    std::string prefix;
+    std::string suffix;
 
-    if (num == 4)
+    if (num <= 5)
     {
-        result = "IV";
+        suffix = "V";
     }
-    else if (num == 9)
+    else
     {
-        result = "IX";
+        prefix = "V";
+        suffix = "X";
     }
-    else if (num == 10)
+
+    unsigned short onesLeft = num % 5;
+    if (onesLeft == 0 && num > 0)
     {
-        result = "X";
+        return suffix;
     }
-    else if (num >= 5)
+    else if (onesLeft <= 3)
     {
-        result = "V";
-        num -= 5;
-        while (num--)
+        result = prefix;
+        while(onesLeft--)
         {
             result += "I";
         }
     }
     else
     {
-        while (num--)
-        {
-            result += "I";
-        }
+        result = "I" + suffix;
     }
 
     return result;
