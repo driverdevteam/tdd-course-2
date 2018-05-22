@@ -5,12 +5,8 @@
 Convert arabic numbers to Roman
 */
 
-std::string GetRomanDecimalToken(unsigned short num, char one, char five, char ten)
+void ChoosePrefixAndSuffix(unsigned short num, char five, char ten, std::string& prefix, std::string& suffix)
 {
-    std::string result;
-    std::string prefix;
-    std::string suffix;
-
     if (num <= 5)
     {
         suffix = five;
@@ -20,7 +16,15 @@ std::string GetRomanDecimalToken(unsigned short num, char one, char five, char t
         prefix = five;
         suffix = ten;
     }
+}
 
+std::string GetRomanDecimalToken(unsigned short num, char one, char five, char ten)
+{
+    std::string prefix;
+    std::string suffix;
+    ChoosePrefixAndSuffix(num, five, ten, prefix, suffix);
+
+    std::string result;
     unsigned short onesLeft = num % 5;
     if (onesLeft == 0 && num > 0)
     {
