@@ -17,6 +17,10 @@ std::string ArabicToRoman(unsigned short num)
     {
         result = "IX";
     }
+    else if (num == 10)
+    {
+        result = "X";
+    }
     else if (num >= 5)
     {
         result = "V";
@@ -87,3 +91,7 @@ TEST(Roman, Arabic9_RomanIX)
     EXPECT_EQ("IX", ArabicToRoman(9));
 }
 
+TEST(Roman, Arabic10_RomanX)
+{
+    EXPECT_EQ("X", ArabicToRoman(10));
+}
