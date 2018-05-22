@@ -90,6 +90,11 @@ TEST(GetIntFromTrynaryNumb, INPUT_1_0_return_1)
     EXPECT_EQ(1, GetIntFromTrynaryNumb(1, 0));
 }
 
+TEST(GetIntFromTrynaryNumb, INPUT_2_2_return_18)
+{
+    EXPECT_EQ(18, GetIntFromTrynaryNumb(2, 2));
+}
+
 //-----------------------------------------------------------
 TEST(GetNumbersListFromString, INPUT_0_RETURN_0)
 {
