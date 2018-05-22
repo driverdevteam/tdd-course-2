@@ -48,7 +48,14 @@ std::string ArabicToRoman(unsigned short num)
     if (num > 10)
     {
         result = GetRomanDecimalToken(10);
-        num %= 10;
+        if (num >= 20)
+        {
+            num -= 10;
+        }
+        else
+        {
+            num %= 10;
+        }
     }
     result += GetRomanDecimalToken(num);
 
