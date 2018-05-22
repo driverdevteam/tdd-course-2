@@ -43,17 +43,22 @@ TEST(Roman, Arabic2_RomanII)
     EXPECT_EQ("II", ArabicToRoman(2));
 }
 
-TEST(Roman, Arabic2_RomanIII)
+TEST(Roman, Arabic3_RomanIII)
 {
     EXPECT_EQ("III", ArabicToRoman(3));
 }
 
-TEST(Roman, Arabic2_RomanIV)
+TEST(Roman, Arabic4_RomanIV)
 {
     EXPECT_EQ("IV", ArabicToRoman(4));
 }
 
-TEST(Roman, Arabic2_RomanV)
+TEST(Roman, Arabic5_RomanV)
 {
     EXPECT_EQ("V", ArabicToRoman(5));
+}
+
+TEST(Roman, Arabic6_RomanVI)
+{
+    EXPECT_EQ("VI", ArabicToRoman(6));
 }
