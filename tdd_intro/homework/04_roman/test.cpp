@@ -151,8 +151,16 @@ TEST(Roman, Arabic40_RomanXL)
     EXPECT_EQ("XL", ArabicToRoman(40));
 }
 
-TEST(Roman, Arabic50_RomanXL)
+TEST(Roman, Arabic50_RomanL)
 {
     EXPECT_EQ("L", ArabicToRoman(50));
 }
 
+TEST(Roman, AcceptanceBefore100)
+{
+    EXPECT_EQ("XLII", ArabicToRoman(42));
+    EXPECT_EQ("LXVII", ArabicToRoman(67));
+    EXPECT_EQ("LXXXVIII", ArabicToRoman(88));
+    EXPECT_EQ("XCV", ArabicToRoman(95));
+    EXPECT_EQ("XCIX", ArabicToRoman(99));
+}
