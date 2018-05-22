@@ -200,3 +200,13 @@ TEST(Roman, Arabic1101_RomanMCI)
 {
     EXPECT_EQ("MCI", ArabicToRoman(1101));
 }
+
+TEST(Roman, AcceptanceBefore3000)
+{
+    EXPECT_EQ("MCI", ArabicToRoman(1101));
+    EXPECT_EQ("MDCCCXCVII", ArabicToRoman(1897));
+    EXPECT_EQ("MMXVIII", ArabicToRoman(2018));
+    EXPECT_EQ("MMDXXXVI", ArabicToRoman(2536));
+    EXPECT_EQ("MMDCCCLXV", ArabicToRoman(2865));
+    EXPECT_EQ("MMM", ArabicToRoman(3000));
+}
