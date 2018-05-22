@@ -66,3 +66,13 @@ TEST(Roman, Arabic6_RomanVI)
 {
     EXPECT_EQ("VI", ArabicToRoman(6));
 }
+
+TEST(Roman, Arabic7_RomanVII)
+{
+    EXPECT_EQ("VII", ArabicToRoman(7));
+}
+
+TEST(Roman, Arabic8_RomanVIII)
+{
+    EXPECT_EQ("VII", ArabicToRoman(8));
+}
