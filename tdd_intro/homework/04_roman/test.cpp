@@ -174,3 +174,8 @@ TEST(Roman, Arabic200_RomanCC)
 {
     EXPECT_EQ("CC", ArabicToRoman(200));
 }
+
+TEST(Roman, Arabic155_RomanCLV)
+{
+    EXPECT_EQ("CLV", ArabicToRoman(155));
+}
