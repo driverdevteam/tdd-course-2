@@ -30,6 +30,11 @@ std::vector<int> GetNumbersListFromString(const std::string& numbers)
     return std::vector<int>{result};
 }
 
+int GetIntFromTrynaryNumb(const int numb)
+{
+    return 0;
+}
+
 int GetTrynaryFromString(std::string& strNumbs)
 {
     std::vector<int> numbers = GetNumbersListFromString(strNumbs);
@@ -73,7 +78,10 @@ TEST(GetTrynaryFromString, INPUT_9_RETURN_9)
     std::string input = "9";
     EXPECT_EQ(0, GetTrynaryFromString(input));
 }
-
+TEST(GetIntFromTrynaryNumb, INPUT_0_0_return_0)
+{
+    EXPECT_EQ(0, GetIntFromTrynaryNumb(0));
+}
 //-----------------------------------------------------------
 TEST(GetNumbersListFromString, INPUT_0_RETURN_0)
 {
