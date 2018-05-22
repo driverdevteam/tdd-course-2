@@ -16,3 +16,15 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
+
+int GetTrynaryFromString(std::string&)
+{
+    return 0;
+}
+
+TEST(GetTrynaryFromString, INPUT_0_RETURN_0)
+{
+    std::string input = "0";
+    EXPECT_EQ(0, GetTrynaryFromString(input));
+}
+
