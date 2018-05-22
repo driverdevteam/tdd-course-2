@@ -2,7 +2,8 @@
 #include <string>
 
 /*
-Convert arabic numbers to Roman
+Convert arabic numbers to Roman. The upper limit is 3000, the lower limit is undefined,
+but Romans doesn't speak with numbers zero and below.
 */
 
 void ChoosePrefixAndSuffix(unsigned short num, char five, char ten, std::string& prefix, std::string& suffix)
@@ -188,4 +189,9 @@ TEST(Roman, AcceptanceBefore1000)
     EXPECT_EQ("DCCCLXXXVIII", ArabicToRoman(888));
     EXPECT_EQ("CMLXXXVII", ArabicToRoman(987));
     EXPECT_EQ("CMXCIX", ArabicToRoman(999));
+}
+
+TEST(Roman, Arabic1101_RomanMCI)
+{
+    EXPECT_EQ("MCI", ArabicToRoman(1101));
 }
