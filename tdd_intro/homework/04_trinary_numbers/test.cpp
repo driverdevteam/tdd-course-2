@@ -19,7 +19,13 @@ If your language provides a method in the standard library to perform the conver
 
 std::vector<int> GetNumbersListFromString(const std::string& numbers)
 {
-    return std::vector<int>{static_cast<int>(numbers[0]) - 48};
+    std::vector<int> result;
+    for(char symb: numbers)
+    {
+        int numeral = static_cast<int>(symb) - 48;
+        result.push_back(numeral);
+    }
+    return std::vector<int>{result};
 }
 
 int GetTrynaryFromString(std::string&)
