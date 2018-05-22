@@ -67,7 +67,17 @@ TEST(GetNumbersListFromString, INPUT_12_RETURN_12)
     expect.push_back(2);
     EXPECT_EQ(expect, GetNumbersListFromString(input));
 }
-
+TEST(GetNumbersListFromString, INPUT_12345_RETURN_12345)
+{
+    std::string input = "12345";
+    std::vector<int> expect;
+    expect.push_back(1);
+    expect.push_back(2);
+    expect.push_back(3);
+    expect.push_back(4);
+    expect.push_back(5);
+    EXPECT_EQ(expect, GetNumbersListFromString(input));
+}
 
 
 
