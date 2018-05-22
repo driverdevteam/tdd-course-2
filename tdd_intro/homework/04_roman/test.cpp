@@ -24,3 +24,8 @@ TEST(Roman, Arabic1_RomanI)
 {
     EXPECT_EQ("I", ArabicToRoman(1));
 }
+
+TEST(Roman, Arabic2_RomanII)
+{
+    EXPECT_EQ("II", ArabicToRoman(2));
+}
