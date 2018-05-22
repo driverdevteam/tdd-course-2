@@ -179,3 +179,13 @@ TEST(Roman, Arabic155_RomanCLV)
 {
     EXPECT_EQ("CLV", ArabicToRoman(155));
 }
+
+TEST(Roman, AcceptanceBefore1000)
+{
+    EXPECT_EQ("CV", ArabicToRoman(105));
+    EXPECT_EQ("CCLVI", ArabicToRoman(256));
+    EXPECT_EQ("CCCLXVII", ArabicToRoman(367));
+    EXPECT_EQ("DCCCLXXXVIII", ArabicToRoman(888));
+    EXPECT_EQ("CMLXXXVII", ArabicToRoman(987));
+    EXPECT_EQ("CMXCIX", ArabicToRoman(999));
+}
