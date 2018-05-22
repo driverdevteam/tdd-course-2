@@ -9,7 +9,14 @@ std::string ArabicToRoman(unsigned short num)
 {
     if (num != 0)
     {
-        return "I";
+        if (num == 1)
+        {
+            return "I";
+        }
+        else
+        {
+            return "II";
+        }
     }
 
     return "";
