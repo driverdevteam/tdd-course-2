@@ -30,8 +30,13 @@ std::vector<int> GetNumbersListFromString(const std::string& numbers)
     return std::vector<int>{result};
 }
 
-int GetTrynaryFromString(std::string&)
+int GetTrynaryFromString(std::string& strNumbs)
 {
+    std::vector<int> numbers = GetNumbersListFromString(strNumbs);
+    if(numbers[0] == 1)
+    {
+        return 1;
+    }
     return 0;
 }
 
