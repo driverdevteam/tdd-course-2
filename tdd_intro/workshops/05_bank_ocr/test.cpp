@@ -86,3 +86,102 @@ Example input and output
 */
 #include <gtest/gtest.h>
 
+// check matrix for one digit 3x3
+// parse one digit
+   // - parse 1
+   // - parse 2
+   // - parse 0-9
+   // - check invalid one digit
+// parse several digits (27x3)
+// parse 27x3 (9 digits)
+   // - check matrix 27x3
+   // - parse
+// parse several lines
+
+using Digit = std::vector<std::string>;
+
+const Digit s_1({"   ",
+                 "  |",
+                 "  |"});
+
+const Digit s_2({" _ ",
+                 " _|",
+                 "|_ "});
+
+std::vector<Digit> s_digits({
+
+});
+
+bool CheckMatrixDimension(const Digit& digit)
+{
+    const size_t prefferedSize = 3;
+
+    if (digit.size() != prefferedSize)
+    {
+        return false;
+    }
+
+    for (const std::string& line : digit)
+    {
+        if (line.size() != prefferedSize)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+std::string ParseDigit(const Digit& digit)
+{
+    if (digit == Digit({"   ",
+                        "  |",
+                        "  |"}))
+    {
+        return "1";
+    }
+    else if (digit == Digit({" _ ",
+                             " _|",
+                             "|_ "}))
+    {
+        return "2";
+    }
+
+    return "8";
+}
+
+TEST(BankOCRTests, Check_Matrix_dimension_true)
+{
+    Digit digit = {"   ", "   ", "   "};
+    EXPECT_TRUE(CheckMatrixDimension(digit));
+}
+
+TEST(BankOCRTests, Check_Matrix_dimension_false)
+{
+    Digit digit = {"  ", "!   ", " "};
+    EXPECT_FALSE(CheckMatrixDimension(digit));
+}
+
+TEST(BankOCRTests, ParseDigit_1)
+{
+    Digit digit = {"   ",
+                   "  |",
+                   "  |"};
+    EXPECT_EQ("1", ParseDigit(digit));
+}
+
+TEST(BankOCRTests, ParseDigit_2)
+{
+    Digit digit = {" _ ",
+                   " _|",
+                   "|_ "};
+    EXPECT_EQ("2", ParseDigit(digit));
+}
+
+TEST(BankOCRTests, ParseDigit_8)
+{
+    Digit digit = {" _ ",
+                   "|_|",
+                   "|_|"};
+    EXPECT_EQ("8", ParseDigit(digit));
+}
