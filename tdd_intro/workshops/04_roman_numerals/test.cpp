@@ -19,8 +19,6 @@ In Roman numerals 1990 is MCMXC:
 1998 is written as MCMXCVIII.
 */
 
-std::string Co
-
 std::string ConvertToRoman(unsigned short num)
 {
     if(num == 10)
