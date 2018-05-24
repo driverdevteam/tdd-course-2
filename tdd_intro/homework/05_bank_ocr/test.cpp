@@ -178,16 +178,6 @@ TEST(BankOCRTests, Check_Matrix_dimension_false)
     EXPECT_FALSE(CheckMatrixDimension(digit));
 }
 
-TEST(BankOCRTests, ParseDigit_1)
-{
-    EXPECT_EQ("1", ParseDigit(s_digits[1]));
-}
-
-TEST(BankOCRTests, ParseDigit_2)
-{
-    EXPECT_EQ("2", ParseDigit(s_digits[2]));
-}
-
 TEST(BankOCRTests, ParseAllDigits)
 {
     for(int i=0;i< 10; i++)
@@ -196,7 +186,3 @@ TEST(BankOCRTests, ParseAllDigits)
     }
 }
 
-TEST(BankOCRTests, ParseDigit_8)
-{
-    EXPECT_EQ("8", ParseDigit(s_digits[8]));
-}
