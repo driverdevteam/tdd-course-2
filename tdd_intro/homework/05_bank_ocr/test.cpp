@@ -155,16 +155,15 @@ bool CheckMatrixDimension(const Digit& digit)
 
 std::string ParseDigit(const Digit& digit)
 {
-    if (digit == s_digits[1])
-    {
-        return "1";
-    }
-    else if (digit == s_digits[2])
-    {
-        return "2";
-    }
 
-    return "8";
+    for(size_t i=0; i <s_digits.size(); ++i)
+    {
+        if(digit == s_digits[i])
+        {
+            return std::to_string(i);
+        }
+    }
+   throw std::exception("Digit is unknown");
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
