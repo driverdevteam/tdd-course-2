@@ -186,3 +186,12 @@ TEST(BankOCRTests, ParseAllDigits)
     }
 }
 
+TEST(BankOCRTests, CheckInvalidOneDigit)
+{
+    Digit wrongDigit= {"$$$",
+                       "$$$",
+                       "$$$"};
+
+    EXPECT_THROW(ParseDigit(wrongDigit), std::exception);
+}
+
