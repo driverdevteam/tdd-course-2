@@ -100,15 +100,36 @@ Example input and output
 
 using Digit = std::vector<std::string>;
 
-const Digit s_1({"   ",
-                 "  |",
-                 "  |"});
-
-const Digit s_2({" _ ",
-                 " _|",
-                 "|_ "});
-
-std::vector<Digit> s_digits({
+std::vector<Digit> s_digits({{" _ ",
+                              "| |",
+                              "|_|"},
+                             {"   ",
+                              "  |",
+                              "  |"},
+                             {" _ ",
+                              " _|",
+                              "|_ "},
+                             {" _ ",
+                              " _|",
+                              " _|"},
+                             {"   ",
+                              "|_|",
+                              "  |"},
+                             {" _ ",
+                              "|_ ",
+                              " _|"},
+                             {" _ ",
+                              "|_ ",
+                              "|_|"},
+                             {" _ ",
+                              "  |",
+                              "  |"},
+                             {" _ ",
+                              "|_|",
+                              "|_|"},
+                             {" _ ",
+                              "|_|",
+                              " _|"}
 
 });
 
@@ -134,15 +155,11 @@ bool CheckMatrixDimension(const Digit& digit)
 
 std::string ParseDigit(const Digit& digit)
 {
-    if (digit == Digit({"   ",
-                        "  |",
-                        "  |"}))
+    if (digit == s_digits[1])
     {
         return "1";
     }
-    else if (digit == Digit({" _ ",
-                             " _|",
-                             "|_ "}))
+    else if (digit == s_digits[2])
     {
         return "2";
     }
@@ -164,24 +181,15 @@ TEST(BankOCRTests, Check_Matrix_dimension_false)
 
 TEST(BankOCRTests, ParseDigit_1)
 {
-    Digit digit = {"   ",
-                   "  |",
-                   "  |"};
-    EXPECT_EQ("1", ParseDigit(digit));
+    EXPECT_EQ("1", ParseDigit(s_digits[1]));
 }
 
 TEST(BankOCRTests, ParseDigit_2)
 {
-    Digit digit = {" _ ",
-                   " _|",
-                   "|_ "};
-    EXPECT_EQ("2", ParseDigit(digit));
+    EXPECT_EQ("2", ParseDigit(s_digits[2]));
 }
 
 TEST(BankOCRTests, ParseDigit_8)
 {
-    Digit digit = {" _ ",
-                   "|_|",
-                   "|_|"};
-    EXPECT_EQ("8", ParseDigit(digit));
+    EXPECT_EQ("8", ParseDigit(s_digits[8]));
 }
