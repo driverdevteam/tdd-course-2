@@ -237,9 +237,15 @@ TEST(BankOCRTests, CheckMatrix27x3)
     {
         EXPECT_STREQ("Wrong digit size", ex.what());
     }
-
 }
+TEST(BankOCRTests, ParseWithOneWrongNumbers)
+{
+    Digit randomDigit ={{   " _ &&& _  _  _  _  _  _  _ ",
+                            " _|&&&  | _||_||_   ||_||_|",
+                            "|_ &&&  | _| _||_|  ||_| _|"}};
 
+    EXPECT_EQ("2&7396789", ParseDigit(randomDigit));
+}
 //--------------------------------------------------------------
 TEST(GetDigitFromList, ParseOneDigit)
 {
