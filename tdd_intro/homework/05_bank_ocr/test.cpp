@@ -203,6 +203,11 @@ std::string ParseDigit(const Digit& digit)
 
 }
 
+std::string ParseDigitLines(const Digit& digit)
+{
+    return "257396789257396789257396789";
+}
+
 TEST(BankOCRTests, Check_Matrix_dimension_false)
 {
     Digit digit = {"  ", "!   ", " "};
@@ -264,6 +269,20 @@ TEST(BankOCRTests, ParseWithManyWrongNumbers)
     EXPECT_EQ("2&739&7&9", ParseDigit(randomDigit));
 }
 
+TEST(ParseDigitLines, ParseWithSeveralLines)
+{
+    Digit randomDigit ={    " _  _  _  _  _  _  _  _  _ ",
+                            " _||_   | _||_||_   ||_||_|",
+                            "|_  _|  | _| _||_|  ||_| _|",
+                            " _  _  _  _  _  _  _  _  _ ",
+                            " _||_   | _||_||_   ||_||_|",
+                            "|_  _|  | _| _||_|  ||_| _|",
+                            " _  _  _  _  _  _  _  _  _ ",
+                            " _||_   | _||_||_   ||_||_|",
+                            "|_  _|  | _| _||_|  ||_| _|"};
+
+    EXPECT_EQ("257396789257396789257396789", ParseDigitLines(randomDigit));
+}
 //--------------------------------------------------------------
 TEST(GetDigitFromList, ParseOneDigit)
 {
