@@ -152,6 +152,10 @@ Digit GetDigitFromList(const Digit& bigDigits, const size_t index)
 
 bool CheckMatrixDimension(const Digit& digit)
 {
+    if(digit.empty())
+    {
+        throw std::exception("digit is empty");
+    }
     const size_t lineSize = 27;
     if (digit.size() % 3)
     {
@@ -194,10 +198,6 @@ std::string ParseDigit(const Digit& digit)
         }
     }
 
-   if(result.empty())
-   {
-       throw std::exception("Digit is unknown");
-   }
    return result;
 
 }
