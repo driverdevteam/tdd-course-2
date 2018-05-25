@@ -135,7 +135,7 @@ std::vector<Digit> s_digits({{" _ ",
 
 Digit GetDigitFromList(Digit& bigDigits, const size_t index)
 {
-    Digit result = {{bigDigits[0].substr(0,3)},bigDigits[1].substr(0,3),bigDigits[2].substr(0,3) };
+    Digit result = {{bigDigits[0].substr(index *3, 3)},bigDigits[1].substr(index *3, 3),bigDigits[2].substr(index *3,3)};
     return result;
 }
 bool CheckMatrixDimension(const Digit& digit)
