@@ -138,7 +138,8 @@ Digit s_severalDigit ={{"    _  _     _  _  _  _  _ ",
                         "  ||_  _|  | _||_|  ||_| _|"}};
 
 const size_t s_numberStep = 3;
-Digit GetDigitFromList(Digit& bigDigits, const size_t index)
+
+Digit GetDigitFromList(const Digit& bigDigits, const size_t index)
 {
     size_t startPos = index * s_numberStep;
 
@@ -169,15 +170,26 @@ bool CheckMatrixDimension(const Digit& digit)
 
 std::string ParseDigit(const Digit& digit)
 {
-
-    for(size_t i=0; i <s_digits.size(); ++i)
+    std::string result = "";
+    for(size_t i=0; i <digit[0].size()/3; ++i)
     {
-        if(digit == s_digits[i])
+        Digit indexDigit = GetDigitFromList(digit, i);
+        for(size_t j =0; j<s_digits.size(); ++j)
         {
-            return std::to_string(i);
+
+            if(indexDigit == s_digits[j])
+            {
+                result += std::to_string(j);
+            }
         }
     }
-   throw std::exception("Digit is unknown");
+
+   if(result.empty())
+   {
+       throw std::exception("Digit is unknown");
+   }
+   return result;
+
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
@@ -208,6 +220,7 @@ TEST(BankOCRTests, CheckInvalidOneDigit)
 
     EXPECT_THROW(ParseDigit(wrongDigit), std::exception);
 }
+
 TEST(BankOCRTests, ParseManyDigits)
 {
     EXPECT_EQ("123456789", ParseDigit(s_severalDigit));
