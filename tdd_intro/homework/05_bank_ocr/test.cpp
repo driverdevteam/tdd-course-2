@@ -133,9 +133,18 @@ std::vector<Digit> s_digits({{" _ ",
 
 });
 
+Digit s_severalDigit ={{"    _  _     _  _  _  _  _ ",
+                        "  | _| _||_||_ |_   ||_||_|",
+                        "  ||_  _|  | _||_|  ||_| _|"}};
+
+const size_t s_numberStep = 3;
 Digit GetDigitFromList(Digit& bigDigits, const size_t index)
 {
-    Digit result = {{bigDigits[0].substr(index *3, 3)},bigDigits[1].substr(index *3, 3),bigDigits[2].substr(index *3,3)};
+    size_t startPos = index * s_numberStep;
+
+    Digit result = { bigDigits[0].substr(startPos, s_numberStep),
+                     bigDigits[1].substr(startPos, s_numberStep),
+                     bigDigits[2].substr(startPos, s_numberStep)};
     return result;
 }
 bool CheckMatrixDimension(const Digit& digit)
@@ -207,16 +216,12 @@ TEST(GetDigitFromList, ParseOneDigit)
 
 TEST(GetDigitFromList, ParseOneDigitFromManyNumbers)
 {
-    Digit severalDigit ={{"    _  _     _  _  _  _  _",
-                          "  | _| _||_||_ |_   ||_||_|",
-                          "  ||_  _|  | _||_|  ||_| _|"}};
-    EXPECT_EQ(s_digits[1], GetDigitFromList(severalDigit, 0));
+
+    EXPECT_EQ(s_digits[1], GetDigitFromList(s_severalDigit, 0));
 }
 
 TEST(GetDigitFromList, ParseOneDigitFromManyNumbersWithIndex_2)
 {
-    Digit severalDigit ={{"    _  _     _  _  _  _  _",
-                          "  | _| _||_||_ |_   ||_||_|",
-                          "  ||_  _|  | _||_|  ||_| _|"}};
-    EXPECT_EQ(s_digits[3], GetDigitFromList(severalDigit, 2));
+
+    EXPECT_EQ(s_digits[3], GetDigitFromList(s_severalDigit, 2));
 }
