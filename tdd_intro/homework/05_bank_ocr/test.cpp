@@ -152,9 +152,8 @@ Digit GetDigitFromList(const Digit& bigDigits, const size_t index)
 
 bool CheckMatrixDimension(const Digit& digit)
 {
-    const size_t prefferedSize = 3;
     const size_t lineSize = 27;
-    if (digit.size() != prefferedSize)
+    if (digit.size() % 3)
     {
         return false;
     }
@@ -205,7 +204,13 @@ std::string ParseDigit(const Digit& digit)
 
 std::string ParseDigitLines(const Digit& digit)
 {
-    return "257396789257396789257396789";
+    std::string result = "";
+    for(size_t i=0;i< digit.size(); i+=3)
+    {
+        Digit tmp = {digit[i], digit[i+1], digit[i+2]};
+        result += ParseDigit(tmp);
+    }
+    return result;
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_false)
@@ -286,15 +291,15 @@ TEST(ParseDigitLines, ParseWithSeveralLines)
 
 TEST(ParseDigitLines, ParseWithRandomSeveralLines)
 {
-    Digit randomDigit ={    "_  _  _  _  _  _  _  _  _ ",
-                            "_||_   | _||_||_   ||_||_|",
-                            "_| _|  | _| _||_|  ||_| _|",
-                            "_  _  _  _  _  _  _  _  _ ",
-                            "_||_   | _||_||_   ||_||_|",
-                            "_| _|  | _| _||_|  ||_| _|",
-                            "_  _  _  _  _  _  _  _  _ ",
-                            "_||_   | _||_||_   ||_||_|",
-                            "_| _|  | _| _||_|  ||_| _|"};
+    Digit randomDigit ={    " _  _  _  _  _  _  _  _  _ ",
+                            " _||_   | _||_||_   ||_||_|",
+                            " _| _|  | _| _||_|  ||_| _|",
+                            " _  _  _  _  _  _  _  _  _ ",
+                            " _||_   | _||_||_   ||_||_|",
+                            " _| _|  | _| _||_|  ||_| _|",
+                            " _  _  _  _  _  _  _  _  _ ",
+                            " _||_   | _||_||_   ||_||_|",
+                            " _| _|  | _| _||_|  ||_| _|"};
 
     EXPECT_EQ("357396789357396789357396789", ParseDigitLines(randomDigit));
 }
