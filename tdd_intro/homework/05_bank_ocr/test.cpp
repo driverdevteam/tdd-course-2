@@ -208,6 +208,10 @@ TEST(BankOCRTests, CheckInvalidOneDigit)
 
     EXPECT_THROW(ParseDigit(wrongDigit), std::exception);
 }
+TEST(BankOCRTests, ParseManyDigits)
+{
+    EXPECT_EQ("123456789", ParseDigit(s_severalDigit));
+}
 //--------------------------------------------------------------
 TEST(GetDigitFromList, ParseOneDigit)
 {
