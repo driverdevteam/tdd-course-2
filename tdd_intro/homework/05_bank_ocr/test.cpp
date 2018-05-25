@@ -283,6 +283,22 @@ TEST(ParseDigitLines, ParseWithSeveralLines)
 
     EXPECT_EQ("257396789257396789257396789", ParseDigitLines(randomDigit));
 }
+
+TEST(ParseDigitLines, ParseWithRandomSeveralLines)
+{
+    Digit randomDigit ={    "_  _  _  _  _  _  _  _  _ ",
+                            "_||_   | _||_||_   ||_||_|",
+                            "_| _|  | _| _||_|  ||_| _|",
+                            "_  _  _  _  _  _  _  _  _ ",
+                            "_||_   | _||_||_   ||_||_|",
+                            "_| _|  | _| _||_|  ||_| _|",
+                            "_  _  _  _  _  _  _  _  _ ",
+                            "_||_   | _||_||_   ||_||_|",
+                            "_| _|  | _| _||_|  ||_| _|"};
+
+    EXPECT_EQ("357396789357396789357396789", ParseDigitLines(randomDigit));
+}
+
 //--------------------------------------------------------------
 TEST(GetDigitFromList, ParseOneDigit)
 {
