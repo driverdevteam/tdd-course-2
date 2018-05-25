@@ -203,3 +203,11 @@ TEST(GetDigitFromList, ParseOneDigit)
 {
     EXPECT_EQ(s_digits[0], GetDigitFromList(s_digits[0], 0));
 }
+
+TEST(GetDigitFromList, ParseOneDigitFromManyNumbers)
+{
+    Digit severalDigit ={{"  _  _     _  _  _  _  _",
+                          "| _| _||_||_ |_   ||_||_|",
+                          "||_  _|  | _||_|  ||_| _|"}};
+    EXPECT_EQ(s_digits[1], GetDigitFromList(severalDigit, 0));
+}
