@@ -135,7 +135,8 @@ std::vector<Digit> s_digits({{" _ ",
 
 Digit GetDigitFromList(Digit& bigDigits, const size_t index)
 {
-    return s_digits[0];
+    Digit result = {{bigDigits[0].substr(0,3)},bigDigits[1].substr(0,3),bigDigits[2].substr(0,3) };
+    return result;
 }
 bool CheckMatrixDimension(const Digit& digit)
 {
@@ -206,8 +207,8 @@ TEST(GetDigitFromList, ParseOneDigit)
 
 TEST(GetDigitFromList, ParseOneDigitFromManyNumbers)
 {
-    Digit severalDigit ={{"  _  _     _  _  _  _  _",
-                          "| _| _||_||_ |_   ||_||_|",
-                          "||_  _|  | _||_|  ||_| _|"}};
+    Digit severalDigit ={{"    _  _     _  _  _  _  _",
+                          "  | _| _||_||_ |_   ||_||_|",
+                          "  ||_  _|  | _||_|  ||_| _|"}};
     EXPECT_EQ(s_digits[1], GetDigitFromList(severalDigit, 0));
 }
