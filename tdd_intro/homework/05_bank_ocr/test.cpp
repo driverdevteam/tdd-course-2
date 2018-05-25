@@ -218,6 +218,17 @@ TEST(BankOCRTests, ParseManyDigits)
 {
     EXPECT_EQ("123456789", ParseDigit(s_severalDigit));
 }
+
+TEST(BankOCRTests, ParseRandomDigit)
+{
+    Digit randomDigit ={{   " _  _  _  _  _  _  _  _  _ ",
+                            " _||_   | _||_||_   ||_||_|",
+                            "|_  _|  | _| _||_|  ||_| _|"}};
+
+    EXPECT_EQ("257396789", ParseDigit(randomDigit));
+}
+
+
 //--------------------------------------------------------------
 TEST(GetDigitFromList, ParseOneDigit)
 {
@@ -235,11 +246,3 @@ TEST(GetDigitFromList, ParseDigitFromManyNumbersWithIndex_2)
     EXPECT_EQ(s_digits[3], GetDigitFromList(s_severalDigit, 2));
 }
 
-TEST(GetDigitFromList, ParseRandomDigitWithIndex_2)
-{
-    Digit randomDigit ={{"    _  _  _     _  _  _  _ ",
-                            " _||_   | _||_||_   ||_||_|",
-                            "|_  _|  | _|  ||_|  ||_| _|"}};
-
-    EXPECT_EQ(s_digits[3], GetDigitFromList(s_severalDigit, 2));
-}
