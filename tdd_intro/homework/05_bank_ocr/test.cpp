@@ -177,7 +177,6 @@ std::string ParseDigit(const Digit& digit)
         Digit indexDigit = GetDigitFromList(digit, i);
         for(size_t j =0; j<s_digits.size(); ++j)
         {
-
             if(indexDigit == s_digits[j])
             {
                 result += std::to_string(j);
@@ -228,6 +227,21 @@ TEST(BankOCRTests, ParseRandomDigit)
     EXPECT_EQ("257396789", ParseDigit(randomDigit));
 }
 
+TEST(BankOCRTests, CheckMatrix27x3)
+{
+    Digit digitWithWrongSize = {"  ", "!   ", " "};
+
+    try
+    {
+        EXPECT_THROW(ParseDigit(digitWithWrongSize), std::exception);
+        FAIL();
+    }
+    catch(const std::exception& ex)
+    {
+        EXPECT_EQ("Wrong digit size", ex.what());
+    }
+
+}
 
 //--------------------------------------------------------------
 TEST(GetDigitFromList, ParseOneDigit)
