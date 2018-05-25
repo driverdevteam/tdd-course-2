@@ -138,7 +138,7 @@ Digit s_severalDigit ={{"    _  _     _  _  _  _  _ ",
                         "  ||_  _|  | _||_|  ||_| _|"}};
 
 const size_t s_numberStep = 3;
-
+const size_t s_countNumbers = 9;
 Digit GetDigitFromList(const Digit& bigDigits, const size_t index)
 {
     size_t startPos = index * s_numberStep;
@@ -148,6 +148,7 @@ Digit GetDigitFromList(const Digit& bigDigits, const size_t index)
                      bigDigits[2].substr(startPos, s_numberStep)};
     return result;
 }
+
 bool CheckMatrixDimension(const Digit& digit)
 {
     const size_t prefferedSize = 3;
@@ -171,7 +172,7 @@ bool CheckMatrixDimension(const Digit& digit)
 std::string ParseDigit(const Digit& digit)
 {
     std::string result = "";
-    for(size_t i=0; i <digit[0].size()/3; ++i)
+    for(size_t i=0; i <s_countNumbers; ++i)
     {
         Digit indexDigit = GetDigitFromList(digit, i);
         for(size_t j =0; j<s_digits.size(); ++j)
@@ -202,14 +203,6 @@ TEST(BankOCRTests, Check_Matrix_dimension_false)
 {
     Digit digit = {"  ", "!   ", " "};
     EXPECT_FALSE(CheckMatrixDimension(digit));
-}
-
-TEST(BankOCRTests, ParseAllDigits)
-{
-    for(int i=0;i< 10; i++)
-    {
-        EXPECT_EQ(std::to_string(i), ParseDigit(s_digits[i]));
-    }
 }
 
 TEST(BankOCRTests, CheckInvalidOneDigit)
