@@ -212,3 +212,11 @@ TEST(GetDigitFromList, ParseOneDigitFromManyNumbers)
                           "  ||_  _|  | _||_|  ||_| _|"}};
     EXPECT_EQ(s_digits[1], GetDigitFromList(severalDigit, 0));
 }
+
+TEST(GetDigitFromList, ParseOneDigitFromManyNumbersWithIndex_2)
+{
+    Digit severalDigit ={{"    _  _     _  _  _  _  _",
+                          "  | _| _||_||_ |_   ||_||_|",
+                          "  ||_  _|  | _||_|  ||_| _|"}};
+    EXPECT_EQ(s_digits[3], GetDigitFromList(severalDigit, 2));
+}
