@@ -224,14 +224,22 @@ TEST(GetDigitFromList, ParseOneDigit)
     EXPECT_EQ(s_digits[0], GetDigitFromList(s_digits[0], 0));
 }
 
-TEST(GetDigitFromList, ParseOneDigitFromManyNumbers)
+TEST(GetDigitFromList, ParseDigitFromManyNumbers)
 {
 
     EXPECT_EQ(s_digits[1], GetDigitFromList(s_severalDigit, 0));
 }
 
-TEST(GetDigitFromList, ParseOneDigitFromManyNumbersWithIndex_2)
+TEST(GetDigitFromList, ParseDigitFromManyNumbersWithIndex_2)
 {
+    EXPECT_EQ(s_digits[3], GetDigitFromList(s_severalDigit, 2));
+}
+
+TEST(GetDigitFromList, ParseRandomDigitWithIndex_2)
+{
+    Digit randomDigit ={{"    _  _  _     _  _  _  _ ",
+                            " _||_   | _||_||_   ||_||_|",
+                            "|_  _|  | _|  ||_|  ||_| _|"}};
 
     EXPECT_EQ(s_digits[3], GetDigitFromList(s_severalDigit, 2));
 }
