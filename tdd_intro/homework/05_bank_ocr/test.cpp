@@ -152,7 +152,7 @@ Digit GetDigitFromList(const Digit& bigDigits, const size_t index)
 bool CheckMatrixDimension(const Digit& digit)
 {
     const size_t prefferedSize = 3;
-
+    const size_t lineSize = 27;
     if (digit.size() != prefferedSize)
     {
         return false;
@@ -160,7 +160,7 @@ bool CheckMatrixDimension(const Digit& digit)
 
     for (const std::string& line : digit)
     {
-        if (line.size() != prefferedSize)
+        if (line.size() != lineSize)
         {
             return false;
         }
@@ -171,6 +171,10 @@ bool CheckMatrixDimension(const Digit& digit)
 
 std::string ParseDigit(const Digit& digit)
 {
+    if(!CheckMatrixDimension(digit))
+    {
+        throw std::exception("Wrong digit size");
+    }
     std::string result = "";
     for(size_t i=0; i <s_countNumbers; ++i)
     {
@@ -190,12 +194,6 @@ std::string ParseDigit(const Digit& digit)
    }
    return result;
 
-}
-
-TEST(BankOCRTests, Check_Matrix_dimension_true)
-{
-    Digit digit = {"   ", "   ", "   "};
-    EXPECT_TRUE(CheckMatrixDimension(digit));
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_false)
@@ -233,12 +231,11 @@ TEST(BankOCRTests, CheckMatrix27x3)
 
     try
     {
-        EXPECT_THROW(ParseDigit(digitWithWrongSize), std::exception);
-        FAIL();
+        ParseDigit(digitWithWrongSize);
     }
     catch(const std::exception& ex)
     {
-        EXPECT_EQ("Wrong digit size", ex.what());
+        EXPECT_STREQ("Wrong digit size", ex.what());
     }
 
 }
