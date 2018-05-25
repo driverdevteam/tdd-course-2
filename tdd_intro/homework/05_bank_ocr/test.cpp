@@ -139,6 +139,7 @@ Digit s_severalDigit ={{"    _  _     _  _  _  _  _ ",
 
 const size_t s_numberStep = 3;
 const size_t s_countNumbers = 9;
+
 Digit GetDigitFromList(const Digit& bigDigits, const size_t index)
 {
     size_t startPos = index * s_numberStep;
@@ -175,6 +176,7 @@ std::string ParseDigit(const Digit& digit)
     {
         throw std::exception("Wrong digit size");
     }
+
     std::string result = "";
     for(size_t i=0; i <s_countNumbers; ++i)
     {
@@ -184,6 +186,11 @@ std::string ParseDigit(const Digit& digit)
             if(indexDigit == s_digits[j])
             {
                 result += std::to_string(j);
+                break;
+            }
+            else if(j == s_digits.size()-1)
+            {
+                result += "&";
             }
         }
     }
