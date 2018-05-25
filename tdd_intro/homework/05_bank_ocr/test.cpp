@@ -133,6 +133,10 @@ std::vector<Digit> s_digits({{" _ ",
 
 });
 
+Digit GetDigitFromList(Digit& bigDigits, const size_t index)
+{
+    return s_digits[0];
+}
 bool CheckMatrixDimension(const Digit& digit)
 {
     const size_t prefferedSize = 3;
@@ -194,4 +198,8 @@ TEST(BankOCRTests, CheckInvalidOneDigit)
 
     EXPECT_THROW(ParseDigit(wrongDigit), std::exception);
 }
-
+//--------------------------------------------------------------
+TEST(GetDigitFromList, ParseOneDigit)
+{
+    EXPECT_EQ(s_digits[0], GetDigitFromList(s_digits[0], 0));
+}
