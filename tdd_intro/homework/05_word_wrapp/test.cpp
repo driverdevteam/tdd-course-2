@@ -19,7 +19,7 @@ using WrappedWords = std::vector<std::string>;
 
 WrappedWords WordWrap(const std::string& stringToWrapp, size_t limit)
 {
-    return WrappedWords();
+    return WrappedWords{stringToWrapp};
 }
 
 TEST(WordWrapTest, PassStringShorterThanLimit)
