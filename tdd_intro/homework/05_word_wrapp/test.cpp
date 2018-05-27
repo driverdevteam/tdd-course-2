@@ -38,3 +38,9 @@ TEST(WordWrapTest, PassStringWithoutSpacesLongerThanLimit)
     EXPECT_EQ(WrappedWords({"12345", "67"}),
               WordWrap("1234567", 5));
 }
+
+TEST(WordWrapTest, PassStringWithSpacesLongerThanLimit)
+{
+    EXPECT_EQ(WrappedWords({"123", "45"}),
+              WordWrap("123 45", 5));
+}
