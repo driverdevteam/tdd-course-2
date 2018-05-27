@@ -27,3 +27,9 @@ TEST(WordWrapTest, PassStringShorterThanLimit)
     const std::string shortString("123");
     EXPECT_EQ(WrappedWords{shortString}, WordWrap(shortString, 20));
 }
+
+TEST(WordWrapTest, PassStringWithoutSpacesLongerThanLimit)
+{
+    EXPECT_EQ(WrappedWords({"12345", "67"}),
+              WordWrap("1234567", 5));
+}
