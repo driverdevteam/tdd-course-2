@@ -15,9 +15,15 @@ last space should be used to wrapp this line. If there are no spaces - wrapp it 
 #include <gtest/gtest.h>
 #include <cctype>
 
+using WrappedWords = std::vector<std::string>;
 
-
-TEST()
+WrappedWords WordWrap(const std::string& stringToWrapp, size_t limit)
 {
+    return WrappedWords();
+}
 
+TEST(WordWrapTest, PassStringShorterThanLimit)
+{
+    const std::string shortString("123");
+    EXPECT_EQ(WrappedWords{shortString}, WordWrap(shortString, 20));
 }
