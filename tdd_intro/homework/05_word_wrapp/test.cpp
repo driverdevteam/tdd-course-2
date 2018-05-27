@@ -4,5 +4,20 @@ where length of each string is not more, than provided limit. If there are space
 last space should be used to wrapp this line. If there are no spaces - wrapp it on provided length limit.
 */
 
+/*
+  - return passed string if its length less then limit
+  - pass a string without spaces with length more than limit
+  - pass a string with spaces with length more than limit
+  - pass a long string that contains intervals without spaces of size > limit
+*/
+
+
 #include <gtest/gtest.h>
 #include <cctype>
+
+
+
+TEST()
+{
+
+}
