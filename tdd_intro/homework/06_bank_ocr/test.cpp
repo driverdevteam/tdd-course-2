@@ -179,26 +179,19 @@ std::string ParseDigitsLine(const DigitsLine& digitsLine)
 {
     std::string result;
 
-    Digit digit;
-
-    digit.push_back(digitsLine[0].substr(0, 3));
-    digit.push_back(digitsLine[1].substr(0, 3));
-    digit.push_back(digitsLine[2].substr(0, 3));
-
-    if (CheckMatrixDimension(digit))
+    for (size_t i = 0; i < 27; i += 3)
     {
-        result += ParseDigit(digit);
-    }
+        Digit digit;
 
-    digit.clear();
+        for (size_t j = 0; j < 3; ++j)
+        {
+            digit.push_back(digitsLine[j].substr(i, 3));
+        }
 
-    digit.push_back(digitsLine[0].substr(3, 3));
-    digit.push_back(digitsLine[1].substr(3, 3));
-    digit.push_back(digitsLine[2].substr(3, 3));
-
-    if (CheckMatrixDimension(digit))
-    {
-        result += ParseDigit(digit);
+        if (CheckMatrixDimension(digit))
+        {
+            result += ParseDigit(digit);
+        }
     }
 
     return result;
