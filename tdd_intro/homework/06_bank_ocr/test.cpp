@@ -318,3 +318,14 @@ TEST(BankOCRTests, ParseDigitsLines_Parse2Lines)
     EXPECT_EQ(std::vector<std::string>({"123456789", "123158769"}),
               ParseDigitsLines(digitsLines));
 }
+
+TEST(BankOCRTests, ParseDigitsLines_Parse1LineAndSkipHalf)
+{
+    DigitsLine digitsLines = {"    _  _     _  _  _  _  _ ",
+                              "  | _| _||_||_ |_   ||_||_|",
+                              "  ||_  _|  | _||_|  ||_| _|",
+                              "    _  _     _  _  _  _  _ ",
+                              "  | _| _|  ||_ |_|  ||_ |_|"};
+    EXPECT_EQ(std::vector<std::string>({"123456789"}),
+              ParseDigitsLines(digitsLines));
+}
