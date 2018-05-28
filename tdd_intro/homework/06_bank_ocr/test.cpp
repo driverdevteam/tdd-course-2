@@ -177,7 +177,31 @@ std::string ParseDigit(const Digit& digit)
 
 std::string ParseDigitsLine(const DigitsLine& digitsLine)
 {
-    return "88";
+    std::string result;
+
+    Digit digit;
+
+    digit.push_back(digitsLine[0].substr(0, 3));
+    digit.push_back(digitsLine[1].substr(0, 3));
+    digit.push_back(digitsLine[2].substr(0, 3));
+
+    if (CheckMatrixDimension(digit))
+    {
+        result += ParseDigit(digit);
+    }
+
+    digit.clear();
+
+    digit.push_back(digitsLine[0].substr(3, 3));
+    digit.push_back(digitsLine[1].substr(3, 3));
+    digit.push_back(digitsLine[2].substr(3, 3));
+
+    if (CheckMatrixDimension(digit))
+    {
+        result += ParseDigit(digit);
+    }
+
+    return result;
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
