@@ -221,6 +221,21 @@ std::vector<std::string> ParseDigitsLines(const DigitsLine& digitsLines)
 {
     std::vector<std::string> result;
 
+    for (size_t i = 0; i < digitsLines.size(); i += s_digitHeight)
+    {
+        DigitsLine lineOfDigits;
+
+        for (size_t j = 0; j < s_digitHeight; ++j)
+        {
+            lineOfDigits.push_back(digitsLines[i + j]);
+        }
+
+        if (CheckDigitsLineDimension(lineOfDigits))
+        {
+            result.push_back(ParseDigitsLine(lineOfDigits));
+        }
+    }
+
     return result;
 }
 
