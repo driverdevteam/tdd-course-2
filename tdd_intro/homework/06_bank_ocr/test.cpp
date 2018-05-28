@@ -162,6 +162,11 @@ bool CheckMatrixDimension(const Digit& digit)
     return true;
 }
 
+bool CheckDigitsLineDimension(const DigitsLine& digitsLine)
+{
+    return false;
+}
+
 std::string ParseDigit(const Digit& digit)
 {
     for (size_t i = 0; i < s_digits.size(); ++i)
@@ -247,4 +252,12 @@ TEST(BankOCRTests, ParseDigitsLine_ParseAllDigits)
                              "  | _| _||_||_ |_   ||_||_|",
                              "  ||_  _|  | _||_|  ||_| _|"};
     EXPECT_EQ("123456789", ParseDigitsLine(digitsLine));
+}
+
+TEST(BankOCRTests, CheckDigitsLineDimension_true)
+{
+    DigitsLine digitsLine = {"    _  _     _  _  _  _  _ ",
+                             "  | _| _||_||_ |_   ||_||_|",
+                             "  ||_  _|  | _||_|  ||_| _|"};
+    EXPECT_TRUE(CheckDigitsLineDimension(digitsLine));
 }
