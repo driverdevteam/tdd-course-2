@@ -220,8 +220,9 @@ std::string ParseDigitsLine(const DigitsLine& digitsLine)
 std::vector<std::string> ParseDigitsLines(const DigitsLine& digitsLines)
 {
     std::vector<std::string> result;
+    const size_t linesCount = digitsLines.size() - s_digitHeight;
 
-    for (size_t i = 0; i < digitsLines.size(); i += s_digitHeight)
+    for (size_t i = 0; i <= linesCount; i += s_digitHeight)
     {
         DigitsLine lineOfDigits;
 
