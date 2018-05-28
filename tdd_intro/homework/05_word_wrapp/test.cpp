@@ -22,27 +22,22 @@ WrappedWords WordWrap(const std::string& stringToWrapp, size_t limit)
     WrappedWords result;
     for (size_t pos = 0; pos < stringToWrapp.size();)
     {
+        std::string limitedString(stringToWrapp.substr(pos, limit));
+
         if (pos + limit < stringToWrapp.size())
         {
-            std::string limitedString(stringToWrapp.substr(pos, limit));
             size_t space_pos = limitedString.find_last_of(' ');
 
             if (space_pos != std::string::npos)
             {
                 result.push_back(stringToWrapp.substr(pos, space_pos));
                 pos += space_pos + 1;
-            }
-            else
-            {
-                result.push_back(limitedString);
-                pos += limit;
+                continue;
             }
         }
-        else
-        {
-            result.push_back(stringToWrapp.substr(pos, limit));
-            pos += limit;
-        }
+
+        result.push_back(limitedString);
+        pos += limit;
     }
     return result;
 }
