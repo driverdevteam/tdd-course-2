@@ -171,7 +171,7 @@ std::string ParseDigit(const Digit& digit)
         }
     }
 
-    return "";
+    return "?";
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
