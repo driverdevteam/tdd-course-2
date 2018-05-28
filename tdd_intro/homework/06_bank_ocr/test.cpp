@@ -164,7 +164,23 @@ bool CheckMatrixDimension(const Digit& digit)
 
 bool CheckDigitsLineDimension(const DigitsLine& digitsLine)
 {
-    return false;
+    const size_t rowsCount = 3;
+    const size_t columnsCount = 27;
+
+    if (digitsLine.size() != rowsCount)
+    {
+        return false;
+    }
+
+    for (const std::string& line : digitsLine)
+    {
+        if (line.size() != columnsCount)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 std::string ParseDigit(const Digit& digit)
