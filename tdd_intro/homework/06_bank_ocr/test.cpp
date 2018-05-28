@@ -99,18 +99,47 @@ Example input and output
 // parse several lines
 
 using Digit = std::vector<std::string>;
+using Digits = std::vector<Digit>;
 
-const Digit s_1({"   ",
-                 "  |",
-                 "  |"});
+const Digits s_digits({{" _ ",
+                        "| |",
+                        "|_|"},
 
-const Digit s_2({" _ ",
-                 " _|",
-                 "|_ "});
+                       {"   ",
+                        "  |",
+                        "  |"},
 
-std::vector<Digit> s_digits({
+                       {" _ ",
+                        " _|",
+                        "|_ "},
 
-});
+                       {" _ ",
+                        " _|",
+                        " _|"},
+
+                       {"   ",
+                        "|_|",
+                        "  |"},
+
+                       {" _ ",
+                        "|_ ",
+                        " _|"},
+
+                       {" _ ",
+                        "|_ ",
+                        "|_|"},
+
+                       {" _ ",
+                        "  |",
+                        "  |"},
+
+                       {" _ ",
+                        "|_|",
+                        "|_|"},
+
+                       {" _ ",
+                        "|_|",
+                        " _|"}});
 
 bool CheckMatrixDimension(const Digit& digit)
 {
@@ -134,20 +163,15 @@ bool CheckMatrixDimension(const Digit& digit)
 
 std::string ParseDigit(const Digit& digit)
 {
-    if (digit == Digit({"   ",
-                        "  |",
-                        "  |"}))
+    for (size_t i = 0; i < s_digits.size(); ++i)
     {
-        return "1";
-    }
-    else if (digit == Digit({" _ ",
-                             " _|",
-                             "|_ "}))
-    {
-        return "2";
+        if (digit == s_digits[i])
+        {
+            return std::to_string(i);
+        }
     }
 
-    return "8";
+    return "";
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
