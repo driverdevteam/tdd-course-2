@@ -217,6 +217,13 @@ std::string ParseDigitsLine(const DigitsLine& digitsLine)
     return result;
 }
 
+std::vector<std::string> ParseDigitsLines(const DigitsLine& digitsLines)
+{
+    std::vector<std::string> result;
+
+    return result;
+}
+
 TEST(BankOCRTests, Check_Matrix_dimension_true)
 {
     Digit digit = {"   ", "   ", "   "};
@@ -283,4 +290,16 @@ TEST(BankOCRTests, CheckDigitsLineDimension_false)
                              "  | _|  _||_||_ |_   ||_||_|",
                              "  ||_  |  | _||_|  ||_| _|"};
     EXPECT_FALSE(CheckDigitsLineDimension(digitsLine));
+}
+
+TEST(BankOCRTests, ParseDigitsLines_Parse2Lines)
+{
+    DigitsLine digitsLines = {"    _  _     _  _  _  _  _ ",
+                              "  | _| _||_||_ |_   ||_||_|",
+                              "  ||_  _|  | _||_|  ||_| _|",
+                              "    _  _     _  _  _  _  _ ",
+                              "  | _| _|  ||_ |_|  ||_ |_|",
+                              "  ||_  _|  | _||_|  ||_| _|"};
+    EXPECT_EQ(std::vector<std::string>({"123456789", "123158769"}),
+              ParseDigitsLines(digitsLines));
 }
