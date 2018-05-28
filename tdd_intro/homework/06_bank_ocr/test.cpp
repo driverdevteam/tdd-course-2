@@ -209,3 +209,11 @@ TEST(BankOCRTests, ParseDigit_8)
                    "|_|"};
     EXPECT_EQ("8", ParseDigit(digit));
 }
+
+TEST(BankOCRTests, ParseDigit_WrongDigit)
+{
+    Digit digit = {"|_ ",
+                   "|_|",
+                   "|_|"};
+    EXPECT_EQ("?", ParseDigit(digit));
+}
