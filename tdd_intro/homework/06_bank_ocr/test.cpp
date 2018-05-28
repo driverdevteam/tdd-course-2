@@ -241,14 +241,6 @@ TEST(BankOCRTests, ParseDigit_WrongDigit)
     EXPECT_EQ("?", ParseDigit(digit));
 }
 
-TEST(BankOCRTests, ParseDigitsLine_Parse2Digits)
-{
-    DigitsLine digitsLine = {" _  _  _  _  _  _  _  _  _ ",
-                             "|_||_||_||_||_||_||_||_||_|",
-                             "|_||_||_||_||_||_||_||_||_|"};
-    EXPECT_EQ("88", ParseDigitsLine(digitsLine));
-}
-
 TEST(BankOCRTests, ParseDigitsLine_ParseAllDigits)
 {
     DigitsLine digitsLine = {"    _  _     _  _  _  _  _ ",
