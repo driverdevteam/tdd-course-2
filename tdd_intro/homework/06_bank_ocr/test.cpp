@@ -142,18 +142,20 @@ const Digits s_digits({{" _ ",
                         "|_|",
                         " _|"}});
 
+const size_t s_digitHeight(3);
+const size_t s_digitWidth(3);
+const size_t s_digitsLineWidth(9 * s_digitWidth);
+
 bool CheckMatrixDimension(const Digit& digit)
 {
-    const size_t prefferedSize = 3;
-
-    if (digit.size() != prefferedSize)
+    if (digit.size() != s_digitHeight)
     {
         return false;
     }
 
     for (const std::string& line : digit)
     {
-        if (line.size() != prefferedSize)
+        if (line.size() != s_digitWidth)
         {
             return false;
         }
@@ -164,17 +166,14 @@ bool CheckMatrixDimension(const Digit& digit)
 
 bool CheckDigitsLineDimension(const DigitsLine& digitsLine)
 {
-    const size_t rowsCount = 3;
-    const size_t columnsCount = 27;
-
-    if (digitsLine.size() != rowsCount)
+    if (digitsLine.size() != s_digitHeight)
     {
         return false;
     }
 
     for (const std::string& line : digitsLine)
     {
-        if (line.size() != columnsCount)
+        if (line.size() != s_digitsLineWidth)
         {
             return false;
         }
@@ -200,13 +199,13 @@ std::string ParseDigitsLine(const DigitsLine& digitsLine)
 {
     std::string result;
 
-    for (size_t i = 0; i < 27; i += 3)
+    for (size_t i = 0; i < s_digitsLineWidth; i += s_digitWidth)
     {
         Digit digit;
 
-        for (size_t j = 0; j < 3; ++j)
+        for (size_t j = 0; j < s_digitHeight; ++j)
         {
-            digit.push_back(digitsLine[j].substr(i, 3));
+            digit.push_back(digitsLine[j].substr(i, s_digitWidth));
         }
 
         if (CheckMatrixDimension(digit))
