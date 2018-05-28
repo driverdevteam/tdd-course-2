@@ -100,6 +100,7 @@ Example input and output
 
 using Digit = std::vector<std::string>;
 using Digits = std::vector<Digit>;
+using DigitsLine = std::vector<std::string>;
 
 const Digits s_digits({{" _ ",
                         "| |",
@@ -174,6 +175,11 @@ std::string ParseDigit(const Digit& digit)
     return "?";
 }
 
+std::string ParseDigitsLine(const DigitsLine& digitsLine)
+{
+    return "";
+}
+
 TEST(BankOCRTests, Check_Matrix_dimension_true)
 {
     Digit digit = {"   ", "   ", "   "};
@@ -216,4 +222,12 @@ TEST(BankOCRTests, ParseDigit_WrongDigit)
                    "|_|",
                    "|_|"};
     EXPECT_EQ("?", ParseDigit(digit));
+}
+
+TEST(BankOCRTests, ParseDigitsLine_Parse2Digits)
+{
+    DigitsLine digitsLine = {" _  _  _  _  _  _  _  _  _ ",
+                             "|_||_||_||_||_||_||_||_||_|",
+                             "|_||_||_||_||_||_||_||_||_|"};
+    EXPECT_EQ("88", ParseDigitsLine(digitsLine));
 }
