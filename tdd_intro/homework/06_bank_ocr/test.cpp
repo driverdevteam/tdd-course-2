@@ -277,3 +277,11 @@ TEST(BankOCRTests, CheckDigitsLineDimension_true)
                              "  ||_  _|  | _||_|  ||_| _|"};
     EXPECT_TRUE(CheckDigitsLineDimension(digitsLine));
 }
+
+TEST(BankOCRTests, CheckDigitsLineDimension_false)
+{
+    DigitsLine digitsLine = {"    _  _     _  _  _  _  _ ",
+                             "  | _|  _||_||_ |_   ||_||_|",
+                             "  ||_  |  | _||_|  ||_| _|"};
+    EXPECT_FALSE(CheckDigitsLineDimension(digitsLine));
+}
