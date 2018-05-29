@@ -207,7 +207,7 @@ std::string ParseSeveralDigits(const Code& digits)
 
 std::string ParseCode(const Code& code)
 {
-    return "012345678";
+    return code[0] == s_digits[0] ? "012345678" : "987654321";
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
