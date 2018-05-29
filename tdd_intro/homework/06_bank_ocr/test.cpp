@@ -208,3 +208,11 @@ TEST(BankOCRTests, ParseDigits_0_9)
         EXPECT_EQ(std::to_string(i), ParseDigit(s_digits[i]));
     }
 }
+
+TEST(BankOCRTests, ParseDigits_InvalidDigit)
+{
+    Digit digit = {" __",
+                   "|_ ",
+                   " _|"};
+    EXPECT_EQ("?", ParseDigit(digit));
+}
