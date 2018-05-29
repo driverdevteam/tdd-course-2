@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 /*
 Convert a trinary number, represented as a string (e.g. '102012'), to its decimal equivalent using first principles.
@@ -34,6 +35,6 @@ TEST (CharToTrinaryDigit, get_2)
 
 TEST (CharToTrinaryDigit, get_invalid_gigit)
 {
-    EXPECT_EQ(2, CharToTrinaryDigit('3'));
+    EXPECT_THROW(CharToTrinaryDigit('3'), std::runtime_error);
 }
 
