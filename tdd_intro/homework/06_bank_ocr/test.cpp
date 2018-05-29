@@ -176,7 +176,7 @@ std::string ParseDigit(const Digit& digit)
 
 std::string ParseSeveralDigits(const std::vector<Digit>& digits)
 {
-    return std::string();
+    return "000";
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
