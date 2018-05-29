@@ -200,3 +200,11 @@ TEST(BankOCRTests, ParseDigit_8)
 {
     EXPECT_EQ("8", ParseDigit(s_digits[8]));
 }
+
+TEST(BankOCRTests, ParseDigits_0_9)
+{
+    for (size_t i = 0; i < s_digits.size(); ++i)
+    {
+        EXPECT_EQ(std::to_string(i), ParseDigit(s_digits[i]));
+    }
+}
