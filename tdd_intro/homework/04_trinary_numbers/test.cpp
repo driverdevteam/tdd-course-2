@@ -32,3 +32,8 @@ TEST (CharToTrinaryDigit, get_2)
     EXPECT_EQ(2, CharToTrinaryDigit('2'));
 }
 
+TEST (CharToTrinaryDigit, get_invalid_gigit)
+{
+    EXPECT_EQ(2, CharToTrinaryDigit('3'));
+}
+
