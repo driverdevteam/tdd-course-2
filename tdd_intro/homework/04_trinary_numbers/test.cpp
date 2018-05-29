@@ -95,3 +95,8 @@ TEST (TrianaryToDecimal, acceptance)
 {
     EXPECT_EQ(302, TrinaryToDecimal("102012"));
 }
+
+TEST (TrianaryToDecimal, acceptance_strange_string)
+{
+    EXPECT_EQ(0, TrinaryToDecimal("!fjksl1020"));
+}
