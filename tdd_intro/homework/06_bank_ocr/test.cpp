@@ -100,7 +100,8 @@ Example input and output
 
 using Digit = std::vector<std::string>;
 
-std::vector<Digit> s_digits({" _ ",
+std::vector<Digit> s_digits({
+                            {" _ ",
                              "| |",
                              "|_|"},
 
@@ -138,7 +139,7 @@ std::vector<Digit> s_digits({" _ ",
 
                             {" _ ",
                              "|_|",
-                             " _|"});
+                             " _|"}});
 
 bool CheckMatrixDimension(const Digit& digit)
 {
