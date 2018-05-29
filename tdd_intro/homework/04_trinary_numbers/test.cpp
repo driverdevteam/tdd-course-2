@@ -19,11 +19,7 @@ If your language provides a method in the standard library to perform the conver
 
 short CharToTrinaryDigit(char trinariGigit)
 {
-    if (trinariGigit == '2')
-    {
-            return 2;
-    }
-    return 0;
+    return trinariGigit - '0';
 }
 
 TEST (CharToTrinaryDigit, get_0)
