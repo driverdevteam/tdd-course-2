@@ -218,7 +218,13 @@ std::string ParseCode(const Code& code)
 
 std::vector<std::string> ParseSeveralCodes(const Code_vt& codes)
 {
-    return {};
+    std::vector<std::string> result;
+
+    for (const Code& code : codes)
+    {
+        result.push_back(ParseCode(code));
+    }
+    return result;
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
