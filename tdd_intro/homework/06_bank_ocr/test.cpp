@@ -174,6 +174,11 @@ std::string ParseDigit(const Digit& digit)
     return "?";
 }
 
+std::string ParseSeveralDigits(const std::vector<Digit>& digits)
+{
+    return std::string();
+}
+
 TEST(BankOCRTests, Check_Matrix_dimension_true)
 {
     Digit digit = {"   ", "   ", "   "};
@@ -215,4 +220,15 @@ TEST(BankOCRTests, ParseDigit_InvalidDigit)
                    "|_ ",
                    " _|"};
     EXPECT_EQ("?", ParseDigit(digit));
+}
+
+TEST(BankOCRTests, ParseSeveralDigits_ThreeZeros)
+{
+    std::vector<Digit> digits;
+
+    digits.push_back(s_digits[0]);
+    digits.push_back(s_digits[0]);
+    digits.push_back(s_digits[0]);
+
+    EXPECT_EQ("000", ParseSeveralDigits(digits));
 }
