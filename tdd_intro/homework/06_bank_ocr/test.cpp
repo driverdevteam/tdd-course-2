@@ -264,5 +264,17 @@ TEST(BankOCRTests, CheckCodeDimension_CorrectCode)
         digits.push_back(s_digits[0]);
     }
 
-    EXPECT_EQ(true, CheckCodeDimension(digits));
+    EXPECT_TRUE(CheckCodeDimension(digits));
+}
+
+TEST(BankOCRTests, CheckCodeDimension_IncorrectDigitsCount)
+{
+    std::vector<Digit> digits;
+
+    for (unsigned int i = 0; i < 4; ++i)
+    {
+        digits.push_back(s_digits[0]);
+    }
+
+    EXPECT_FALSE(CheckCodeDimension(digits));
 }
