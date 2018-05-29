@@ -165,7 +165,20 @@ bool CheckMatrixDimension(const Digit& digit)
 
 bool CheckCodeDimension(const std::vector<Digit>& code)
 {
-    return code.size() == s_digitsInCode;
+    if (code.size() != s_digitsInCode)
+    {
+        return false;
+    }
+
+    for (const Digit& digit : code)
+    {
+        if (!CheckMatrixDimension(digit))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 std::string ParseDigit(const Digit& digit)
