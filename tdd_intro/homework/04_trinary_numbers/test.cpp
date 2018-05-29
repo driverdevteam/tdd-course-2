@@ -28,6 +28,11 @@ short CharToTrinaryDigit(char trinaryGigit)
     throw std::runtime_error("Invalid trinaryDigit");
 }
 
+long TrinaryToDecimal(const std::string& trinaryNumber)
+{
+    return 0;
+}
+
 TEST (CharToTrinaryDigit, get_0)
 {
     EXPECT_EQ(0, CharToTrinaryDigit('0'));
