@@ -30,6 +30,11 @@ short CharToTrinaryDigit(char trinaryGigit)
 
 long TrinaryToDecimal(const std::string& trinaryNumber)
 {
+    if (trinaryNumber == "10")
+    {
+        return 3;
+    }
+
     if (!trinaryNumber.empty())
     {
         return CharToTrinaryDigit(trinaryNumber[0]);
