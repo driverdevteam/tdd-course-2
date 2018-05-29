@@ -205,6 +205,11 @@ std::string ParseSeveralDigits(const Code& digits)
     return result;
 }
 
+std::string ParseCode(const Code& code)
+{
+    return std::string();
+}
+
 TEST(BankOCRTests, Check_Matrix_dimension_true)
 {
     Digit digit = {"   ", "   ", "   "};
@@ -307,4 +312,16 @@ TEST(BankOCRTests, CheckCodeDimension_IncorrectDigits)
     digits.push_back(incorrectDigit);
 
     EXPECT_FALSE(CheckCodeDimension(digits));
+}
+
+TEST(BankOCRTests, ParseCode_CorrectCode)
+{
+    Code code;
+
+    for (unsigned int i = 0; i < s_digitsInCode - 1; ++i)
+    {
+        code.push_back(s_digits[0]);
+    }
+
+    EXPECT_EQ("012345678", ParseCode(code));
 }
