@@ -43,3 +43,7 @@ TEST (CharToTrinaryDigit, get_invalid_gigit)
     EXPECT_THROW(CharToTrinaryDigit('3'), std::runtime_error);
 }
 
+TEST (CharToTrinaryDigit, get_non_gigit)
+{
+    EXPECT_THROW(CharToTrinaryDigit('a'), std::runtime_error);
+}
