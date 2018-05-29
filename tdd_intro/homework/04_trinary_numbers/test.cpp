@@ -20,7 +20,7 @@ If your language provides a method in the standard library to perform the conver
 
 short CharToTrinaryDigit(char trinaryGigit)
 {
-    if (trinaryGigit != '3' && trinaryGigit != 'a')
+    if (trinaryGigit >= '0' && trinaryGigit <= '2')
     {
         return trinaryGigit - '0';
     }
