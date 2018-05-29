@@ -67,3 +67,8 @@ TEST (TrinaryToDecimal, get_emptyString)
 {
     EXPECT_EQ(0, TrinaryToDecimal(""));
 }
+
+TEST (TrinaryToDecimal, get_10)
+{
+    EXPECT_EQ(3, TrinaryToDecimal("10"));
+}
