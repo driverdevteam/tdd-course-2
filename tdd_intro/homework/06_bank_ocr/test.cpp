@@ -100,6 +100,7 @@ Example input and output
 
 using Digit = std::vector<std::string>;
 using Code = std::vector<Digit>;
+using Code_vt = std::vector<Code>;
 
 std::vector<Digit> s_digits({
                             {" _ ",
@@ -213,6 +214,11 @@ std::string ParseCode(const Code& code)
     }
 
     return "";
+}
+
+std::vector<std::string> ParseSeveralCodes(const Code_vt& codes)
+{
+    return {};
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
@@ -374,4 +380,29 @@ TEST(BankOCRTests, ParseCode_AcceptanceTest)
 
     EXPECT_EQ("123456789", ParseCode(code));
     EXPECT_EQ("?23456789", ParseCode(codeWithMistake));
+}
+
+TEST(BankOCRTests, ParseSeveralCodes_CommonCodes)
+{
+    Code_vt codes;
+
+    Code code;
+    Code codeWithMistake;
+
+    Digit incorrectDigit = {" __",
+                            "|_ ",
+                            " _|"};
+
+    for (unsigned int i = 1; i <= s_digitsInCode; ++i)
+    {
+        code.push_back(s_digits[i]);
+        codeWithMistake.push_back(s_digits[i]);
+    }
+
+    std::replace(codeWithMistake.begin(), codeWithMistake.end(), s_digits[1], incorrectDigit);
+
+    codes.push_back(code);
+    codes.push_back(codeWithMistake);
+
+    EXPECT_EQ(std::vector<std::string>({"123456789", "?23456789"}), ParseSeveralCodes(codes));
 }
