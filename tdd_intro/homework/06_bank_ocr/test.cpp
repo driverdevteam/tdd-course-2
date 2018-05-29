@@ -314,14 +314,26 @@ TEST(BankOCRTests, CheckCodeDimension_IncorrectDigits)
     EXPECT_FALSE(CheckCodeDimension(digits));
 }
 
-TEST(BankOCRTests, ParseCode_CorrectCode)
+TEST(BankOCRTests, ParseCode_CorrectCode_012345678)
 {
     Code code;
 
     for (unsigned int i = 0; i < s_digitsInCode - 1; ++i)
     {
-        code.push_back(s_digits[0]);
+        code.push_back(s_digits[i]);
     }
 
     EXPECT_EQ("012345678", ParseCode(code));
+}
+
+TEST(BankOCRTests, ParseCode_CorrectCode_987654321)
+{
+    Code code;
+
+    for (unsigned int i = s_digitsInCode; i > 0; --i)
+    {
+        code.push_back(s_digits[i]);
+    }
+
+    EXPECT_EQ("987654321", ParseCode(code));
 }
