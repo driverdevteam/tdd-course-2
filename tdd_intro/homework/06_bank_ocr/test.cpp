@@ -354,3 +354,24 @@ TEST(BankOCRTests, ParseCode_IncorrectCode)
 
     EXPECT_EQ("", ParseCode(code));
 }
+
+TEST(BankOCRTests, ParseCode_AcceptanceTest)
+{
+    Code code;
+    Code codeWithMistake;
+
+    Digit incorrectDigit = {" __",
+                            "|_ ",
+                            " _|"};
+
+    for (unsigned int i = 1; i <= s_digitsInCode; ++i)
+    {
+        code.push_back(s_digits[i]);
+        codeWithMistake.push_back(s_digits[i]);
+    }
+
+    std::replace(codeWithMistake.begin(), codeWithMistake.end(), s_digits[1], incorrectDigit);
+
+    EXPECT_EQ("123456789", ParseCode(code));
+    EXPECT_EQ("?23456789", ParseCode(codeWithMistake));
+}
