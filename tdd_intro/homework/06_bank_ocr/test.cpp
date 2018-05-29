@@ -232,3 +232,13 @@ TEST(BankOCRTests, ParseSeveralDigits_ThreeZeros)
 
     EXPECT_EQ("000", ParseSeveralDigits(digits));
 }
+
+TEST(BankOCRTests, ParseSeveralDigits_TwoThrees)
+{
+    std::vector<Digit> digits;
+
+    digits.push_back(s_digits[3]);
+    digits.push_back(s_digits[3]);
+
+    EXPECT_EQ("33", ParseSeveralDigits(digits));
+}
