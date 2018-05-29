@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 /*
 Convert a trinary number, represented as a string (e.g. '102012'), to its decimal equivalent using first principles.
@@ -16,3 +17,86 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
+
+short CharToTrinaryDigit(char trinaryGigit)
+{
+    if (trinaryGigit >= '0' && trinaryGigit <= '2')
+    {
+        return trinaryGigit - '0';
+    }
+
+    throw std::runtime_error("Invalid trinaryDigit");
+}
+
+long TrinaryToDecimal(const std::string& trinaryNumber)
+{
+    if (!trinaryNumber.empty())
+    {
+        try
+        {
+            long result = 0;
+            const size_t numberOfDigits = trinaryNumber.size() - 1;
+            for (int i = numberOfDigits; i >= 0; --i)
+            {
+                const size_t exp = numberOfDigits - i;
+                result += static_cast<long>(CharToTrinaryDigit(trinaryNumber[i]) * std::pow(3, exp));
+            }
+            return result;
+        }
+        catch (const std::runtime_error& /*ex*/)
+        {
+        }
+    }
+
+    return 0;
+}
+
+TEST (CharToTrinaryDigit, get_0)
+{
+    EXPECT_EQ(0, CharToTrinaryDigit('0'));
+}
+
+TEST (CharToTrinaryDigit, get_2)
+{
+    EXPECT_EQ(2, CharToTrinaryDigit('2'));
+}
+
+TEST (CharToTrinaryDigit, get_invalid_gigit)
+{
+    EXPECT_THROW(CharToTrinaryDigit('3'), std::runtime_error);
+}
+
+TEST (CharToTrinaryDigit, get_non_gigit)
+{
+    EXPECT_THROW(CharToTrinaryDigit('a'), std::runtime_error);
+}
+
+TEST (TrinaryToDecimal, get_0)
+{
+    EXPECT_EQ(0, TrinaryToDecimal("0"));
+}
+
+TEST (TrinaryToDecimal, get_emptyString)
+{
+    EXPECT_EQ(0, TrinaryToDecimal(""));
+}
+
+TEST (TrinaryToDecimal, get_10)
+{
+    EXPECT_EQ(3, TrinaryToDecimal("10"));
+}
+
+TEST (TrinaryToDecimal, get_string_with_invalid_digit)
+{
+    EXPECT_EQ(0, TrinaryToDecimal("108"));
+}
+
+TEST (TrianaryToDecimal, acceptance)
+{
+    EXPECT_EQ(302, TrinaryToDecimal("102012"));
+}
+
+TEST (TrianaryToDecimal, acceptance_strange_string)
+{
+    EXPECT_EQ(0, TrinaryToDecimal("!fjksl1020"));
+}
