@@ -141,6 +141,8 @@ std::vector<Digit> s_digits({
                              "|_|",
                              " _|"}});
 
+unsigned int s_digitsInCode = 9;
+
 bool CheckMatrixDimension(const Digit& digit)
 {
     const size_t prefferedSize = 3;
@@ -159,6 +161,11 @@ bool CheckMatrixDimension(const Digit& digit)
     }
 
     return true;
+}
+
+bool CheckCodeDimension(const std::vector<Digit>& code)
+{
+    return false;
 }
 
 std::string ParseDigit(const Digit& digit)
@@ -246,4 +253,16 @@ TEST(BankOCRTests, ParseSeveralDigits_TwoThrees)
     digits.push_back(s_digits[3]);
 
     EXPECT_EQ("33", ParseSeveralDigits(digits));
+}
+
+TEST(BankOCRTests, CheckCodeDimension_CorrectCode)
+{
+    std::vector<Digit> digits;
+
+    for (unsigned int i = 0; i < s_digitsInCode; ++i)
+    {
+        digits.push_back(s_digits[0]);
+    }
+
+    EXPECT_EQ(true, CheckCodeDimension(digits));
 }
