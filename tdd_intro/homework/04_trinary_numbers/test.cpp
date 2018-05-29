@@ -90,3 +90,8 @@ TEST (TrinaryToDecimal, get_string_with_invalid_digit)
 {
     EXPECT_EQ(0, TrinaryToDecimal("108"));
 }
+
+TEST (TrianaryToDecimal, acceptance)
+{
+    EXPECT_EQ(302, TrinaryToDecimal("102012"));
+}
