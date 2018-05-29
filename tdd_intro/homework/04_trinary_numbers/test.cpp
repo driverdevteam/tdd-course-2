@@ -26,3 +26,9 @@ TEST (CharToTrinaryDigit, get_0)
 {
     EXPECT_EQ(0, CharToTrinaryDigit('0'));
 }
+
+TEST (CharToTrinaryDigit, get_2)
+{
+    EXPECT_EQ(2, CharToTrinaryDigit('2'));
+}
+
