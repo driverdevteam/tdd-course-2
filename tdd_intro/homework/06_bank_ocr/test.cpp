@@ -99,6 +99,7 @@ Example input and output
 // parse several lines
 
 using Digit = std::vector<std::string>;
+using Code = std::vector<Digit>;
 
 std::vector<Digit> s_digits({
                             {" _ ",
@@ -163,7 +164,7 @@ bool CheckMatrixDimension(const Digit& digit)
     return true;
 }
 
-bool CheckCodeDimension(const std::vector<Digit>& code)
+bool CheckCodeDimension(const Code& code)
 {
     if (code.size() != s_digitsInCode)
     {
@@ -194,7 +195,7 @@ std::string ParseDigit(const Digit& digit)
     return "?";
 }
 
-std::string ParseSeveralDigits(const std::vector<Digit>& digits)
+std::string ParseSeveralDigits(const Code& digits)
 {
     std::string result;
     for (const Digit& digit : digits)
@@ -249,7 +250,7 @@ TEST(BankOCRTests, ParseDigit_InvalidDigit)
 
 TEST(BankOCRTests, ParseSeveralDigits_ThreeZeros)
 {
-    std::vector<Digit> digits;
+    Code digits;
 
     digits.push_back(s_digits[0]);
     digits.push_back(s_digits[0]);
@@ -260,7 +261,7 @@ TEST(BankOCRTests, ParseSeveralDigits_ThreeZeros)
 
 TEST(BankOCRTests, ParseSeveralDigits_TwoThrees)
 {
-    std::vector<Digit> digits;
+    Code digits;
 
     digits.push_back(s_digits[3]);
     digits.push_back(s_digits[3]);
@@ -270,7 +271,7 @@ TEST(BankOCRTests, ParseSeveralDigits_TwoThrees)
 
 TEST(BankOCRTests, CheckCodeDimension_CorrectCode)
 {
-    std::vector<Digit> digits;
+    Code digits;
 
     for (unsigned int i = 0; i < s_digitsInCode; ++i)
     {
@@ -282,7 +283,7 @@ TEST(BankOCRTests, CheckCodeDimension_CorrectCode)
 
 TEST(BankOCRTests, CheckCodeDimension_IncorrectDigitsCount)
 {
-    std::vector<Digit> digits;
+    Code digits;
 
     for (unsigned int i = 0; i < 4; ++i)
     {
@@ -294,7 +295,7 @@ TEST(BankOCRTests, CheckCodeDimension_IncorrectDigitsCount)
 
 TEST(BankOCRTests, CheckCodeDimension_IncorrectDigits)
 {
-    std::vector<Digit> digits;
+    Code digits;
     Digit incorrectDigit = {" __ ",
                             "|_ ",
                             " _|"};
