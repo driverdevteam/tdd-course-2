@@ -278,3 +278,19 @@ TEST(BankOCRTests, CheckCodeDimension_IncorrectDigitsCount)
 
     EXPECT_FALSE(CheckCodeDimension(digits));
 }
+
+TEST(BankOCRTests, CheckCodeDimension_IncorrectDigits)
+{
+    std::vector<Digit> digits;
+    Digit incorrectDigit = {" __ ",
+                            "|_ ",
+                            " _|"};
+
+    for (unsigned int i = 0; i < s_digitsInCode - 1; ++i)
+    {
+        digits.push_back(s_digits[0]);
+    }
+    digits.push_back(incorrectDigit);
+
+    EXPECT_FALSE(CheckCodeDimension(digits));
+}
