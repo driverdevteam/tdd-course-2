@@ -30,26 +30,25 @@ short CharToTrinaryDigit(char trinaryGigit)
 
 long TrinaryToDecimal(const std::string& trinaryNumber)
 {
-    if (trinaryNumber == "108")
+    if (!trinaryNumber.empty())
     {
-        return 0;
+        try
+        {
+            long result = 0;
+            const size_t numberOfDigits = trinaryNumber.size() - 1;
+            for (int i = numberOfDigits; i >= 0; --i)
+            {
+                const size_t exp = numberOfDigits - i;
+                result += static_cast<long>(CharToTrinaryDigit(trinaryNumber[i]) * std::pow(3, exp));
+            }
+            return result;
+        }
+        catch (const std::runtime_error& /*ex*/)
+        {
+        }
     }
 
-    if (trinaryNumber.empty())
-    {
-       return 0;
-    }
-
-    long result = 0;
-    const size_t numberOfDigits = trinaryNumber.size() - 1;
-
-    for (int i = numberOfDigits; i >= 0; --i)
-    {
-        const size_t exp = numberOfDigits - i;
-        result += CharToTrinaryDigit(trinaryNumber[i]) * std::pow(3, exp);
-    }
-
-    return result;
+    return 0;
 }
 
 TEST (CharToTrinaryDigit, get_0)
