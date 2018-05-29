@@ -18,9 +18,14 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
-short CharToTrinaryDigit(char trinariGigit)
+short CharToTrinaryDigit(char trinaryGigit)
 {
-    return trinariGigit - '0';
+    if (trinaryGigit != '3')
+    {
+        return trinaryGigit - '0';
+    }
+
+    throw std::runtime_error("Invalid trinaryDigit");
 }
 
 TEST (CharToTrinaryDigit, get_0)
