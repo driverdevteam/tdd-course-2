@@ -47,3 +47,8 @@ TEST (CharToTrinaryDigit, get_non_gigit)
 {
     EXPECT_THROW(CharToTrinaryDigit('a'), std::runtime_error);
 }
+
+TEST (TrinaryToDecimal, get_0)
+{
+    EXPECT_EQ(0, TrinaryToDecimal("0"));
+}
