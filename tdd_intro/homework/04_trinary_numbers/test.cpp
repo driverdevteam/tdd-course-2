@@ -30,7 +30,7 @@ short CharToTrinaryDigit(char trinaryGigit)
 
 long TrinaryToDecimal(const std::string& trinaryNumber)
 {
-    return 0;
+    return CharToTrinaryDigit(trinaryNumber[0]);
 }
 
 TEST (CharToTrinaryDigit, get_0)
@@ -57,3 +57,4 @@ TEST (TrinaryToDecimal, get_0)
 {
     EXPECT_EQ(0, TrinaryToDecimal("0"));
 }
+
