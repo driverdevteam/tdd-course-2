@@ -337,3 +337,15 @@ TEST(BankOCRTests, ParseCode_CorrectCode_987654321)
 
     EXPECT_EQ("987654321", ParseCode(code));
 }
+
+TEST(BankOCRTests, ParseCode_IncorrectCode)
+{
+    Code code;
+
+    for (unsigned int i = 0; i < 4; ++i)
+    {
+        code.push_back(s_digits[0]);
+    }
+
+    EXPECT_EQ("", ParseCode(code));
+}
