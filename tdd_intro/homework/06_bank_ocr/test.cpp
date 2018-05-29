@@ -201,7 +201,7 @@ TEST(BankOCRTests, ParseDigit_8)
     EXPECT_EQ("8", ParseDigit(s_digits[8]));
 }
 
-TEST(BankOCRTests, ParseDigits_0_9)
+TEST(BankOCRTests, ParseDigit_0_9)
 {
     for (size_t i = 0; i < s_digits.size(); ++i)
     {
@@ -209,7 +209,7 @@ TEST(BankOCRTests, ParseDigits_0_9)
     }
 }
 
-TEST(BankOCRTests, ParseDigits_InvalidDigit)
+TEST(BankOCRTests, ParseDigit_InvalidDigit)
 {
     Digit digit = {" __",
                    "|_ ",
