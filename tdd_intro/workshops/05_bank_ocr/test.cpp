@@ -298,10 +298,17 @@ TEST(BankOCRTests, ParseNumber_123456789)
     EXPECT_EQ("123456789", ParseNumber(number));
 }
 
-TEST(BankOCRTests, ParseNumber_invalid_matrix)
+TEST(BankOCRTests, ParseNumber_invalid_matrix_width)
 {
     Number number = {"    _  _     _  _  _  _ ",
                      "  | _| _||_||_ |_   ||_|",
+                     "  ||_  _|  | _||_|  ||_|"};
+    EXPECT_EQ("", ParseNumber(number));
+}
+
+TEST(BankOCRTests, ParseNumber_invalid_matrix_height)
+{
+    Number number = {"  | _| _||_||_ |_   ||_|",
                      "  ||_  _|  | _||_|  ||_|"};
     EXPECT_EQ("", ParseNumber(number));
 }
