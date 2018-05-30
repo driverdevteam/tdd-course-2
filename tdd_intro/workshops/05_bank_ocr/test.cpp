@@ -155,8 +155,21 @@ std::string ParseDigit(const Digit& digit)
     return "?";
 }
 
+bool CheckMatrix(const Number& number)
+{
+    return number.size() == 3
+            && number[0].size() == 27
+            && number[1].size() == 27
+            && number[2].size() == 27;
+}
+
 std::string ParseNumber(const Number& number)
 {
+    if (!CheckMatrix(number))
+    {
+        return "";
+    }
+
     std::string result;
     for (int i = 0; i < 27; i+=3)
     {
