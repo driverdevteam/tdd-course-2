@@ -176,3 +176,11 @@ TEST(BankOCRTests, ParseDigit_8)
                    "|_|"};
     EXPECT_EQ("8", ParseDigit(digit));
 }
+
+TEST(BankOCRTests, ParseDigit_corrupted)
+{
+    Digit digit = {" _ ",
+                   " | ",
+                   " | "};
+    EXPECT_EQ("?", ParseDigit(digit));
+}
