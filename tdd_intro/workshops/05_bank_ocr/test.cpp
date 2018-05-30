@@ -110,9 +110,9 @@ std::map<Digit, std::string> s_digits({
                                 " _|",
                                 "|_ "}, "2"},
 
-                               {{"_ ",
-                                 "_|",
-                                 "_|"}, "3"},
+                               {{" _ ",
+                                 " _|",
+                                 " _|"}, "3"},
 
                               {{"   ",
                                 "|_|",
@@ -157,7 +157,15 @@ std::string ParseDigit(const Digit& digit)
 
 std::string ParseNumber(const Number& number)
 {
-    return "123456789";
+    std::string result;
+    for (int i = 0; i < 27; i+=3)
+    {
+        Digit digit{std::string(number[0].begin() + i, number[0].begin() + i + 3),
+                    std::string(number[1].begin() + i, number[1].begin() + i + 3),
+                    std::string(number[2].begin() + i, number[2].begin() + i + 3)};
+        result += ParseDigit(digit);
+    }
+    return result;
 }
 
 TEST(BankOCRTests, ParseDigit_1)
@@ -178,9 +186,9 @@ TEST(BankOCRTests, ParseDigit_2)
 
 TEST(BankOCRTests, ParseDigit_3)
 {
-    Digit digit = {"_ ",
-                   "_|",
-                   "_|"};
+    Digit digit = {" _ ",
+                   " _|",
+                   " _|"};
     EXPECT_EQ("3", ParseDigit(digit));
 }
 
