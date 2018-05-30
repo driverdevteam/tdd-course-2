@@ -143,26 +143,6 @@ std::map<Digit, std::string> s_digits({
 
 });
 
-bool CheckMatrixDimension(const Digit& digit)
-{
-    const size_t prefferedSize = 3;
-
-    if (digit.size() != prefferedSize)
-    {
-        return false;
-    }
-
-    for (const std::string& line : digit)
-    {
-        if (line.size() != prefferedSize)
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 std::string ParseDigit(const Digit& digit)
 {
     const auto it = s_digits.find(digit);
@@ -172,18 +152,6 @@ std::string ParseDigit(const Digit& digit)
     }
 
     return "?";
-}
-
-TEST(BankOCRTests, Check_Matrix_dimension_true)
-{
-    Digit digit = {"   ", "   ", "   "};
-    EXPECT_TRUE(CheckMatrixDimension(digit));
-}
-
-TEST(BankOCRTests, Check_Matrix_dimension_false)
-{
-    Digit digit = {"  ", "!   ", " "};
-    EXPECT_FALSE(CheckMatrixDimension(digit));
 }
 
 TEST(BankOCRTests, ParseDigit_1)
