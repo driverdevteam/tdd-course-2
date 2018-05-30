@@ -101,6 +101,10 @@ Example input and output
 using Digit = std::vector<std::string>;
 using Number = std::vector<std::string>;
 
+const size_t matrixWidth = 27;
+const size_t digitWidth = 3;
+const size_t digitHeight = 3;
+
 std::map<Digit, std::string> s_digits({
                               {{"   ",
                                 "  |",
@@ -157,10 +161,19 @@ std::string ParseDigit(const Digit& digit)
 
 bool CheckMatrix(const Number& number)
 {
-    return number.size() == 3
-            && number[0].size() == 27
-            && number[1].size() == 27
-            && number[2].size() == 27;
+    if (number.size() == digitHeight)
+    {
+        for (const auto line : number)
+        {
+            if (line.size() != matrixWidth)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
 
 std::string ParseNumber(const Number& number)
@@ -171,7 +184,7 @@ std::string ParseNumber(const Number& number)
     }
 
     std::string result;
-    for (int i = 0; i < 27; i+=3)
+    for (int i = 0; i < matrixWidth; i+=3)
     {
         Digit digit{std::string(number[0].begin() + i, number[0].begin() + i + 3),
                     std::string(number[1].begin() + i, number[1].begin() + i + 3),
