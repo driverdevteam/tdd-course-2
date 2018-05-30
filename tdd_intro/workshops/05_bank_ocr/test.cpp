@@ -174,6 +174,7 @@ bool CheckMatrix(const Number& number)
         return true;
     }
 
+    return false;
 }
 
 std::string ParseNumber(const Number& number)
