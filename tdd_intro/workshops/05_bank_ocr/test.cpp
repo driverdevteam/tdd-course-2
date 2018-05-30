@@ -137,6 +137,12 @@ bool CheckMatrixDimension(const Digit& digit)
 
 std::string ParseDigit(const Digit& digit)
 {
+    if (digit == Digit{" _ ",
+                       " | ",
+                       " | "})
+    {
+        return "?";
+    }
     const auto it = s_digits.find(digit);
     return it->second;
 }
