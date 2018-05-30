@@ -137,14 +137,13 @@ bool CheckMatrixDimension(const Digit& digit)
 
 std::string ParseDigit(const Digit& digit)
 {
-    if (digit == Digit{" _ ",
-                       " | ",
-                       " | "})
-    {
-        return "?";
-    }
     const auto it = s_digits.find(digit);
-    return it->second;
+    if (it != s_digits.end())
+    {
+        return it->second;
+    }
+
+    return "?";
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
