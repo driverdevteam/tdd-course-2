@@ -201,7 +201,12 @@ std::string ParseNumber(const Number& number)
 
 std::vector<std::string> ParseLines(const Numbers& numbers)
 {
-    return {"123456789"};
+    std::vector<std::string> result;
+    for (const auto& number : numbers)
+    {
+        result.push_back(ParseNumber(number));
+    }
+    return result;
 }
 
 TEST(BankOCRTests, ParseDigit_1)
