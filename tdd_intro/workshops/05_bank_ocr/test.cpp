@@ -135,7 +135,11 @@ std::map<Digit, std::string> s_digits({
 
                               {{" _ ",
                                 "|_|",
-                                " _|"}, "9"}
+                                " _|"}, "9"},
+
+                              {{" _ ",
+                                "| |",
+                                "|_|"}, "0"}
 
 });
 
@@ -269,3 +273,12 @@ TEST(BankOCRTests, ParseDigit_corrupted)
                    " | "};
     EXPECT_EQ("?", ParseDigit(digit));
 }
+
+TEST(BankOCRTests, ParseDigit_invalid_matrix)
+{
+    Digit digit = {"",
+                   "!   ",
+                   "!   "};
+    EXPECT_EQ("?", ParseDigit(digit));
+}
+
