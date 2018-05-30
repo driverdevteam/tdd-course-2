@@ -272,3 +272,10 @@ TEST(BankOCRTests, ParseNumber_123456789)
     EXPECT_EQ("123456789", ParseNumber(number));
 }
 
+TEST(BankOCRTests, ParseNumber_invalid_matrix)
+{
+    Number number = {"    _  _     _  _  _  _ ",
+                     "  | _| _||_||_ |_   ||_|",
+                     "  ||_  _|  | _||_|  ||_|"};
+    EXPECT_EQ("", ParseNumber(number));
+}
