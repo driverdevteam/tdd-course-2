@@ -174,6 +174,14 @@ TEST(BankOCRTests, ParseDigit_2)
     EXPECT_EQ("2", ParseDigit(digit));
 }
 
+TEST(BankOCRTests, ParseDigit_3)
+{
+    Digit digit = {"_ ",
+                   "_|",
+                   "_|"};
+    EXPECT_EQ("3", ParseDigit(digit));
+}
+
 TEST(BankOCRTests, ParseDigit_8)
 {
     Digit digit = {" _ ",
