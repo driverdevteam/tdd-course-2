@@ -185,11 +185,14 @@ std::string ParseNumber(const Number& number)
     }
 
     std::string result;
-    for (int i = 0; i < matrixWidth; i+=3)
+    for (int i = 0; i < matrixWidth; i += digitWidth)
     {
-        Digit digit{std::string(number[0].begin() + i, number[0].begin() + i + 3),
-                    std::string(number[1].begin() + i, number[1].begin() + i + 3),
-                    std::string(number[2].begin() + i, number[2].begin() + i + 3)};
+        Digit digit;
+        for (const auto line : number)
+        {
+            digit.push_back(std::string(line.begin() + i, line.begin() + i + digitWidth));
+        }
+
         result += ParseDigit(digit);
     }
     return result;
