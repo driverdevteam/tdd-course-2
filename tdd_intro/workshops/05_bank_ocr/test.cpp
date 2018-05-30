@@ -100,6 +100,7 @@ Example input and output
 
 using Digit = std::vector<std::string>;
 using Number = std::vector<std::string>;
+using Numbers = std::vector<Number>;
 
 const size_t matrixWidth = 27;
 const size_t digitWidth = 3;
@@ -196,6 +197,11 @@ std::string ParseNumber(const Number& number)
         result += ParseDigit(digit);
     }
     return result;
+}
+
+std::vector<std::string> ParseLines(const Numbers& numbers)
+{
+    return {};
 }
 
 TEST(BankOCRTests, ParseDigit_1)
@@ -315,4 +321,15 @@ TEST(BankOCRTests, ParseNumber_invalid_matrix_height)
     Number number = {"  | _| _||_||_ |_   ||_|",
                      "  ||_  _|  | _||_|  ||_|"};
     EXPECT_EQ("", ParseNumber(number));
+}
+
+TEST(BankOCRTests, ParseLines_single_line)
+{
+    Number number = {"    _  _     _  _  _  _  _ ",
+                     "  | _| _||_||_ |_   ||_||_|",
+                     "  ||_  _|  | _||_|  ||_| _|"};
+    Numbers numbers {number};
+
+    std::vector<std::string> expected {"123456789"};
+    EXPECT_EQ(expected, ParseLines(numbers));
 }
