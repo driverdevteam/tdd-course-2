@@ -155,6 +155,11 @@ std::string ParseDigit(const Digit& digit)
     return "?";
 }
 
+std::string ParseNumber(const Number& number)
+{
+    return "123456789";
+}
+
 TEST(BankOCRTests, ParseDigit_1)
 {
     Digit digit = {"   ",
