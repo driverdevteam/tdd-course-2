@@ -100,15 +100,18 @@ Example input and output
 
 using Digit = std::vector<std::string>;
 
-const Digit s_1({"   ",
-                 "  |",
-                 "  |"});
+std::map<Digit, std::string> s_digits({
+                              {{"   ",
+                               "  |",
+                               "  |"}, "1"},
 
-const Digit s_2({" _ ",
-                 " _|",
-                 "|_ "});
+                              {{" _ ",
+                                " _|",
+                                "|_ "}, "2"},
 
-std::vector<Digit> s_digits({
+                              {{" _ ",
+                                "|_|",
+                                "|_|"}, "8"}
 
 });
 
@@ -134,20 +137,8 @@ bool CheckMatrixDimension(const Digit& digit)
 
 std::string ParseDigit(const Digit& digit)
 {
-    if (digit == Digit({"   ",
-                        "  |",
-                        "  |"}))
-    {
-        return "1";
-    }
-    else if (digit == Digit({" _ ",
-                             " _|",
-                             "|_ "}))
-    {
-        return "2";
-    }
-
-    return "8";
+    const auto it = s_digits.find(digit);
+    return it->second;
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
