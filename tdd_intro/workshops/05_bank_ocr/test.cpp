@@ -99,6 +99,7 @@ Example input and output
 // parse several lines
 
 using Digit = std::vector<std::string>;
+using Number = std::vector<std::string>;
 
 std::map<Digit, std::string> s_digits({
                               {{"   ",
@@ -248,5 +249,13 @@ TEST(BankOCRTests, ParseDigit_invalid_matrix)
                    "!   ",
                    "!   "};
     EXPECT_EQ("?", ParseDigit(digit));
+}
+
+TEST(BankOCRTests, ParseNumber_123456789)
+{
+    Number number = {"    _  _     _  _  _  _  _ ",
+                     "  | _| _||_||_ |_   ||_||_|",
+                     "  ||_  _|  | _||_|  ||_| _|"};
+    EXPECT_EQ("123456789", ParseNumber(number));
 }
 
