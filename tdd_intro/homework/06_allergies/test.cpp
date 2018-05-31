@@ -16,6 +16,8 @@ Now, given just that score of 34, your program should be able:
     To say have Tom allergic to specific product or not.
     To give list of all allergens Tom is allergic to.
 
+E.g. it can be class with methods IsAllergicTo(string), List() and receiving allergyScore in constructor
+	
 Note: a given score may include allergens not listed above (i.e. allergens that score 256, 512, 1024, etc.).
 Your program should ignore those components of the score.
 For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
