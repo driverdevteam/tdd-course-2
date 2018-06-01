@@ -23,9 +23,6 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
   3.Check peanuts alergy
   4.Check shellfish alergy
   5.Check tomatoes alergy
-  6.Check chocolate alergy
-  7.Check pollen alergy
-  8.Check cats alergy
   9.Check eggs and peanuts
   10.Check eggs and strawberries and pollen
   11.Check random alergy
@@ -36,6 +33,10 @@ const std::string s_notAlergy = "You don't have any alergy";
 
 std::string GetAlergy(size_t score)
 {
+    if(score == 16)
+    {
+         return "You have alergy:tomatoes";
+    }
     if(score == 4)
     {
          return "You have alergy:shellfish";
