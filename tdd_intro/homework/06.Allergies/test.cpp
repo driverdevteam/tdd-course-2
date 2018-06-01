@@ -31,22 +31,30 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
   11.Check random alergy
  */
 
+
+const std::string s_notAlergy = "You don't have any alergy";
+
 std::string GetAlergy(size_t score)
 {
     if(score)
     {
         return "You have alergy:eggs";
     }
-    return "You don't have any alergy";
+    return s_notAlergy;
 }
 
 TEST(GetAlergy, Check_no_allergy)
 {
-    EXPECT_EQ("You don't have any alergy", GetAlergy(0));
+    EXPECT_EQ(s_notAlergy, GetAlergy(0));
 }
 
 TEST(GetAlergy, Check_eggs_alergy)
 {
     EXPECT_EQ("You have alergy:eggs", GetAlergy(1));
+}
+
+TEST(GetAlergy, Check_peanuts_alergy)
+{
+    EXPECT_EQ("You have alergy:peanuts", GetAlergy(2));
 }
 
