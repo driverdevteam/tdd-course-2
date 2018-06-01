@@ -36,7 +36,11 @@ const std::string s_notAlergy = "You don't have any alergy";
 
 std::string GetAlergy(size_t score)
 {
-    if(score)
+    if(score == 2)
+    {
+         return "You have alergy:peanuts";
+    }
+    if(score ==1)
     {
         return "You have alergy:eggs";
     }
