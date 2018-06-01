@@ -33,6 +33,10 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
 
 std::string GetAlergy(size_t score)
 {
+    if(score)
+    {
+        return "You have alergy:eggs";
+    }
     return "You don't have any alergy";
 }
 
