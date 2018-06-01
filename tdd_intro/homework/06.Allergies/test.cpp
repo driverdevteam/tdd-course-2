@@ -40,3 +40,9 @@ TEST(GetAlergy, Check_no_allergy)
 {
     EXPECT_EQ("You don't have any alergy", GetAlergy(0));
 }
+
+TEST(GetAlergy, Check_eggs_alergy)
+{
+    EXPECT_EQ("You have alergy:eggs", GetAlergy(1));
+}
+
