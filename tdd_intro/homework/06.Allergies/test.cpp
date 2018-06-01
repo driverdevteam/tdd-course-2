@@ -40,7 +40,7 @@ std::string GetAlergy(size_t score)
     {
          return "You have alergy:peanuts";
     }
-    if(score ==1)
+    if(score == 1)
     {
         return "You have alergy:eggs";
     }
@@ -61,4 +61,11 @@ TEST(GetAlergy, Check_peanuts_alergy)
 {
     EXPECT_EQ("You have alergy:peanuts", GetAlergy(2));
 }
+
+TEST(GetAlergy, Check_shellfish_alergy)
+{
+    EXPECT_EQ("You have alergy:shellfish", GetAlergy(4));
+}
+
+
 
