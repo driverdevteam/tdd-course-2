@@ -71,5 +71,9 @@ TEST(GetAlergy, Check_shellfish_alergy)
     EXPECT_EQ("You have alergy:shellfish", GetAlergy(4));
 }
 
+TEST(GetAlergy, Check_tomatoes_alergy)
+{
+    EXPECT_EQ("You have alergy:tomatoes", GetAlergy(16));
+}
 
 
