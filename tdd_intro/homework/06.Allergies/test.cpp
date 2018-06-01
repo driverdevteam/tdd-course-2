@@ -17,9 +17,7 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
 #include <gtest/gtest.h>
 
 //tests list
-
 /*
-
   1.Check no allergy
   2.Check eggs alergy
   3.Check peanuts alergy
@@ -31,4 +29,14 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
   9.Check eggs and peanuts
   10.Check eggs and strawberries and pollen
   11.Check random alergy
- * \
+ */
+
+std::string GetAlergy(size_t score)
+{
+    return "You don't have any alergy";
+}
+
+TEST(GetAlergy, Check_no_allergy)
+{
+    EXPECT_EQ("You don't have any alergy", GetAlergy(0));
+}
