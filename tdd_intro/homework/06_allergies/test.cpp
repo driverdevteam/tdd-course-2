@@ -102,6 +102,11 @@ public:
     {
         return AllergiesList();
     }
+
+    bool IsAllergicTo(const std::string& allergyName)
+    {
+        return true;
+    }
 };
 
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
@@ -139,4 +144,10 @@ TEST(PersonAllergiesTests, UnexistentAllergy_EmptyList)
 {
     PersonAllergies personAllergies(256);
     EXPECT_EQ(AllergiesList(), personAllergies.List());
+}
+
+TEST(PersonAllergiesTests, IsAllergicTo_UnexistentAllergy)
+{
+    PersonAllergies personAllergies(256);
+    EXPECT_FALSE(personAllergies.IsAllergicTo("tomatoes"));
 }
