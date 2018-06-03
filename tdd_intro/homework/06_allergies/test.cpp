@@ -13,3 +13,18 @@ Your program should ignore those components of the score. For example, if the al
 */
 
 #include <gtest/gtest.h>
+#include <string>
+#include <vector>
+
+using AllergiesList = std::vector<std::string>;
+
+AllergiesList GetAllergiesList(unsigned int score)
+{
+    return {};
+}
+
+TEST(Allergies, GetAllergiesList_EggsAllergy)
+{
+    unsigned int score = 1;
+    EXPECT_EQ(AllergiesList({"eggs"}), GetAllergiesList(score));
+}
