@@ -64,7 +64,7 @@ enum AllergyIndex : uint64_t
 
 bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
 {
-    return allergyScore == 1 << alergyIndex;
+    return allergyScore & 1 << alergyIndex;
 }
 
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
