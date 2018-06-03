@@ -101,3 +101,8 @@ TEST(GetAllergyIndexTests, WithIncorrectName)
 {
     EXPECT_THROW(GetAllergyIndex(""), std::out_of_range);
 }
+
+TEST(GetAllergyIndexTests, WithCorrectName_tomatoes)
+{
+    EXPECT_EQ(AllergyIndexTomatoes, GetAllergyIndex("tomatoes"));
+}
