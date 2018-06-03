@@ -77,12 +77,7 @@ TEST(HaveAllergyTests, CompareWithIncorrectNumber)
     EXPECT_FALSE(HaveAllergy(2, AllergyIndexEggs));
 }
 
-TEST(HaveAllergyTests, CompareWithCorrectNumber_4)
-{
-    EXPECT_TRUE(HaveAllergy(4, AllergyIndexShellfish));
-}
-
-TEST(HaveAllergyTests, CompareWithComplexNumber_5)
+TEST(HaveAllergyTests, CompareWithComplexNumber)
 {
     EXPECT_TRUE(HaveAllergy(5, AllergyIndexEggs));
     EXPECT_TRUE(HaveAllergy(5, AllergyIndexShellfish));
