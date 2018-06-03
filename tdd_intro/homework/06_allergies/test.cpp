@@ -119,6 +119,7 @@ private:
 
 const uint64_t s_unexistentAllergyIndex(256);
 const std::string s_tomatoes("tomatoes");
+const std::string s_eggs("eggs");
 const uint64_t s_tomatoesIndex(16);
 
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
@@ -139,7 +140,7 @@ TEST(HaveAllergyTests, CompareWithComplexNumber)
 
 TEST(GetAllergyIndexTests, WithCorrectName)
 {
-    EXPECT_EQ(AllergyIndexEggs, GetAllergyIndex("eggs"));
+    EXPECT_EQ(AllergyIndexEggs, GetAllergyIndex(s_eggs));
 }
 
 TEST(GetAllergyIndexTests, WithIncorrectName)
@@ -168,4 +169,10 @@ TEST(PersonAllergiesTests, List_OneAllergy)
 {
     PersonAllergies personAllergies(s_tomatoesIndex);
     EXPECT_EQ(AllergiesList({s_tomatoes}), personAllergies.List());
+}
+
+TEST(PersonAllergiesTests, List_TwoAllergy)
+{
+    PersonAllergies personAllergies(s_tomatoesIndex + 1);
+    EXPECT_EQ(AllergiesList({s_tomatoes, s_eggs}), personAllergies.List());
 }
