@@ -100,6 +100,7 @@ public:
 
     AllergiesList List()
     {
+        return AllergiesList();
     }
 };
 
