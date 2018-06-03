@@ -46,6 +46,10 @@ StringList CalculateAllergents(unsigned int scores)
                                                                    {32, "chocolate"},
                                                                    {64, "pollen"},
                                                                    {128, "cats"}};
+    if (scores > 0)
+    {
+        return StringList{"eggs"};
+    }
     return StringList();
 }
 
@@ -64,5 +68,5 @@ TEST(AllergentsTests, Input_1_get_eggs)
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), "eggs");
 
     EXPECT_EQ(StringList{"eggs"}, allergentsList);
-    EXPECT_FALSE(findedElement != allergentsList.end());
+    EXPECT_TRUE(findedElement != allergentsList.end());
 }
