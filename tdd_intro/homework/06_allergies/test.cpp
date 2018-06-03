@@ -101,11 +101,17 @@ public:
 
     AllergiesList List()
     {
-        if (m_allergyScore == 1 << AllergyIndexTomatoes)
+        AllergiesList allergiesList;
+
+        for (auto allergy : s_allergies)
         {
-            return AllergiesList({"tomatoes"});
+            if (HaveAllergy(m_allergyScore, allergy.second))
+            {
+                allergiesList.insert(allergy.first);
+            }
         }
-        return AllergiesList();
+
+        return allergiesList;
     }
 
     bool IsAllergicTo(const std::string& allergyName)
