@@ -27,6 +27,17 @@ For example, if the allergy score is 257, your program should only report the eg
 #include <vector>
 using StringSet = std::set<std::string>;
 
+namespace
+{
+static const std::vector<std::pair<int, std::string>> allergentsScores = {{128, "cats"},
+                                                                          {64, "pollen"},
+                                                                          {32, "chocolate"},
+                                                                          {16, "tomatoes"},
+                                                                          {8, "strawberries"},
+                                                                          {4, "shellfish"},
+                                                                          {2, "peanuts"},
+                                                                          {1, "eggs"}};
+}
 //List of tests:
 //    1. Input 1 and get set with "eggs"
 //    2. Input 0 and get empty set
@@ -38,14 +49,7 @@ using StringSet = std::set<std::string>;
 
 StringSet CalculateAllergents(int scores)
 {
-    static const std::vector<std::pair<int, std::string>> allergentsScores = {{128, "cats"},
-                                                                              {64, "pollen"},
-                                                                              {32, "chocolate"},
-                                                                              {16, "tomatoes"},
-                                                                              {8, "strawberries"},
-                                                                              {4, "shellfish"},
-                                                                              {2, "peanuts"},
-                                                                              {1, "eggs"}};
+
     StringSet results;
     for (auto val = allergentsScores.begin(); val != allergentsScores.end(); ++val)
     {
@@ -70,7 +74,7 @@ TEST(AllergentsTests, Input_0_get_emptyList)
 }
 TEST(AllergentsTests, Input_1_get_eggs)
 {
-    const std::string checkString = "eggs";
+    const std::string checkString = allergentsScores[7].second;
     StringSet allergentsList = CalculateAllergents(1);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), checkString);
 
@@ -79,7 +83,7 @@ TEST(AllergentsTests, Input_1_get_eggs)
 }
 TEST(AllergentsTests, Input_2_get_peanuts)
 {
-    const std::string checkString = "peanuts";
+    const std::string checkString = allergentsScores[6].second;
     StringSet allergentsList = CalculateAllergents(2);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), checkString);
 
@@ -88,18 +92,18 @@ TEST(AllergentsTests, Input_2_get_peanuts)
 }
 TEST(AllergentsTests, Input_3_get_eggs_peanuts_check_peanuts)
 {
-    StringSet checkList = {"eggs", "peanuts"};
+    StringSet checkList = {allergentsScores[7].second, allergentsScores[6].second};
     StringSet allergentsList = CalculateAllergents(3);
-    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), "peanuts");
+    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[6].second);
 
     EXPECT_TRUE(allergentsList == checkList);
     EXPECT_TRUE(findedElement != allergentsList.end());
 }
 TEST(AllergentsTests, Input_87_get_eggs_chocolate_polen_check_chocolate)
 {
-    StringSet checkList = {"pollen", "chocolate", "eggs"};
+    StringSet checkList = {allergentsScores[1].second, allergentsScores[2].second, allergentsScores[7].second};
     StringSet allergentsList = CalculateAllergents(97);
-    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), "chocolate");
+    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[1].second);
 
     EXPECT_TRUE(allergentsList == checkList);
     EXPECT_TRUE(findedElement != allergentsList.end());
