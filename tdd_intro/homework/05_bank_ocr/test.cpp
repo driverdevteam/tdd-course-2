@@ -98,41 +98,41 @@ Example input and output
 // - parse
 // parse several lines
 
-using Digit = std::vector<std::string>;
+using DigitSequence = std::vector<std::string>;
 
-std::vector<Digit> s_digits({{" _ ",
-                              "| |",
-                              "|_|"},
-                             {"   ",
-                              "  |",
-                              "  |"},
-                             {" _ ",
-                              " _|",
-                              "|_ "},
-                             {" _ ",
-                              " _|",
-                              " _|"},
-                             {"   ",
-                              "|_|",
-                              "  |"},
-                             {" _ ",
-                              "|_ ",
-                              " _|"},
-                             {" _ ",
-                              "|_ ",
-                              "|_|"},
-                             {" _ ",
-                              "  |",
-                              "  |"},
-                             {" _ ",
-                              "|_|",
-                              "|_|"},
-                             {" _ ",
-                              "|_|",
-                              " _|"}});
+std::vector<DigitSequence> s_digits({{" _ ",
+                                      "| |",
+                                      "|_|"},
+                                     {"   ",
+                                      "  |",
+                                      "  |"},
+                                     {" _ ",
+                                      " _|",
+                                      "|_ "},
+                                     {" _ ",
+                                      " _|",
+                                      " _|"},
+                                     {"   ",
+                                      "|_|",
+                                      "  |"},
+                                     {" _ ",
+                                      "|_ ",
+                                      " _|"},
+                                     {" _ ",
+                                      "|_ ",
+                                      "|_|"},
+                                     {" _ ",
+                                      "  |",
+                                      "  |"},
+                                     {" _ ",
+                                      "|_|",
+                                      "|_|"},
+                                     {" _ ",
+                                      "|_|",
+                                      " _|"}});
 
 
-bool CheckMatrixDimension(const Digit& digit)
+bool CheckMatrixDimension(const DigitSequence& digit)
 {
     const size_t prefferedSize = 3;
 
@@ -152,7 +152,7 @@ bool CheckMatrixDimension(const Digit& digit)
     return true;
 }
 
-std::string ParseDigit(const Digit& d)
+std::string ParseDigit(const DigitSequence& d)
 {
     for (size_t i = 0; i < s_digits.size(); ++i)
     {
@@ -165,55 +165,77 @@ std::string ParseDigit(const Digit& d)
     return "*";
 }
 
+std::string ParseDigits(const DigitSequence& digits)
+{
+    std::string res;
+
+    for (size_t i = 0; i < 27; i += 3)
+    {
+        DigitSequence digit;
+
+        for (size_t j = 0; j < 3; ++j)
+        {
+            digit.push_back(digits[j].substr(i, 3));
+        }
+
+        if (CheckMatrixDimension(digit))
+        {
+            res += ParseDigit(digit);
+        }
+    }
+
+    return res;
+}
+
 TEST(BankOCRTests, Check_Matrix_dimension_true)
 {
-    Digit digit = {"   ", "   ", "   "};
+    DigitSequence digit = {"   ", "   ", "   "};
     EXPECT_TRUE(CheckMatrixDimension(digit));
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_false)
 {
-    Digit digit = {"  ", "!   ", " "};
+    DigitSequence digit = {"  ", "!   ", " "};
     EXPECT_FALSE(CheckMatrixDimension(digit));
 }
 
 TEST(BankOCRTests, ParseDigit_1)
 {
-    Digit digit = {"   ",
-                   "  |",
-                   "  |"};
+    DigitSequence digit = {"   ",
+                           "  |",
+                           "  |"};
     EXPECT_EQ("1", ParseDigit(digit));
 }
 
 TEST(BankOCRTests, ParseDigit_2)
 {
-    Digit digit = {" _ ",
-                   " _|",
-                   "|_ "};
+    DigitSequence digit = {" _ ",
+                           " _|",
+                           "|_ "};
     EXPECT_EQ("2", ParseDigit(digit));
 }
 
 TEST(BankOCRTests, ParseDigit_8)
 {
-    Digit digit = {" _ ",
-                   "|_|",
-                   "|_|"};
+    DigitSequence digit = {" _ ",
+                           "|_|",
+                           "|_|"};
     EXPECT_EQ("8", ParseDigit(digit));
 }
 
 TEST(BankOCRTests, ParseDigit_wrong_4)
 {
-    Digit wrongDigit = {"|@|",
-                        "  |"
-                       };
+    DigitSequence wrongDigit = {"|@|",
+                                "  |"
+                               };
     EXPECT_EQ("*", ParseDigit(wrongDigit));
 }
 
 TEST(BankOCRTests, Parse_all_digitis)
 {
-    Digit digits = {"    _  _     _  _  _  _  _ ",
-                    "  | _| _||_||_ |_   ||_||_|",
-                    "  ||_  _|  | _||_|  ||_| _|"};
+    DigitSequence digits = {"    _  _     _  _  _  _  _ ",
+                            "  | _| _||_||_ |_   ||_||_|",
+                            "  ||_  _|  | _||_|  ||_| _|"};
     EXPECT_EQ("123456789", ParseDigits(digits));
 }
 
