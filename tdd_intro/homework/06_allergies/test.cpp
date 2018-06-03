@@ -105,7 +105,7 @@ public:
 
     bool IsAllergicTo(const std::string& allergyName)
     {
-        return true;
+        return false;
     }
 };
 
