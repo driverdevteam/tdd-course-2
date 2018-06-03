@@ -251,5 +251,12 @@ TEST(BankOCRTests, CheckDigitSequenceDimension_with_param_true)
                             "  ||_  _|  | _||_|  ||_| _|"};
     EXPECT_TRUE(CheckDigitSequenceDimension(digits, s_digitSequenceWidth));
 }
+TEST(BankOCRTests, CheckDigitSequenceDimension_with_param_false)
+{
+    DigitSequence digits = {"    _  _     _  _  _  _  _    ",
+                            "  | _| _||_||_ |_   ||_||_|  |",
+                            "  ||_  _|  | _||_|  ||_| _|  |"};
+    EXPECT_FALSE(CheckDigitSequenceDimension(digits, s_digitSequenceWidth));
+}
 
 
