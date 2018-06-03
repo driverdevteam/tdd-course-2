@@ -192,6 +192,29 @@ std::string ParseDigits(const DigitSequence& digits)
     return res;
 }
 
+std::vector<std::string> ParseDigitSequences(const DigitSequence& digitSequences)
+{
+    std::vector<std::string> result;
+    const size_t sequencesSize = digitSequences.size() - s_digitWidth;
+
+    for (size_t i = 0; i <= sequencesSize; i += s_digitHeight)
+    {
+        DigitSequence digitSequence;
+
+        for (size_t j = 0; j < s_digitHeight; ++j)
+        {
+            digitSequence.push_back(digitSequences[i + j]);
+        }
+
+        if (CheckDigitSequenceDimension(digitSequence, s_digitSequenceWidth))
+        {
+            result.push_back(ParseDigits(digitSequence));
+        }
+    }
+
+    return result;
+}
+
 TEST(BankOCRTests, CheckDigitSequenceDimension_true)
 {
     DigitSequence digit = {"   ", "   ", "   "};
@@ -258,7 +281,7 @@ TEST(BankOCRTests, CheckDigitSequenceDimension_with_param_false)
                             "  ||_  _|  | _||_|  ||_| _|  |"};
     EXPECT_FALSE(CheckDigitSequenceDimension(digits, s_digitSequenceWidth));
 }
-TEST(BankOCRTests, ParseDigitSequences_2_lines)
+TEST(BankOCRTests, ParseDigitSequences_2)
 {
     DigitSequence digitSequences = {"    _  _     _  _  _  _  _ ",
                                     "  | _| _||_||_ |_   ||_||_|",
