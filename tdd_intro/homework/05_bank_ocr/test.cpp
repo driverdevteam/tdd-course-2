@@ -245,3 +245,12 @@ TEST(BankOCRTests, Parse_all_digitis)
     EXPECT_EQ("123456789", ParseDigits(digits));
 }
 
+TEST(BankOCRTests, Check_DigitSequence_dimension_true)
+{
+    DigitSequence digits = {"    _  _     _  _  _  _  _ ",
+                            "  | _| _||_||_ |_   ||_||_|",
+                            "  ||_  _|  | _||_|  ||_| _|"};
+    EXPECT_TRUE(CheckDigitSequenceDimension(digits));
+}
+
+
