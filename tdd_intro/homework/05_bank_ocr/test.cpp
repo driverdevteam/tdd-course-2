@@ -88,29 +88,49 @@ Example input and output
 
 // check matrix for one digit 3x3
 // parse one digit
-   // - parse 1
-   // - parse 2
-   // - parse 0-9
-   // - check invalid one digit
+// - parse 1
+// - parse 2
+// - parse 0-9
+// - check invalid one digit
 // parse several digits (27x3)
 // parse 27x3 (9 digits)
-   // - check matrix 27x3
-   // - parse
+// - check matrix 27x3
+// - parse
 // parse several lines
 
 using Digit = std::vector<std::string>;
 
-const Digit s_1({"   ",
-                 "  |",
-                 "  |"});
+std::vector<Digit> s_digits({{" _ ",
+                              "| |",
+                              "|_|"},
+                             {"   ",
+                              "  |",
+                              "  |"},
+                             {" _ ",
+                              " _|",
+                              "|_ "},
+                             {" _ ",
+                              " _|",
+                              " _|"},
+                             {"   ",
+                              "|_|",
+                              "  |"},
+                             {" _ ",
+                              "|_ ",
+                              " _|"},
+                             {" _ ",
+                              "|_ ",
+                              "|_|"},
+                             {" _ ",
+                              "  |",
+                              "  |"},
+                             {" _ ",
+                              "|_|",
+                              "|_|"},
+                             {" _ ",
+                              "|_|",
+                              " _|"}});
 
-const Digit s_2({" _ ",
-                 " _|",
-                 "|_ "});
-
-std::vector<Digit> s_digits({
-
-});
 
 bool CheckMatrixDimension(const Digit& digit)
 {
@@ -132,22 +152,17 @@ bool CheckMatrixDimension(const Digit& digit)
     return true;
 }
 
-std::string ParseDigit(const Digit& digit)
+std::string ParseDigit(const Digit& d)
 {
-    if (digit == Digit({"   ",
-                        "  |",
-                        "  |"}))
+    for (size_t i = 0; i < s_digits.size(); ++i)
     {
-        return "1";
-    }
-    else if (digit == Digit({" _ ",
-                             " _|",
-                             "|_ "}))
-    {
-        return "2";
+        if (d == s_digits[i])
+        {
+            return std::to_string(i);
+        }
     }
 
-    return "8";
+    return "*";
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
