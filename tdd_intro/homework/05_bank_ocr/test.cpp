@@ -258,5 +258,16 @@ TEST(BankOCRTests, CheckDigitSequenceDimension_with_param_false)
                             "  ||_  _|  | _||_|  ||_| _|  |"};
     EXPECT_FALSE(CheckDigitSequenceDimension(digits, s_digitSequenceWidth));
 }
+TEST(BankOCRTests, ParseDigitSequences_2_lines)
+{
+    DigitSequence digitSequences = {"    _  _     _  _  _  _  _ ",
+                                    "  | _| _||_||_ |_   ||_||_|",
+                                    "  ||_  _|  | _||_|  ||_| _|",
+                                    "    _  _     _  _  _  _  _ ",
+                                    "  | _| _|  ||_ |_|  ||_ |_|",
+                                    "  ||_  _|  | _||_|  ||_| _|"};
+    EXPECT_EQ(std::vector<std::string>({"123456789", "123158769"}),
+              ParseDigitSequences(digitSequences));
+}
 
 
