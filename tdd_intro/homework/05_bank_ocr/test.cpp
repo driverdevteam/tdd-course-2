@@ -162,7 +162,7 @@ std::string ParseDigit(const Digit& d)
         }
     }
 
-    return "*";
+    return "";
 }
 
 TEST(BankOCRTests, Check_Matrix_dimension_true)
@@ -199,4 +199,12 @@ TEST(BankOCRTests, ParseDigit_8)
                    "|_|",
                    "|_|"};
     EXPECT_EQ("8", ParseDigit(digit));
+}
+
+TEST(BankOCRTests, ParseDigit_wrong_4)
+{
+    Digit wrongDigit = {"|@|",
+                        "  |"
+                        };
+    EXPECT_EQ("*", ParseDigit(wrongDigit));
 }
