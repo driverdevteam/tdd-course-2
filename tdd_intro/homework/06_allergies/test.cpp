@@ -23,3 +23,26 @@ Your program should ignore those components of the score.
 For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
 */
 #include <gtest/gtest.h>
+#include <algorithm>
+#include <vector>
+using StringList = std::vector<std::string>;
+
+//List of tests:
+//    1. Input 1 and get set with "eggs"
+//    2. Input 0 and get empty set
+//    3. Input 3 and get "eggs" and "peanuts"
+//    4. Input 87 and get "polen", "chocolate" and "eggs"
+//    5. Input 256 and get all list of allergies
+//    6. Input 260 and "eggs" and "peanuts"
+
+
+
+
+TEST(AllergentsTests, Input_0_get_emptyList)
+{
+    StringList allergentsList = CalculateAllergents(0);
+    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), "");
+
+    EXPECT_EQ(true, allergentsList.empty());
+    EXPECT_EQ(false, findedElement != allergentsList.end());
+}
