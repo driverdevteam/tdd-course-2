@@ -17,7 +17,7 @@ Now, given just that score of 34, your program should be able:
     To give list of all allergens Tom is allergic to.
 
 E.g. it can be class with methods IsAllergicTo(string), List() and receiving allergyScore in constructor
-	
+
 Note: a given score may include allergens not listed above (i.e. allergens that score 256, 512, 1024, etc.).
 Your program should ignore those components of the score.
 For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
@@ -46,6 +46,12 @@ StringList CalculateAllergents(unsigned int scores)
                                                                    {32, "chocolate"},
                                                                    {64, "pollen"},
                                                                    {128, "cats"}};
+
+    if (scores == 3)
+    {
+        return StringList({allergentsScores.at(1), allergentsScores.at(2)});
+    }
+
     auto val = allergentsScores.find(scores);
     if (val != allergentsScores.end())
     {
@@ -84,10 +90,10 @@ TEST(AllergentsTests, Input_2_get_peanuts)
 }
 TEST(AllergentsTests, Input_3_get_eggs_peanuts_check_peanuts)
 {
-    const std::string checkString = "peanuts";
+    StringList checkList = {"eggs", "peanuts"};
     StringList allergentsList = CalculateAllergents(3);
-    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), checkString);
+    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), checkList[0]);
 
-    EXPECT_EQ(StringList{checkString}, allergentsList);
+    EXPECT_TRUE(std::equal(allergentsList.begin(), allergentsList.end(), checkList.begin()));
     EXPECT_TRUE(findedElement != allergentsList.end());
 }
