@@ -23,6 +23,7 @@ Your program should ignore those components of the score.
 For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
 */
 #include <gtest/gtest.h>
+#include <map>
 
 /*
   - AllergyIndexTests
@@ -62,6 +63,16 @@ enum AllergyIndex : uint64_t
     AllergyIndexLast = AllergyIndexCats
 };
 
+static const std::map<std::string, AllergyIndex> s_allergies({
+                         {"eggs", AllergyIndexEggs},
+                         {"peanuts", AllergyIndexPeanuts},
+                         {"shellfish", AllergyIndexShellfish},
+                         {"strawberries", AllergyIndexStrawberries},
+                         {"tomatoes", AllergyIndexTomatoes},
+                         {"chocolate", AllergyIndexChocolate},
+                         {"pollen", AllergyIndexPollen},
+                         {"cats", AllergyIndexCats} });
+
 bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
 {
     return (allergyScore & uint64_t(1) << alergyIndex) != 0;
@@ -69,11 +80,14 @@ bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
 
 AllergyIndex GetAllergyIndex(const std::string& allergyName)
 {
-    if (allergyName != "eggs")
+    auto allergy = s_allergies.find(allergyName);
+
+    if (allergy == s_allergies.end())
     {
         throw std::out_of_range("Allergy has no index.");
     }
-    return AllergyIndexEggs;
+
+    return allergy->second;
 }
 
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
