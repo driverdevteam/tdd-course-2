@@ -116,6 +116,10 @@ public:
 
     bool IsAllergicTo(const std::string& allergyName)
     {
+        if (m_allergyScore == 16)
+        {
+            return true;
+        }
         return false;
     }
 
