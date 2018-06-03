@@ -46,10 +46,12 @@ StringList CalculateAllergents(unsigned int scores)
                                                                    {32, "chocolate"},
                                                                    {64, "pollen"},
                                                                    {128, "cats"}};
-    if (scores > 0)
+    auto val = allergentsScores.find(scores);
+    if (val != allergentsScores.end())
     {
-        return StringList{"eggs"};
+        return StringList({val->second});
     }
+
     return StringList();
 }
 
