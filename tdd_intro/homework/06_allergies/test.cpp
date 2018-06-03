@@ -46,3 +46,28 @@ For example, if the allergy score is 257, your program should only report the eg
     - check with existent and unexistent allergies
       - List() returns name of existent allergy
 */
+
+enum AllergyIndex : uint64_t
+{
+    AllergyIndexWrong = 0,
+    AllergyIndexFirst = 1,
+    AllergyIndexEggs = AllergyIndexFirst,
+    AllergyIndexPeanuts,
+    AllergyIndexShellfish,
+    AllergyIndexStrawberries,
+    AllergyIndexTomatoes,
+    AllergyIndexChocolate,
+    AllergyIndexPollen,
+    AllergyIndexCats,
+    AllergyIndexLast = AllergyIndexCats
+};
+
+bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
+{
+    return false;
+}
+
+TEST(HaveAllergyTests, CompareWithCorrectNumber)
+{
+    EXPECT_TRUE(HaveAllergy(1, AllergyIndexEggs));
+}
