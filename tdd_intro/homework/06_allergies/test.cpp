@@ -69,6 +69,10 @@ bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
 
 AllergyIndex GetAllergyIndex(const std::string& allergyName)
 {
+    if (allergyName != "eggs")
+    {
+        throw std::out_of_range("Allergy has no index.");
+    }
     return AllergyIndexEggs;
 }
 
