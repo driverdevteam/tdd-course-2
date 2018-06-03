@@ -50,8 +50,7 @@ For example, if the allergy score is 257, your program should only report the eg
 
 enum AllergyIndex : uint64_t
 {
-    AllergyIndexWrong = 0,
-    AllergyIndexFirst = 1,
+    AllergyIndexFirst = 0,
     AllergyIndexEggs = AllergyIndexFirst,
     AllergyIndexPeanuts,
     AllergyIndexShellfish,
@@ -65,7 +64,7 @@ enum AllergyIndex : uint64_t
 
 bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
 {
-    return allergyScore == alergyIndex;
+    return allergyScore == 1 << alergyIndex;
 }
 
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
