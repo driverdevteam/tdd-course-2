@@ -81,3 +81,9 @@ TEST(HaveAllergyTests, CompareWithCorrectNumber_4)
 {
     EXPECT_TRUE(HaveAllergy(4, AllergyIndexShellfish));
 }
+
+TEST(HaveAllergyTests, CompareWithComplexNumber_5)
+{
+    EXPECT_TRUE(HaveAllergy(5, AllergyIndexEggs));
+    EXPECT_TRUE(HaveAllergy(5, AllergyIndexShellfish));
+}
