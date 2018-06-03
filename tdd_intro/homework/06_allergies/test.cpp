@@ -201,3 +201,9 @@ TEST(PersonAllergiesTests, IsAllergicTo_TwoAllergy)
     EXPECT_TRUE(personAllergies.IsAllergicTo(s_tomatoes));
     EXPECT_TRUE(personAllergies.IsAllergicTo(s_eggs));
 }
+
+TEST(PersonAllergiesTests, List_ExistentAndUnexistentAllergy)
+{
+    PersonAllergies personAllergies(s_tomatoesIndex + s_unexistentAllergyIndex);
+    EXPECT_EQ(AllergiesList({s_tomatoes}), personAllergies.List());
+}
