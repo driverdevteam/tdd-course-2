@@ -71,3 +71,12 @@ TEST(AllergentsTests, Input_1_get_eggs)
     EXPECT_EQ(StringList{checkString}, allergentsList);
     EXPECT_TRUE(findedElement != allergentsList.end());
 }
+TEST(AllergentsTests, Input_2_get_peanuts)
+{
+    const std::string checkString = "peanuts";
+    StringList allergentsList = CalculateAllergents(2);
+    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), checkString);
+
+    EXPECT_EQ(StringList{checkString}, allergentsList);
+    EXPECT_TRUE(findedElement != allergentsList.end());
+}
