@@ -100,6 +100,12 @@ Example input and output
 
 using DigitSequence = std::vector<std::string>;
 
+namespace
+{
+size_t s_digitWidth = 3;
+size_t s_digitHeight = 3;
+size_t s_digitSequenceWidth = 9 * s_digitWidth;
+
 std::vector<DigitSequence> s_digits({{" _ ",
                                       "| |",
                                       "|_|"},
@@ -130,7 +136,7 @@ std::vector<DigitSequence> s_digits({{" _ ",
                                      {" _ ",
                                       "|_|",
                                       " _|"}});
-
+}
 
 bool CheckMatrixDimension(const DigitSequence& digit)
 {
@@ -169,13 +175,13 @@ std::string ParseDigits(const DigitSequence& digits)
 {
     std::string res;
 
-    for (size_t i = 0; i < 27; i += 3)
+    for (size_t i = 0; i < s_digitSequenceWidth; i += s_digitWidth)
     {
         DigitSequence digit;
 
-        for (size_t j = 0; j < 3; ++j)
+        for (size_t j = 0; j < s_digitHeight; ++j)
         {
-            digit.push_back(digits[j].substr(i, 3));
+            digit.push_back(digits[j].substr(i, s_digitWidth));
         }
 
         if (CheckMatrixDimension(digit))
