@@ -28,6 +28,7 @@ For example, if the allergy score is 257, your program should only report the eg
   - AllergyIndexTests
     - Compare allergy index with correct number
     - Compare allergy index with incorrect number
+    - Compare with complex number
   - AllergyNameTests
     - Find allergy index for correct name
     - Throw exceprion for incorrect name
