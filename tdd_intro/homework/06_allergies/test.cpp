@@ -44,7 +44,7 @@ static const std::vector<std::pair<int, std::string>> allergentsScores = {{128, 
 //    3. Input 3 and get "eggs" and "peanuts"
 //    4. Input 97 and get "polen", "chocolate" and "eggs"
 //    5. Input 255 and get all list of allergies
-//    6. Input 260 and "eggs" and "peanuts"
+//    6. Input 259 and "eggs" and "peanuts"
 
 
 StringSet CalculateAllergents(int scores)
@@ -114,5 +114,15 @@ TEST(AllergentsTests, Input_255_get_all_alergents_list)
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[0].second);
 
     EXPECT_TRUE(allergentsList.size() == allergentsScores.size());
+    EXPECT_TRUE(findedElement != allergentsList.end());
+}
+
+TEST(AllergentsTests, Input_259_get_eggs_peanuts_check_eggs)
+{
+    StringSet checkList = {allergentsScores[7].second, allergentsScores[6].second};
+    StringSet allergentsList = CalculateAllergents(259);
+    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[7].second);
+
+    EXPECT_TRUE(allergentsList == checkList);
     EXPECT_TRUE(findedElement != allergentsList.end());
 }
