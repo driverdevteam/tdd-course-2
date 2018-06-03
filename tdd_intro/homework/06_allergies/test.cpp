@@ -78,6 +78,8 @@ bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
     return (allergyScore & uint64_t(1) << alergyIndex) != 0;
 }
 
+using AllergiesList = std::vector<std::string>;
+
 AllergyIndex GetAllergyIndex(const std::string& allergyName)
 {
     auto allergy = s_allergies.find(allergyName);
@@ -89,6 +91,17 @@ AllergyIndex GetAllergyIndex(const std::string& allergyName)
 
     return allergy->second;
 }
+
+class PersonAllergies
+{
+public:
+    explicit PersonAllergies(uint64_t allergyScore)
+    {}
+
+    AllergiesList List()
+    {
+    }
+};
 
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
 {
@@ -119,4 +132,10 @@ TEST(GetAllergyIndexTests, WithIncorrectName)
 TEST(GetAllergyIndexTests, WithCorrectName_tomatoes)
 {
     EXPECT_EQ(AllergyIndexTomatoes, GetAllergyIndex("tomatoes"));
+}
+
+TEST(PersonAllergiesTests, UnexistentAllergy_EmptyList)
+{
+    PersonAllergies personAllergies(256);
+    EXPECT_EQ(AllergiesList(), personAllergies.List());
 }
