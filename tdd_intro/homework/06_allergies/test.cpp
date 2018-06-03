@@ -55,6 +55,6 @@ TEST(AllergentsTests, Input_0_get_emptyList)
     StringList allergentsList = CalculateAllergents(0);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), "");
 
-    EXPECT_EQ(true, allergentsList.empty());
-    EXPECT_EQ(false, findedElement != allergentsList.end());
+    EXPECT_TRUE(allergentsList.empty());
+    EXPECT_FALSE(findedElement != allergentsList.end());
 }
