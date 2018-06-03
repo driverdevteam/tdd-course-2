@@ -96,10 +96,15 @@ class PersonAllergies
 {
 public:
     explicit PersonAllergies(uint64_t allergyScore)
+        : m_allergyScore(allergyScore)
     {}
 
     AllergiesList List()
     {
+        if (m_allergyScore == 1 << AllergyIndexTomatoes)
+        {
+            return AllergiesList({"tomatoes"});
+        }
         return AllergiesList();
     }
 
@@ -107,6 +112,9 @@ public:
     {
         return false;
     }
+
+private:
+    uint64_t m_allergyScore;
 };
 
 const uint64_t s_unexistentAllergyIndex(256);
