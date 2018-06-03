@@ -58,3 +58,11 @@ TEST(AllergentsTests, Input_0_get_emptyList)
     EXPECT_TRUE(allergentsList.empty());
     EXPECT_FALSE(findedElement != allergentsList.end());
 }
+TEST(AllergentsTests, Input_1_get_eggs)
+{
+    StringList allergentsList = CalculateAllergents(1);
+    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), "eggs");
+
+    EXPECT_EQ(StringList{"eggs"}, allergentsList);
+    EXPECT_FALSE(findedElement != allergentsList.end());
+}
