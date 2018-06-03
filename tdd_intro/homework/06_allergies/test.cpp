@@ -109,6 +109,9 @@ public:
     }
 };
 
+const uint64_t s_unexistentAllergyIndex(256);
+const std::string s_tomatoes("tomatoes");
+
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
 {
     EXPECT_TRUE(HaveAllergy(1, AllergyIndexEggs));
@@ -137,17 +140,17 @@ TEST(GetAllergyIndexTests, WithIncorrectName)
 
 TEST(GetAllergyIndexTests, WithCorrectName_tomatoes)
 {
-    EXPECT_EQ(AllergyIndexTomatoes, GetAllergyIndex("tomatoes"));
+    EXPECT_EQ(AllergyIndexTomatoes, GetAllergyIndex(s_tomatoes));
 }
 
 TEST(PersonAllergiesTests, UnexistentAllergy_EmptyList)
 {
-    PersonAllergies personAllergies(256);
+    PersonAllergies personAllergies(s_unexistentAllergyIndex);
     EXPECT_EQ(AllergiesList(), personAllergies.List());
 }
 
 TEST(PersonAllergiesTests, IsAllergicTo_UnexistentAllergy)
 {
-    PersonAllergies personAllergies(256);
-    EXPECT_FALSE(personAllergies.IsAllergicTo("tomatoes"));
+    PersonAllergies personAllergies(s_unexistentAllergyIndex);
+    EXPECT_FALSE(personAllergies.IsAllergicTo(s_tomatoes));
 }
