@@ -138,7 +138,7 @@ std::vector<DigitSequence> s_digits({{" _ ",
                                       " _|"}});
 }
 
-bool CheckMatrixDimension(const DigitSequence& digitSequence, size_t digitsWidth = 3)
+bool CheckDigitSequenceDimension(const DigitSequence& digitSequence, size_t digitsWidth = 3)
 {
 
     if (digitSequence.size() != s_digitWidth)
@@ -183,7 +183,7 @@ std::string ParseDigits(const DigitSequence& digits)
             digit.push_back(digits[j].substr(i, s_digitWidth));
         }
 
-        if (CheckMatrixDimension(digit))
+        if (CheckDigitSequenceDimension(digit))
         {
             res += ParseDigit(digit);
         }
@@ -192,16 +192,16 @@ std::string ParseDigits(const DigitSequence& digits)
     return res;
 }
 
-TEST(BankOCRTests, Check_Matrix_dimension_true)
+TEST(BankOCRTests, CheckDigitSequenceDimension_true)
 {
     DigitSequence digit = {"   ", "   ", "   "};
-    EXPECT_TRUE(CheckMatrixDimension(digit));
+    EXPECT_TRUE(CheckDigitSequenceDimension(digit));
 }
 
-TEST(BankOCRTests, Check_Matrix_dimension_false)
+TEST(BankOCRTests, CheckDigitSequenceDimension_false)
 {
     DigitSequence digit = {"  ", "!   ", " "};
-    EXPECT_FALSE(CheckMatrixDimension(digit));
+    EXPECT_FALSE(CheckDigitSequenceDimension(digit));
 }
 
 TEST(BankOCRTests, ParseDigit_1)
@@ -244,12 +244,12 @@ TEST(BankOCRTests, Parse_all_digitis)
     EXPECT_EQ("123456789", ParseDigits(digits));
 }
 
-TEST(BankOCRTests, CheckMatrixDimension_true_with_param)
+TEST(BankOCRTests, CheckDigitSequenceDimension_with_param_true)
 {
     DigitSequence digits = {"    _  _     _  _  _  _  _ ",
                             "  | _| _||_||_ |_   ||_||_|",
                             "  ||_  _|  | _||_|  ||_| _|"};
-    EXPECT_TRUE(CheckMatrixDimension(digits, s_digitSequenceWidth));
+    EXPECT_TRUE(CheckDigitSequenceDimension(digits, s_digitSequenceWidth));
 }
 
 
