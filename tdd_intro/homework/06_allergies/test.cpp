@@ -78,7 +78,7 @@ bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
     return (allergyScore & uint64_t(1) << alergyIndex) != 0;
 }
 
-using AllergiesList = std::vector<std::string>;
+using AllergiesList = std::set<std::string>;
 
 AllergyIndex GetAllergyIndex(const std::string& allergyName)
 {
