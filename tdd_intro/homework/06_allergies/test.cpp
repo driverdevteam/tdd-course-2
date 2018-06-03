@@ -20,7 +20,7 @@ using AllergiesList = std::vector<std::string>;
 
 AllergiesList GetAllergiesList(unsigned int score)
 {
-    return {};
+    return {"eggs"};
 }
 
 TEST(Allergies, GetAllergiesList_EggsAllergy)
