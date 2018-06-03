@@ -22,22 +22,7 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
 Your program should ignore those components of the score.
 For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
 */
-#include <gtest/gtest.h>
-#include <algorithm>
-#include <vector>
-using StringSet = std::set<std::string>;
 
-namespace
-{
-static const std::vector<std::pair<int, std::string>> allergentsScores = {{128, "cats"},
-                                                                          {64, "pollen"},
-                                                                          {32, "chocolate"},
-                                                                          {16, "tomatoes"},
-                                                                          {8, "strawberries"},
-                                                                          {4, "shellfish"},
-                                                                          {2, "peanuts"},
-                                                                          {1, "eggs"}};
-}
 //List of tests:
 //    1. Input 1 and get set with "eggs"
 //    2. Input 0 and get empty set
@@ -47,10 +32,33 @@ static const std::vector<std::pair<int, std::string>> allergentsScores = {{128, 
 //    6. Input 259 and "eggs" and "peanuts"
 
 
+#include <gtest/gtest.h>
+#include <algorithm>
+#include <vector>
+using StringSet = std::set<std::string>;
+
+namespace
+{
+    static const std::vector<std::pair<int, std::string>> allergentsScores = {{128, "cats"},
+                                                                              {64, "pollen"},
+                                                                              {32, "chocolate"},
+                                                                              {16, "tomatoes"},
+                                                                              {8, "strawberries"},
+                                                                              {4, "shellfish"},
+                                                                              {2, "peanuts"},
+                                                                              {1, "eggs"}};
+    const int TOMS_ALLERGENTS_END_VALUE = 256;
+}
+
+
 StringSet CalculateAllergents(int scores)
 {
 
     StringSet results;
+    if (scores / TOMS_ALLERGENTS_END_VALUE >= 1)
+    {
+        scores = scores % TOMS_ALLERGENTS_END_VALUE;
+    }
     for (auto val = allergentsScores.begin(); val != allergentsScores.end(); ++val)
     {
         if (scores - val->first >= 0)
