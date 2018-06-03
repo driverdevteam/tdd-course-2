@@ -92,3 +92,8 @@ TEST(GetAllergyIndexTests, WithCorrectName)
 {
     EXPECT_EQ(AllergyIndexEggs, GetAllergyIndex("eggs"));
 }
+
+TEST(GetAllergyIndexTests, WithIncorrectName)
+{
+    EXPECT_THROW(GetAllergyIndex(""), std::out_of_range);
+}
