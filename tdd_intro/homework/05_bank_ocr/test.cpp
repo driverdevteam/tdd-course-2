@@ -205,6 +205,15 @@ TEST(BankOCRTests, ParseDigit_wrong_4)
 {
     Digit wrongDigit = {"|@|",
                         "  |"
-                        };
+                       };
     EXPECT_EQ("*", ParseDigit(wrongDigit));
 }
+
+TEST(BankOCRTests, Parse_all_digitis)
+{
+    Digit digits = {"    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_| _|"};
+    EXPECT_EQ("123456789", ParseDigits(digits));
+}
+
