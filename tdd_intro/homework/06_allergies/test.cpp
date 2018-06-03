@@ -31,7 +31,7 @@ using StringSet = std::set<std::string>;
 //    1. Input 1 and get set with "eggs"
 //    2. Input 0 and get empty set
 //    3. Input 3 and get "eggs" and "peanuts"
-//    4. Input 87 and get "polen", "chocolate" and "eggs"
+//    4. Input 97 and get "polen", "chocolate" and "eggs"
 //    5. Input 255 and get all list of allergies
 //    6. Input 260 and "eggs" and "peanuts"
 
@@ -98,7 +98,7 @@ TEST(AllergentsTests, Input_3_get_eggs_peanuts_check_peanuts)
 TEST(AllergentsTests, Input_87_get_eggs_chocolate_polen_check_chocolate)
 {
     StringSet checkList = {"pollen", "chocolate", "eggs"};
-    StringSet allergentsList = CalculateAllergents(87);
+    StringSet allergentsList = CalculateAllergents(97);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), "chocolate");
 
     EXPECT_TRUE(allergentsList == checkList);
