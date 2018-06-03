@@ -116,11 +116,7 @@ public:
 
     bool IsAllergicTo(const std::string& allergyName)
     {
-        if (m_allergyScore == 16)
-        {
-            return true;
-        }
-        return false;
+        return HaveAllergy(m_allergyScore, GetAllergyIndex(allergyName));
     }
 
 private:
@@ -191,4 +187,17 @@ TEST(PersonAllergiesTests, IsAllergicTo_ExistentAllergy)
 {
     PersonAllergies personAllergies(s_tomatoesIndex);
     EXPECT_TRUE(personAllergies.IsAllergicTo(s_tomatoes));
+}
+
+TEST(PersonAllergiesTests, IsAllergicTo_ExistentAllergy_WrongIndex)
+{
+    PersonAllergies personAllergies(s_tomatoesIndex);
+    EXPECT_FALSE(personAllergies.IsAllergicTo(s_eggs));
+}
+
+TEST(PersonAllergiesTests, IsAllergicTo_TwoAllergy)
+{
+    PersonAllergies personAllergies(s_tomatoesIndex + 1);
+    EXPECT_TRUE(personAllergies.IsAllergicTo(s_tomatoes));
+    EXPECT_TRUE(personAllergies.IsAllergicTo(s_eggs));
 }
