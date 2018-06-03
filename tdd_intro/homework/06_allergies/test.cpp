@@ -69,7 +69,7 @@ bool HaveAllergy(uint64_t allergyScore, AllergyIndex alergyIndex)
 
 AllergyIndex GetAllergyIndex(const std::string& allergyName)
 {
-    return AllergyIndexLast;
+    return AllergyIndexEggs;
 }
 
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
@@ -88,7 +88,7 @@ TEST(HaveAllergyTests, CompareWithComplexNumber)
     EXPECT_TRUE(HaveAllergy(5, AllergyIndexShellfish));
 }
 
-TEST(GetAllergyIndexTests, CompareWithComplexNumber)
+TEST(GetAllergyIndexTests, WithCorrectName)
 {
     EXPECT_EQ(AllergyIndexEggs, GetAllergyIndex("eggs"));
 }
