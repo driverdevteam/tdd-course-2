@@ -50,11 +50,8 @@ namespace
     const int TOMS_ALLERGENTS_END_VALUE = 256;
 }
 
-
-StringSet CalculateAllergents(int scores)
+void CalculateAllergents(int scores, StringSet& results)
 {
-
-    StringSet results;
     if (scores / TOMS_ALLERGENTS_END_VALUE >= 1)
     {
         scores = scores % TOMS_ALLERGENTS_END_VALUE;
@@ -67,14 +64,13 @@ StringSet CalculateAllergents(int scores)
             scores-=val->first;
         }
     }
-
-    return results;
 }
 
 
 TEST(AllergentsTests, Input_0_get_emptyList)
 {
-    StringSet allergentsList = CalculateAllergents(0);
+    StringSet allergentsList;
+    CalculateAllergents(0, allergentsList);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), "");
 
     EXPECT_TRUE(allergentsList.empty());
@@ -82,8 +78,9 @@ TEST(AllergentsTests, Input_0_get_emptyList)
 }
 TEST(AllergentsTests, Input_1_get_eggs)
 {
+    StringSet allergentsList;
     const std::string checkString = allergentsScores[7].second;
-    StringSet allergentsList = CalculateAllergents(1);
+    CalculateAllergents(1, allergentsList);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), checkString);
 
     EXPECT_EQ(StringSet{checkString}, allergentsList);
@@ -91,8 +88,9 @@ TEST(AllergentsTests, Input_1_get_eggs)
 }
 TEST(AllergentsTests, Input_2_get_peanuts)
 {
+    StringSet allergentsList;
     const std::string checkString = allergentsScores[6].second;
-    StringSet allergentsList = CalculateAllergents(2);
+    CalculateAllergents(2, allergentsList);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), checkString);
 
     EXPECT_EQ(StringSet{checkString}, allergentsList);
@@ -100,8 +98,9 @@ TEST(AllergentsTests, Input_2_get_peanuts)
 }
 TEST(AllergentsTests, Input_3_get_eggs_peanuts_check_peanuts)
 {
+    StringSet allergentsList;
     StringSet checkList = {allergentsScores[7].second, allergentsScores[6].second};
-    StringSet allergentsList = CalculateAllergents(3);
+    CalculateAllergents(3, allergentsList);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[6].second);
 
     EXPECT_TRUE(allergentsList == checkList);
@@ -109,8 +108,9 @@ TEST(AllergentsTests, Input_3_get_eggs_peanuts_check_peanuts)
 }
 TEST(AllergentsTests, Input_87_get_eggs_chocolate_polen_check_chocolate)
 {
+    StringSet allergentsList;
     StringSet checkList = {allergentsScores[1].second, allergentsScores[2].second, allergentsScores[7].second};
-    StringSet allergentsList = CalculateAllergents(97);
+    CalculateAllergents(97, allergentsList);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[1].second);
 
     EXPECT_TRUE(allergentsList == checkList);
@@ -118,7 +118,8 @@ TEST(AllergentsTests, Input_87_get_eggs_chocolate_polen_check_chocolate)
 }
 TEST(AllergentsTests, Input_255_get_all_alergents_list)
 {
-    StringSet allergentsList = CalculateAllergents(255);
+    StringSet allergentsList;
+    CalculateAllergents(255, allergentsList);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[0].second);
 
     EXPECT_TRUE(allergentsList.size() == allergentsScores.size());
@@ -127,8 +128,9 @@ TEST(AllergentsTests, Input_255_get_all_alergents_list)
 
 TEST(AllergentsTests, Input_259_get_eggs_peanuts_check_eggs)
 {
+    StringSet allergentsList;
     StringSet checkList = {allergentsScores[7].second, allergentsScores[6].second};
-    StringSet allergentsList = CalculateAllergents(259);
+    CalculateAllergents(259, allergentsList);
     auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[7].second);
 
     EXPECT_TRUE(allergentsList == checkList);
