@@ -111,6 +111,7 @@ public:
 
 const uint64_t s_unexistentAllergyIndex(256);
 const std::string s_tomatoes("tomatoes");
+const uint64_t s_tomatoesIndex(16);
 
 TEST(HaveAllergyTests, CompareWithCorrectNumber)
 {
@@ -153,4 +154,10 @@ TEST(PersonAllergiesTests, IsAllergicTo_UnexistentAllergy)
 {
     PersonAllergies personAllergies(s_unexistentAllergyIndex);
     EXPECT_FALSE(personAllergies.IsAllergicTo(s_tomatoes));
+}
+
+TEST(PersonAllergiesTests, List_OneAllergy)
+{
+    PersonAllergies personAllergies(s_tomatoesIndex);
+    EXPECT_EQ(AllergiesList({s_tomatoes}), personAllergies.List());
 }
