@@ -182,3 +182,9 @@ TEST(PersonAllergiesTests, List_TwoAllergy)
     PersonAllergies personAllergies(s_tomatoesIndex + 1);
     EXPECT_EQ(AllergiesList({s_tomatoes, s_eggs}), personAllergies.List());
 }
+
+TEST(PersonAllergiesTests, IsAllergicTo_ExistentAllergy)
+{
+    PersonAllergies personAllergies(s_tomatoesIndex);
+    EXPECT_TRUE(personAllergies.IsAllergicTo(s_tomatoes));
+}
