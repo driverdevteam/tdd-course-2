@@ -170,7 +170,7 @@ std::string ParseDigit(const DigitSequence& d)
     return "*";
 }
 
-std::string ParseDigits(const DigitSequence& digits)
+std::string ParseDigitSequence(const DigitSequence& digits)
 {
     std::string res;
 
@@ -208,7 +208,7 @@ std::vector<std::string> ParseDigitSequences(const DigitSequence& digitSequences
 
         if (CheckDigitSequenceDimension(digitSequence, s_digitSequenceWidth))
         {
-            result.push_back(ParseDigits(digitSequence));
+            result.push_back(ParseDigitSequence(digitSequence));
         }
     }
 
@@ -264,7 +264,7 @@ TEST(BankOCRTests, Parse_all_digitis)
     DigitSequence digits = {"    _  _     _  _  _  _  _ ",
                             "  | _| _||_||_ |_   ||_||_|",
                             "  ||_  _|  | _||_|  ||_| _|"};
-    EXPECT_EQ("123456789", ParseDigits(digits));
+    EXPECT_EQ("123456789", ParseDigitSequence(digits));
 }
 
 TEST(BankOCRTests, CheckDigitSequenceDimension_with_param_true)
