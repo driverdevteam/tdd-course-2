@@ -108,3 +108,11 @@ TEST(AllergentsTests, Input_87_get_eggs_chocolate_polen_check_chocolate)
     EXPECT_TRUE(allergentsList == checkList);
     EXPECT_TRUE(findedElement != allergentsList.end());
 }
+TEST(AllergentsTests, Input_255_get_all_alergents_list)
+{
+    StringSet allergentsList = CalculateAllergents(255);
+    auto findedElement = std::find(allergentsList.begin(), allergentsList.end(), allergentsScores[0].second);
+
+    EXPECT_TRUE(allergentsList.size() == allergentsScores.size());
+    EXPECT_TRUE(findedElement != allergentsList.end());
+}
