@@ -71,3 +71,8 @@ TEST(HaveAllergyTests, CompareWithCorrectNumber)
 {
     EXPECT_TRUE(HaveAllergy(1, AllergyIndexEggs));
 }
+
+TEST(HaveAllergyTests, CompareWithIncorrectNumber)
+{
+    EXPECT_FALSE(HaveAllergy(2, AllergyIndexEggs));
+}
