@@ -41,9 +41,13 @@ using Allergies = std::set<Allergy>;
 
 Allergies GetAllergies(AllergyScore score)
 {
-    if (score != 0)
+    if (score == eggs)
     {
         return { eggs };
+    }
+    else if (score == peanuts)
+    {
+        return { peanuts };
     }
     return { };
 }
