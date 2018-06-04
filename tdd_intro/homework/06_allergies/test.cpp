@@ -17,7 +17,7 @@ Your program should ignore those components of the score. For example, if the al
 #include <vector>
 #include <map>
 
-using AllergiesList = std::vector<std::string>;
+using AllergiesList = std::set<std::string>;
 
 std::map<unsigned int, std::string> allergies_mp = {{1, "eggs"},
                                                     {2, "peanuts"},
@@ -51,7 +51,7 @@ AllergiesList GetAllergiesList(unsigned int score)
 {
     AllergiesList result;
 
-    unsigned int commonDegree = 0;
+    unsigned int commonDegree = allergies_mp.size() - 1;
     unsigned int commonPow;
     unsigned int foundDegree;
 
@@ -61,15 +61,19 @@ AllergiesList GetAllergiesList(unsigned int score)
         {
             if (foundDegree < allergies_mp.size())
             {
-                result.push_back(allergies_mp.find(static_cast<unsigned int>(pow(2, foundDegree)))->second);
+                result.insert(allergies_mp.find(static_cast<unsigned int>(pow(2, foundDegree)))->second);
             }
             break;
         }
         else
         {
             commonPow = static_cast<unsigned int>(pow(2, commonDegree));
-            result.push_back(allergies_mp.find(commonPow)->second);
-            score -= commonPow;
+            if (commonPow < score)
+            {
+                result.insert(allergies_mp.find(commonPow)->second);
+                score -= commonPow;
+            }
+            --commonDegree;
         }
     }
 
