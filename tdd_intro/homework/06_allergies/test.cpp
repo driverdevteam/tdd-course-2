@@ -28,53 +28,38 @@ std::map<unsigned int, std::string> allergies_mp = {{1, "eggs"},
                                                     {64, "pollen"},
                                                     {128, "cats"}};
 
-int DegreeOfTwo(unsigned int number)
+unsigned int LessDegreeOfTwo(unsigned int number)
 {
     int degree = 0;
 
-    unsigned int power;
-
-    while ((power = static_cast<unsigned int>(pow(2, degree))) <= number)
+    while (static_cast<unsigned int>(pow(2, degree)) <= number)
     {
-        if (power == number)
-        {
-            return degree;
-        }
-
         ++degree;
     }
 
-    return -1;
+    return --degree;
 }
+
 
 AllergiesList GetAllergiesList(unsigned int score)
 {
     AllergiesList result;
 
-    unsigned int commonDegree = allergies_mp.size() - 1;
-    unsigned int commonPow;
+    unsigned int maxDegree = allergies_mp.size() - 1;
     unsigned int foundDegree;
+    unsigned int foundPow;
 
     while (score != 0)
     {
-        if ((foundDegree = DegreeOfTwo(score)) != -1)
+        foundDegree = LessDegreeOfTwo(score);
+        foundPow = static_cast<unsigned int>(pow(2, foundDegree));
+
+        if (foundDegree < maxDegree)
         {
-            if (foundDegree < allergies_mp.size())
-            {
-                result.insert(allergies_mp.find(static_cast<unsigned int>(pow(2, foundDegree)))->second);
-            }
-            break;
+            result.insert(allergies_mp.find(foundPow)->second);
         }
-        else
-        {
-            commonPow = static_cast<unsigned int>(pow(2, commonDegree));
-            if (commonPow < score)
-            {
-                result.insert(allergies_mp.find(commonPow)->second);
-                score -= commonPow;
-            }
-            --commonDegree;
-        }
+
+        score -= foundPow;
     }
 
     return result;
@@ -122,16 +107,16 @@ TEST(AllergiesList, GetAllergiesList_Acceptance)
    EXPECT_EQ(AllergiesList({"peanuts", "chocolate"}), GetAllergiesList(score));
 }
 
-TEST(AllergiesList, DegreeOfTwo_DegreeOne)
+TEST(AllergiesList, LessDegreeOfTwo_DegreeOne)
 {
     unsigned int number = 2;
     unsigned int degree = 1;
-    EXPECT_EQ(degree, DegreeOfTwo(number));
+    EXPECT_EQ(degree, LessDegreeOfTwo(number));
 }
 
-TEST(AllergiesList, DegreeOfTwo_DegreeThree)
+TEST(AllergiesList, LessDegreeOfTwo_DegreeThree)
 {
     unsigned int number = 8;
     unsigned int degree = 3;
-    EXPECT_EQ(degree, DegreeOfTwo(number));
+    EXPECT_EQ(degree, LessDegreeOfTwo(number));
 }
