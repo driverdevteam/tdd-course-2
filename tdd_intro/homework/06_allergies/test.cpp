@@ -27,14 +27,14 @@ For example, if the allergy score is 257, your program should only report the eg
 using AllergyScore = unsigned int;
 enum Allergy // Allergy corresponds to the score as the power of 2
 {
-    eggs = 0,
-    peanuts,
-    shellfish,
-    strawberries,
-    tomatoes,
-    chocolate,
-    pollen,
-    cats,
+    eggs = 0,     // 1 << 0 = 1
+    peanuts,      // 1 << 1 = 2
+    shellfish,    // 1 << 2 = 4
+    strawberries, // 1 << 3 = 8
+    tomatoes,     // 1 << 4 = 16
+    chocolate,    // 1 << 5 = 32
+    pollen,       // 1 << 6 = 64
+    cats,         // 1 << 7 = 128
     allergiesCount
 };
 
@@ -111,4 +111,20 @@ TEST(AllergiesTest, IsAlergyPresentInScore)
     EXPECT_TRUE(IsAlergyPresentInScore(chocolate, 32));
     EXPECT_TRUE(IsAlergyPresentInScore(pollen, 64));
     EXPECT_TRUE(IsAlergyPresentInScore(cats, 128));
+}
+
+TEST(AllergiesTest, NotKnownAllergies)
+{
+    EXPECT_EQ(Allergies{ }, GetAllergies(256));
+    EXPECT_EQ(Allergies{ }, GetAllergies(512));
+    EXPECT_EQ(Allergies{ }, GetAllergies(1024));
+    EXPECT_EQ(Allergies{ }, GetAllergies(2048));
+    EXPECT_EQ(Allergies{ }, GetAllergies(4096));
+}
+
+TEST(AllergiesTest, NotKnownWithKnownAllergies)
+{
+    EXPECT_EQ((Allergies{ eggs }), GetAllergies(1 + 256));
+    EXPECT_EQ((Allergies{ peanuts, shellfish }), GetAllergies(2 + 4 + 512));
+    EXPECT_EQ((Allergies{ tomatoes, chocolate, cats }), GetAllergies(16 + 32 + 128 + 1024));
 }
