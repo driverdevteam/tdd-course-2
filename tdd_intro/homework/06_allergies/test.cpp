@@ -28,3 +28,9 @@ TEST(Allergies, GetAllergiesList_EggsAllergy)
     unsigned int score = 1;
     EXPECT_EQ(AllergiesList({"eggs"}), GetAllergiesList(score));
 }
+
+TEST(Allergies, GetAllergiesList_PeanutsAllergy)
+{
+    unsigned int score = 2;
+    EXPECT_EQ(AllergiesList({"peanuts"}), GetAllergiesList(score));
+}
