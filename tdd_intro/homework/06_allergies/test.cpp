@@ -62,3 +62,8 @@ TEST(AllergiesTest, Peanuts)
 {
     EXPECT_EQ(Allergies{ peanuts }, GetAllergies(peanuts));
 }
+
+TEST(AllergiesTest, EggsAndPeanuts)
+{
+    EXPECT_EQ((Allergies{ eggs, peanuts }), GetAllergies(eggs + peanuts));
+}
