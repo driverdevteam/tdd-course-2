@@ -44,6 +44,11 @@ Allergies GetAllergies(AllergyScore score)
     Allergies allergies;
     if (score > 0)
     {
+        if (score >= shellfish)
+        {
+            allergies.insert(shellfish);
+            score -= shellfish;
+        }
         if (score >= peanuts)
         {
             allergies.insert(peanuts);
