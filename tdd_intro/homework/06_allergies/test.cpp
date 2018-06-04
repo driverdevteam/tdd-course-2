@@ -41,11 +41,21 @@ using Allergies = std::set<Allergy>;
 
 Allergies GetAllergies(AllergyScore score)
 {
+    Allergies allergies;
     if (score > 0)
     {
-        return { static_cast<Allergy>(score) };
+        if (score >= peanuts)
+        {
+            allergies.insert(peanuts);
+            score -= peanuts;
+        }
+        if (score >= eggs)
+        {
+            allergies.insert(eggs);
+            score -= eggs;
+        }
     }
-    return { };
+    return allergies;
 }
 
 TEST(AllergiesTest, NotAllergic)
