@@ -34,7 +34,8 @@ enum Allergy // Allergy corresponds to the score as the power of 2
     tomatoes,
     chocolate,
     pollen,
-    cats
+    cats,
+    allergiesCount
 };
 
 using Allergies = std::set<Allergy>;
@@ -52,20 +53,13 @@ bool IsAlergyPresentInScore(Allergy allergy, AllergyScore score)
 Allergies GetAllergies(AllergyScore score)
 {
     Allergies allergies;
-    if (score >= GetSingleAllergyScore(shellfish))
+    for (unsigned int i = 0; i < allergiesCount; ++i)
     {
-        allergies.insert(shellfish);
-        score -= GetSingleAllergyScore(shellfish);
-    }
-    if (score >= GetSingleAllergyScore(peanuts))
-    {
-        allergies.insert(peanuts);
-        score -= GetSingleAllergyScore(peanuts);
-    }
-    if (score >= GetSingleAllergyScore(eggs))
-    {
-        allergies.insert(eggs);
-        score -= GetSingleAllergyScore(eggs);
+        Allergy allergy = static_cast<Allergy>(i);
+        if (IsAlergyPresentInScore(allergy, score))
+        {
+            allergies.insert(allergy);
+        }
     }
     return allergies;
 }
