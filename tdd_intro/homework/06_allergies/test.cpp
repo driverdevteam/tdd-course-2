@@ -25,7 +25,7 @@ For example, if the allergy score is 257, your program should only report the eg
 #include <gtest/gtest.h>
 
 using AllergyScore = unsigned int;
-enum class Allergy: AllergyScore
+enum Allergy
 {
     eggs = 1,
     peanuts = 2,
@@ -49,3 +49,7 @@ TEST(AllergiesTest, NotAllergic)
     EXPECT_EQ(Allergies{ }, GetAllergies(0));
 }
 
+TEST(AllergiesTest, Eggs)
+{
+    EXPECT_EQ(Allergies{ eggs }, GetAllergies(Allergy::eggs));
+}
