@@ -38,7 +38,10 @@ AllergiesList GetAllergiesList(unsigned int score)
     {
         return {"eggs", "peanuts"};
     }
-
+    else if (score == 5)
+    {
+        return {"eggs", "shellfish"};
+    }
 
     return {allergies_mp.find(score)->second};
 }
