@@ -28,6 +28,11 @@ std::map<unsigned int, std::string> allergies_mp = {{1, "eggs"},
                                                     {64, "pollen"},
                                                     {128, "cats"}};
 
+int DegreeOfTwo(unsigned int number)
+{
+    return 0;
+}
+
 AllergiesList GetAllergiesList(unsigned int score)
 {
     if (score == 0)
@@ -74,4 +79,11 @@ TEST(AllergiesList, GetAllergiesList_EggsAndShellfishAllergy)
 {
     unsigned int score = 5;
     EXPECT_EQ(AllergiesList({"eggs", "shellfish"}), GetAllergiesList(score));
+}
+
+TEST(AllergiesList, DegreeOfTwo_DegreeOne)
+{
+    unsigned int number = 2;
+    unsigned int degree = 1;
+    EXPECT_EQ(degree, DegreeOfTwo(number));
 }
