@@ -30,6 +30,11 @@ std::map<unsigned int, std::string> allergies_mp = {{1, "eggs"},
 
 AllergiesList GetAllergiesList(unsigned int score)
 {
+    if (score == 0)
+    {
+        return {};
+    }
+
     return {allergies_mp.find(score)->second};
 }
 
