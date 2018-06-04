@@ -30,7 +30,7 @@ std::map<unsigned int, std::string> allergies_mp = {{1, "eggs"},
 
 int DegreeOfTwo(unsigned int number)
 {
-    return 0;
+    return 1;
 }
 
 AllergiesList GetAllergiesList(unsigned int score)
