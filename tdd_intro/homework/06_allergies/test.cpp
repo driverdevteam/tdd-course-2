@@ -49,20 +49,31 @@ int DegreeOfTwo(unsigned int number)
 
 AllergiesList GetAllergiesList(unsigned int score)
 {
-    if (score == 0)
+    AllergiesList result;
+
+    unsigned int commonDegree = 0;
+    unsigned int commonPow;
+    unsigned int foundDegree;
+
+    while (score != 0)
     {
-        return {};
-    }
-    else if (score == 3)
-    {
-        return {"eggs", "peanuts"};
-    }
-    else if (score == 5)
-    {
-        return {"eggs", "shellfish"};
+        if ((foundDegree = DegreeOfTwo(score)) != -1)
+        {
+            if (foundDegree < allergies_mp.size())
+            {
+                result.push_back(allergies_mp.find(static_cast<unsigned int>(pow(2, foundDegree)))->second);
+            }
+            break;
+        }
+        else
+        {
+            commonPow = static_cast<unsigned int>(pow(2, commonDegree));
+            result.push_back(allergies_mp.find(commonPow)->second);
+            score -= commonPow;
+        }
     }
 
-    return {allergies_mp.find(score)->second};
+    return result;
 }
 
 TEST(Allergies, GetAllergiesList_EggsAllergy)
