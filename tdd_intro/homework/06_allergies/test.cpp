@@ -44,6 +44,11 @@ AllergyScore GetSingleAllergyScore(Allergy allergy)
     return 1 << allergy;
 }
 
+bool IsAlergyPresentInScore(Allergy allergy, AllergyScore score)
+{
+    return score & GetSingleAllergyScore(allergy);
+}
+
 Allergies GetAllergies(AllergyScore score)
 {
     Allergies allergies;
@@ -100,4 +105,16 @@ TEST(AllergiesTest, GetSingleAllergyScore)
     EXPECT_EQ(32, GetSingleAllergyScore(chocolate));
     EXPECT_EQ(64, GetSingleAllergyScore(pollen));
     EXPECT_EQ(128, GetSingleAllergyScore(cats));
+}
+
+TEST(AllergiesTest, IsAlergyPresentInScore)
+{
+    EXPECT_TRUE(IsAlergyPresentInScore(eggs, 1));
+    EXPECT_TRUE(IsAlergyPresentInScore(peanuts, 2));
+    EXPECT_TRUE(IsAlergyPresentInScore(shellfish, 4));
+    EXPECT_TRUE(IsAlergyPresentInScore(strawberries, 8));
+    EXPECT_TRUE(IsAlergyPresentInScore(tomatoes, 16));
+    EXPECT_TRUE(IsAlergyPresentInScore(chocolate, 32));
+    EXPECT_TRUE(IsAlergyPresentInScore(pollen, 64));
+    EXPECT_TRUE(IsAlergyPresentInScore(cats, 128));
 }
