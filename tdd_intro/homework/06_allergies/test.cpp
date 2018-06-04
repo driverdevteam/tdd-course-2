@@ -23,3 +23,9 @@ Your program should ignore those components of the score.
 For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
 */
 #include <gtest/gtest.h>
+
+TEST(AllergiesTest, NotAllergic)
+{
+    EXPECT_EQ(Allergies{ }, GetAllergies(0));
+}
+
