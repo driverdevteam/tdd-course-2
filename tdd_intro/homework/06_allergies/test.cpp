@@ -15,17 +15,22 @@ Your program should ignore those components of the score. For example, if the al
 #include <gtest/gtest.h>
 #include <string>
 #include <vector>
+#include <map>
 
 using AllergiesList = std::vector<std::string>;
 
+std::map<unsigned int, std::string> allergies_mp = {{1, "eggs"},
+                                                    {2, "peanuts"},
+                                                    {4, "shellfish"},
+                                                    {8, "strawberries"},
+                                                    {16, "tomatoes"},
+                                                    {32, "chocolate"},
+                                                    {64, "pollen"},
+                                                    {128, "cats"}};
+
 AllergiesList GetAllergiesList(unsigned int score)
 {
-    if (score == 1)
-    {
-        return {"eggs"};
-    }
-
-    return {"peanuts"};
+    return {allergies_mp.find(score)->second};
 }
 
 TEST(Allergies, GetAllergiesList_EggsAllergy)
