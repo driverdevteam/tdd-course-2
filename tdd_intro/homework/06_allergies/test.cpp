@@ -87,3 +87,10 @@ TEST(AllergiesList, DegreeOfTwo_DegreeOne)
     unsigned int degree = 1;
     EXPECT_EQ(degree, DegreeOfTwo(number));
 }
+
+TEST(AllergiesList, DegreeOfTwo_DegreeThree)
+{
+    unsigned int number = 8;
+    unsigned int degree = 3;
+    EXPECT_EQ(degree, DegreeOfTwo(number));
+}
