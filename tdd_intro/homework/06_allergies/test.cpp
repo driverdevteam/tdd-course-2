@@ -77,3 +77,9 @@ TEST(AllergiesTest, EggsAndPeanuts)
 {
     EXPECT_EQ((Allergies{ eggs, peanuts }), GetAllergies(eggs + peanuts));
 }
+
+TEST(AllergiesTest, PeanutsAndShellfish)
+{
+    EXPECT_EQ((Allergies{ peanuts, shellfish }), GetAllergies(peanuts + shellfish));
+}
+
