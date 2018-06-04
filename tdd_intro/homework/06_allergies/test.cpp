@@ -106,6 +106,12 @@ TEST(AllergiesList, GetAllergiesList_EggsAndShellfishAllergy)
     EXPECT_EQ(AllergiesList({"eggs", "shellfish"}), GetAllergiesList(score));
 }
 
+TEST(AllergiesList, GetAllergiesList_MoreThan256)
+{
+    unsigned int score = 257;
+    EXPECT_EQ(AllergiesList({"eggs"}), GetAllergiesList(score));
+}
+
 TEST(AllergiesList, DegreeOfTwo_DegreeOne)
 {
     unsigned int number = 2;
