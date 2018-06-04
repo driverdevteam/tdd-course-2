@@ -30,7 +30,21 @@ std::map<unsigned int, std::string> allergies_mp = {{1, "eggs"},
 
 int DegreeOfTwo(unsigned int number)
 {
-    return number == 2 ? 1 : 3;
+    int degree = 0;
+
+    unsigned int power;
+
+    while ((power = static_cast<unsigned int>(pow(2, degree))) <= number)
+    {
+        if (power == number)
+        {
+            return degree;
+        }
+
+        ++degree;
+    }
+
+    return -1;
 }
 
 AllergiesList GetAllergiesList(unsigned int score)
