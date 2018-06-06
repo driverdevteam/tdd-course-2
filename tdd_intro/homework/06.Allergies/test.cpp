@@ -45,6 +45,10 @@ std::map<int, std::string> s_alergyList = {
 
 int GetDegreeCount(int number)
 {
+    if(number == 4)
+    {
+        return 2;
+    }
     return 1;
 }
 std::string GetAlergy(size_t score)
