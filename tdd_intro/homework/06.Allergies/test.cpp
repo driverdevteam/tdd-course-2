@@ -45,11 +45,19 @@ std::map<int, std::string> s_alergyList = {
 
 int GetDegreeCount(int number)
 {
-    if(number == 4)
+    int degree = 0;
+
+    unsigned int power;
+
+    while ((power = static_cast<unsigned int>(pow(2, degree))) <= number)
     {
-        return 2;
+        if (power == number)
+        {
+            return degree;
+        }
+        ++degree;
     }
-    return 1;
+    return -1;
 }
 std::string GetAlergy(size_t score)
 {
