@@ -49,15 +49,12 @@ int GetDegreeCount(int number)
 
     unsigned int power;
 
-    while ((power = static_cast<unsigned int>(pow(2, degree))) <= number)
+    while (static_cast<unsigned int>(pow(2, degree)) <= number)
     {
-        if (power == number)
-        {
-            return degree;
-        }
+
         ++degree;
     }
-    return -1;
+    return --degree;
 }
 
 std::string GetAlergy(size_t score)
@@ -68,26 +65,21 @@ std::string GetAlergy(size_t score)
     }
 
     std::string result = s_alergyOn;
-    unsigned int commonDegree = 0;
-    unsigned int commonPow;
+    unsigned int maxDegree  = s_alergyList.size() - 1;;
+    unsigned int foundPow;
     unsigned int foundDegree;
 
     while (score != 0)
     {
-        if ((foundDegree = GetDegreeCount(score)) != -1)
+        foundDegree = GetDegreeCount(score);
+        foundPow = static_cast<unsigned int>(pow(2, foundDegree));
+
+        if (foundDegree < maxDegree)
         {
-            if (foundDegree < s_alergyList.size())
-            {
-                result += s_alergyList.find(static_cast<unsigned int>(pow(2, foundDegree)))->second + ",";
-            }
-            break;
+            result += s_alergyList.find(foundPow)->second + ",";
         }
-        else
-        {
-            commonPow = static_cast<unsigned int>(pow(2, commonDegree));
-            result += s_alergyList.find(commonPow)->second + ",";
-            score -= commonPow;
-        }
+
+        score -= foundPow;
     }
     result.pop_back();
     return result;
@@ -120,7 +112,12 @@ TEST(GetAlergy, Check_tomatoes_alergy)
 
 TEST(GetAlergy, Check_two_alergies)
 {
-    EXPECT_EQ(s_alergyOn + "eggs,shellfish", GetAlergy(5));
+    EXPECT_EQ(s_alergyOn + "shellfish,eggs", GetAlergy(5));
+}
+
+TEST(GetAlergy, AcceptanceTest)
+{
+    EXPECT_EQ(s_alergyOn + "chocolate,peanuts", GetAlergy(34));
 }
 //----------------------------------------------------------------------
 TEST(GetAlergy, GetDegreeCount)
