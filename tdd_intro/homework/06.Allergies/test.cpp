@@ -30,26 +30,24 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
 
 
 const std::string s_notAlergy = "You don't have any alergy";
+std::map<int, std::string> alergyList = {
+                                         {1, "eggs"},
+                                         {2, "peanuts"},
+                                         {4, "shellfish"},
+                                         {8, "strawberries"},
+                                         {16, "tomatoes"},
+                                         {32, "chocolate"},
+                                         {64, "pollen"},
+                                         {128, "cats"}
+                                         };
 
 std::string GetAlergy(size_t score)
 {
-    if(score == 16)
+    if(!score)
     {
-         return "You have alergy:tomatoes";
+        return s_notAlergy;
     }
-    if(score == 4)
-    {
-         return "You have alergy:shellfish";
-    }
-    if(score == 2)
-    {
-         return "You have alergy:peanuts";
-    }
-    if(score == 1)
-    {
-        return "You have alergy:eggs";
-    }
-    return s_notAlergy;
+    return "You have alergy:" + alergyList[score];
 }
 
 TEST(GetAlergy, Check_no_allergy)
