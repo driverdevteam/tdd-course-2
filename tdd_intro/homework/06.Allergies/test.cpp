@@ -30,7 +30,8 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
 
 
 const std::string s_notAlergy = "You don't have any alergy";
-std::map<int, std::string> alergyList = {
+const std::string s_alergyOn = "You have alergy:";
+std::map<int, std::string> s_alergyList = {
                                          {1, "eggs"},
                                          {2, "peanuts"},
                                          {4, "shellfish"},
@@ -47,7 +48,7 @@ std::string GetAlergy(size_t score)
     {
         return s_notAlergy;
     }
-    return "You have alergy:" + alergyList[score];
+    return s_alergyOn + s_alergyList[score];
 }
 
 TEST(GetAlergy, Check_no_allergy)
@@ -57,22 +58,22 @@ TEST(GetAlergy, Check_no_allergy)
 
 TEST(GetAlergy, Check_eggs_alergy)
 {
-    EXPECT_EQ("You have alergy:eggs", GetAlergy(1));
+    EXPECT_EQ(s_alergyOn + s_alergyList[1], GetAlergy(1));
 }
 
 TEST(GetAlergy, Check_peanuts_alergy)
 {
-    EXPECT_EQ("You have alergy:peanuts", GetAlergy(2));
+    EXPECT_EQ(s_alergyOn + s_alergyList[2], GetAlergy(2));
 }
 
 TEST(GetAlergy, Check_shellfish_alergy)
 {
-    EXPECT_EQ("You have alergy:shellfish", GetAlergy(4));
+    EXPECT_EQ(s_alergyOn + s_alergyList[4], GetAlergy(4));
 }
 
 TEST(GetAlergy, Check_tomatoes_alergy)
 {
-    EXPECT_EQ("You have alergy:tomatoes", GetAlergy(16));
+    EXPECT_EQ(s_alergyOn + s_alergyList[16], GetAlergy(16));
 }
 
 
