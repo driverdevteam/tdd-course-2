@@ -108,3 +108,9 @@ TEST(GetAlergy, GetDegreeCountFrom4)
 {
     EXPECT_EQ(2, GetDegreeCount(4));
 }
+
+TEST(GetAlergy, GetDegreeCountFrom8)
+{
+    EXPECT_EQ(3, GetDegreeCount(8));
+}
+
