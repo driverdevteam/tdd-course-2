@@ -187,6 +187,7 @@ It should be wrapped by length of 30 into this sequence of lines (ommiting quote
 
 ### Coffee
 We have several coffee machines. We have to create class which makes a coffee.
+```
 class ICoffeCore
 {
 public:
@@ -200,6 +201,7 @@ public:
     virtual void AddChocolate(int gram) = 0;
     virtual void AddCream(int gram) = 0;
 };
+```
 
 We produce:
 (sequence)
