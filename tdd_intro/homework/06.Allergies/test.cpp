@@ -76,4 +76,8 @@ TEST(GetAlergy, Check_tomatoes_alergy)
     EXPECT_EQ(s_alergyOn + s_alergyList[16], GetAlergy(16));
 }
 
+TEST(GetAlergy, Check_two_alergies)
+{
+    EXPECT_EQ(s_alergyOn + "shellfish,eggs", GetAlergy(5));
+}
 
