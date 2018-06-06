@@ -185,3 +185,30 @@ It should be wrapped by length of 30 into this sequence of lines (ommiting quote
 "after pos."
 ```
 
+### Coffee
+We have several coffee machines. We have to create class which makes a coffee.
+class ICoffeCore
+{
+public:
+    ~ICoffeCore(){}
+    virtual void SetCupSize(int gram) = 0;
+    virtual void AddWater(int gram, int temperature) = 0;
+    virtual void AddSugar(int gram) = 0;
+    virtual void AddCoffee(int gram) = 0;
+    virtual void AddMilk(int gram) = 0;
+    virtual void AddMilkFoam(int gram) = 0;
+    virtual void AddChocolate(int gram) = 0;
+    virtual void AddCream(int gram) = 0;
+};
+
+We produce:
+(sequence)
+- americano: water & coffee 1:2 or 1:3. Water temp 60C
+- cappuccino - milk & coffee & milk foam 1:3, 1:3, 1:3. Water temp 80C
+- latte - milk & coffee & milk foam 1:4, 1:2, 1:4. Water temp 90C
+- marochino - chocolate & coffee & milk foam, 1:4, 1:4, 1:4 and 1:4 is empty
+
+We have 2 size of cup, it is:
+- little 100 gram
+- big 140 gram
+
