@@ -59,6 +59,7 @@ int GetDegreeCount(int number)
     }
     return -1;
 }
+
 std::string GetAlergy(size_t score)
 {
     if(!score)
@@ -66,7 +67,30 @@ std::string GetAlergy(size_t score)
         return s_notAlergy;
     }
 
-    return s_alergyOn + s_alergyList[score];
+    std::string result = s_alergyOn;
+    unsigned int commonDegree = 0;
+    unsigned int commonPow;
+    unsigned int foundDegree;
+
+    while (score != 0)
+    {
+        if ((foundDegree = GetDegreeCount(score)) != -1)
+        {
+            if (foundDegree < s_alergyList.size())
+            {
+                result += s_alergyList.find(static_cast<unsigned int>(pow(2, foundDegree)))->second + ",";
+            }
+            break;
+        }
+        else
+        {
+            commonPow = static_cast<unsigned int>(pow(2, commonDegree));
+            result += s_alergyList.find(commonPow)->second + ",";
+            score -= commonPow;
+        }
+    }
+    result.pop_back();
+    return result;
 }
 
 TEST(GetAlergy, Check_no_allergy)
@@ -96,9 +120,9 @@ TEST(GetAlergy, Check_tomatoes_alergy)
 
 TEST(GetAlergy, Check_two_alergies)
 {
-    EXPECT_EQ(s_alergyOn + "shellfish, eggs", GetAlergy(5));
+    EXPECT_EQ(s_alergyOn + "eggs,shellfish", GetAlergy(5));
 }
-
+//----------------------------------------------------------------------
 TEST(GetAlergy, GetDegreeCount)
 {
     EXPECT_EQ(1, GetDegreeCount(2));
