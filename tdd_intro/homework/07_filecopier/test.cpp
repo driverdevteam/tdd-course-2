@@ -42,10 +42,10 @@ using FilesList = std::vector<std::string>;
 class IFileSystem
 {
 public:
-    virtual bool IsFileExist(const std::string& path) = 0;
-    virtual FilesList GetFilesList(const std::string& dirPath) = 0;
-    virtual bool IsDirectory(const std::string& path) = 0;
-    virtual std::string GetRelativePath(const std::string& fullPath, const std::string& relativeToPath) = 0;
-    virtual bool CreateDirectory(const std::string& dirPath) = 0;
-    virtual bool CopyFile(const std::string& srcFilePath, const std::string& dstFilePath) = 0;
+    virtual bool IsFileExist(const std::string& path) const = 0;
+    virtual FilesList GetFilesList(const std::string& dirPath) const = 0;
+    virtual bool IsDirectory(const std::string& path) const = 0;
+    virtual std::string GetRelativePath(const std::string& fullPath, const std::string& relativeToPath) const = 0;
+    virtual bool CreateDirectory(const std::string& dirPath) const = 0;
+    virtual bool CopyFile(const std::string& srcFilePath, const std::string& dstFilePath) const = 0;
 };
