@@ -20,3 +20,18 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+/*
+ - Check if file/directory exist
+ - Get list of files in direcroty
+ - Check if file is directory
+ - Get relative path
+ - Create directory
+ - Copy file
+
+ - Copy one file
+ - Copy two files
+ - Copy folder with file
+ - Check empty folder is not copying
+ - Copy file and folder with file
+ - Copy file hierarchy
+*/
