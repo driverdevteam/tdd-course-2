@@ -44,6 +44,10 @@ const std::string s_fileName("file.name");
 
 std::string ConcatPath(const std::string& left, const std::string& right)
 {
+    if (left.empty())
+    {
+        return right;
+    }
     if (right.empty())
     {
         return left;
