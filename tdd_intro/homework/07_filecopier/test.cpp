@@ -107,8 +107,11 @@ public:
 
         m_fileSystem->CreateDirectory(dst);
 
-        const std::string dstPath(m_fileSystem->GetRelativePath(files[0], src));
-        m_fileSystem->CopyFile(files[0], ConcatPath(dst, dstPath));
+        for (const std::string& srcFilePath : files)
+        {
+            const std::string dstPath(m_fileSystem->GetRelativePath(srcFilePath, src));
+            m_fileSystem->CopyFile(srcFilePath, ConcatPath(dst, dstPath));
+        }
     }
 
 private:
@@ -164,7 +167,7 @@ TEST(FileCopierTests, Copy_OneFile)
     EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
 }
 
-TEST(FileCopierTests, Copy_TwoFile)
+TEST(FileCopierTests, Copy_TwoFiles)
 {
     MockFileSystem fileSystem;
     testing::InSequence copySequence;
