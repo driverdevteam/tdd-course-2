@@ -98,7 +98,15 @@ public:
         {
             throw std::runtime_error("Source path not exist");
         }
-        m_fileSystem->GetFilesList(src);
+
+        FilesList files(m_fileSystem->GetFilesList(src));
+        if (files.empty())
+        {
+            return;
+        }
+
+        const std::string dstPath(m_fileSystem->GetRelativePath(files[0], src));
+        m_fileSystem->CopyFile(files[0], ConcatPath(dst, dstPath));
     }
 
 private:
@@ -143,7 +151,7 @@ TEST(FileCopierTests, Copy_OneFile)
             .WillOnce(testing::Return(true));
     EXPECT_CALL(fileSystem, GetFilesList(s_srcFolder))
             .WillOnce(testing::Return(FilesList({srcFilePath})));
-    EXPECT_CALL(fileSystem, GetRelativePath(s_srcFolder, srcFilePath))
+    EXPECT_CALL(fileSystem, GetRelativePath(srcFilePath, s_srcFolder))
             .WillOnce(testing::Return(s_fileName));
     EXPECT_CALL(fileSystem, CopyFile(srcFilePath, dstFilePath))
             .WillOnce(testing::Return(true));
