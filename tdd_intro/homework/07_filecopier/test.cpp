@@ -151,6 +151,8 @@ TEST(FileCopierTests, Copy_OneFile)
             .WillOnce(testing::Return(true));
     EXPECT_CALL(fileSystem, GetFilesList(s_srcFolder))
             .WillOnce(testing::Return(FilesList({srcFilePath})));
+    EXPECT_CALL(fileSystem, CreateDirectory(s_srcFolder))
+            .WillOnce(testing::Return(true));
     EXPECT_CALL(fileSystem, GetRelativePath(srcFilePath, s_srcFolder))
             .WillOnce(testing::Return(s_fileName));
     EXPECT_CALL(fileSystem, CopyFile(srcFilePath, dstFilePath))
