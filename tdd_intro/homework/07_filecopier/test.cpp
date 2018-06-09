@@ -38,6 +38,7 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 */
 
 using FilesList = std::vector<std::string>;
+const std::string s_dstFolder("D:\\Folder");
 
 class IFileSystem
 {
@@ -71,12 +72,20 @@ class FileCopier : public IFileCopier
 {
 public:
     FileCopier(IFileSystem* fileSystem)
+        : m_fileSystem(fileSystem)
     {
     }
 
     virtual void Copy(const std::string& src, const std::string& dst) override
     {
+        if (!m_fileSystem->IsFileExist(src))
+        {
+            throw std::runtime_error("Source path not exist");
+        }
     }
+
+private:
+    IFileSystem* m_fileSystem;
 };
 
 TEST(FileCopierTests, Copy_NotExistentSrc)
@@ -87,5 +96,5 @@ TEST(FileCopierTests, Copy_NotExistentSrc)
     EXPECT_CALL(fileSystem, IsFileExist(notExistentSrc)).WillOnce(testing::Return(false));
 
     FileCopier fileCopier(&fileSystem);
-    EXPECT_THROW(fileCopier.Copy(notExistentSrc, "D:\\Folder"), std::runtime_error);
+    EXPECT_THROW(fileCopier.Copy(notExistentSrc, s_dstFolder), std::runtime_error);
 }
