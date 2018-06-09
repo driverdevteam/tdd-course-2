@@ -60,3 +60,32 @@ public:
     MOCK_CONST_METHOD1(CreateDirectory, bool(const std::string& dirPath));
     MOCK_CONST_METHOD2(CopyFile, bool(const std::string& srcFilePath, const std::string& dstFilePath));
 };
+
+class IFileCopier
+{
+public:
+    virtual void Copy(const std::string& src, const std::string& dst) = 0;
+};
+
+class FileCopier : public IFileCopier
+{
+public:
+    FileCopier(IFileSystem* fileSystem)
+    {
+    }
+
+    virtual void Copy(const std::string& src, const std::string& dst) override
+    {
+    }
+};
+
+TEST(FileCopierTests, Copy_NotExistentSrc)
+{
+    MockFileSystem fileSystem;
+
+    const std::string notExistentSrc("NotExistentSrc");
+    EXPECT_CALL(fileSystem, IsFileExist(notExistentSrc)).WillOnce(testing::Return(false));
+
+    FileCopier fileCopier(&fileSystem);
+    EXPECT_THROW(fileCopier.Copy(notExistentSrc, "D:\\Folder"), std::runtime_error);
+}
