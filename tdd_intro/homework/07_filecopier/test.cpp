@@ -38,6 +38,7 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 */
 
 using FilesList = std::vector<std::string>;
+const std::string s_srcFolder("C:\\Folder");
 const std::string s_dstFolder("D:\\Folder");
 
 class IFileSystem
@@ -97,4 +98,19 @@ TEST(FileCopierTests, Copy_NotExistentSrc)
 
     FileCopier fileCopier(&fileSystem);
     EXPECT_THROW(fileCopier.Copy(notExistentSrc, s_dstFolder), std::runtime_error);
+}
+
+TEST(FileCopierTests, Copy_GetFilesListEmpty)
+{
+    MockFileSystem fileSystem;
+    testing::InSequence copySequence;
+
+    EXPECT_CALL(fileSystem, IsFileExist(s_srcFolder))
+            .WillOnce(testing::Return(true));
+    EXPECT_CALL(fileSystem, GetFilesList(s_srcFolder))
+            .WillOnce(testing::Return(FilesList()));
+    EXPECT_CALL(fileSystem, CopyFile(testing::_, testing::_)).Times(0);
+
+    FileCopier fileCopier(&fileSystem);
+    EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
 }
