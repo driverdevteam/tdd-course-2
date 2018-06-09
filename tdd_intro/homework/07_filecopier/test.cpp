@@ -40,6 +40,12 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 using FilesList = std::vector<std::string>;
 const std::string s_srcFolder("C:\\Folder");
 const std::string s_dstFolder("D:\\Folder");
+const std::string s_fileName("file.name");
+
+std::string ConcatPath(const std::string& left, const std::string& right)
+{
+    return "";
+}
 
 class IFileSystem
 {
@@ -114,4 +120,9 @@ TEST(FileCopierTests, Copy_GetFilesListEmpty)
 
     FileCopier fileCopier(&fileSystem);
     EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
+}
+
+TEST(FileCopierTests, ConcatPath_ConcatLeftWithRight)
+{
+    EXPECT_EQ("C:\\Folder\\file.name", ConcatPath(s_srcFolder, s_fileName));
 }
