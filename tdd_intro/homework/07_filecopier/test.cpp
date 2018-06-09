@@ -83,6 +83,7 @@ public:
         {
             throw std::runtime_error("Source path not exist");
         }
+        m_fileSystem->GetFilesList(src);
     }
 
 private:
