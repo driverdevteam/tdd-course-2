@@ -138,12 +138,12 @@ TEST(FileCopierTests, ConcatPath_ConcatLeftWithRight)
 
 TEST(FileCopierTests, ConcatPath_ConcatLeftWithoutRight)
 {
-    EXPECT_EQ("C:\\Folder", ConcatPath(s_srcFolder, ""));
+    EXPECT_EQ(s_srcFolder, ConcatPath(s_srcFolder, ""));
 }
 
 TEST(FileCopierTests, ConcatPath_ConcatRightWithoutLeft)
 {
-    EXPECT_EQ("file.name", ConcatPath("", s_fileName));
+    EXPECT_EQ(s_fileName, ConcatPath("", s_fileName));
 }
 
 TEST(FileCopierTests, ConcatPath_ConcatEmpty)
