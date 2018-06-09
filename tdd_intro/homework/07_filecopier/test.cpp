@@ -131,6 +131,27 @@ TEST(FileCopierTests, Copy_GetFilesListEmpty)
     EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
 }
 
+TEST(FileCopierTests, Copy_OneFile)
+{
+    MockFileSystem fileSystem;
+    testing::InSequence copySequence;
+
+    const std::string srcFilePath(ConcatPath(s_srcFolder, s_fileName));
+    const std::string dstFilePath(ConcatPath(s_dstFolder, s_fileName));
+
+    EXPECT_CALL(fileSystem, IsFileExist(s_srcFolder))
+            .WillOnce(testing::Return(true));
+    EXPECT_CALL(fileSystem, GetFilesList(s_srcFolder))
+            .WillOnce(testing::Return(FilesList({srcFilePath})));
+    EXPECT_CALL(fileSystem, GetRelativePath(s_srcFolder, srcFilePath))
+            .WillOnce(testing::Return(s_fileName));
+    EXPECT_CALL(fileSystem, CopyFile(srcFilePath, dstFilePath))
+            .WillOnce(testing::Return(true));
+
+    FileCopier fileCopier(&fileSystem);
+    EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
+}
+
 TEST(FileCopierTests, ConcatPath_ConcatLeftWithRight)
 {
     EXPECT_EQ("C:\\Folder\\file.name", ConcatPath(s_srcFolder, s_fileName));
