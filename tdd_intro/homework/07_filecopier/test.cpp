@@ -28,6 +28,7 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
  - Create directory
  - Copy file
 
+ - Pass not existent src
  - Copy one file
  - Copy two files
  - Copy folder with file
@@ -35,3 +36,16 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
  - Copy file and folder with file
  - Copy file hierarchy
 */
+
+using FilesList = std::vector<std::string>;
+
+class IFileSystem
+{
+public:
+    virtual bool IsFileExist(const std::string& path) = 0;
+    virtual FilesList GetFilesList(const std::string& dirPath) = 0;
+    virtual bool IsDirectory(const std::string& path) = 0;
+    virtual std::string GetRelativePath(const std::string& fullPath, const std::string& relativeToPath) = 0;
+    virtual bool CreateDirectory(const std::string& dirPath) = 0;
+    virtual bool CopyFile(const std::string& srcFilePath, const std::string& dstFilePath) = 0;
+};
