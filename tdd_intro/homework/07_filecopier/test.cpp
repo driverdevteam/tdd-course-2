@@ -105,6 +105,8 @@ public:
             return;
         }
 
+        m_fileSystem->CreateDirectory(dst);
+
         const std::string dstPath(m_fileSystem->GetRelativePath(files[0], src));
         m_fileSystem->CopyFile(files[0], ConcatPath(dst, dstPath));
     }
@@ -151,7 +153,7 @@ TEST(FileCopierTests, Copy_OneFile)
             .WillOnce(testing::Return(true));
     EXPECT_CALL(fileSystem, GetFilesList(s_srcFolder))
             .WillOnce(testing::Return(FilesList({srcFilePath})));
-    EXPECT_CALL(fileSystem, CreateDirectory(s_srcFolder))
+    EXPECT_CALL(fileSystem, CreateDirectory(s_dstFolder))
             .WillOnce(testing::Return(true));
     EXPECT_CALL(fileSystem, GetRelativePath(srcFilePath, s_srcFolder))
             .WillOnce(testing::Return(s_fileName));
