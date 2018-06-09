@@ -49,3 +49,14 @@ public:
     virtual bool CreateDirectory(const std::string& dirPath) const = 0;
     virtual bool CopyFile(const std::string& srcFilePath, const std::string& dstFilePath) const = 0;
 };
+
+class MockFileSystem : public IFileSystem
+{
+public:
+    MOCK_CONST_METHOD1(IsFileExist, bool(const std::string& path));
+    MOCK_CONST_METHOD1(GetFilesList, FilesList(const std::string& dirPath));
+    MOCK_CONST_METHOD1(IsDirectory, bool(const std::string& path));
+    MOCK_CONST_METHOD2(GetRelativePath, std::string(const std::string& fullPath, const std::string& relativeToPath));
+    MOCK_CONST_METHOD1(CreateDirectory, bool(const std::string& dirPath));
+    MOCK_CONST_METHOD2(CopyFile, bool(const std::string& srcFilePath, const std::string& dstFilePath));
+};
