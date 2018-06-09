@@ -145,3 +145,8 @@ TEST(FileCopierTests, ConcatPath_ConcatRightWithoutLeft)
 {
     EXPECT_EQ("file.name", ConcatPath("", s_fileName));
 }
+
+TEST(FileCopierTests, ConcatPath_ConcatEmpty)
+{
+    EXPECT_EQ("", ConcatPath("", ""));
+}
