@@ -126,3 +126,8 @@ TEST(FileCopierTests, ConcatPath_ConcatLeftWithRight)
 {
     EXPECT_EQ("C:\\Folder\\file.name", ConcatPath(s_srcFolder, s_fileName));
 }
+
+TEST(FileCopierTests, ConcatPath_ConcatLeftWithoutRight)
+{
+    EXPECT_EQ("C:\\Folder", ConcatPath(s_srcFolder, ""));
+}
