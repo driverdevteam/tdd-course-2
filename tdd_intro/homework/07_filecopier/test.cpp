@@ -175,6 +175,15 @@ void BeforeCopyFileTest(const std::string& srcFolder,
             .WillOnce(testing::Return(true));
 }
 
+void EmptyFolderTest(const std::string& srcFolder, MockFileSystem& fileSystem)
+{
+    EXPECT_CALL(fileSystem, IsFileExist(srcFolder))
+            .WillOnce(testing::Return(true));
+    EXPECT_CALL(fileSystem, GetFilesList(srcFolder))
+            .WillOnce(testing::Return(FilesList()));
+    EXPECT_CALL(fileSystem, CreateDirectory(srcFolder)).Times(0);
+    EXPECT_CALL(fileSystem, CopyFile(testing::_, testing::_)).Times(0);
+}
 TEST(FileCopierTests, Copy_NotExistentSrc)
 {
     MockFileSystem fileSystem;
@@ -191,11 +200,7 @@ TEST(FileCopierTests, Copy_GetFilesListEmpty)
     MockFileSystem fileSystem;
     testing::InSequence copySequence;
 
-    EXPECT_CALL(fileSystem, IsFileExist(s_srcFolder))
-            .WillOnce(testing::Return(true));
-    EXPECT_CALL(fileSystem, GetFilesList(s_srcFolder))
-            .WillOnce(testing::Return(FilesList()));
-    EXPECT_CALL(fileSystem, CopyFile(testing::_, testing::_)).Times(0);
+    EmptyFolderTest(s_srcFolder, fileSystem);
 
     FileCopier fileCopier(&fileSystem);
     EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
@@ -269,12 +274,7 @@ TEST(FileCopierTests, Copy_FolderWithoutFiles)
 
     CopyFolderTest(s_srcFolder, s_srcFolderPath, s_subFolder, fileSystem);
 
-    EXPECT_CALL(fileSystem, IsFileExist(s_srcFolderPath))
-            .WillOnce(testing::Return(true));
-    EXPECT_CALL(fileSystem, GetFilesList(s_srcFolderPath))
-            .WillOnce(testing::Return(FilesList()));
-    EXPECT_CALL(fileSystem, CreateDirectory(s_srcFolderPath)).Times(0);
-    EXPECT_CALL(fileSystem, CopyFile(testing::_, testing::_)).Times(0);
+    EmptyFolderTest(s_srcFolderPath, fileSystem);
 
     FileCopier fileCopier(&fileSystem);
     EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
