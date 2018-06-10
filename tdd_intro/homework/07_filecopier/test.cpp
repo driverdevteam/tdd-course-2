@@ -121,7 +121,11 @@ public:
         for (const std::string& srcFilePath : files)
         {
             const std::string dstPath(m_fileSystem->GetRelativePath(srcFilePath, src));
-            if (!m_fileSystem->IsDirectory(srcFilePath))
+            if (m_fileSystem->IsDirectory(srcFilePath))
+            {
+                Copy(srcFilePath, ConcatPath(dst, dstPath));
+            }
+            else
             {
                 m_fileSystem->CopyFile(srcFilePath, ConcatPath(dst, dstPath));
             }
