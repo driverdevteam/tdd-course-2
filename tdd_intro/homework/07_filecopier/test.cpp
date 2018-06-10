@@ -42,6 +42,7 @@ const std::string s_srcFolder("C:\\Folder");
 const std::string s_dstFolder("D:\\Folder");
 const std::string s_fileName("file.name");
 const std::string s_fileName1(s_fileName + "1");
+const std::string s_subFolder("Subfolder");
 
 std::string ConcatPath(const std::string& left, const std::string& right)
 {
@@ -61,6 +62,10 @@ const std::string s_srcFilePath(ConcatPath(s_srcFolder, s_fileName));
 const std::string s_dstFilePath(ConcatPath(s_dstFolder, s_fileName));
 const std::string s_srcFilePath1(ConcatPath(s_srcFolder, s_fileName1));
 const std::string s_dstFilePath1(ConcatPath(s_dstFolder, s_fileName1));
+const std::string s_srcFolderPath(ConcatPath(s_srcFolder, s_subFolder));
+const std::string s_dstFolderPath(ConcatPath(s_dstFolder, s_subFolder));
+const std::string s_srcFolderFilePath(ConcatPath(s_srcFolderPath, s_fileName));
+const std::string s_dstFolderFilePath(ConcatPath(s_dstFolderPath, s_fileName));
 
 class IFileSystem
 {
@@ -132,6 +137,8 @@ void CopyFileTest(const std::string& srcFolder,
 {
     EXPECT_CALL(fileSystem, GetRelativePath(srcFilePath, srcFolder))
             .WillOnce(testing::Return(fileName));
+    EXPECT_CALL(fileSystem, IsDirectory(srcFilePath))
+            .WillOnce(testing::Return(false));
     EXPECT_CALL(fileSystem, CopyFile(srcFilePath, dstFilePath))
             .WillOnce(testing::Return(true));
 }
@@ -203,6 +210,32 @@ TEST(FileCopierTests, Copy_TwoFiles)
 
     CopyFileTest(s_srcFolder, s_srcFilePath, s_fileName, s_dstFilePath, fileSystem);
     CopyFileTest(s_srcFolder, s_srcFilePath1, s_fileName1, s_dstFilePath1, fileSystem);
+
+    FileCopier fileCopier(&fileSystem);
+    EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
+}
+
+TEST(FileCopierTests, Copy_FolderWithFile)
+{
+    MockFileSystem fileSystem;
+    testing::InSequence copySequence;
+
+    BeforeCopyFileTest(s_srcFolder,
+                       s_dstFolder,
+                       FilesList({s_srcFolderPath}),
+                       fileSystem);
+
+    EXPECT_CALL(fileSystem, GetRelativePath(s_srcFolderPath, s_srcFolder))
+            .WillOnce(testing::Return(s_subFolder));
+    EXPECT_CALL(fileSystem, IsDirectory(s_srcFolderPath))
+            .WillOnce(testing::Return(true));
+
+    BeforeCopyFileTest(s_srcFolderPath,
+                       s_dstFolderPath,
+                       FilesList({s_srcFolderFilePath}),
+                       fileSystem);
+
+    CopyFileTest(s_srcFolderPath, s_srcFolderFilePath, s_fileName, s_dstFolderFilePath, fileSystem);
 
     FileCopier fileCopier(&fileSystem);
     EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
