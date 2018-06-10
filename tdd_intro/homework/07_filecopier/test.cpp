@@ -280,6 +280,30 @@ TEST(FileCopierTests, Copy_FolderWithoutFiles)
     EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
 }
 
+TEST(FileCopierTests, Copy_FileAndFolderWithFile)
+{
+    MockFileSystem fileSystem;
+    testing::InSequence copySequence;
+
+    BeforeCopyFileTest(s_srcFolder,
+                       s_dstFolder,
+                       FilesList({s_srcFolderPath, s_srcFilePath}),
+                       fileSystem);
+
+    CopyFolderTest(s_srcFolder, s_srcFolderPath, s_subFolder, fileSystem);
+
+    BeforeCopyFileTest(s_srcFolderPath,
+                       s_dstFolderPath,
+                       FilesList({s_srcFolderFilePath}),
+                       fileSystem);
+
+    CopyFileTest(s_srcFolderPath, s_srcFolderFilePath, s_fileName, s_dstFolderFilePath, fileSystem);
+    CopyFileTest(s_srcFolder, s_srcFilePath, s_fileName, s_dstFilePath, fileSystem);
+
+    FileCopier fileCopier(&fileSystem);
+    EXPECT_NO_THROW(fileCopier.Copy(s_srcFolder, s_dstFolder));
+}
+
 TEST(FileCopierTests, ConcatPath_ConcatLeftWithRight)
 {
     EXPECT_EQ("C:\\Folder\\file.name", ConcatPath(s_srcFolder, s_fileName));
