@@ -120,14 +120,15 @@ public:
 
         for (const std::string& srcFilePath : files)
         {
-            const std::string dstPath(m_fileSystem->GetRelativePath(srcFilePath, src));
+            const std::string relativePath(m_fileSystem->GetRelativePath(srcFilePath, src));
+            const std::string dstPath(ConcatPath(dst, relativePath));
             if (m_fileSystem->IsDirectory(srcFilePath))
             {
-                Copy(srcFilePath, ConcatPath(dst, dstPath));
+                Copy(srcFilePath, dstPath);
             }
             else
             {
-                m_fileSystem->CopyFile(srcFilePath, ConcatPath(dst, dstPath));
+                m_fileSystem->CopyFile(srcFilePath, dstPath);
             }
         }
     }
@@ -147,6 +148,17 @@ void CopyFileTest(const std::string& srcFolder,
     EXPECT_CALL(fileSystem, IsDirectory(srcFilePath))
             .WillOnce(testing::Return(false));
     EXPECT_CALL(fileSystem, CopyFile(srcFilePath, dstFilePath))
+            .WillOnce(testing::Return(true));
+}
+
+void CopyFolderTest(const std::string& srcFolder,
+                    const std::string& srcFilePath,
+                    const std::string& fileName,
+                    MockFileSystem& fileSystem)
+{
+    EXPECT_CALL(fileSystem, GetRelativePath(srcFilePath, srcFolder))
+            .WillOnce(testing::Return(fileName));
+    EXPECT_CALL(fileSystem, IsDirectory(srcFilePath))
             .WillOnce(testing::Return(true));
 }
 
@@ -232,10 +244,7 @@ TEST(FileCopierTests, Copy_FolderWithFile)
                        FilesList({s_srcFolderPath}),
                        fileSystem);
 
-    EXPECT_CALL(fileSystem, GetRelativePath(s_srcFolderPath, s_srcFolder))
-            .WillOnce(testing::Return(s_subFolder));
-    EXPECT_CALL(fileSystem, IsDirectory(s_srcFolderPath))
-            .WillOnce(testing::Return(true));
+    CopyFolderTest(s_srcFolder, s_srcFolderPath, s_subFolder, fileSystem);
 
     BeforeCopyFileTest(s_srcFolderPath,
                        s_dstFolderPath,
