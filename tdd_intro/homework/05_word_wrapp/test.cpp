@@ -120,6 +120,11 @@ TEST(WordWrappTests, OnlySpaces)
     EXPECT_EQ(Strings_vt{}, WordWrapp("        ", 3));
 }
 
+TEST(WordWrappTests, SeveralWordsDifferentCountOfSpaces)
+{
+    EXPECT_EQ(Strings_vt({"Hello,", "my name is", "Sergey"}), WordWrapp("Hello,   my name is      Sergey", 10));
+}
+
 TEST(WordWrappTests, Trim_OneSpaceBeforeWord)
 {
     std::string wordToTrim(" word");
