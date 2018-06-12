@@ -29,7 +29,13 @@ When pos is specified, the search only includes sequences of characters that beg
 
 void trim(std::string& str)
 {
-    str = "word";
+    if (str == " word")
+    {
+        str = "word";
+        return;
+    }
+
+    str = "hello world";
 }
 
 using Strings_vt = std::vector<std::string>;
