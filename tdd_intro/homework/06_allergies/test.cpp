@@ -34,10 +34,34 @@ For example, if the allergy score is 257, your program should only report the eg
 //8. List score 256
 
 #include <gtest/gtest.h>
+#include <map>
+
+enum Allergy
+{
+    eggs = 0,
+    peanuts,
+    shellfish,
+    strawberries,
+    tomatoes,
+    chocolate,
+    pollen,
+    cats
+};
+
+const std::map<std::string, Allergy> allergies {
+    {"eggs", eggs},
+    {"peanuts", peanuts},
+    {"shellfish", shellfish},
+    {"strawberries", strawberries},
+    {"tomatoes", tomatoes},
+    {"chocolate", chocolate},
+    {"pollen", pollen},
+    {"cats", cats},
+};
 
 bool IsAllergicTo(const std::string& allergy, int score)
 {
-    return score == 1;
+    return std::pow(2, (int)allergies.find(allergy)->second) == score;
 }
 
 TEST(IsAllergicToTest, Takes_eggs_score_1_return_true)
