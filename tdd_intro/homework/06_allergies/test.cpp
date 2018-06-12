@@ -129,3 +129,8 @@ TEST(IsAllergicToTest, Takes_pollen_score_128_return_false)
 {
     EXPECT_FALSE(IsAllergicTo("pollen", 128));
 }
+
+TEST(IsAllergicToTest, Takes_empty_string_score_128_return_false)
+{
+    EXPECT_FALSE(IsAllergicTo("", 128));
+}
