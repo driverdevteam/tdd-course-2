@@ -87,3 +87,10 @@ TEST(WordWrappTests, ThreeWordWithSingleSpaces)
 {
     EXPECT_EQ(Strings_vt({"012 3", "45678"}), WordWrapp("012 3 45678", 5));
 }
+
+TEST(WordWrappTests, Trim_OneSpaceBeforeWord)
+{
+    std::string wordToTrim(" word");
+    trim(wordToTrim);
+    EXPECT_EQ("word", wordToTrim);
+}
