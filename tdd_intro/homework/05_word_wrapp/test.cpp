@@ -57,7 +57,10 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 
         trim(word);
 
-        result.push_back(word);
+        if (!word.empty())
+        {
+            result.push_back(word);
+        }
 
         if (data.size() > limit)
         {
