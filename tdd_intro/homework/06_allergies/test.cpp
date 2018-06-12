@@ -35,7 +35,13 @@ For example, if the allergy score is 257, your program should only report the eg
 
 #include <gtest/gtest.h>
 
+bool IsAllergicTo(const std::string& allergy, int score)
+{
+    return true;
+}
+
 TEST(IsAllergicToTest, Takes_eggs_score_1_return_true)
 {
     EXPECT_TRUE(IsAllergicTo("eggs", 1));
 }
+
