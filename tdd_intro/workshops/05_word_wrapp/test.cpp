@@ -96,3 +96,8 @@ TEST(WordWrappTests, TwoWordsWithAlotOfSpaces)
 {
     EXPECT_EQ(Strings_vt({"12", "34567"}), WordWrapp("12    34567", 5));
 }
+
+TEST(WordWrappTests, TwoWordsLessThenLimitDevidedBySpace)
+{
+    EXPECT_EQ(Strings_vt({"12", "345"}), WordWrapp("12 345", 5));
+}
