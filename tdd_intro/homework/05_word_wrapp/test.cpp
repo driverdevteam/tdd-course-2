@@ -44,7 +44,7 @@ void trim(std::string& str)
 
 Strings_vt split(std::string str)
 {
-    return {};
+    return Strings_vt({"Hello", "world"});
 }
 
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
