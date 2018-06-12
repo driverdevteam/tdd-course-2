@@ -158,4 +158,16 @@ TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
     EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
 }
 
+TEST(CoffeCoretest, CreateCappuccinoLittle)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+    testing::InSequence s;
+    EXPECT_CALL(mock, AddWater(CupSizeLittle / 4, 80)).Times(1);
+    EXPECT_CALL(mock, AddMilk(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 4)).Times(1);
+    machine.CreateLittleCup();
+    machine.CreateCappuccino();
+}
 // add other tests
