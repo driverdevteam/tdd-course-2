@@ -122,13 +122,13 @@ TEST(CoffeCoretest, CreateHotWater)
     machine.CreateHotWaterCup();
 }
 
-// FIX: sequence
 //- americano: water & coffee 1:2 or 1:3. Water temp 60C
 TEST(CoffeCoretest, CreateAmericanoBig)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
 
+    testing::InSequence s;
     EXPECT_CALL(mock, AddWater(CupSizeBig / 2, 60)).Times(1);
     EXPECT_CALL(mock, AddCoffee(CupSizeBig / 2)).Times(1);
     machine.CreateBigCup();
@@ -140,8 +140,10 @@ TEST(CoffeCoretest, CreateAmericanoLittle)
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
 
+    testing::InSequence s;
     EXPECT_CALL(mock, AddWater(CupSizeLittle / 2, 60)).Times(1);
     EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 2)).Times(1);
+
     machine.CreateLittleCup();
     machine.CreateAmericano();
 }
@@ -150,9 +152,10 @@ TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
-
+    testing::InSequence s;
     EXPECT_CALL(mock, AddWater(testing::_, testing::_)).Times(0);
     EXPECT_CALL(mock, AddCoffee(testing::_)).Times(0);
     EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
 }
+
 // add other tests
