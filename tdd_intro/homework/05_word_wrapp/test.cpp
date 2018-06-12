@@ -42,32 +42,6 @@ void trim(std::string& str)
     }).base(), str.end());
 }
 
-Strings_vt split(std::string str)
-{
-    Strings_vt result;
-
-    int pos;
-    int prev_pos = 0;
-
-    while (!str.empty())
-    {
-        pos = str.find(' ', prev_pos);
-
-        std::string word;
-        if (pos == -1)
-        {
-            pos = str.size();
-        }
-        word = str.substr(prev_pos, pos - prev_pos);
-        prev_pos = pos;
-
-        trim(word);
-        result.push_back(word);
-    }
-
-    return result;
-}
-
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 {
     Strings_vt result;
@@ -171,14 +145,4 @@ TEST(WordWrappTests, Trim_OneSpaceAfterWord)
     std::string wordToTrim("word ");
     trim(wordToTrim);
     EXPECT_EQ("word", wordToTrim);
-}
-
-TEST(WordWrappTests, Split_TwoWordWithOneSpace)
-{
-    EXPECT_EQ(Strings_vt({"Hello", "world"}), split("Hello world"));
-}
-
-TEST(WordWrappTests, Split_ThreeWordsSingleSpaces)
-{
-    EXPECT_EQ(Strings_vt({"Hello", "perfect" ,"world"}), split("Hello perfect world"));
 }
