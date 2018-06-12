@@ -108,3 +108,10 @@ TEST(WordWrappTests, Trim_SpaceBeforeTwoWords)
     trim(wordToTrim);
     EXPECT_EQ("hello world", wordToTrim);
 }
+
+TEST(WordWrappTests, Trim_OneSpaceAfterWord)
+{
+    std::string wordToTrim("word ");
+    trim(wordToTrim);
+    EXPECT_EQ("word", wordToTrim);
+}
