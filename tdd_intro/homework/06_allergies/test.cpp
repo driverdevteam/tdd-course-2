@@ -37,7 +37,7 @@ For example, if the allergy score is 257, your program should only report the eg
 
 bool IsAllergicTo(const std::string& allergy, int score)
 {
-    return true;
+    return score == 1;
 }
 
 TEST(IsAllergicToTest, Takes_eggs_score_1_return_true)
