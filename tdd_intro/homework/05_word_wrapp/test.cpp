@@ -16,6 +16,8 @@ When pos is specified, the search only includes sequences of characters that beg
 #include <gtest/gtest.h>
 #include <cctype>
 #include <sstream>
+#include <algorithm>
+
 //1. Empty test.
 //2. Short word and big limit.
 //3. Big word and short limit.
@@ -32,6 +34,10 @@ void trim(std::string& str)
     str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) {
         return !std::isspace(ch);
     }));
+
+    str.erase(std::find_if(str.rbegin(), str.rend(), [](int ch) {
+        return !std::isspace(ch);
+    }).base(), str.end());
 }
 
 using Strings_vt = std::vector<std::string>;
