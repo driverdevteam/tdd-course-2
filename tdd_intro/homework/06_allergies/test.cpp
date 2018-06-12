@@ -94,3 +94,38 @@ TEST(IsAllergicToTest, Takes_peanuts_score_2_return_true)
 {
     EXPECT_TRUE(IsAllergicTo("peanuts", 2));
 }
+
+TEST(IsAllergicToTest, Takes_shellfish_score_4_return_true)
+{
+    EXPECT_TRUE(IsAllergicTo("shellfish", 4));
+}
+
+TEST(IsAllergicToTest, Takes_strawberries_score_8_return_true)
+{
+    EXPECT_TRUE(IsAllergicTo("strawberries", 8));
+}
+
+TEST(IsAllergicToTest, Takes_tomatoes_score_16_return_true)
+{
+    EXPECT_TRUE(IsAllergicTo("tomatoes", 16));
+}
+
+TEST(IsAllergicToTest, Takes_chocolate_score_32_return_true)
+{
+    EXPECT_TRUE(IsAllergicTo("chocolate", 32));
+}
+
+TEST(IsAllergicToTest, Takes_pollen_score_64_return_true)
+{
+    EXPECT_TRUE(IsAllergicTo("pollen", 64));
+}
+
+TEST(IsAllergicToTest, Takes_cats_score_128_return_true)
+{
+    EXPECT_TRUE(IsAllergicTo("cats", 128));
+}
+
+TEST(IsAllergicToTest, Takes_pollen_score_128_return_false)
+{
+    EXPECT_FALSE(IsAllergicTo("pollen", 128));
+}
