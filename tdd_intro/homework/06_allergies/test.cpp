@@ -61,6 +61,10 @@ const std::map<std::string, Allergy> allergies {
 
 bool IsAllergicTo(const std::string& allergy, int score)
 {
+    if (allergy.empty())
+    {
+        return false;
+    }
     int degreeOfAllergy = allergies.find(allergy)->second;
     return (score & 1 << degreeOfAllergy) != 0;
 }
