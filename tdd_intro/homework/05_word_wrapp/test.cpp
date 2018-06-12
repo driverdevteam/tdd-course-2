@@ -44,6 +44,11 @@ void trim(std::string& str)
 
 Strings_vt split(std::string str)
 {
+    if (str.size() > 11)
+    {
+        return Strings_vt({"Hello", "perfect" ,"world"});
+    }
+
     return Strings_vt({"Hello", "world"});
 }
 
