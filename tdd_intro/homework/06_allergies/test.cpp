@@ -36,7 +36,6 @@ For example, if the allergy score is 257, your program should only report the eg
 #include <gtest/gtest.h>
 #include <map>
 #include <vector>
-#include <string>
 
 enum Allergy
 {
@@ -60,6 +59,11 @@ const std::map<std::string, Allergy> allergies {
     {"pollen", pollen},
     {"cats", cats},
 };
+
+std::vector<std::string> List(int score)
+{
+    return {};
+}
 
 bool IsAllergicTo(const std::string& allergy, int score)
 {
