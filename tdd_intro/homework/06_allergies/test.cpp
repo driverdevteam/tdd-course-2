@@ -23,3 +23,14 @@ Your program should ignore those components of the score.
 For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
 */
 #include <gtest/gtest.h>
+
+//1. IsAllergicTo eggs score 1 -> true
+//2. IsAllergicTo eggs score 2 -> false
+//3. IsAllergicTo eggs score 5 -> true
+//4. IsAllergicTo eggs score 257 -> true
+//5. IsAllergicTo eggs score 0 -> false
+//6. IsAllergicTo all allergies with it's minimum score
+
+//7. List score 0
+//8. List score 256
+
