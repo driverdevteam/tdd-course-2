@@ -166,6 +166,7 @@ TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
     testing::InSequence s;
+
     EXPECT_CALL(mock, AddWater(testing::_, testing::_)).Times(0);
     EXPECT_CALL(mock, AddCoffee(testing::_)).Times(0);
     EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
@@ -177,6 +178,7 @@ TEST(CoffeCoretest, CreateCappuccinoLittle)
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
     testing::InSequence s;
+
     EXPECT_CALL(mock, AddWater(CupSizeLittle / 4, 80)).Times(1);
     EXPECT_CALL(mock, AddMilk(CupSizeLittle / 4)).Times(1);
     EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 4)).Times(1);
@@ -190,11 +192,25 @@ TEST(CoffeCoretest, CreateCappuccinoBig)
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
     testing::InSequence s;
+
     EXPECT_CALL(mock, AddWater(CupSizeBig / 4, 80)).Times(1);
     EXPECT_CALL(mock, AddMilk(CupSizeBig / 4)).Times(1);
     EXPECT_CALL(mock, AddCoffee(CupSizeBig / 4)).Times(1);
     EXPECT_CALL(mock, AddMilkFoam(CupSizeBig / 4)).Times(1);
     machine.CreateBigCup();
     machine.CreateCappuccino();
+}
+
+TEST(CoffeCoretest, CreateCappuccinoBig_NoCup)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+    testing::InSequence s;
+
+    EXPECT_CALL(mock, AddWater(testing::_, testing::_)).Times(0);
+    EXPECT_CALL(mock, AddMilk(testing::_)).Times(0);
+    EXPECT_CALL(mock, AddCoffee(testing::_)).Times(0);
+    EXPECT_CALL(mock, AddMilkFoam(testing::_)).Times(0);
+    EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
 }
 // add other tests
