@@ -45,3 +45,7 @@ TEST(IsAllergicToTest, Takes_eggs_score_1_return_true)
     EXPECT_TRUE(IsAllergicTo("eggs", 1));
 }
 
+TEST(IsAllergicToTest, Takes_eggs_score_2_return_false)
+{
+    EXPECT_FALSE(IsAllergicTo("eggs", 2));
+}
