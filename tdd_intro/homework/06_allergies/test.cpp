@@ -35,6 +35,8 @@ For example, if the allergy score is 257, your program should only report the eg
 
 #include <gtest/gtest.h>
 #include <map>
+#include <vector>
+#include <string>
 
 enum Allergy
 {
@@ -142,5 +144,5 @@ TEST(IsAllergicToTest, Takes_empty_string_score_128_return_false)
 
 TEST(ListTest, Takes_0_return_empty_list)
 {
-    EXPECT_FALSE(List(0));
+    EXPECT_TRUE(List(0).empty());
 }
