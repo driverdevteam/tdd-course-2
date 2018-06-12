@@ -58,7 +58,7 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 
             if (tmpLimit > 0)
             {
-                pos -= limit - tmpLimit;
+                currentEndPos = pos + tmpLimit;
                 word = tmpWord;
             }
         }
@@ -69,7 +69,7 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
         }
         result.push_back(word);
 
-        pos += limit;
+        pos = currentEndPos;
     }
 
     return result;
