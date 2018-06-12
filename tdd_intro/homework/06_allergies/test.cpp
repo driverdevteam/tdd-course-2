@@ -31,7 +31,7 @@ For example, if the allergy score is 257, your program should only report the eg
 //6. IsAllergicTo all allergies with it's minimum score
 
 //7. List score 0
-//8. List score 256
+//8. List score 255
 
 #include <gtest/gtest.h>
 #include <map>
@@ -62,7 +62,7 @@ const std::map<std::string, Allergy> allergies {
     {"cats", cats},
 };
 
-using Allergies_vt = std::vector<std::string>;
+using Allergies_vt = std::set<std::string>;
 
 bool IsAllergicTo(const std::string& allergy, int score)
 {
@@ -82,7 +82,7 @@ Allergies_vt List(int score)
     {
         if (IsAllergicTo(allergy.first, score))
         {
-            result.push_back(allergy.first);
+            result.insert(allergy.first);
         }
     }
 
@@ -169,4 +169,12 @@ TEST(ListTest, Takes_1_return_eggs)
     Allergies_vt allergiesList = List(1);
     ASSERT_EQ(1, allergiesList.size());
     EXPECT_TRUE("eggs", allergiesList[0]);
+}
+
+TEST(ListTest, Takes_256_return_all)
+{
+    Allergies_vt allergiesList = List(255);
+    Allergies_vt expected {"eggs", "peanuts", "shellfish", "strawberries", "tomatoes", "chocolate", "pollen", "cats"};
+    ASSERT_EQ(expected.size(), allergiesList.size());
+    EXPECT_EQ(expected, allergiesList);
 }
