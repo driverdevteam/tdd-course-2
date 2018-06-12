@@ -99,3 +99,10 @@ TEST(WordWrappTests, Trim_OneSpaceBeforeWord)
     trim(wordToTrim);
     EXPECT_EQ("word", wordToTrim);
 }
+
+TEST(WordWrappTests, Trim_SpaceBeforeTwoWords)
+{
+    std::string wordToTrim(" hello world");
+    trim(wordToTrim);
+    EXPECT_EQ("hello world", wordToTrim);
+}
