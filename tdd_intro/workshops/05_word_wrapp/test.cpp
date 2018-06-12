@@ -48,7 +48,7 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 
         if (word != " ")
         {
-            if (word.back() == ' ')
+            while (word.back() == ' ')
             {
                 word.pop_back();
             }
@@ -97,5 +97,5 @@ TEST(WordWrappTests, ThreeWordWithSingleSpaces)
 
 TEST(WordWrappTests, TwoWordsWithAlotOfSpaces)
 {
-    EXPECT_EQ(Strings_vt({"12", "45678"}), WordWrapp("12    34567", 5));
+    EXPECT_EQ(Strings_vt({"12", "34567"}), WordWrapp("12    34567", 5));
 }
