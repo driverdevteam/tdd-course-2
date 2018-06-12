@@ -45,7 +45,8 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
             continue;
         }
 
-        if (pos + limit < data.size() && word.back() != ' ' && data[pos + limit] != ' ')
+        int currentEndPos = pos + limit;
+        if (currentEndPos < data.size() && word.back() != ' ' && data[currentEndPos] != ' ')
         {
             int tmpLimit = limit;
             std::string tmpWord = word;
@@ -117,4 +118,15 @@ TEST(WordWrappTests, TwoWordsWithAlotOfSpaces)
 TEST(WordWrappTests, TwoWordsLessThenLimitDevidedBySpace)
 {
     EXPECT_EQ(Strings_vt({"12", "345"}), WordWrapp("12 345", 5));
+}
+
+TEST(WordWrappTests, acceptance)
+{
+    EXPECT_EQ(Strings_vt({"When pos is specified, the",
+                          "search only includes sequences",
+                          "of characters that begin at or",
+                          "before position pos, ignoring",
+                          "any possible match beginning",
+                          "after pos."})
+              , WordWrapp("When pos is specified, the search only includes sequences of characters that begin at or before position pos, ignoring any possible match beginning after pos.", 30));
 }
