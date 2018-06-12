@@ -62,6 +62,10 @@ const std::map<std::string, Allergy> allergies {
 
 std::vector<std::string> List(int score)
 {
+    if (score)
+    {
+        return {"eggs"};
+    }
     return {};
 }
 
