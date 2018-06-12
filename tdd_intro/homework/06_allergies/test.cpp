@@ -139,3 +139,8 @@ TEST(IsAllergicToTest, Takes_empty_string_score_128_return_false)
 {
     EXPECT_FALSE(IsAllergicTo("", 128));
 }
+
+TEST(ListTest, Takes_0_return_empty_list)
+{
+    EXPECT_FALSE(List(0));
+}
