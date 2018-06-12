@@ -22,7 +22,6 @@ Note: a given score may include allergens not listed above (i.e. allergens that 
 Your program should ignore those components of the score.
 For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
 */
-#include <gtest/gtest.h>
 
 //1. IsAllergicTo eggs score 1 -> true
 //2. IsAllergicTo eggs score 2 -> false
@@ -34,3 +33,9 @@ For example, if the allergy score is 257, your program should only report the eg
 //7. List score 0
 //8. List score 256
 
+#include <gtest/gtest.h>
+
+TEST(IsAllergicToTest, Takes_eggs_score_1_return_true)
+{
+    EXPECT_TRUE(IsAllergicTo("eggs", 1));
+}
