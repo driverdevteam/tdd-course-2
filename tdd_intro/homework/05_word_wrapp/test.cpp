@@ -44,12 +44,28 @@ void trim(std::string& str)
 
 Strings_vt split(std::string str)
 {
-    if (str.size() > 11)
+    Strings_vt result;
+
+    int pos;
+    int prev_pos = 0;
+
+    while (!str.empty())
     {
-        return Strings_vt({"Hello", "perfect" ,"world"});
+        pos = str.find(' ', prev_pos);
+
+        std::string word;
+        if (pos == -1)
+        {
+            pos = str.size();
+        }
+        word = str.substr(prev_pos, pos - prev_pos);
+        prev_pos = pos;
+
+        trim(word);
+        result.push_back(word);
     }
 
-    return Strings_vt({"Hello", "world"});
+    return result;
 }
 
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
