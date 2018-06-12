@@ -29,6 +29,8 @@ When pos is specified, the search only includes sequences of characters that beg
 //9. String with words and different count of spaces.
 //10.
 
+using Strings_vt = std::vector<std::string>;
+
 void trim(std::string& str)
 {
     str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) {
@@ -40,7 +42,11 @@ void trim(std::string& str)
     }).base(), str.end());
 }
 
-using Strings_vt = std::vector<std::string>;
+Strings_vt split(std::string str)
+{
+    return {};
+}
+
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 {
     Strings_vt result;
@@ -144,4 +150,9 @@ TEST(WordWrappTests, Trim_OneSpaceAfterWord)
     std::string wordToTrim("word ");
     trim(wordToTrim);
     EXPECT_EQ("word", wordToTrim);
+}
+
+TEST(WordWrappTests, Split_TwoWordWithOneSpace)
+{
+    EXPECT_EQ(Strings_vt({"Hello", "world"}), split("Hello world"));
 }
