@@ -27,6 +27,11 @@ When pos is specified, the search only includes sequences of characters that beg
 //9. String with words and different count of spaces.
 //10.
 
+void trim(std::string& str)
+{
+    str = "word";
+}
+
 using Strings_vt = std::vector<std::string>;
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 {
