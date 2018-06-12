@@ -39,14 +39,16 @@ For example, if the allergy score is 257, your program should only report the eg
 
 enum Allergy
 {
-    eggs = 0,
+    allergiesFirst = 0,
+    eggs = allergiesFirst,
     peanuts,
     shellfish,
     strawberries,
     tomatoes,
     chocolate,
     pollen,
-    cats
+    cats,
+    allergiesLast = cats
 };
 
 const std::map<std::string, Allergy> allergies {
@@ -60,14 +62,7 @@ const std::map<std::string, Allergy> allergies {
     {"cats", cats},
 };
 
-std::vector<std::string> List(int score)
-{
-    if (score)
-    {
-        return {"eggs"};
-    }
-    return {};
-}
+using Allergies_vt = std::vector<std::string>;
 
 bool IsAllergicTo(const std::string& allergy, int score)
 {
@@ -78,6 +73,20 @@ bool IsAllergicTo(const std::string& allergy, int score)
         return (score & 1 << degreeOfAllergy) != 0;
     }
     return false;
+}
+
+Allergies_vt List(int score)
+{
+    Allergies_vt result;
+    for (const auto& allergy : allergies)
+    {
+        if (IsAllergicTo(allergy.first, score))
+        {
+            result.push_back(allergy.first);
+        }
+    }
+
+    return result;
 }
 
 TEST(IsAllergicToTest, Takes_eggs_score_1_return_true)
@@ -157,7 +166,7 @@ TEST(ListTest, Takes_0_return_empty_list)
 
 TEST(ListTest, Takes_1_return_eggs)
 {
-    std::vector<std::string> allergiesList = List(1);
+    Allergies_vt allergiesList = List(1);
     ASSERT_EQ(1, allergiesList.size());
     EXPECT_TRUE("eggs", allergiesList[0]);
 }
