@@ -150,3 +150,10 @@ TEST(ListTest, Takes_0_return_empty_list)
 {
     EXPECT_TRUE(List(0).empty());
 }
+
+TEST(ListTest, Takes_1_return_eggs)
+{
+    std::vector<std::string> allergiesList = List(1);
+    ASSERT_EQ(1, allergiesList.size());
+    EXPECT_TRUE("eggs", allergiesList[0]);
+}
