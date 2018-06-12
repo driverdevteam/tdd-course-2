@@ -29,13 +29,9 @@ When pos is specified, the search only includes sequences of characters that beg
 
 void trim(std::string& str)
 {
-    if (str == " word")
-    {
-        str = "word";
-        return;
-    }
-
-    str = "hello world";
+    str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) {
+        return !std::isspace(ch);
+    }));
 }
 
 using Strings_vt = std::vector<std::string>;
