@@ -156,3 +156,8 @@ TEST(WordWrappTests, Split_TwoWordWithOneSpace)
 {
     EXPECT_EQ(Strings_vt({"Hello", "world"}), split("Hello world"));
 }
+
+TEST(WordWrappTests, Split_ThreeWordsSingleSpaces)
+{
+    EXPECT_EQ(Strings_vt({"Hello", "perfect" ,"world"}), split("Hello perfect world"));
+}
