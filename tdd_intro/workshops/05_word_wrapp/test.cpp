@@ -45,6 +45,23 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
             continue;
         }
 
+        if (pos + limit < data.size() && word.back() != ' ' && data[pos + limit] != ' ')
+        {
+            int tmpLimit = limit;
+            std::string tmpWord = word;
+            while (tmpLimit > 0 && tmpWord.back() != ' ')
+            {
+                --tmpLimit;
+                tmpWord = data.substr(pos, tmpLimit);
+            }
+
+            if (tmpLimit > 0)
+            {
+                pos -= limit - tmpLimit;
+                word = tmpWord;
+            }
+        }
+
         while (word.back() == ' ')
         {
             word.pop_back();
