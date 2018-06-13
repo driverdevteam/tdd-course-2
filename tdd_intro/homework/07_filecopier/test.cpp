@@ -30,6 +30,10 @@ Tests list
 -Check Folder hierarchy
 */
 
+std::string JoinPath(const std::string& parent, const std::string& child)
+{
+    return parent + "/" + child;
+}
 
 class IFileCopier
 {
@@ -97,7 +101,7 @@ TEST(CopyFilesTests, CopyOneFile)
     copier.Copy("srcPath","dstPath");
 }
 
-TEST(CopyFilesTests, CopyOneFile)
+TEST(CopyFilesTests, JoinPath)
 {
     EXPECT_EQ("Parent/Child", JoinPath("Parent", "Child"));
 }
