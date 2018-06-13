@@ -116,6 +116,11 @@ void CoffeeMachine::CreateAmericano()
 
 void CoffeeMachine::CreateCappuccino()
 {
+    if(m_size == CupSizeInvalid)
+    {
+        throw std::runtime_error("cap is empty");
+    }
+
     m_core.AddWater(m_size / 4, 80);
     m_core.AddMilk(m_size / 4);
     m_core.AddCoffee(m_size / 4);
@@ -189,12 +194,13 @@ TEST(CoffeCoretest, CreateCappuccinoo_NoCup)
     CoffeeMachine machine(mock);
 
     testing::InSequence seq;
-    EXPECT_CALL(mock, AddWater(CupSizeLittle / 4, 80)).Times(1);
-    EXPECT_CALL(mock, AddMilk(CupSizeLittle / 4)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 4)).Times(1);
-    EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddWater(testing::_, testing::_)).Times(0);
+    EXPECT_CALL(mock, AddMilk(testing::_)).Times(0);
+    EXPECT_CALL(mock, AddCoffee(testing::_)).Times(0);
+    EXPECT_CALL(mock, AddMilkFoam(testing::_)).Times(0);
 
     EXPECT_THROW(machine.CreateCappuccino(), std::runtime_error);
 }
+
 
 // add other tests
