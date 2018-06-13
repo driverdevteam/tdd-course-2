@@ -5,4 +5,5 @@ SUBDIRS += \
     02_word_count \
     03_anagram \
     04_trinary_numbers \
-    05_word_wrapp
+    05_word_wrapp \
+    07_coffee
