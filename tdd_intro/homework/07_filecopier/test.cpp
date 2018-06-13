@@ -38,5 +38,12 @@ public:
     virtual std::vector<std::string> GetFilesFromFolder(const std::string& path)=0;
     virtual bool IsDir(const std::string& path)=0;
     virtual void Copy(const std::string& src, const std::string& dst) = 0;
+};
 
+class MockFileCopier:public IFileCopier
+{
+public:
+    MOCK_METHOD1(GetFilesFromFolder, std::vector<std::string>(const std::string&));
+    MOCK_METHOD1(IsDir, bool(const std::string&));
+    MOCK_METHOD2(Copy, void(const std::string& src, const std::string& dst));
 };
