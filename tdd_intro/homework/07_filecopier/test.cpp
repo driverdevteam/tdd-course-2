@@ -62,6 +62,7 @@ FileCopier::FileCopier(IFileCopier &fileSystem):m_copyCore(fileSystem)
 {
 }
 
+
 void FileCopier::Copy(const std::string &src, const std::string &dst)
 {
     m_copyCore.Copy(src, dst);
@@ -96,8 +97,10 @@ TEST(CopyFilesTests, CopyOneFile)
     copier.Copy("srcPath","dstPath");
 }
 
-
-
+TEST(CopyFilesTests, CopyOneFile)
+{
+    EXPECT_EQ("Parent/Child", JoinPath("Parent", "Child"));
+}
 
 
 
