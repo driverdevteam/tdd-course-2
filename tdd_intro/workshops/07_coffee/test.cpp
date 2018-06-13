@@ -67,6 +67,17 @@ enum CupSize
     CupSizeBig = 140
 };
 
+enum Component
+{
+    Watter,
+    Sugar,
+    Coffee,
+    Milk,
+    MilkFloam,
+    Chocolate,
+    Cream
+};
+
 class CoffeeMachine
 {
 public:
@@ -80,14 +91,18 @@ public:
 
 private:
     void CheckCup();
+    void AddComponent(Component component, int size);
 
 private:
     ICoffeCore& m_core;
     CupSize m_size;
+    int m_freeSpaceInCup;
+    int m_waterTemperature;
 };
 
 CoffeeMachine::CoffeeMachine(ICoffeCore& core)
     : m_core(core),
+      m_freeSpaceInCup(CupSizeInvalid),
       m_size(CupSizeInvalid)
 {
 }
@@ -95,44 +110,81 @@ CoffeeMachine::CoffeeMachine(ICoffeCore& core)
 void CoffeeMachine::CreateLittleCup()
 {
     m_size = CupSizeLittle;
+    m_freeSpaceInCup = m_size;
 }
 
 void CoffeeMachine::CreateBigCup()
 {
     m_size = CupSizeBig;
+    m_freeSpaceInCup = m_size;
 }
 
 void CoffeeMachine::CreateHotWaterCup()
 {
-    m_core.AddWater(CupSizeBig, 95);
+    CheckCup();
+
+    m_waterTemperature = 95;
+    AddComponent(Watter, m_size);
 }
 
 void CoffeeMachine::CreateAmericano()
 {
     CheckCup();
 
-    m_core.AddWater(m_size / 2, 60);
-    m_core.AddCoffee(m_size / 2);
-
-    m_size = CupSizeInvalid;
+    m_waterTemperature = 60;
+    AddComponent(Watter, m_size / 2);
+    AddComponent(Coffee, m_size / 2);
 }
 
 void CoffeeMachine::CreateCappuccino()
 {
     CheckCup();
 
-    m_core.AddWater(m_size / 4, 80);
-    m_core.AddMilk(m_size / 4);
-    m_core.AddCoffee(m_size / 4);
-    m_core.AddMilkFoam(m_size / 4);
+    m_waterTemperature = 80;
+    AddComponent(Watter, m_freeSpaceInCup / 4);
+    AddComponent(Milk, m_freeSpaceInCup / 4);
+    AddComponent(Coffee, m_freeSpaceInCup / 4);
+    AddComponent(MilkFloam, m_freeSpaceInCup / 4);
 }
 
 void CoffeeMachine::CheckCup()
 {
-    if(m_size == CupSizeInvalid)
+    if(m_freeSpaceInCup == CupSizeInvalid)
     {
         throw std::runtime_error("cap is empty");
     }
+}
+
+void CoffeeMachine::AddComponent(Component component, int size)
+{
+    if (m_freeSpaceInCup < size)
+    {
+        throw std::runtime_error("overflow");
+    }
+
+    switch (component)
+    {
+    case Watter:
+        m_core.AddWater(size, m_waterTemperature);
+        break;
+
+    case Coffee:
+        m_core.AddCoffee(size);
+        break;
+
+    case Milk:
+        m_core.AddMilk(size);
+        break;
+
+    case MilkFloam:
+        m_core.AddMilkFoam(size);
+        break;
+
+    default:
+        throw std::runtime_error("unexpected component");
+    }
+
+    m_freeSpaceInCup -= size;
 }
 
 TEST(CoffeCoretest, CreateHotWater)
