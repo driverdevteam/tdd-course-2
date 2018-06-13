@@ -113,6 +113,8 @@ void CoffeeMachine::CreateAmericano()
 
     m_core.AddWater(m_size / 2, 60);
     m_core.AddCoffee(m_size / 2);
+
+    m_size = CupSizeInvalid;
 }
 
 void CoffeeMachine::CreateCappuccino()
