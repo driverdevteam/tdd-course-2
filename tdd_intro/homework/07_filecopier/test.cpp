@@ -30,8 +30,6 @@ Tests list
 -Check Folder hierarchy
 */
 
-
-
 const std::string s_dstPath = "dstPath";
 const std::string s_srcPath = "srcPath";
 const std::string s_fileName = "SomeFile";
@@ -106,6 +104,15 @@ TEST(CopyFilesTests, CopyOneFile)
     copier.Copy(s_srcPath, s_dstPath);
 }
 
+TEST(CopyFilesTests, CopyManyFile)
+{
+    MockFileCopier mock;
+    FileCopier copier(mock);
+    EXPECT_CALL(mock, Copy(s_srcPath, s_dstPath)).Times(1);
+    EXPECT_CALL(mock, GetFilesFromFolder(s_srcPath)).WillOnce(testing::Return(std::vector<std::string>{s_fileName, s_fileName, s_fileName, s_fileName, s_fileName}));
+    EXPECT_CALL(mock, Copy(JoinPath(s_srcPath, s_fileName),JoinPath(s_dstPath, s_fileName))).Times(5);
+    copier.Copy(s_srcPath, s_dstPath);
+}
 //------------------------------------------------------------
 TEST(CopyFilesTests, JoinPath)
 {
