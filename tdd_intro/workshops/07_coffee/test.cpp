@@ -141,10 +141,10 @@ void CoffeeMachine::CreateCappuccino()
     CheckCup();
 
     m_waterTemperature = 80;
-    AddComponent(Watter, m_freeSpaceInCup / 4);
-    AddComponent(Milk, m_freeSpaceInCup / 4);
-    AddComponent(Coffee, m_freeSpaceInCup / 4);
-    AddComponent(MilkFloam, m_freeSpaceInCup / 4);
+    AddComponent(Watter, m_size / 4);
+    AddComponent(Milk, m_size / 4);
+    AddComponent(Coffee, m_size / 4);
+    AddComponent(MilkFloam, m_size / 4);
 }
 
 void CoffeeMachine::CheckCup()
@@ -233,7 +233,7 @@ TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
     EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
 }
 
-TEST(CoffeCoretest, CreateCappuccinooLittle)
+TEST(CoffeCoretest, CreateCappuccinoLittle)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
