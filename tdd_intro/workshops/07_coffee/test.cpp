@@ -173,7 +173,6 @@ TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
 
-    testing::InSequence seq;
     EXPECT_CALL(mock, AddWater(testing::_, testing::_)).Times(0);
     EXPECT_CALL(mock, AddCoffee(testing::_)).Times(0);
 
@@ -208,5 +207,13 @@ TEST(CoffeCoretest, CreateCappuccinoo_NoCup)
     EXPECT_THROW(machine.CreateCappuccino(), std::runtime_error);
 }
 
+TEST(CoffeCoretest, Overflow)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
 
+    machine.CreateBigCup();
+    machine.CreateAmericano();
+    EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
+}
 // add other tests
