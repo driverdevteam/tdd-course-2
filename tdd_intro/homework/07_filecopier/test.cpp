@@ -30,8 +30,22 @@ class IFileSystem
 {
 public:
     virtual ~IFileSystem();
-    std::vector<std::String> GetChild(const std::string& path);
+    std::vector<std::string> GetChild(const std::string& path);
     bool IsDir(const std::string& path);
     void Copy(const std::string& src, const std::string& dst);
 };
 
+TEST(FileCopierTest, CopySingleFile)
+{
+    MocFileSystem moc;
+    FileCopier copier(moc);
+    std::vector<std::string> files{"singleFileName"};
+
+    std::string srcPath;
+    std::strings dstPath;
+    ON_CALL(moc, GetChild()).WillOnce(Return(files));
+    ON_CALL(moc, IsDir(files[0])).WillOnce(Return(false));
+    EXPECT_CALL(moc, Copy(srcPath + DirSeparator() + files[0], dstPath + DirSeparator() + files[0])).Times(1);
+
+    copier.Copy(srcPath, dstPath);
+}
