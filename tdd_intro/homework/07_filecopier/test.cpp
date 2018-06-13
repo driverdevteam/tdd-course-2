@@ -47,3 +47,13 @@ public:
     MOCK_METHOD1(IsDir, bool(const std::string&));
     MOCK_METHOD2(Copy, void(const std::string& src, const std::string& dst));
 };
+
+class FileCopier
+{
+public:
+    FileCopier(IFileSystem& fileSystem);
+    virtual void Copy(const std::string& src, const std::string& dst) override;
+
+private:
+    IFileCopier& m_copyCore;
+}
