@@ -77,6 +77,16 @@ TEST(CopyFilesTests, CopyOnlyFolder)
     copier.Copy("mainFolder","dstPath");
 }
 
+TEST(CopyFilesTests, CopyOneFile)
+{
+    MockFileCopier mock;
+    FileCopier copier(mock);
+    EXPECT_CALL(mock, Copy("mainFolder","dstPath")).Times(1);
+    EXPECT_CALL(mock, GetFilesFromFolder("dsPath")).WillOnce(testing::Return(std::vector<std::string>{"file1", "file2"}));
+
+    copier.Copy("mainFolder","dstPath");
+}
+
 
 
 
