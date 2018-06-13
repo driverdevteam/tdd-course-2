@@ -51,9 +51,24 @@ public:
 class FileCopier
 {
 public:
-    FileCopier(IFileSystem& fileSystem);
-    virtual void Copy(const std::string& src, const std::string& dst) override;
+    FileCopier(IFileCopier& fileSystem);
+    void Copy(const std::string& src, const std::string& dst);
 
 private:
     IFileCopier& m_copyCore;
+};
+
+
+TEST(CopyFilesTests, CopyOneFile)
+{
+    MockFileCopier mock;
+    FileCopier copier(mock);
+    EXPECT_CALL(mock, Copy("mainFolder/testFile","dstPath/testFile"));
+
+    copier.Copy("mainFolder/testFile","dstPath/testFile");
 }
+
+
+
+
+
