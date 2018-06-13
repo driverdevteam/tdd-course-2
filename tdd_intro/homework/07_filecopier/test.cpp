@@ -20,3 +20,12 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+/*
+Tests list
+-Copy one file
+-Copy list of files from folder
+-Copy folder
+-Copy folders recurcive
+-Check folder empty
+-Check Folder hierarchy
+*/
