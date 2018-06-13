@@ -65,6 +65,12 @@ FileCopier::FileCopier(IFileCopier &fileSystem):m_copyCore(fileSystem)
 void FileCopier::Copy(const std::string &src, const std::string &dst)
 {
     m_copyCore.Copy(src, dst);
+    std::vector<std::string> fileList = m_copyCore.GetFilesFromFolder(src);
+
+    //for(int i=0;i< fileList.size(); ++i)
+    //{
+       // m_copyCore.Copy(dst + "/"+ fileList[i], dst + fileList[i] );
+    //}
 }
 
 TEST(CopyFilesTests, CopyOnlyFolder)
@@ -72,19 +78,21 @@ TEST(CopyFilesTests, CopyOnlyFolder)
     MockFileCopier mock;
     FileCopier copier(mock);
 
-    EXPECT_CALL(mock, Copy("mainFolder","dstPath")).Times(1);
+    EXPECT_CALL(mock, Copy("srcPath","dstPath")).Times(1);
 
-    copier.Copy("mainFolder","dstPath");
+    EXPECT_CALL(mock, GetFilesFromFolder("srcPath")).WillOnce(testing::Return(std::vector<std::string>{}));
+
+    copier.Copy("srcPath","dstPath");
 }
 
 TEST(CopyFilesTests, CopyOneFile)
 {
     MockFileCopier mock;
     FileCopier copier(mock);
-    EXPECT_CALL(mock, Copy("mainFolder","dstPath")).Times(1);
-    EXPECT_CALL(mock, GetFilesFromFolder("dsPath")).WillOnce(testing::Return(std::vector<std::string>{"file1", "file2"}));
+    EXPECT_CALL(mock, GetFilesFromFolder("srcPath")).WillOnce(testing::Return(std::vector<std::string>{"file1", "file2"}));
+    EXPECT_CALL(mock, Copy("srcPath","dstPath")).Times(1);
 
-    copier.Copy("mainFolder","dstPath");
+    copier.Copy("srcPath","dstPath");
 }
 
 
