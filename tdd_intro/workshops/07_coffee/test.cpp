@@ -79,6 +79,9 @@ public:
     void CreateCappuccino();
 
 private:
+    void CheckCup();
+
+private:
     ICoffeCore& m_core;
     CupSize m_size;
 };
@@ -106,25 +109,28 @@ void CoffeeMachine::CreateHotWaterCup()
 
 void CoffeeMachine::CreateAmericano()
 {
-    if(m_size == CupSizeInvalid)
-    {
-        throw std::runtime_error("cap is empty");
-    }
+    CheckCup();
+
     m_core.AddWater(m_size / 2, 60);
     m_core.AddCoffee(m_size / 2);
 }
 
 void CoffeeMachine::CreateCappuccino()
 {
-    if(m_size == CupSizeInvalid)
-    {
-        throw std::runtime_error("cap is empty");
-    }
+    CheckCup();
 
     m_core.AddWater(m_size / 4, 80);
     m_core.AddMilk(m_size / 4);
     m_core.AddCoffee(m_size / 4);
     m_core.AddMilkFoam(m_size / 4);
+}
+
+void CoffeeMachine::CheckCup()
+{
+    if(m_size == CupSizeInvalid)
+    {
+        throw std::runtime_error("cap is empty");
+    }
 }
 
 TEST(CoffeCoretest, CreateHotWater)
