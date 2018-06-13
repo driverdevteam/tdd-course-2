@@ -58,16 +58,24 @@ private:
     IFileCopier& m_copyCore;
 };
 
+FileCopier::FileCopier(IFileCopier &fileSystem):m_copyCore(fileSystem)
+{
+}
+
+void FileCopier::Copy(const std::string &src, const std::string &dst)
+{
+    m_copyCore.Copy(src, dst);
+}
+
 
 TEST(CopyFilesTests, CopyOneFile)
 {
     MockFileCopier mock;
     FileCopier copier(mock);
-    EXPECT_CALL(mock, Copy("mainFolder/testFile","dstPath/testFile"));
+    EXPECT_CALL(mock, Copy("mainFolder/testFile","dstPath/testFile")).Times(1);
 
     copier.Copy("mainFolder/testFile","dstPath/testFile");
 }
-
 
 
 
