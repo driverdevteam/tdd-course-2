@@ -97,10 +97,23 @@ TEST(FileCopierTest, CopySingleFile)
 
     std::string srcPath;
     std::string dstPath;
-    ON_CALL(moc, GetChild(_)).WillByDefault(Return(files));
+    EXPECT_CALL(moc, GetChild(_)).WillOnce(Return(files));
     ON_CALL(moc, IsDir(files[0])).WillByDefault(Return(false));
     EXPECT_CALL(moc, Copy(BuildPath(srcPath, files[0]), BuildPath(dstPath, files[0]))).Times(1);
 
     copier.Copy(srcPath, dstPath);
 }
 
+TEST(FileCopierTest, CopyEmptyFolder)
+{
+    MocFileSystem moc;
+    FileCopier copier(moc);
+    std::vector<std::string> files{};
+
+    EXPECT_CALL(moc, GetChild(_)).WillOnce(Return(files));
+    EXPECT_CALL(moc, Copy(_, _)).Times(0);
+
+    std::string srcPath;
+    std::string dstPath;
+    copier.Copy(srcPath, dstPath);
+}
