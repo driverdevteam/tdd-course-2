@@ -33,6 +33,11 @@ std::string DirSeparator()
     return "/";
 }
 
+std::string BuildPath(const std::string& parentDir, const std::string& fileName)
+{
+    return parentDir + DirSeparator() + fileName;
+}
+
 class IFileSystem
 {
 public:
@@ -79,7 +84,7 @@ void FileCopier::Copy(const std::string &src, const std::string &dst)
     std::vector<std::string> child = m_fileSystem.GetChild(src);
     for (const auto& children : child)
     {
-        m_fileSystem.Copy(src + DirSeparator() + children, dst + DirSeparator() + children);
+        m_fileSystem.Copy(BuildPath(src, children), BuildPath(dst, children));
     }
 }
 
@@ -94,7 +99,7 @@ TEST(FileCopierTest, CopySingleFile)
     std::string dstPath;
     ON_CALL(moc, GetChild(_)).WillByDefault(Return(files));
     ON_CALL(moc, IsDir(files[0])).WillByDefault(Return(false));
-    EXPECT_CALL(moc, Copy(srcPath + DirSeparator() + files[0], dstPath + DirSeparator() + files[0])).Times(1);
+    EXPECT_CALL(moc, Copy(BuildPath(srcPath, files[0]), BuildPath(dstPath, files[0]))).Times(1);
 
     copier.Copy(srcPath, dstPath);
 }
