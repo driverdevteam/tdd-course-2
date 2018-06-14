@@ -75,17 +75,16 @@ void FileCopier::Copy(const std::string &src, const std::string &dst)
     m_copyCore.Copy(src, dst);
     std::vector<std::string> fileList = m_copyCore.GetFilesFromFolder(src);
 
-    for(int i=0;i< fileList.size(); ++i)
+    for(const auto& child: fileList)
     {
-       if(m_copyCore.IsDir(JoinPath(src, fileList[i])))
+       if(m_copyCore.IsDir(JoinPath(src, child)))
        {
-            Copy(JoinPath(src, fileList[i]), JoinPath(dst,fileList[i] ));
+            Copy(JoinPath(src, child), JoinPath(dst,child ));
        }
        else
        {
-           m_copyCore.Copy(JoinPath(src, fileList[i]), JoinPath(dst, fileList[i]));
+           m_copyCore.Copy(JoinPath(src, child), JoinPath(dst, child));
        }
-
     }
 }
 
@@ -135,7 +134,36 @@ TEST(CopyFilesTests, CopyFilesAndFoldersRecorsive)
 {
     MockFileCopier mock;
     FileCopier copier(mock);
-    EXPECT_CALL(mock, GetFilesFromFolder(testing::_)).WillRepeatedly(testing::Return(std::vector<std::string>{"someFolder"}));
+    const std::string srcFile1 = JoinPath(s_srcPath, "someFile");
+    const std::string srcFolder1 = JoinPath(s_srcPath, "someFolder");
+    const std::string srcFile2 = JoinPath(srcFolder1, "someFile2");
+    const std::string srcFolder2 = JoinPath(srcFolder1, "someFolder2");
+
+    const std::string dstFile1 = JoinPath(s_dstPath, "someFile");
+    const std::string dstFolder1 = JoinPath(s_dstPath, "someFolder");
+    const std::string dstFile2 = JoinPath(dstFolder1, "someFile2");
+    const std::string dstFolder2 = JoinPath(dstFolder1, "someFolder2");
+
+
+
+    EXPECT_CALL(mock, GetFilesFromFolder(s_srcPath)).WillOnce(testing::Return(std::vector<std::string>{"someFile", "someFolder"}));
+    EXPECT_CALL(mock, GetFilesFromFolder(srcFolder1)).WillOnce(testing::Return(std::vector<std::string>{"someFile2", "someFolder2"}));
+    EXPECT_CALL(mock, GetFilesFromFolder(srcFolder2)).WillOnce(testing::Return(std::vector<std::string>{}));
+
+
+    EXPECT_CALL(mock, IsDir(srcFile1)).WillOnce(testing::Return(false));
+    EXPECT_CALL(mock, IsDir(srcFolder1)).WillOnce(testing::Return(true));
+    EXPECT_CALL(mock, IsDir(srcFile2)).WillOnce(testing::Return(false));
+    EXPECT_CALL(mock, IsDir(srcFolder2)).WillOnce(testing::Return(true));
+
+
+    EXPECT_CALL(mock, Copy(s_srcPath, s_dstPath)).Times(1);
+    EXPECT_CALL(mock, Copy(srcFile1, dstFile1)).Times(1);
+    EXPECT_CALL(mock, Copy(srcFolder1, dstFolder1)).Times(1);
+    EXPECT_CALL(mock, Copy(srcFile2, dstFile2)).Times(1);
+    EXPECT_CALL(mock, Copy(srcFolder2, dstFolder2)).Times(1);
+
+    copier.Copy(s_srcPath, s_dstPath);
 }
 //------------------------------------------------------------
 TEST(CopyFilesTests, JoinPath)
