@@ -77,6 +77,10 @@ void FileCopier::Copy(const std::string &src, const std::string &dst)
 
     for(int i=0;i< fileList.size(); ++i)
     {
+       if(m_copyCore.IsDir(JoinPath(src, fileList[i])))
+       {
+            Copy(JoinPath(src, fileList[i]), JoinPath(dst,fileList[i] ));
+       }
        m_copyCore.Copy(JoinPath(src, fileList[i]), JoinPath(dst, fileList[i]));
     }
 }
@@ -118,10 +122,9 @@ TEST(CopyFilesTests, CopyFolder)
 {
     MockFileCopier mock;
     FileCopier copier(mock);
-    EXPECT_CALL(mock, Copy(s_srcPath, s_dstPath)).Times(1);
-    EXPECT_CALL(mock, GetFilesFromFolder(s_srcPath)).WillOnce(testing::Return(std::vector<std::string>{"someFolder"}));
-    EXPECT_CALL(mock, IsDir(JoinPath(s_srcPath,"someFolder"))).WillOnce(testing::Return(true));
-    EXPECT_CALL(mock, Copy(JoinPath(s_srcPath,"someFolder"),JoinPath(s_dstPath,"someFolder"))).Times(1);
+    EXPECT_CALL(mock, Copy(s_srcPath, s_dstPath));
+    EXPECT_CALL(mock, GetFilesFromFolder(testing::_)).WillRepeatedly(testing::Return(std::vector<std::string>{"someFolder"}));
+    EXPECT_CALL(mock, Copy(JoinPath(s_srcPath,"someFolder"), JoinPath(s_dstPath,"someFolder"))).Times(1);
     copier.Copy(s_srcPath, s_dstPath);
 }
 //------------------------------------------------------------
