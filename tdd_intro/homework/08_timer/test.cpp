@@ -22,3 +22,15 @@ Timer can be started again any time, no metter in what state it is
 */
 
 #include <gtest/gtest.h>
+
+typedef std::chrono::high_resolution_clock Clock;
+typedef Clock::duration Duration;
+
+class ITimer {
+public:
+  virtual ~ITimer() {}
+
+  virtual void Start(Clock clock) = 0;
+  virtual bool IsExpired() const = 0;
+  virtual Duration TimeLeft() const = 0;
+};
