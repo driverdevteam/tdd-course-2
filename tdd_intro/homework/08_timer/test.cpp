@@ -46,4 +46,14 @@ public:
     MOCK_METHOD0(TimeLeft, Duration(void));
 };
 
+class Timer
+{
+public:
+        void Start();
+        bool IsExpired();
+        Duration TimeLeft();
+private:
+    ITimer& m_timer;
+};
+
 
