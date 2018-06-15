@@ -26,18 +26,12 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
  * 4. Copy folder with folders and files
 */
 
-#include <filesystem>
-namespace std
-{
-    using namespace experimental; // for filesystem support
-}
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+#include "FakeFileSystem.h"
 
 class IFileCopier
 {
 public:
-    virtual void Copy(const std::string& src, const std::string& dst) = 0;
+    virtual void CopyFolderRecursive(const path& src, const path& dst) = 0;
 };
-
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
-

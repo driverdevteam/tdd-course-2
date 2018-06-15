@@ -6,4 +6,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-    test.cpp
+    test.cpp \
+    FakeFileSystem.cpp
+
+HEADERS += \
+    FakeFileSystem.h
+
