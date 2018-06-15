@@ -17,6 +17,27 @@ You don't need to test filesystem functions. To work with a filesystem you shoul
 
 You can start with GMock from https://goo.gl/j7EkQX, good luck!
 */
+
+/*
+ * Test plan:
+ * 1. Copy single file
+ * 2. Copy several files
+ * 3. Copy folder with files
+ * 4. Copy folder with folders and files
+*/
+
+#include <filesystem>
+namespace std
+{
+    using namespace experimental; // for filesystem support
+}
+
+class IFileCopier
+{
+public:
+    virtual void Copy(const std::string& src, const std::string& dst) = 0;
+};
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
