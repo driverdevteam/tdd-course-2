@@ -94,3 +94,10 @@ TEST(TimerTests, IsExpired_StartedLong)
     timer.Start();
     EXPECT_FALSE(timer.IsExpired());
 }
+
+TEST(TimerTests, IsExpired_Expired)
+{
+    Timer timer(Duration(100));
+    timer.Start();
+    EXPECT_TRUE(timer.IsExpired());
+}
