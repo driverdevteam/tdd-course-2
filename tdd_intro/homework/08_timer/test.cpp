@@ -72,7 +72,7 @@ public:
 
     virtual Duration TimeLeft() const override
     {
-        return Duration();
+        return Duration(m_endTime - m_currentTime->Get());
     }
 
 private:
