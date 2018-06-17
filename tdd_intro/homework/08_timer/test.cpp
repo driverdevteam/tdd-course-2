@@ -43,14 +43,15 @@ class ICurrentTime
 public:
     virtual ~ICurrentTime() {}
 
-    virtual TimePoint Get() const;
+    virtual TimePoint Get() const = 0;
 };
 
-class Timer : ITimer
+class Timer : public ITimer
 {
 public:
-    explicit Timer(const Duration& duration)
-        : m_duration(duration)
+    Timer(ICurrentTime* currentTime, const Duration& duration)
+        : m_currentTime(currentTime)
+        , m_duration(duration)
     {}
 
     virtual void Start() override
@@ -74,9 +75,10 @@ public:
 
 private:
     Duration m_duration;
+    ICurrentTime* m_currentTime;
 };
 
-class CurrentTime : ICurrentTime
+class MockCurrentTime : public ICurrentTime
 {
 public:
     MOCK_CONST_METHOD0(Get, TimePoint());
@@ -84,20 +86,23 @@ public:
 
 TEST(TimerTests, IsExpired_NotStarted)
 {
-    Timer timer(Duration(0));
+    MockCurrentTime currentTime;
+    Timer timer(&currentTime, Duration(0));
     EXPECT_TRUE(timer.IsExpired());
 }
 
 TEST(TimerTests, IsExpired_StartedLong)
 {
-    Timer timer(Duration(10000000));
+    MockCurrentTime currentTime;
+    Timer timer(&currentTime, Duration(10000000));
     timer.Start();
     EXPECT_FALSE(timer.IsExpired());
 }
 
 TEST(TimerTests, IsExpired_Expired)
 {
-    Timer timer(Duration(100));
+    MockCurrentTime currentTime;
+    Timer timer(&currentTime, Duration(100));
     timer.Start();
     EXPECT_TRUE(timer.IsExpired());
 }
