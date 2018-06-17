@@ -52,6 +52,7 @@ public:
     Timer(ICurrentTime* currentTime, const Duration& duration)
         : m_currentTime(currentTime)
         , m_duration(duration)
+        , m_endTime(Duration(0))
     {}
 
     virtual void Start() override
@@ -86,9 +87,19 @@ public:
     MOCK_CONST_METHOD0(Get, TimePoint());
 };
 
+void GetTimeCallForIsExpired(MockCurrentTime& currentTime)
+{
+    EXPECT_CALL(currentTime, Get())
+            .WillOnce(testing::Return(TimePoint(Duration(123))))
+            .WillOnce(testing::Return(TimePoint(Duration(321))));
+}
+
 TEST(TimerTests, IsExpired_NotStarted)
 {
     MockCurrentTime currentTime;
+    EXPECT_CALL(currentTime, Get())
+            .WillOnce(testing::Return(TimePoint(Duration(123))));
+
     Timer timer(&currentTime, Duration(0));
     EXPECT_TRUE(timer.IsExpired());
 }
@@ -96,6 +107,8 @@ TEST(TimerTests, IsExpired_NotStarted)
 TEST(TimerTests, IsExpired_StartedLong)
 {
     MockCurrentTime currentTime;
+    GetTimeCallForIsExpired(currentTime);
+
     Timer timer(&currentTime, Duration(10000000));
     timer.Start();
     EXPECT_FALSE(timer.IsExpired());
@@ -104,10 +117,7 @@ TEST(TimerTests, IsExpired_StartedLong)
 TEST(TimerTests, IsExpired_Expired)
 {
     MockCurrentTime currentTime;
-
-    EXPECT_CALL(currentTime, Get())
-            .WillOnce(testing::Return(TimePoint(Duration(123))))
-            .WillOnce(testing::Return(TimePoint(Duration(321))));
+    GetTimeCallForIsExpired(currentTime);
 
     Timer timer(&currentTime, Duration(100));
     timer.Start();
