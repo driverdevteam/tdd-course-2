@@ -163,3 +163,19 @@ TEST(TimerTests, TimeLeft_RestartedNotExpired)
 
     EXPECT_FALSE(timer.IsExpired());
 }
+
+TEST(TimerTests, TimeLeft_RestartedWhileStillRunning)
+{
+    MockCurrentTime currentTime;
+    GetTimeCallForIsExpired(currentTime);
+
+    Timer timer(&currentTime, Duration(1000));
+    timer.Start();
+    timer.Start();
+
+    EXPECT_CALL(currentTime, Get())
+            .WillOnce(testing::Return(TimePoint(Duration(1223))));
+
+    EXPECT_FALSE(timer.IsExpired());
+}
+
