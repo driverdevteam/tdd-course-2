@@ -56,16 +56,17 @@ public:
 
     virtual void Start() override
     {
-
+        m_endTime = m_currentTime->Get() + m_duration;
     }
 
     virtual bool IsExpired() const override
     {
-        if (m_duration.count() != 0)
+        if (m_endTime < m_currentTime->Get())
         {
-            return false;
+            return true;
         }
-        return true;
+
+        return false;
     }
 
     virtual Duration TimeLeft() const override
@@ -76,6 +77,7 @@ public:
 private:
     Duration m_duration;
     ICurrentTime* m_currentTime;
+    TimePoint m_endTime;
 };
 
 class MockCurrentTime : public ICurrentTime
