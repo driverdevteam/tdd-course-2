@@ -21,18 +21,55 @@ Timer allows to determine how much time left till period is expired
 Timer can be started again any time, no metter in what state it is
 */
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <chrono>
 
 typedef std::chrono::high_resolution_clock Clock;
 typedef Clock::duration Duration;
 typedef std::chrono::time_point<Clock> TimePoint;
 
-class ITimer {
+class ITimer
+{
 public:
   virtual ~ITimer() {}
 
   virtual void Start() = 0;
   virtual bool IsExpired() const = 0;
   virtual Duration TimeLeft() const = 0;
+};
+
+class ICurrentTime
+{
+public:
+    virtual ~ICurrentTime() {}
+
+    virtual TimePoint Get() const;
+};
+
+class Timer : ITimer
+{
+public:
+  Timer()
+  {}
+
+  virtual void Start() override
+  {
+
+  }
+
+  virtual bool IsExpired() const override
+  {
+
+  }
+
+  virtual Duration TimeLeft() const override
+  {
+      return Duration();
+  }
+};
+
+class CurrentTime : ICurrentTime
+{
+public:
+    MOCK_CONST_METHOD0(Get, TimePoint());
 };
