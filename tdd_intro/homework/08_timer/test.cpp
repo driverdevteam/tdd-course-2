@@ -52,6 +52,10 @@ public:
     Timer()
     {}
 
+    explicit Timer(const Duration& duration)
+        : m_duration(duration)
+    {}
+
     virtual void Start() override
     {
 
@@ -66,6 +70,9 @@ public:
     {
       return Duration();
     }
+
+private:
+    Duration m_duration;
 };
 
 class CurrentTime : ICurrentTime
