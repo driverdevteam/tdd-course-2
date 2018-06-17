@@ -50,6 +50,7 @@ class Timer : ITimer
 {
 public:
     Timer()
+        : m_duration(0)
     {}
 
     explicit Timer(const Duration& duration)
@@ -63,6 +64,10 @@ public:
 
     virtual bool IsExpired() const override
     {
+        if (m_duration.count() != 0)
+        {
+            return false;
+        }
         return true;
     }
 
