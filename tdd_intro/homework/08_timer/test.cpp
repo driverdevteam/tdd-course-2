@@ -49,23 +49,23 @@ public:
 class Timer : ITimer
 {
 public:
-  Timer()
-  {}
+    Timer()
+    {}
 
-  virtual void Start() override
-  {
+    virtual void Start() override
+    {
 
-  }
+    }
 
-  virtual bool IsExpired() const override
-  {
+    virtual bool IsExpired() const override
+    {
+        return false;
+    }
 
-  }
-
-  virtual Duration TimeLeft() const override
-  {
+    virtual Duration TimeLeft() const override
+    {
       return Duration();
-  }
+    }
 };
 
 class CurrentTime : ICurrentTime
@@ -73,3 +73,9 @@ class CurrentTime : ICurrentTime
 public:
     MOCK_CONST_METHOD0(Get, TimePoint());
 };
+
+TEST(TimerTests, IsExpired_NotStarted)
+{
+    Timer timer;
+    EXPECT_TRUE(timer.IsExpired());
+}
