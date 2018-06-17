@@ -102,6 +102,11 @@ TEST(TimerTests, IsExpired_StartedLong)
 TEST(TimerTests, IsExpired_Expired)
 {
     MockCurrentTime currentTime;
+
+    EXPECT_CALL(currentTime, Get())
+            .WillOnce(testing::Return(TimePoint(Duration(123))))
+            .WillOnce(testing::Return(TimePoint(Duration(321))));
+
     Timer timer(&currentTime, Duration(100));
     timer.Start();
     EXPECT_TRUE(timer.IsExpired());
