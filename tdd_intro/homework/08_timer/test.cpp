@@ -59,7 +59,7 @@ public:
 
     virtual bool IsExpired() const override
     {
-        return false;
+        return true;
     }
 
     virtual Duration TimeLeft() const override
