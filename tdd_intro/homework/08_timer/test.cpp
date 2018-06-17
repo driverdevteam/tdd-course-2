@@ -49,10 +49,6 @@ public:
 class Timer : ITimer
 {
 public:
-    Timer()
-        : m_duration(0)
-    {}
-
     explicit Timer(const Duration& duration)
         : m_duration(duration)
     {}
@@ -88,7 +84,7 @@ public:
 
 TEST(TimerTests, IsExpired_NotStarted)
 {
-    Timer timer;
+    Timer timer(Duration(0));
     EXPECT_TRUE(timer.IsExpired());
 }
 
