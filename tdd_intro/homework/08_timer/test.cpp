@@ -72,7 +72,7 @@ public:
 
     virtual Duration TimeLeft() const override
     {
-      return Duration();
+        return Duration();
     }
 
 private:
@@ -122,4 +122,14 @@ TEST(TimerTests, IsExpired_Expired)
     Timer timer(&currentTime, Duration(100));
     timer.Start();
     EXPECT_TRUE(timer.IsExpired());
+}
+
+TEST(TimerTests, TimeLeft_StartedNotExpired)
+{
+    MockCurrentTime currentTime;
+    GetTimeCallForIsExpired(currentTime);
+
+    Timer timer(&currentTime, Duration(1000));
+    timer.Start();
+    EXPECT_EQ(Duration(802), timer.TimeLeft());
 }
