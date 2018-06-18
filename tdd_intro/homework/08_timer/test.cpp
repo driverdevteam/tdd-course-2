@@ -32,7 +32,7 @@ typedef std::chrono::time_point<Clock> TimePoint;
 class ITimer {
 public:
   virtual ~ITimer() {}
-  virtual void Start(Clock clock) = 0;
+  virtual void Start() = 0;
   virtual bool IsExpired() const = 0;
   virtual Duration TimeLeft() const = 0;
 
@@ -52,15 +52,23 @@ public:
     MOCK_CONST_METHOD0(Get, TimePoint(void));
 };
 
-class Timer
+class Timer: public ITimer
 {
 public:
+        ITimer(ICurrentTime& currentTime, Duration& duration);
         void Start();
         bool IsExpired();
         Duration TimeLeft();
 private:
-    ITimer& m_timer;
+    Duration m_duration;
     ICurrentTime& m_currentTime;
     TimePoint m_endTime;
 };
 
+TEST(TimerTests, Start)
+{
+    MockCurrentTime currentTime;
+    Timer timer(currentTime, 1);
+    EXPECT_CALL(currentTime, GetCurrentTime()).WillOnce(testing::Return(TimePoint(Duration(123))));
+    EXPECT_TRUE(timer.IsExpired());
+}
