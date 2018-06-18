@@ -166,7 +166,7 @@ TEST(CoffeCoretest, CreateCappuccinoBig)
 
     EXPECT_CALL(mock, AddMilk(CupSizeBig / 3, 80)).Times(1);
     EXPECT_CALL(mock, AddCoffee(CupSizeBig / 3)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(CupSizeBig / 3)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeBig / 3)).Times(1);
     machine.CreateBigCup();
     machine.CreateCappuccino();
 }
