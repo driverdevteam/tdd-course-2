@@ -78,6 +78,7 @@ public:
     void CreateAmericano();
     void CreateCappuccino();
     void CreateLatte();
+    void CreateMarochino();
 private:
     ICoffeCore& m_core;
     CupSize m_size;
@@ -134,6 +135,10 @@ void CoffeeMachine::CreateLatte()
     m_core.AddMilk(m_size / 4, 90);
     m_core.AddCoffee(m_size / 2);
     m_core.AddMilkFoam(m_size / 4);
+}
+
+void CoffeeMachine::CreateMarochino()
+{
 }
 
 TEST(CoffeeCoretest, CreateHotWater)
@@ -224,4 +229,16 @@ TEST(CoffeeCoretest, CreateLatteLittle)
     EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 4)).Times(1);
     machine.CreateLittleCup();
     machine.CreateLatte();
+}
+
+TEST(CoffeeCoretest, CreateMarochinoBig)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddChocolate(CupSizeBig / 4)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeBig / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeBig / 4)).Times(1);
+    machine.CreateBigCup();
+    machine.CreateMarochino();
 }
