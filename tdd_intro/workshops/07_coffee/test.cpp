@@ -177,3 +177,15 @@ TEST(CoffeCoretest, CreateCappuccinoBig)
     machine.CreateBigCup();
     machine.CreateCappuccino();
 }
+
+TEST(CoffeCoretest, CreateCappuccinoLittle)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddMilk(CupSizeLittle / 3, 80)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 3)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 3)).Times(1);
+    machine.CreateLittleCup();
+    machine.CreateCappuccino();
+}
