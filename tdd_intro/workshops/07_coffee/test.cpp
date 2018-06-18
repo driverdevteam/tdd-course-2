@@ -249,3 +249,15 @@ TEST(CoffeeCoretest, CreateMarochinoBig)
     machine.CreateBigCup();
     machine.CreateMarochino();
 }
+
+TEST(CoffeeCoretest, CreateMarochinoLittle)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddChocolate(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 4)).Times(1);
+    machine.CreateLittleCup();
+    machine.CreateMarochino();
+}
