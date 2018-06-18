@@ -105,4 +105,12 @@ TEST(TimerTests, Start)
     EXPECT_FALSE(timer.IsExpired());
 }
 
+TEST(TimerTests, TimeLeft)
+{
+     MockCurrentTime currentTime;
+     EXPECT_CALL(currentTime, GetCurrentTime()).WillRepeatedly(testing::Return(TimePoint(Duration(100))));
+     Timer timer(currentTime, Duration(100));
+     timer.Start();
+     EXPECT_EQ(Duration(0), timer.TimeLeft());
+}
 
