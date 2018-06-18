@@ -1,4 +1,4 @@
-include(../../gtest.pri)
+include(../../gmock.pri)
 
 TEMPLATE = app
 CONFIG += console c++11
