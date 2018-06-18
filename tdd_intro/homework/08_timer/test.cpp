@@ -27,24 +27,25 @@ Timer can be started again any time, no metter in what state it is
 
 typedef std::chrono::high_resolution_clock Clock;
 typedef Clock::duration Duration;
-
+typedef std::chrono::time_point<Clock> TimePoint;
 
 class ITimer {
 public:
   virtual ~ITimer() {}
-
-  virtual void Start(Clock& clock) = 0;
+  virtual void Start(Clock clock) = 0;
   virtual bool IsExpired() const = 0;
   virtual Duration TimeLeft() const = 0;
+
 };
 
-class MockTimer : public ITimer
+class ICurrentTime
 {
 public:
-    MOCK_METHOD1(Start, void(Clock&));
-    MOCK_METHOD0(IsExpired, bool(void));
-    MOCK_METHOD0(TimeLeft, Duration(void));
+    virtual ~ICurrentTime() {}
+
+    virtual TimePoint Get() const = 0;
 };
+
 
 class Timer
 {
@@ -54,6 +55,8 @@ public:
         Duration TimeLeft();
 private:
     ITimer& m_timer;
-};
+    ICurrentTime& m_currentTime;
+    TimePoint m_endTime;
 
+};
 
