@@ -46,6 +46,11 @@ public:
     virtual TimePoint Get() const = 0;
 };
 
+class MockCurrentTime: public ICurrentTime
+{
+public:
+    MOCK_CONST_METHOD0(Get, TimePoint(void));
+};
 
 class Timer
 {
@@ -57,6 +62,5 @@ private:
     ITimer& m_timer;
     ICurrentTime& m_currentTime;
     TimePoint m_endTime;
-
 };
 
