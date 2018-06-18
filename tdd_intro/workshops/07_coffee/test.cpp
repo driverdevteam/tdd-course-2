@@ -136,7 +136,7 @@ void CoffeeMachine::CreateLatte()
     m_core.AddMilkFoam(m_size / 4);
 }
 
-TEST(CoffeCoretest, CreateHotWater)
+TEST(CoffeeCoretest, CreateHotWater)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
@@ -146,7 +146,7 @@ TEST(CoffeCoretest, CreateHotWater)
     machine.CreateHotWaterCup();
 }
 
-TEST(CoffeCoretest, CreateAmericanoBig)
+TEST(CoffeeCoretest, CreateAmericanoBig)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
@@ -157,7 +157,7 @@ TEST(CoffeCoretest, CreateAmericanoBig)
     machine.CreateAmericano();
 }
 
-TEST(CoffeCoretest, CreateAmericanoLittle)
+TEST(CoffeeCoretest, CreateAmericanoLittle)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
@@ -168,7 +168,7 @@ TEST(CoffeCoretest, CreateAmericanoLittle)
     machine.CreateAmericano();
 }
 
-TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
+TEST(CoffeeCoretest, CreateAmericanoLittle_NoCup)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
@@ -178,7 +178,7 @@ TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
     EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
 }
 
-TEST(CoffeCoretest, CreateCappuccinoBig)
+TEST(CoffeeCoretest, CreateCappuccinoBig)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
@@ -190,7 +190,7 @@ TEST(CoffeCoretest, CreateCappuccinoBig)
     machine.CreateCappuccino();
 }
 
-TEST(CoffeCoretest, CreateCappuccinoLittle)
+TEST(CoffeeCoretest, CreateCappuccinoLittle)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
@@ -202,7 +202,7 @@ TEST(CoffeCoretest, CreateCappuccinoLittle)
     machine.CreateCappuccino();
 }
 
-TEST(CoffeCoretest, CreateLatteBig)
+TEST(CoffeeCoretest, CreateLatteBig)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
