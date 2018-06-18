@@ -91,7 +91,12 @@ bool Timer::IsExpired() const
 
 Duration Timer::TimeLeft() const
 {
-    return Duration();
+    TimePoint currentTime(m_currentTime.GetCurrentTime());
+    if (m_endTime < currentTime)
+    {
+        return Duration(0);
+    }
+    return Duration(m_endTime - currentTime);
 }
 
 TEST(TimerTests, Start)
@@ -112,5 +117,22 @@ TEST(TimerTests, TimeLeft)
      Timer timer(currentTime, Duration(100));
      timer.Start();
      EXPECT_EQ(Duration(0), timer.TimeLeft());
+}
+
+TEST(TimerTests, Restart)
+{
+    MockCurrentTime currentTime;
+    EXPECT_CALL(currentTime, GetCurrentTime())
+                .WillOnce(testing::Return(TimePoint(Duration(12))))
+                .WillOnce(testing::Return(TimePoint(Duration(40))));
+
+    Timer timer(currentTime, Duration(100));
+    timer.Start();
+    timer.Start();
+
+    EXPECT_CALL(currentTime, GetCurrentTime())
+            .WillOnce(testing::Return(TimePoint(Duration(100))));
+
+    EXPECT_FALSE(timer.IsExpired());
 }
 
