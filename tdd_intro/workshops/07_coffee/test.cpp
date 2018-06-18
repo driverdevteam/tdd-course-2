@@ -108,8 +108,8 @@ void CoffeeMachine::CreateAmericano()
     {
         throw std::runtime_error("cap is empty");
     }
-    m_core.AddWater(m_size / 2, 60);
-    m_core.AddCoffee(m_size / 2);
+    m_core.AddWater(m_size / 3, 60);
+    m_core.AddCoffee((2*m_size) / 3);
 }
 
 TEST(CoffeCoretest, CreateHotWater)
@@ -122,15 +122,13 @@ TEST(CoffeCoretest, CreateHotWater)
     machine.CreateHotWaterCup();
 }
 
-// FIX: sequence
-//- americano: water & coffee 1:2 or 1:3. Water temp 60C
 TEST(CoffeCoretest, CreateAmericanoBig)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
 
-    EXPECT_CALL(mock, AddWater(CupSizeBig / 2, 60)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(CupSizeBig / 2)).Times(1);
+    EXPECT_CALL(mock, AddWater(CupSizeBig / 3, 60)).Times(1);
+    EXPECT_CALL(mock, AddCoffee((2*CupSizeBig) / 3)).Times(1);
     machine.CreateBigCup();
     machine.CreateAmericano();
 }
@@ -140,8 +138,8 @@ TEST(CoffeCoretest, CreateAmericanoLittle)
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
 
-    EXPECT_CALL(mock, AddWater(CupSizeLittle / 2, 60)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 2)).Times(1);
+    EXPECT_CALL(mock, AddWater(CupSizeLittle / 3, 60)).Times(1);
+    EXPECT_CALL(mock, AddCoffee((2*CupSizeLittle) / 3)).Times(1);
     machine.CreateLittleCup();
     machine.CreateAmericano();
 }
