@@ -127,6 +127,13 @@ void CoffeeMachine::CreateCappuccino()
 
 void CoffeeMachine::CreateLatte()
 {
+    if(m_size == CupSizeInvalid)
+    {
+        throw std::runtime_error("cap is empty");
+    }
+    m_core.AddMilk(m_size / 4, 90);
+    m_core.AddCoffee(m_size / 2);
+    m_core.AddMilkFoam(m_size / 4);
 }
 
 TEST(CoffeCoretest, CreateHotWater)
