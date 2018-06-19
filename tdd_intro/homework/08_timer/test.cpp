@@ -39,7 +39,7 @@ public:
 
     virtual void Start(int periodSec) = 0;
     virtual bool IsExpired() const = 0;
-//    virtual Duration TimeLeft() const = 0;
+    virtual Duration TimeLeft() const = 0;
 };
 
 template <typename TClock>
@@ -49,7 +49,7 @@ public:
 
     virtual void Start(int periodSec) override;
     virtual bool IsExpired() const override;
-//    virtual Duration TimeLeft() override;
+    virtual Duration TimeLeft() const override;
 
 private:
     TClock* m_clock;
@@ -77,11 +77,11 @@ bool Timer<TClock>::IsExpired() const
     return m_clock->now() - m_startPoint >= m_duration;
 }
 
-//template<typename TClock>
-//Duration Timer<TClock>::TimeLeft()
-//{
-
-//}
+template<typename TClock>
+Duration Timer<TClock>::TimeLeft() const
+{
+    return Duration(std::chrono::seconds(0));
+}
 
 class MocClock
 {
@@ -129,6 +129,13 @@ TEST (TimerTest, IsExpired_return_true)
     EXPECT_TRUE(timer.IsExpired());
 }
 
+TEST (TimerTest, TimeLeft_return_10)
+{
+    MocClock moc;
+    Timer<MocClock> timer = Timer<MocClock>(&moc);
+    timer.Start(10);
 
+    EXPECT_EQ(10, std::chrono::duration_cast<std::chrono::hours>(timer.TimeLeft()).count());
+}
 
 
