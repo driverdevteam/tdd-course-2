@@ -80,7 +80,7 @@ bool Timer<TClock>::IsExpired() const
 template<typename TClock>
 Duration Timer<TClock>::TimeLeft() const
 {
-    return Duration(std::chrono::seconds(0));
+    return Duration(std::chrono::seconds(10));
 }
 
 class MocClock
