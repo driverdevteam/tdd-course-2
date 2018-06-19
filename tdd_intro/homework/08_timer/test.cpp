@@ -196,5 +196,8 @@ TEST (TimerTest, IsExpired_return_true_before_start)
     MocClock moc;
     Timer<MocClock> timer = Timer<MocClock>(&moc);
 
+    moc.Rewind(100500);
     EXPECT_TRUE(timer.IsExpired());
 }
+
+
