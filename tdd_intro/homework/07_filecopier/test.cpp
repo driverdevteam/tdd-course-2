@@ -20,3 +20,15 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+class IFileCopier
+{
+public:
+    ~IFileCopier();
+    virtual void Copy(const std::string& src, const std::string& dst) = 0;
+};
+
+class FileCopierMock : public IFileCopier
+{
+public:
+    MOCK_METHOD2(Copy, void(const std::string&, const std::string&));
+};
