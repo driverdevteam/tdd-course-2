@@ -77,7 +77,7 @@ void Timer<TClock>::Start(int periodSec)
 template<typename TClock>
 bool Timer<TClock>::IsExpired() const
 {
-    return TimeLeft().count() == 0;
+    return TimeLeft().count() <= 0;
 }
 
 template<typename TClock>
