@@ -42,7 +42,7 @@ public:
     virtual void AddWater(int gram, int temperature) = 0;
     virtual void AddSugar(int gram) = 0;
     virtual void AddCoffee(int gram) = 0;
-    virtual void AddMilk(int gram) = 0;
+    virtual void AddMilk(int gram, int temperature) = 0;
     virtual void AddMilkFoam(int gram) = 0;
     virtual void AddChocolate(int gram) = 0;
     virtual void AddCream(int gram) = 0;
@@ -54,7 +54,7 @@ public:
     MOCK_METHOD2(AddWater, void(int, int));
     MOCK_METHOD1(AddSugar, void(int));
     MOCK_METHOD1(AddCoffee, void(int));
-    MOCK_METHOD1(AddMilk, void(int));
+    MOCK_METHOD2(AddMilk, void(int, int));
     MOCK_METHOD1(AddMilkFoam, void(int));
     MOCK_METHOD1(AddChocolate, void(int));
     MOCK_METHOD1(AddCream, void(int));
@@ -76,6 +76,9 @@ public:
     void CreateBigCup();
     void CreateHotWaterCup();
     void CreateAmericano();
+    void CreateCappuccino();
+    void CreateLatte();
+    void CreateMarochino();
 private:
     ICoffeCore& m_core;
     CupSize m_size;
@@ -108,11 +111,44 @@ void CoffeeMachine::CreateAmericano()
     {
         throw std::runtime_error("cap is empty");
     }
-    m_core.AddWater(m_size / 2, 60);
-    m_core.AddCoffee(m_size / 2);
+    m_core.AddWater(m_size / 3, 60);
+    m_core.AddCoffee((2*m_size) / 3);
 }
 
-TEST(CoffeCoretest, CreateHotWater)
+void CoffeeMachine::CreateCappuccino()
+{
+    if(m_size == CupSizeInvalid)
+    {
+        throw std::runtime_error("cap is empty");
+    }
+    m_core.AddMilk(m_size / 3, 80);
+    m_core.AddCoffee(m_size / 3);
+    m_core.AddMilkFoam(m_size / 3);
+}
+
+void CoffeeMachine::CreateLatte()
+{
+    if(m_size == CupSizeInvalid)
+    {
+        throw std::runtime_error("cap is empty");
+    }
+    m_core.AddMilk(m_size / 4, 90);
+    m_core.AddCoffee(m_size / 2);
+    m_core.AddMilkFoam(m_size / 4);
+}
+
+void CoffeeMachine::CreateMarochino()
+{
+    if(m_size == CupSizeInvalid)
+    {
+        throw std::runtime_error("cap is empty");
+    }
+    m_core.AddChocolate(m_size / 4);
+    m_core.AddCoffee(m_size / 4);
+    m_core.AddMilkFoam(m_size / 4);
+}
+
+TEST(CoffeeCoretest, CreateHotWater)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
@@ -122,31 +158,29 @@ TEST(CoffeCoretest, CreateHotWater)
     machine.CreateHotWaterCup();
 }
 
-// FIX: sequence
-//- americano: water & coffee 1:2 or 1:3. Water temp 60C
-TEST(CoffeCoretest, CreateAmericanoBig)
+TEST(CoffeeCoretest, CreateAmericanoBig)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
 
-    EXPECT_CALL(mock, AddWater(CupSizeBig / 2, 60)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(CupSizeBig / 2)).Times(1);
+    EXPECT_CALL(mock, AddWater(CupSizeBig / 3, 60)).Times(1);
+    EXPECT_CALL(mock, AddCoffee((2*CupSizeBig) / 3)).Times(1);
     machine.CreateBigCup();
     machine.CreateAmericano();
 }
 
-TEST(CoffeCoretest, CreateAmericanoLittle)
+TEST(CoffeeCoretest, CreateAmericanoLittle)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
 
-    EXPECT_CALL(mock, AddWater(CupSizeLittle / 2, 60)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 2)).Times(1);
+    EXPECT_CALL(mock, AddWater(CupSizeLittle / 3, 60)).Times(1);
+    EXPECT_CALL(mock, AddCoffee((2*CupSizeLittle) / 3)).Times(1);
     machine.CreateLittleCup();
     machine.CreateAmericano();
 }
 
-TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
+TEST(CoffeeCoretest, CreateAmericanoLittle_NoCup)
 {
     CoffeeCoreMock mock;
     CoffeeMachine machine(mock);
@@ -156,4 +190,74 @@ TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
     EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
 }
 
-// add other tests
+TEST(CoffeeCoretest, CreateCappuccinoBig)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddMilk(CupSizeBig / 3, 80)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeBig / 3)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeBig / 3)).Times(1);
+    machine.CreateBigCup();
+    machine.CreateCappuccino();
+}
+
+TEST(CoffeeCoretest, CreateCappuccinoLittle)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddMilk(CupSizeLittle / 3, 80)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 3)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 3)).Times(1);
+    machine.CreateLittleCup();
+    machine.CreateCappuccino();
+}
+
+TEST(CoffeeCoretest, CreateLatteBig)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddMilk(CupSizeBig / 4, 90)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeBig / 2)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeBig / 4)).Times(1);
+    machine.CreateBigCup();
+    machine.CreateLatte();
+}
+
+TEST(CoffeeCoretest, CreateLatteLittle)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddMilk(CupSizeLittle / 4, 90)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 2)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 4)).Times(1);
+    machine.CreateLittleCup();
+    machine.CreateLatte();
+}
+
+TEST(CoffeeCoretest, CreateMarochinoBig)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddChocolate(CupSizeBig / 4)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeBig / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeBig / 4)).Times(1);
+    machine.CreateBigCup();
+    machine.CreateMarochino();
+}
+
+TEST(CoffeeCoretest, CreateMarochinoLittle)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddChocolate(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 4)).Times(1);
+    machine.CreateLittleCup();
+    machine.CreateMarochino();
+}
