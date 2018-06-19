@@ -52,6 +52,9 @@ public:
     virtual Duration TimeLeft() const override;
 
 private:
+    Duration TimeElapsed() const;
+
+private:
     TClock* m_clock;
     Duration m_duration;
     TimePoint m_startPoint;
@@ -74,13 +77,19 @@ void Timer<TClock>::Start(int periodSec)
 template<typename TClock>
 bool Timer<TClock>::IsExpired() const
 {
-    return m_clock->now() - m_startPoint >= m_duration;
+    return TimeLeft().count() == 0;
 }
 
 template<typename TClock>
 Duration Timer<TClock>::TimeLeft() const
 {
-    return m_duration - (m_clock->now() - m_startPoint);
+    return m_duration - TimeElapsed();
+}
+
+template<typename TClock>
+Duration Timer<TClock>::TimeElapsed() const
+{
+    return m_clock->now() - m_startPoint;
 }
 
 class MocClock
