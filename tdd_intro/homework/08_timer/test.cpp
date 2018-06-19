@@ -135,7 +135,7 @@ TEST (TimerTest, TimeLeft_return_10)
     Timer<MocClock> timer = Timer<MocClock>(&moc);
     timer.Start(10);
 
-    EXPECT_EQ(10, std::chrono::duration_cast<std::chrono::hours>(timer.TimeLeft()).count());
+    EXPECT_EQ(10, std::chrono::duration_cast<std::chrono::seconds>(timer.TimeLeft()).count());
 }
 
 
