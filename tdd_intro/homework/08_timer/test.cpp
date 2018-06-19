@@ -21,4 +21,10 @@ Timer allows to determine how much time left till period is expired
 Timer can be started again any time, no metter in what state it is
 */
 
+//1. Check period expired
+//2. Check period the period not expired
+//3. Check time left
+//4. Check previous items after Start while timer is running
+
 #include <gtest/gtest.h>
+
