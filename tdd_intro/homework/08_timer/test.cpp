@@ -138,6 +138,16 @@ TEST (TimerTest, IsExpired_return_true)
     EXPECT_TRUE(timer.IsExpired());
 }
 
+TEST (TimerTest, IsExpired_after_long_time_return_true)
+{
+    MocClock moc;
+    Timer<MocClock> timer = Timer<MocClock>(&moc);
+    timer.Start(10);
+
+    moc.Rewind(1000);
+    EXPECT_TRUE(timer.IsExpired());
+}
+
 TEST (TimerTest, TimeLeft_return_10)
 {
     MocClock moc;
