@@ -138,4 +138,13 @@ TEST (TimerTest, TimeLeft_return_10)
     EXPECT_EQ(10, std::chrono::duration_cast<std::chrono::seconds>(timer.TimeLeft()).count());
 }
 
+TEST (TimerTest, TimeLeft_return_0)
+{
+    MocClock moc;
+    Timer<MocClock> timer = Timer<MocClock>(&moc);
+    timer.Start(10);
+
+    moc.Rewind(10);
+    EXPECT_EQ(0, std::chrono::duration_cast<std::chrono::seconds>(timer.TimeLeft()).count());
+}
 
