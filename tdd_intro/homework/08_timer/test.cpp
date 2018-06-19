@@ -83,7 +83,9 @@ bool Timer<TClock>::IsExpired() const
 template<typename TClock>
 Duration Timer<TClock>::TimeLeft() const
 {
-    return m_duration - TimeElapsed();
+    return m_duration > TimeElapsed()
+            ? m_duration - TimeElapsed()
+            : Duration();
 }
 
 template<typename TClock>
