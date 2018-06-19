@@ -167,3 +167,14 @@ TEST (TimerTest, TimeLeft_return_0)
     EXPECT_EQ(0, std::chrono::duration_cast<std::chrono::seconds>(timer.TimeLeft()).count());
 }
 
+TEST (TimerTest, IsExpired_return_false_after_restart)
+{
+    MocClock moc;
+    Timer<MocClock> timer = Timer<MocClock>(&moc);
+    timer.Start(10);
+
+    moc.Rewind(100500);
+    timer.Start(10);
+
+    EXPECT_FALSE(timer.IsExpired());
+}
