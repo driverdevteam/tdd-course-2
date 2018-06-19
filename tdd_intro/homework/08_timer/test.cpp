@@ -45,20 +45,21 @@ public:
 template <typename TClock>
 class Timer : public ITimer {
 public:
-    Timer(TClock clock);
+    Timer(TClock* clock);
 
     virtual void Start(int periodSec) override;
     virtual bool IsExpired() const override;
 //    virtual Duration TimeLeft() override;
 
 private:
-    TClock m_clock;
-    int m_periodSec;
+    TClock* m_clock;
+    Duration m_duration;
     TimePoint m_startPoint;
 };
 
 template<typename TClock>
-Timer<TClock>::Timer(TClock clock)
+Timer<TClock>::Timer(TClock* clock)
+    : m_clock(clock)
 {
 
 }
@@ -66,13 +67,14 @@ Timer<TClock>::Timer(TClock clock)
 template<typename TClock>
 void Timer<TClock>::Start(int periodSec)
 {
-
+    m_duration = Duration(std::chrono::seconds(periodSec));
+    m_startPoint = m_clock->now();
 }
 
 template<typename TClock>
 bool Timer<TClock>::IsExpired() const
 {
-    return false;
+    return m_clock->now() - m_startPoint >= m_duration;
 }
 
 //template<typename TClock>
@@ -86,7 +88,8 @@ class MocClock
 public:
     MocClock();
 
-    TimePoint now();
+    TimePoint now() const;
+    void Rewind(int sec);
 
 private:
     TimePoint m_timePoint;
@@ -94,24 +97,37 @@ private:
 
 MocClock::MocClock()
 {
-
 }
 
-TimePoint MocClock::now()
+TimePoint MocClock::now() const
 {
     return m_timePoint;
+}
+
+void MocClock::Rewind(int sec)
+{
+    m_timePoint += std::chrono::seconds(sec);
 }
 
 
 TEST (TimerTest, IsExpired_return_false)
 {
     MocClock moc;
-    Timer<MocClock> timer = Timer<MocClock>(moc);
+    Timer<MocClock> timer = Timer<MocClock>(&moc);
     timer.Start(10);
 
     EXPECT_FALSE(timer.IsExpired());
 }
 
+TEST (TimerTest, IsExpired_return_true)
+{
+    MocClock moc;
+    Timer<MocClock> timer = Timer<MocClock>(&moc);
+    timer.Start(10);
+
+    moc.Rewind(10);
+    EXPECT_TRUE(timer.IsExpired());
+}
 
 
 
