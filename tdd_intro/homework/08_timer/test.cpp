@@ -28,3 +28,12 @@ Timer can be started again any time, no metter in what state it is
 
 #include <gtest/gtest.h>
 
+TEST (TimerTest, IsExpired_return_true)
+{
+    MocClock moc;
+    Timer timer = Timer(moc);
+    timer.Start(10);
+
+    EXPECT_FALSE(timer.IsExpired());
+}
+
