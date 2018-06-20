@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <memory>
 
 #include "SocketWrapper.h"
 
@@ -73,7 +74,7 @@ SocketWrapper SocketWrapper::Accept()
     return SocketWrapper(other);
 }
 
-ISocketWrapper::SockPtr SocketWrapper::Connect(const std::string& addr, int16_t port)
+SocketWrapper SocketWrapper::Connect(const std::string& addr, int16_t port)
 {
     sockaddr_in addres;
     addres.sin_family = AF_INET;
@@ -84,15 +85,21 @@ ISocketWrapper::SockPtr SocketWrapper::Connect(const std::string& addr, int16_t 
     {
         throw std::runtime_error(GetExceptionString("Failed to connect to server.", WSAGetLastError()));
     }
-    return std::make_shared<SocketWrapper>(other);
+    return SocketWrapper(other);
 }
 
-void SocketWrapper::Read(std::vector<char>& buffer)
+void SocketWrapper::Read(std::string& buffer)
 {
-    recv(m_socket, buffer.data(), buffer.size(), 0);
+    std::vector<char> bufferTmp;
+    bufferTmp.resize(buffer.size());
+    if (SOCKET_ERROR == recv(m_socket, bufferTmp.data(), bufferTmp.size(), 0))
+    {
+        throw std::runtime_error(GetExceptionString("Failed to connect to server.", WSAGetLastError()));
+    }
+    buffer.assign(bufferTmp.begin(), bufferTmp.end());
 }
 
-void SocketWrapper::Write(const std::vector<char>& buffer)
+void SocketWrapper::Write(const std::string& buffer)
 {
     send(m_socket, buffer.data(), buffer.size(), 0);
 }
