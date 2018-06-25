@@ -149,6 +149,11 @@ std::string Number0_99ToString(int num)
 
     std::string result;
 
+    if (num / 10 == 2)
+    {
+        result = GetTwentyNumberString();
+    }
+
     if (num < s_numbersStrings.size())
     {
         result = s_numbersStrings[num];
