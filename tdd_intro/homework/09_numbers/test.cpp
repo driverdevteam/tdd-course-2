@@ -205,9 +205,24 @@ std::string Number0_99ToString(int num)
         result = s_tensNumbersStrings[tensNum];
     }
 
-    if (num < s_numbersStrings.size())
+    bool addNumber = true;
+
+    if (tensNum >= 2)
     {
-        result = s_numbersStrings[num];
+        num %= 10;
+        if (num != 0)
+        {
+            result += "-";
+        }
+        else
+        {
+            addNumber = false;
+        }
+    }
+
+    if (addNumber && num < s_numbersStrings.size())
+    {
+        result += s_numbersStrings[num];
     }
 
     return result;
