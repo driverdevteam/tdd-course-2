@@ -387,3 +387,8 @@ TEST(NumbersTests, NumberToString_OutOfBounds)
     EXPECT_THROW(NumberToString(-1), std::out_of_range);
     EXPECT_THROW(NumberToString(100000), std::out_of_range);
 }
+
+TEST(NumbersTests, NumberToString_42)
+{
+    EXPECT_EQ(GetFourtyNumberString() + "-" + GetTwoNumberString(), NumberToString(42));
+}
