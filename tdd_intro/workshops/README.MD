@@ -37,31 +37,135 @@ Example declaration of function required can be something like this:
 std::map<std::string, int> WordsCount(std::string)
 ```
 
-### Anagram
+### Armstrong number 
 
-Given a word and a list of possible anagrams, select the correct sublist.
+An Armstrong number is a number that is the sum of its own digits each raised to the power of the number of digits.
 
-Given "listen" and a list of candidates like "enlists" "google" "inlets" "banana" the program should return a list containing "inlets".
+For example:
+
+9 is an Armstrong number, because 9 = 9^1 = 9
+10 is not an Armstrong number, because 10 != 1^2 + 0^2 = 1
+153 is an Armstrong number, because: 153 = 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
+154 is not an Armstrong number, because: 154 != 1^3 + 5^3 + 4^3 = 1 + 125 + 64 = 190
+9474 is an Armstrong number
+
+Write some code to determine whether a number is an Armstrong number.
+
+Acceptance test
+5 - true
+100 - false
+9475 - false
+9926315 - true
+9926314 - false
 
 _from http://exercism.io/_
 
-### Trinary
+### Roman numerals
 
-Convert a trinary number, represented as a string (e.g. '102012'), to its decimal equivalent using first principles.
+Write a function to convert from normal numbers to Roman Numerals.
 
-The program should consider strings specifying an invalid trinary as the value 0.
+The Romans wrote numbers using letters - I, V, X, L, C, D, M. (converter http://www.novaroma.org/via_romana/numbers.html)
 
-Trinary numbers contain three symbols: 0, 1, and 2.
+There is no need to be able to convert numbers larger than about 3000. (The Romans themselves didn't tend to go any higher)
 
-The last place in a trinary number is the 1's place. The second to last is the 3's place, the third to last is the 9's place, etc.
+Wikipedia says: Modern Roman numerals ... are written by expressing each digit separately starting with the left most digit and skipping any digit with a value of zero.
+
+To see this in practice, consider the example of 1990.
+In Roman numerals 1990 is MCMXC:
+1000=M 900=CM 90=XC
+
+2008 is written as MMVIII:
+2000=MM 8=VIII
+
+1998 is written as MCMXCVIII.
+
+## Functionality decomposition training:
+
+### Bank OCR
+
+Your manager has recently purchased a machine that assists in reading letters and faxes sent in by branch offices. The machine scans the paper documents, and produces a file with a number of entries. You will write a program to parse this file.
+
+#### Specification
+#### User Story 1
+
+The following format is created by the machine:
 ```
-# "102012"
-    1       0       2       0       1       2    # the number
-1*3^5 + 0*3^4 + 2*3^3 + 0*3^2 + 1*3^1 + 2*3^0    # the value
-  243 +     0 +    54 +     0 +     3 +     2 =  302
+    _  _     _  _  _  _  _
+  | _| _||_||_ |_   ||_||_|
+  ||_  _|  | _||_|  ||_| _|
 ```
+Each entry is 3 lines long, and each line has 27 characters. 3 lines of each entry contain an account number written using pipes and underscores.
 
-If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
+Each account number should have 9 digits, all of which should be in the range 0-9. A normal file contains around 500 entries.
+
+Write a program that can take this file and parse it into actual account numbers.
+
+Example input and output
+```
+ _  _  _  _  _  _  _  _  _
+| || || || || || || || || |
+|_||_||_||_||_||_||_||_||_|
+
+=> 000000000
+
+  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |
+
+=> 111111111
+
+ _  _  _  _  _  _  _  _  _
+ _| _| _| _| _| _| _| _| _|
+|_ |_ |_ |_ |_ |_ |_ |_ |_
+
+=> 222222222
+
+ _  _  _  _  _  _  _  _  _
+ _| _| _| _| _| _| _| _| _|
+ _| _| _| _| _| _| _| _| _|
+
+=> 333333333
+
+|_||_||_||_||_||_||_||_||_|
+  |  |  |  |  |  |  |  |  |
+
+=> 444444444
+
+ _  _  _  _  _  _  _  _  _
+|_ |_ |_ |_ |_ |_ |_ |_ |_
+ _| _| _| _| _| _| _| _| _|
+
+=> 555555555
+
+ _  _  _  _  _  _  _  _  _
+|_ |_ |_ |_ |_ |_ |_ |_ |_
+|_||_||_||_||_||_||_||_||_|
+
+=> 666666666
+
+ _  _  _  _  _  _  _  _  _
+  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |
+
+=> 777777777
+
+ _  _  _  _  _  _  _  _  _
+|_||_||_||_||_||_||_||_||_|
+|_||_||_||_||_||_||_||_||_|
+
+=> 888888888
+
+ _  _  _  _  _  _  _  _  _
+|_||_||_||_||_||_||_||_||_|
+ _| _| _| _| _| _| _| _| _|
+
+=> 999999999
+
+    _  _     _  _  _  _  _
+  | _| _||_||_ |_   ||_||_|
+  ||_  _|  | _||_|  ||_| _|
+
+=> 123456789
+```
 
 ### Word Wrapp
 
@@ -80,4 +184,33 @@ It should be wrapped by length of 30 into this sequence of lines (ommiting quote
 "any possible match beginning",
 "after pos."
 ```
+
+### Coffee
+We have several coffee machines. We have to create class which makes a coffee.
+```
+class ICoffeCore
+{
+public:
+    ~ICoffeCore(){}
+    virtual void SetCupSize(int gram) = 0;
+    virtual void AddWater(int gram, int temperature) = 0;
+    virtual void AddSugar(int gram) = 0;
+    virtual void AddCoffee(int gram) = 0;
+    virtual void AddMilk(int gram) = 0;
+    virtual void AddMilkFoam(int gram) = 0;
+    virtual void AddChocolate(int gram) = 0;
+    virtual void AddCream(int gram) = 0;
+};
+```
+
+We produce:
+(sequence)
+- americano: water & coffee 1:2 or 1:3. Water temp 60C
+- cappuccino - milk & coffee & milk foam 1:3, 1:3, 1:3. Water temp 80C
+- latte - milk & coffee & milk foam 1:4, 1:2, 1:4. Water temp 90C
+- marochino - chocolate & coffee & milk foam, 1:4, 1:4, 1:4 and 1:4 is empty
+
+We have 2 size of cup, it is:
+- little 100 gram
+- big 140 gram
 
