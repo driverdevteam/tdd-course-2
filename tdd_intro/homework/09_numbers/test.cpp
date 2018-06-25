@@ -224,6 +224,10 @@ std::string Number0_99ToString(int num)
 
 std::string NumberToString(int num)
 {
+    if (num < 0 || 99999 < num)
+    {
+        throw std::out_of_range("Only numbers 0..99999 are acceptable.");
+    }
     return "";
 }
 
