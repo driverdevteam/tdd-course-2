@@ -30,5 +30,5 @@ TEST(NumbersTests, Number0_99ToString_OutOfBounds)
 
 TEST(NumbersTests, Number0_99ToString_0)
 {
-    EXPECT_EQ("zero", Number0_99ToString(-1));
+    EXPECT_EQ("zero", Number0_99ToString(0));
 }
