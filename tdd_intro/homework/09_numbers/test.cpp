@@ -24,7 +24,19 @@ std::string Number0_99ToString(int num)
         throw std::out_of_range("Only numbers 0..99 are acceptable.");
     }
 
-    return GetZeroNumberString();
+    std::string result;
+
+    switch (num)
+    {
+    case 0:
+        result = GetZeroNumberString();
+        break;
+    case 1:
+        result = "one";
+        break;
+    }
+
+    return result;
 }
 
 TEST(NumbersTests, Number0_99ToString_OutOfBounds)
