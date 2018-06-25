@@ -247,6 +247,17 @@ std::string NumberToString(int num)
     std::string result;
     bool addNumber = true;
 
+    if (num >= 1000)
+    {
+        result += Number0_99ToString(num / 1000) + GetSpacerString() + GetThousandString();
+        num %= 1000;
+        addNumber = num != 0;
+        if (addNumber)
+        {
+            result += GetSpacerString();
+        }
+    }
+
     if (num >= 100)
     {
         result += Number0_99ToString(num / 100) + GetSpacerString() + GetHundredString();
