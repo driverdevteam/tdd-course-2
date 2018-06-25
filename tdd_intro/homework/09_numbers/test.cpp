@@ -459,3 +459,11 @@ TEST(NumbersTests, NumberToString_1000)
     EXPECT_EQ(GetOneNumberString() + GetSpacerString() + GetThousandString(),
               NumberToString(1000));
 }
+
+TEST(NumbersTests, NumberToString_12345)
+{
+    EXPECT_EQ(GetTwelveNumberString() + GetSpacerString() + GetThousandString() + GetSpacerString()
+              + GetThreeNumberString() + GetSpacerString() + GetHundredString() + GetSpacerString()
+              + GetFourtyNumberString() + "-" + GetFiveNumberString(),
+              NumberToString(12345));
+}
