@@ -17,6 +17,11 @@ std::string GetZeroNumberString()
     return "zero";
 }
 
+std::string GetOneNumberString()
+{
+    return "one";
+}
+
 std::string Number0_99ToString(int num)
 {
     if (num < 0 || 99 < num)
@@ -32,7 +37,7 @@ std::string Number0_99ToString(int num)
         result = GetZeroNumberString();
         break;
     case 1:
-        result = "one";
+        result = GetOneNumberString();
         break;
     }
 
@@ -52,5 +57,5 @@ TEST(NumbersTests, Number0_99ToString_0)
 
 TEST(NumbersTests, Number0_99ToString_1)
 {
-    EXPECT_EQ("one", Number0_99ToString(1));
+    EXPECT_EQ(GetOneNumberString(), Number0_99ToString(1));
 }
