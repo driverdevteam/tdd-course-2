@@ -19,7 +19,7 @@ std::string Number0_99ToString(int num)
         throw std::out_of_range("Only numbers 0..99 are acceptable.");
     }
 
-    return "";
+    return "zero";
 }
 
 TEST(NumbersTests, Number0_99ToString_OutOfBounds)
