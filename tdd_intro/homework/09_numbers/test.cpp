@@ -117,6 +117,11 @@ std::string GetTwentyNumberString()
     return "twenty";
 }
 
+std::string GetThirtyNumberString()
+{
+    return "thirty";
+}
+
 const std::vector<std::string> s_numbersStrings({
                                     GetZeroNumberString(),
                                     GetOneNumberString(),
@@ -271,4 +276,9 @@ TEST(NumbersTests, Number0_99ToString_19)
 TEST(NumbersTests, Number0_99ToString_20)
 {
     EXPECT_EQ(GetTwentyNumberString(), Number0_99ToString(20));
+}
+
+TEST(NumbersTests, Number0_99ToString_30)
+{
+    EXPECT_EQ(GetThirtyNumberString(), Number0_99ToString(30));
 }
