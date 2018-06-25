@@ -247,6 +247,10 @@ std::string NumberToString(int num)
         result += Number0_99ToString(num / 100) + GetSpacerString() + GetHundredString();
         num %= 100;
         addNumber = num != 0;
+        if (addNumber)
+        {
+            result += GetSpacerString();
+        }
     }
 
     if (addNumber)
