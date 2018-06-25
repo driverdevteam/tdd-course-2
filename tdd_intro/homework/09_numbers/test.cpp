@@ -37,3 +37,8 @@ TEST(NumbersTests, Number0_99ToString_0)
 {
     EXPECT_EQ(GetZeroNumberString(), Number0_99ToString(0));
 }
+
+TEST(NumbersTests, Number0_99ToString_1)
+{
+    EXPECT_EQ("one", Number0_99ToString(1));
+}
