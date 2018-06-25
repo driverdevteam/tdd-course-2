@@ -12,3 +12,13 @@
     - 12345
 */
 
+std::string Number0_99ToString(int num)
+{
+    return "";
+}
+
+TEST(NumbersTests, Number0_99ToString_OutOfBounds)
+{
+    EXPECT_THROW(Number0_99ToString(-1), std::out_of_range);
+    EXPECT_THROW(Number0_99ToString(100), std::out_of_range);
+}
