@@ -158,6 +158,10 @@ std::string Number0_99ToString(int num)
     {
         result = GetTwentyNumberString();
     }
+    else if (num / 10 == 3)
+    {
+        result = GetThirtyNumberString();
+    }
 
     if (num < s_numbersStrings.size())
     {
