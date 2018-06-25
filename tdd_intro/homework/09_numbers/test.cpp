@@ -12,6 +12,11 @@
     - 12345
 */
 
+std::string GetZeroNumberString()
+{
+    return "zero";
+}
+
 std::string Number0_99ToString(int num)
 {
     if (num < 0 || 99 < num)
@@ -19,7 +24,7 @@ std::string Number0_99ToString(int num)
         throw std::out_of_range("Only numbers 0..99 are acceptable.");
     }
 
-    return "zero";
+    return GetZeroNumberString();
 }
 
 TEST(NumbersTests, Number0_99ToString_OutOfBounds)
@@ -30,5 +35,5 @@ TEST(NumbersTests, Number0_99ToString_OutOfBounds)
 
 TEST(NumbersTests, Number0_99ToString_0)
 {
-    EXPECT_EQ("zero", Number0_99ToString(0));
+    EXPECT_EQ(GetZeroNumberString(), Number0_99ToString(0));
 }
