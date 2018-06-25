@@ -122,6 +122,36 @@ std::string GetThirtyNumberString()
     return "thirty";
 }
 
+std::string GetFourtyNumberString()
+{
+    return "fourty";
+}
+
+std::string GetFiftyNumberString()
+{
+    return "fifty";
+}
+
+std::string GetSixtyNumberString()
+{
+    return "sixty";
+}
+
+std::string GetSeventyNumberString()
+{
+    return "seventy";
+}
+
+std::string GetEightyNumberString()
+{
+    return "eighty";
+}
+
+std::string GetNinetyNumberString()
+{
+    return "ninety";
+}
+
 const std::vector<std::string> s_numbersStrings({
                                     GetZeroNumberString(),
                                     GetOneNumberString(),
@@ -150,7 +180,13 @@ const std::vector<std::string> s_tensNumbersStrings({
                                     "",
                                     "",
                                     GetTwentyNumberString(),
-                                    GetThirtyNumberString()
+                                    GetThirtyNumberString(),
+                                    GetFourtyNumberString(),
+                                    GetFiftyNumberString(),
+                                    GetSixtyNumberString(),
+                                    GetSeventyNumberString(),
+                                    GetEightyNumberString(),
+                                    GetNinetyNumberString()
                                 });
 
 std::string Number0_99ToString(int num)
@@ -291,4 +327,34 @@ TEST(NumbersTests, Number0_99ToString_20)
 TEST(NumbersTests, Number0_99ToString_30)
 {
     EXPECT_EQ(GetThirtyNumberString(), Number0_99ToString(30));
+}
+
+TEST(NumbersTests, Number0_99ToString_40)
+{
+    EXPECT_EQ(GetFourtyNumberString(), Number0_99ToString(40));
+}
+
+TEST(NumbersTests, Number0_99ToString_50)
+{
+    EXPECT_EQ(GetFiftyNumberString(), Number0_99ToString(50));
+}
+
+TEST(NumbersTests, Number0_99ToString_60)
+{
+    EXPECT_EQ(GetSixtyNumberString(), Number0_99ToString(60));
+}
+
+TEST(NumbersTests, Number0_99ToString_70)
+{
+    EXPECT_EQ(GetSeventyNumberString(), Number0_99ToString(70));
+}
+
+TEST(NumbersTests, Number0_99ToString_80)
+{
+    EXPECT_EQ(GetEightyNumberString(), Number0_99ToString(80));
+}
+
+TEST(NumbersTests, Number0_99ToString_90)
+{
+    EXPECT_EQ(GetNinetyNumberString(), Number0_99ToString(90));
 }
