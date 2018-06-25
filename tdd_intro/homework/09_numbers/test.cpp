@@ -152,6 +152,16 @@ std::string GetNinetyNumberString()
     return "ninety";
 }
 
+std::string GetSpacerString()
+{
+    return " ";
+}
+
+std::string GetHundredString()
+{
+    return "hundred";
+}
+
 const std::vector<std::string> s_numbersStrings({
                                     GetZeroNumberString(),
                                     GetOneNumberString(),
@@ -392,4 +402,10 @@ TEST(NumbersTests, NumberToString_OutOfBounds)
 TEST(NumbersTests, NumberToString_42)
 {
     EXPECT_EQ(GetFourtyNumberString() + "-" + GetTwoNumberString(), NumberToString(42));
+}
+
+TEST(NumbersTests, NumberToString_100)
+{
+    EXPECT_EQ(GetOneNumberString() + GetSpacerString() + GetHundredString(),
+              NumberToString(100));
 }
