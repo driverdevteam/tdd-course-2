@@ -145,6 +145,14 @@ const std::vector<std::string> s_numbersStrings({
                                     GetNineteenNumberString()
                                 });
 
+
+const std::vector<std::string> s_tensNumbersStrings({
+                                    "",
+                                    "",
+                                    GetTwentyNumberString(),
+                                    GetThirtyNumberString()
+                                });
+
 std::string Number0_99ToString(int num)
 {
     if (num < 0 || 99 < num)
@@ -154,13 +162,11 @@ std::string Number0_99ToString(int num)
 
     std::string result;
 
-    if (num / 10 == 2)
+    int tensNum = num / 10;
+
+    if (tensNum < s_tensNumbersStrings.size())
     {
-        result = GetTwentyNumberString();
-    }
-    else if (num / 10 == 3)
-    {
-        result = GetThirtyNumberString();
+        result = s_tensNumbersStrings[tensNum];
     }
 
     if (num < s_numbersStrings.size())
