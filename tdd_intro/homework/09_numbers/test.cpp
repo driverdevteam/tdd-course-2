@@ -27,3 +27,8 @@ TEST(NumbersTests, Number0_99ToString_OutOfBounds)
     EXPECT_THROW(Number0_99ToString(-1), std::out_of_range);
     EXPECT_THROW(Number0_99ToString(100), std::out_of_range);
 }
+
+TEST(NumbersTests, Number0_99ToString_0)
+{
+    EXPECT_EQ("zero", Number0_99ToString(-1));
+}
