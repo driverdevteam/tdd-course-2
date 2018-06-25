@@ -358,3 +358,8 @@ TEST(NumbersTests, Number0_99ToString_90)
 {
     EXPECT_EQ(GetNinetyNumberString(), Number0_99ToString(90));
 }
+
+TEST(NumbersTests, Number0_99ToString_21)
+{
+    EXPECT_EQ(GetTwentyNumberString() + "-" + GetOneNumberString(), Number0_99ToString(21));
+}
