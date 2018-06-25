@@ -222,6 +222,11 @@ std::string Number0_99ToString(int num)
     return result;
 }
 
+std::string NumberToString(int num)
+{
+    return "";
+}
+
 TEST(NumbersTests, Number0_99ToString_OutOfBounds)
 {
     EXPECT_THROW(Number0_99ToString(-1), std::out_of_range);
@@ -371,4 +376,10 @@ TEST(NumbersTests, Number0_99ToString_90)
 TEST(NumbersTests, Number0_99ToString_21)
 {
     EXPECT_EQ(GetTwentyNumberString() + "-" + GetOneNumberString(), Number0_99ToString(21));
+}
+
+TEST(NumbersTests, NumberToString_OutOfBounds)
+{
+    EXPECT_THROW(NumberToString(-1), std::out_of_range);
+    EXPECT_THROW(NumberToString(100000), std::out_of_range);
 }
