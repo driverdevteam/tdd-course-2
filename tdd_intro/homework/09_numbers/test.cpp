@@ -424,3 +424,10 @@ TEST(NumbersTests, NumberToString_100)
     EXPECT_EQ(GetOneNumberString() + GetSpacerString() + GetHundredString(),
               NumberToString(100));
 }
+
+TEST(NumbersTests, NumberToString_101)
+{
+    EXPECT_EQ(GetOneNumberString() + GetSpacerString() + GetHundredString()
+              + GetSpacerString() + GetOneNumberString(),
+              NumberToString(101));
+}
