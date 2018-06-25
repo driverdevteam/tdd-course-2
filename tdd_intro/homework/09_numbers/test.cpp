@@ -239,7 +239,22 @@ std::string NumberToString(int num)
         throw std::out_of_range("Only numbers 0..99999 are acceptable.");
     }
 
-    return Number0_99ToString(num);
+    std::string result;
+    bool addNumber = true;
+
+    if (num >= 100)
+    {
+        result += Number0_99ToString(num / 100) + GetSpacerString() + GetHundredString();
+        num %= 100;
+        addNumber = num != 0;
+    }
+
+    if (addNumber)
+    {
+        result += Number0_99ToString(num);
+    }
+
+    return result;
 }
 
 TEST(NumbersTests, Number0_99ToString_OutOfBounds)
