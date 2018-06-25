@@ -162,6 +162,11 @@ std::string GetHundredString()
     return "hundred";
 }
 
+std::string GetThousandString()
+{
+    return "thousand";
+}
+
 const std::vector<std::string> s_numbersStrings({
                                     GetZeroNumberString(),
                                     GetOneNumberString(),
@@ -434,4 +439,10 @@ TEST(NumbersTests, NumberToString_101)
     EXPECT_EQ(GetOneNumberString() + GetSpacerString() + GetHundredString()
               + GetSpacerString() + GetOneNumberString(),
               NumberToString(101));
+}
+
+TEST(NumbersTests, NumberToString_1000)
+{
+    EXPECT_EQ(GetOneNumberString() + GetSpacerString() + GetThousandString(),
+              NumberToString(1000));
 }
