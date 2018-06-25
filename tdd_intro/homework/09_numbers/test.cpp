@@ -237,6 +237,27 @@ std::string Number0_99ToString(int num)
     return result;
 }
 
+bool BigNumberToString(int bigNumber,
+                       std::string bigNumberString,
+                       int& num,
+                       std::string& result)
+{
+    bool addNumber = true;
+
+    if (num >= bigNumber)
+    {
+        result += Number0_99ToString(num / bigNumber) + GetSpacerString() + bigNumberString;
+        num %= bigNumber;
+        addNumber = num != 0;
+        if (addNumber)
+        {
+            result += GetSpacerString();
+        }
+    }
+
+    return addNumber;
+}
+
 std::string NumberToString(int num)
 {
     if (num < 0 || 99999 < num)
@@ -247,27 +268,8 @@ std::string NumberToString(int num)
     std::string result;
     bool addNumber = true;
 
-    if (num >= 1000)
-    {
-        result += Number0_99ToString(num / 1000) + GetSpacerString() + GetThousandString();
-        num %= 1000;
-        addNumber = num != 0;
-        if (addNumber)
-        {
-            result += GetSpacerString();
-        }
-    }
-
-    if (num >= 100)
-    {
-        result += Number0_99ToString(num / 100) + GetSpacerString() + GetHundredString();
-        num %= 100;
-        addNumber = num != 0;
-        if (addNumber)
-        {
-            result += GetSpacerString();
-        }
-    }
+    addNumber &= BigNumberToString(1000, GetThousandString(), num, result);
+    addNumber &= BigNumberToString(100, GetHundredString(), num, result);
 
     if (addNumber)
     {
