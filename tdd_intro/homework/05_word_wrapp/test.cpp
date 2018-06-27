@@ -11,17 +11,18 @@ last space should be used to wrapp this line. If there are no spaces - wrapp it 
 
 //List of tests:
 //    1. Check zero string.
-//    2. Check string splitting without spaces by limit.
-//    3. Check string splitting with one space in the end.
-//    4. Check string splitting with one space at start.
-//    5. Check string splitting with multiple spaces at start.
-//    5. Check string splitting with multiple spaces in the end of string.
+//    2. Check string splitting before limit
+//    3. Check string splitting without spaces by limit.
+//    4. Check string splitting with one space in the end.
+//    5. Check string splitting with one space at start.
+//    6. Check string splitting with multiple spaces at start.
+//    7. Check string splitting with multiple spaces in the end of string.
 
 namespace
 {
     using StringList = std::list<std::string>;
 
-    StringList wrapp(std::string)
+    StringList wrapp(std::string, unsigned int limit)
     {
         return StringList{""};
     }
@@ -30,5 +31,6 @@ namespace
 
 TEST(WordWrapTests, TakeZeroString_GetZeroString)
 {
-    EXPECT_EQ(StringList{""}, wrapp(""));
+    EXPECT_EQ(StringList{""}, wrapp("", 0));
 }
+

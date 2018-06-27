@@ -3,7 +3,6 @@ TEMPLATE = subdirs
 SUBDIRS += \
     01_bob \
     02_leap_year \
-    03_anagram \
     04_trinary_numbers \
     05_word_wrapp \
     05_bank_ocr \
