@@ -22,16 +22,18 @@ namespace
 {
     using StringList = std::list<std::string>;
 
-    StringList wrapp(const std::string& str, unsigned int limit)
+    StringList wrapp(const std::string& str, size_t limit)
     {
-        StringList result;
         if (str.empty())
         {
             return StringList{""};
         }
+
+        StringList result;
         std::string tmp;
         size_t length = str.length();
-        for (auto startPos = 0; startPos < length; startPos += limit)
+
+        for (size_t startPos = 0; startPos < length; startPos += limit)
         {
             tmp = str.substr(startPos,limit);
             result.push_back(tmp);
@@ -58,5 +60,6 @@ TEST(WordWrapTests, TakeStringUnderLimit_GetStringList)
     StringList res = {"Hello!I_sa", "id_hello!_", "Hey!"};
     EXPECT_EQ(res, wrapp(txt, 10));
 }
+
 
 
