@@ -64,6 +64,11 @@ std::string GetSpelling(int number)
         return "ten";
     }
 
+    if (number == 14)
+    {
+        return "fourteen";
+    }
+
     return s_oneDigitNumbers.find(number)->second;
 }
 
