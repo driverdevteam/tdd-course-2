@@ -72,6 +72,9 @@ std::map<int, std::string> s_20To90Numbers = {
     {90, "ninety"}
 };
 
+std::string s_hundred("hundred");
+std::string s_hundreds("hundreds");
+
 
 std::string GetSpelling(int number)
 {
@@ -80,16 +83,20 @@ std::string GetSpelling(int number)
         throw std::out_of_range("Out of bounds value!");
     }
 
-    if (number >= 100)
+    std::string hundredsStr;
+    std::string tensStr;
+
+    int hundreds = number  / 100;
+
+    if (hundreds > 0)
     {
-        if (number == 135)
-        {
-            return "one hundred and thirty-five";
-        }
-        return "one hundred";
+        hundredsStr = s_0To19Numbers.find(hundreds)->second + " ";
+        hundredsStr += hundreds > 1 ? s_hundreds : s_hundred;
     }
 
-    int tens = number / 10;
+    number -= hundreds * 100;
+
+    int tens = (number % 100) / 10;
 
     if (tens > 1)
     {
@@ -98,16 +105,29 @@ std::string GetSpelling(int number)
         int ones = number % 10;
         if (ones != 0)
         {
-            return tenPart + "-" + s_0To19Numbers.find(ones)->second;
+            tensStr = tenPart + "-" + s_0To19Numbers.find(ones)->second;
         }
         else
         {
-            return tenPart;
+            tensStr = tenPart;
         }
     }
     else
     {
-        return s_0To19Numbers.find(number)->second;
+        tensStr = s_0To19Numbers.find(number)->second;
+    }
+
+    if (hundredsStr.empty())
+    {
+        return tensStr;
+    }
+    else if (tensStr.empty() || tensStr == "zero")
+    {
+        return hundredsStr;
+    }
+    else
+    {
+        return hundredsStr + " and " + tensStr;
     }
 }
 
