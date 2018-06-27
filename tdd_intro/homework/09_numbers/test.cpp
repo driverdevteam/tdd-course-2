@@ -64,7 +64,7 @@ std::map<int, std::string> s_0To19Numbers = {
 std::map<int, std::string> s_20To90Numbers = {
     {20, "twenty"},
     {30, "thirty"},
-    {40, "fourty"},
+    {40, "forty"},
     {50, "fifty"},
     {60, "sixty"},
     {70, "seventy"},
@@ -73,7 +73,7 @@ std::map<int, std::string> s_20To90Numbers = {
 };
 
 std::string s_hundred("hundred");
-std::string s_thoursand("thoursand");
+std::string s_thoursand("thousand");
 
 std::string GetTensPart(int number)
 {
@@ -201,12 +201,12 @@ TEST(GetSpelling, Input_135_Get_OneHundredAndThirtyFive)
 
 TEST(GetSpelling, Input_1024_Get_OneThroursandTwentyFour)
 {
-    EXPECT_EQ("one thoursand twenty-four", GetSpelling(1024));
+    EXPECT_EQ("one thousand twenty-four", GetSpelling(1024));
 }
 
 TEST(GetSpelling, Input_2993_Get_TwoThoursandNineHundredAndNinetyThree)
 {
-    EXPECT_EQ("two thoursand nine hundred and ninety-three", GetSpelling(2993));
+    EXPECT_EQ("two thousand nine hundred and ninety-three", GetSpelling(2993));
 }
 
 TEST(GetSpelling, AcceptanceTest)
