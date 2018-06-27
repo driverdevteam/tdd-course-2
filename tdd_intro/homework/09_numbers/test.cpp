@@ -73,9 +73,7 @@ std::map<int, std::string> s_20To90Numbers = {
 };
 
 std::string s_hundred("hundred");
-std::string s_hundreds("hundreds");
 std::string s_thoursand("thoursand");
-std::string s_thoursands("thoursands");
 
 std::string GetTensPart(int number)
 {
@@ -117,15 +115,7 @@ std::string GetSpelling(int number)
 
     if (thoursands > 0)
     {
-        thoursandStr = GetTensPart(thoursands) + " ";
-        if (thoursands % 10 == 1 && thoursands != 11)
-        {
-            thoursandStr += s_thoursand;
-        }
-        else
-        {
-            thoursandStr += s_thoursands;
-        }
+        thoursandStr = GetTensPart(thoursands) + " " + s_thoursand;
 
         number -= thoursands * 1000;
     }
@@ -134,8 +124,7 @@ std::string GetSpelling(int number)
 
     if (hundreds > 0)
     {
-        hundredsStr = s_0To19Numbers.find(hundreds)->second + " ";
-        hundredsStr += hundreds > 1 ? s_hundreds : s_hundred;
+        hundredsStr = s_0To19Numbers.find(hundreds)->second + " " + s_hundred;
 
         number -= hundreds * 100;
     }
@@ -217,5 +206,5 @@ TEST(GetSpelling, Input_1024_Get_OneThroursandTwentyFour)
 
 TEST(GetSpelling, Input_2993_Get_TwoThoursandNineHundredAndNinetyThree)
 {
-    EXPECT_EQ("two thoursands nine hundreds and ninety-three", GetSpelling(2993));
+    EXPECT_EQ("two thoursand nine hundred and ninety-three", GetSpelling(2993));
 }
