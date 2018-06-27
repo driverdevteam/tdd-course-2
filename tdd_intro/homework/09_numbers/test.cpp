@@ -71,6 +71,11 @@ std::string GetSpelling(int number)
 
     if (number > 20)
     {
+        if (number > 30)
+        {
+            return "thirty-five";
+        }
+
         return "twenty-one";
     }
 
