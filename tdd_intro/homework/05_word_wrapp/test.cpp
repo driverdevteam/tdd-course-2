@@ -22,9 +22,14 @@ namespace
 {
     using StringList = std::list<std::string>;
 
-    StringList wrapp(std::string, unsigned int limit)
+    StringList wrapp(const std::string& str, unsigned int limit)
     {
-        return StringList{""};
+        if (str.empty())
+        {
+            return StringList{""};
+        }
+
+        return StringList{str};
     }
 }
 
