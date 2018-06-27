@@ -58,6 +58,12 @@ std::string GetSpelling(int number)
     {
         throw std::out_of_range("Out of bounds value!");
     }
+
+    if (number == 10)
+    {
+        return "ten";
+    }
+
     return s_oneDigitNumbers.find(number)->second;
 }
 
