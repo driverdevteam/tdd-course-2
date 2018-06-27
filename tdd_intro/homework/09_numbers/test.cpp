@@ -74,33 +74,11 @@ std::map<int, std::string> s_20To90Numbers = {
 
 std::string s_hundred("hundred");
 std::string s_hundreds("hundreds");
+std::string s_thoursand("thoursand");
+std::string s_thoursands("thoursands");
 
-
-std::string GetSpelling(int number)
+std::string GetTensPart(int number)
 {
-    if (number < 0 || number > 99999)
-    {
-        throw std::out_of_range("Out of bounds value!");
-    }
-
-    if (number >= 1000)
-    {
-        return "one thoursand twenty-four";
-    }
-
-    std::string hundredsStr;
-    std::string tensStr;
-
-    int hundreds = number  / 100;
-
-    if (hundreds > 0)
-    {
-        hundredsStr = s_0To19Numbers.find(hundreds)->second + " ";
-        hundredsStr += hundreds > 1 ? s_hundreds : s_hundred;
-    }
-
-    number -= hundreds * 100;
-
     int tens = (number % 100) / 10;
 
     if (tens > 1)
@@ -110,30 +88,81 @@ std::string GetSpelling(int number)
         int ones = number % 10;
         if (ones != 0)
         {
-            tensStr = tenPart + "-" + s_0To19Numbers.find(ones)->second;
+            return tenPart + "-" + s_0To19Numbers.find(ones)->second;
         }
         else
         {
-            tensStr = tenPart;
+            return tenPart;
         }
     }
     else
     {
-        tensStr = s_0To19Numbers.find(number)->second;
+        return s_0To19Numbers.find(number)->second;
+    }
+}
+
+
+std::string GetSpelling(int number)
+{
+    if (number < 0 || number > 99999)
+    {
+        throw std::out_of_range("Out of bounds value!");
+    }
+
+    std::string thoursandStr;
+    std::string hundredsStr;
+    std::string tensStr;
+
+    int thoursands = number / 1000;
+
+    if (thoursands > 0)
+    {
+        thoursandStr = GetTensPart(thoursands) + " ";
+        if (thoursands % 10 == 1 && thoursands != 11)
+        {
+            thoursandStr += s_thoursand;
+        }
+        else
+        {
+            thoursandStr += s_thoursands;
+        }
+
+        number -= thoursands * 1000;
+    }
+
+    int hundreds = number / 100;
+
+    if (hundreds > 0)
+    {
+        hundredsStr = s_0To19Numbers.find(hundreds)->second + " ";
+        hundredsStr += hundreds > 1 ? s_hundreds : s_hundred;
+
+        number -= hundreds * 100;
+    }
+
+    tensStr = GetTensPart(number);
+
+    std::string finalStr;
+
+    if (!thoursandStr.empty())
+    {
+        finalStr += thoursandStr + " ";
     }
 
     if (hundredsStr.empty())
     {
-        return tensStr;
+            finalStr += tensStr;
     }
     else if (tensStr.empty() || tensStr == "zero")
     {
-        return hundredsStr;
+            finalStr += hundredsStr;
     }
     else
     {
-        return hundredsStr + " and " + tensStr;
+        finalStr += hundredsStr + " and " + tensStr;
     }
+
+    return finalStr;
 }
 
 TEST(GetSpelling, Input_0_Get_Zero)
@@ -188,5 +217,5 @@ TEST(GetSpelling, Input_1024_Get_OneThroursandTwentyFour)
 
 TEST(GetSpelling, Input_2993_Get_TwoThoursandNineHundredAndNinetyThree)
 {
-    EXPECT_EQ("two thoursand nine hundred and ninety three", GetSpelling(2993));
+    EXPECT_EQ("two thoursands nine hundreds and ninety-three", GetSpelling(2993));
 }
