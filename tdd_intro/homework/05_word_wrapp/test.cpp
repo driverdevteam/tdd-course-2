@@ -17,7 +17,16 @@ last space should be used to wrapp this line. If there are no spaces - wrapp it 
 //    5. Check string splitting with multiple spaces at start.
 //    5. Check string splitting with multiple spaces in the end of string.
 
-using StringList = std::list<std::string>;
+namespace
+{
+    using StringList = std::list<std::string>;
+
+    StringList wrapp(std::string)
+    {
+        return StringList{""};
+    }
+}
+
 
 TEST(WordWrapTests, TakeZeroString_GetZeroString)
 {
