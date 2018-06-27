@@ -66,3 +66,8 @@ TEST(GetSpelling, Input_1_Get_One)
 {
     EXPECT_EQ("one", GetSpelling(1));
 }
+
+TEST(GetSpelling, OutOfBounds)
+{
+    EXPECT_THROW(GetSpelling(-1), std::out_of_range);
+}
