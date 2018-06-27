@@ -5,7 +5,7 @@ last space should be used to wrapp this line. If there are no spaces - wrapp it 
 */
 
 #include <gtest/gtest.h>
-#include <cctype>
+#include <sstream>
 #include <string>
 #include <list>
 
@@ -24,12 +24,19 @@ namespace
 
     StringList wrapp(const std::string& str, unsigned int limit)
     {
+        StringList result;
         if (str.empty())
         {
             return StringList{""};
         }
-
-        return StringList{str};
+        std::string tmp;
+        size_t length = str.length();
+        for (auto startPos = 0; startPos < length; startPos += limit)
+        {
+            tmp = str.substr(startPos,limit);
+            result.push_back(tmp);
+        }
+        return result;
     }
 }
 
