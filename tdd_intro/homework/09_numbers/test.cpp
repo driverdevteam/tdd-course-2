@@ -75,3 +75,8 @@ TEST(GetSpelling, OutOfBounds)
 {
     EXPECT_THROW(GetSpelling(-1), std::out_of_range);
 }
+
+TEST(GetSpelling, Input_10_Get_Ten)
+{
+    EXPECT_EQ("ten", GetSpelling(10));
+}
