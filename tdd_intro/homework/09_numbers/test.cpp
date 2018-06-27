@@ -69,6 +69,11 @@ std::string GetSpelling(int number)
         throw std::out_of_range("Out of bounds value!");
     }
 
+    if (number > 20)
+    {
+        return "twenty-one";
+    }
+
     return s_0To19Numbers.find(number)->second;
 }
 
