@@ -32,10 +32,20 @@ namespace
         StringList result;
         std::string tmp;
         size_t length = str.length();
-
-        for (size_t startPos = 0; startPos < length; startPos += limit)
+        size_t space_pos = 0;
+        for (size_t startPos = 0; startPos < length;)
         {
             tmp = str.substr(startPos,limit);
+            space_pos = tmp.find_last_of(' ');
+            if (space_pos != tmp.npos && length > limit)
+            {
+                tmp = tmp.substr(startPos, space_pos);
+                startPos = space_pos + 1;
+            }
+            else
+            {
+                startPos += limit;
+            }
             result.push_back(tmp);
         }
         return result;
@@ -61,5 +71,10 @@ TEST(WordWrapTests, TakeStringUnderLimit_GetStringList)
     EXPECT_EQ(res, wrapp(txt, 10));
 }
 
-
+TEST(WordWrapTests, TakeStringUnderLimitWithSpaces_GetSplittedString)
+{
+    const std::string txt = "Hello Man! Money!Monkey!Mikki!";
+    StringList res = {"Hello Man!", "Money!Monkey!", "Mikki!"};
+    EXPECT_EQ(res, wrapp(txt, 13));
+}
 
