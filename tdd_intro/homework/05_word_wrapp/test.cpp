@@ -44,3 +44,12 @@ TEST(WordWrapTests, TakeStringBeforeLimit_GetString)
     const std::string txt = "Hello world!";
     EXPECT_EQ(StringList{txt}, wrapp(txt, 30));
 }
+
+TEST(WordWrapTests, TakeStringUnderLimit_GetStringList)
+{
+    const std::string txt = "Hello!I_said_hello!_Hey!";
+    StringList res = {"Hello!I_sa", "id_hello!_", "Hey!"};
+    EXPECT_EQ(res, wrapp(txt, 10));
+}
+
+
