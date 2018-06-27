@@ -39,7 +39,7 @@ Use and (correctly) when spelling out the number in English:
 
 std::string GetSpelling(int zero)
 {
-    return std::string();
+    return "zero";
 }
 
 TEST(GetSpelling, Input_0_Get_Zero)
