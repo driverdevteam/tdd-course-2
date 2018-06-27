@@ -78,3 +78,9 @@ TEST(WordWrapTests, TakeStringUnderLimitWithSpaces_GetSplittedString)
     EXPECT_EQ(res, wrapp(txt, 13));
 }
 
+TEST(WordWrapTests, TakeNumberStringWithSpaces_GetRightSplitted)
+{
+    const std::string txt = "12345 6 123456789  123456789";
+    StringList res = {"12345", "6 1234", "56789", "123456", "789"};
+    EXPECT_EQ(res, wrapp(txt, 6));
+}
