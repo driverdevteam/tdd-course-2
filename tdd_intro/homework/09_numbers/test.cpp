@@ -36,10 +36,25 @@ Use and (correctly) when spelling out the number in English:
 
 #include <gtest/gtest.h>
 #include <string>
+#include <map>
+
+std::map<int, std::string> s_oneDigitNumbers = {
+    {0, "zero"},
+    {1, "one"},
+    {2, "two"},
+    {3, "three"},
+    {4, "four"},
+    {5, "five"},
+    {6, "six"},
+    {7, "seven"},
+    {8, "eight"},
+    {9, "nine"}
+};
+
 
 std::string GetSpelling(int number)
 {
-    return number == 0 ? "zero" : "one";
+    return s_oneDigitNumbers.find(number)->second;
 }
 
 TEST(GetSpelling, Input_0_Get_Zero)
