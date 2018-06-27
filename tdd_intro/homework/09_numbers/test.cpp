@@ -54,6 +54,10 @@ std::map<int, std::string> s_oneDigitNumbers = {
 
 std::string GetSpelling(int number)
 {
+    if (number < 0 || number > 99999)
+    {
+        throw std::out_of_range("Out of bounds value!");
+    }
     return s_oneDigitNumbers.find(number)->second;
 }
 
