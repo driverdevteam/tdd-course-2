@@ -185,3 +185,8 @@ TEST(GetSpelling, Input_1024_Get_OneThroursandTwentyFour)
 {
     EXPECT_EQ("one thoursand twenty-four", GetSpelling(1024));
 }
+
+TEST(GetSpelling, Input_2993_Get_TwoThoursandNineHundredAndNinetyThree)
+{
+    EXPECT_EQ("two thoursand nine hundred and ninety three", GetSpelling(2993));
+}
