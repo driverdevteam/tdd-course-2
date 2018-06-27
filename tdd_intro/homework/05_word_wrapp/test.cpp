@@ -34,3 +34,8 @@ TEST(WordWrapTests, TakeZeroString_GetZeroString)
     EXPECT_EQ(StringList{""}, wrapp("", 0));
 }
 
+TEST(WordWrapTests, TakeStringBeforeLimit_GetString)
+{
+    const std::string txt = "Hello world!";
+    EXPECT_EQ(StringList{txt}, wrapp(txt, 30));
+}
