@@ -83,6 +83,11 @@ std::string GetSpelling(int number)
         throw std::out_of_range("Out of bounds value!");
     }
 
+    if (number >= 1000)
+    {
+        return "one thoursand twenty-four";
+    }
+
     std::string hundredsStr;
     std::string tensStr;
 
