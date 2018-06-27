@@ -31,16 +31,18 @@ namespace
 
         StringList result;
         std::string tmp;
-        size_t length = str.length();
         size_t space_pos = 0;
+        const char DELIMITER = ' ';
+        size_t length = str.length();
         for (size_t startPos = 0; startPos < length;)
         {
-            tmp = str.substr(startPos,limit);
-            space_pos = tmp.find_last_of(' ');
-            if (space_pos != tmp.npos && length > limit)
+            tmp = str.substr(startPos, limit);
+            space_pos = tmp.find_last_of(DELIMITER);
+            auto spaces_count = std::count(tmp.begin(), tmp.end(), DELIMITER);
+            if (spaces_count > 1  || tmp.back() == DELIMITER && space_pos != tmp.npos)
             {
-                tmp = tmp.substr(startPos, space_pos);
-                startPos = space_pos + 1;
+                tmp = tmp.substr(0, space_pos);
+                startPos += tmp.length() + 1;
             }
             else
             {
@@ -61,7 +63,7 @@ TEST(WordWrapTests, TakeZeroString_GetZeroString)
 TEST(WordWrapTests, TakeStringBeforeLimit_GetString)
 {
     const std::string txt = "Hello world!";
-    EXPECT_EQ(StringList{txt}, wrapp(txt, 30));
+    EXPECT_EQ(StringList({txt}), wrapp(txt, 30));
 }
 
 TEST(WordWrapTests, TakeStringUnderLimit_GetStringList)
@@ -80,7 +82,7 @@ TEST(WordWrapTests, TakeStringUnderLimitWithSpaces_GetSplittedString)
 
 TEST(WordWrapTests, TakeNumberStringWithSpaces_GetRightSplitted)
 {
-    const std::string txt = "12345 6 123456789  123456789";
+    const std::string txt = "12345 6 123456789 123456789";
     StringList res = {"12345", "6 1234", "56789", "123456", "789"};
     EXPECT_EQ(res, wrapp(txt, 6));
 }
