@@ -86,3 +86,8 @@ TEST(GetSpelling, Input_10_Get_Ten)
 {
     EXPECT_EQ("ten", GetSpelling(10));
 }
+
+TEST(GetSpelling, Input_14_Get_Fourteen)
+{
+    EXPECT_EQ("fourteen", GetSpelling(14));
+}
