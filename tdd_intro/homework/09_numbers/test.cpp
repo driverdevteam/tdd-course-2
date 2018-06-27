@@ -208,3 +208,8 @@ TEST(GetSpelling, Input_2993_Get_TwoThoursandNineHundredAndNinetyThree)
 {
     EXPECT_EQ("two thoursand nine hundred and ninety-three", GetSpelling(2993));
 }
+
+TEST(GetSpelling, AcceptanceTest)
+{
+    EXPECT_EQ("twelve thousand three hundred and forty-five", GetSpelling(12345));
+}
