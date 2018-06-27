@@ -61,6 +61,17 @@ std::map<int, std::string> s_0To19Numbers = {
     {19, "nineteen"}
 };
 
+std::map<int, std::string> s_20To90Numbers = {
+    {20, "twenty"},
+    {30, "thirty"},
+    {40, "fourty"},
+    {50, "fifty"},
+    {60, "sixty"},
+    {70, "seventy"},
+    {80, "eighty"},
+    {90, "ninety"}
+};
+
 
 std::string GetSpelling(int number)
 {
@@ -69,17 +80,26 @@ std::string GetSpelling(int number)
         throw std::out_of_range("Out of bounds value!");
     }
 
-    if (number > 20)
+    int tens = number / 10;
+
+    if (tens > 1)
     {
-        if (number > 30)
+        std::string tenPart = s_20To90Numbers.find(tens * 10)->second;
+
+        int ones = number % 10;
+        if (ones != 0)
         {
-            return "thirty-five";
+            return tenPart + "-" + s_0To19Numbers.find(ones)->second;
         }
-
-        return "twenty-one";
+        else
+        {
+            return tenPart;
+        }
     }
-
-    return s_0To19Numbers.find(number)->second;
+    else
+    {
+        return s_0To19Numbers.find(number)->second;
+    }
 }
 
 TEST(GetSpelling, Input_0_Get_Zero)
