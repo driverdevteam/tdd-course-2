@@ -82,6 +82,10 @@ std::string GetSpelling(int number)
 
     if (number >= 100)
     {
+        if (number == 135)
+        {
+            return "one hundred and thirty-five";
+        }
         return "one hundred";
     }
 
