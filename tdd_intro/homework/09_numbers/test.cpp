@@ -35,3 +35,14 @@ Use and (correctly) when spelling out the number in English:
 */
 
 #include <gtest/gtest.h>
+#include <string>
+
+std::string GetSpelling(int zero)
+{
+    return std::string();
+}
+
+TEST(GetSpelling, Input_0_Get_Zero)
+{
+    EXPECT_EQ("zero", GetSpelling(0));
+}
