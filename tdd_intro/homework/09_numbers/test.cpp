@@ -80,6 +80,11 @@ std::string GetSpelling(int number)
         throw std::out_of_range("Out of bounds value!");
     }
 
+    if (number >= 100)
+    {
+        return "one hundred";
+    }
+
     int tens = number / 10;
 
     if (tens > 1)
@@ -135,4 +140,9 @@ TEST(GetSpelling, Input_21_Get_TwentyOne)
 TEST(GetSpelling, Input_35_Get_ThirtyFive)
 {
     EXPECT_EQ("thirty-five", GetSpelling(35));
+}
+
+TEST(GetSpelling, Input_100_Get_OneHundred)
+{
+    EXPECT_EQ("one hundred", GetSpelling(100));
 }
