@@ -38,7 +38,7 @@ Use and (correctly) when spelling out the number in English:
 #include <string>
 #include <map>
 
-std::map<int, std::string> s_oneDigitNumbers = {
+std::map<int, std::string> s_0To19Numbers = {
     {0, "zero"},
     {1, "one"},
     {2, "two"},
@@ -48,7 +48,17 @@ std::map<int, std::string> s_oneDigitNumbers = {
     {6, "six"},
     {7, "seven"},
     {8, "eight"},
-    {9, "nine"}
+    {9, "nine"},
+    {10, "ten"},
+    {11, "eleven"},
+    {12, "twelve"},
+    {13, "thirteen"},
+    {14, "fourteen"},
+    {15, "fifteen"},
+    {16, "sixteen"},
+    {17, "seventeen"},
+    {18, "eighteen"},
+    {19, "nineteen"}
 };
 
 
@@ -59,17 +69,7 @@ std::string GetSpelling(int number)
         throw std::out_of_range("Out of bounds value!");
     }
 
-    if (number == 10)
-    {
-        return "ten";
-    }
-
-    if (number == 14)
-    {
-        return "fourteen";
-    }
-
-    return s_oneDigitNumbers.find(number)->second;
+    return s_0To19Numbers.find(number)->second;
 }
 
 TEST(GetSpelling, Input_0_Get_Zero)
