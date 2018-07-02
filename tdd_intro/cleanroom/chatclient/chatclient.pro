@@ -7,7 +7,8 @@ CONFIG -= qt
 
 SOURCES += \
     test.cpp \
-    socketwrapper.cpp
+    socketwrapper.cpp \
+    chatutils.cpp
 
 LIBS += \
     Ws2_32.lib \
@@ -15,4 +16,6 @@ LIBS += \
     AdvApi32.lib
 
 HEADERS += \
-    socketwrapper.h
+    socketwrapper.h \
+    chatutils.h \
+    channel.h

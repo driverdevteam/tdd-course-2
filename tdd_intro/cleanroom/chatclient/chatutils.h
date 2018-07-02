@@ -1,11 +1,13 @@
-#ifndef CHATUTILS_H
-#define CHATUTILS_H
+#pragma once
+#include "channel.h"
 
+const std::string host = "localhost";
+const int port = 4444;
 
-class ChatUtils
-{
-public:
-    ChatUtils();
-};
+void ClientHandshake(Channel& channel, const std::string& login);
+void ServerHandshake(Channel& channel, const std::string& login);
 
-#endif // CHATUTILS_H
+Channel SetupServerChannel(ISocketWrapperPtr socket);
+Channel SetupClientChannel(ISocketWrapperPtr socket);
+
+Channel StartSession(ISocketWrapperPtr socket);

@@ -124,6 +124,5 @@ TEST(SocketWrapperTest, StartSession_SetupServer)
     EXPECT_CALL(*socket, Accept()).WillOnce(testing::Return(nullptr));
 
     EXPECT_NO_THROW(StartSession(socket));
-
 }
 

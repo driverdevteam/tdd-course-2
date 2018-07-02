@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <windows.h>
 #include <memory>
+#include <string>
 
 class ISocketWrapper;
 using ISocketWrapperPtr = std::shared_ptr<ISocketWrapper>;
