@@ -1,6 +1,7 @@
 ﻿#include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "socketwrapper.h"
+#include "chatutils.h"
 
 using namespace testing;
 /*
@@ -8,7 +9,7 @@ Implement chat application, that communicates via TCP sockets.
  There is list of requirenments to this application:
  * It receives user nickname through commandline arguments on start
  * It runs only for two clients
- * On start it checks if port 4444 is bound
+ * On start it checks if port port is bound
     * if it is - connects to other client
     * if not - binds a port and waits for inbound connection
         * message "No one is here..." is displayed in UI
@@ -40,6 +41,7 @@ Implement chat application, that communicates via TCP sockets.
     * If user runs app with 'me' nickname - error with text "Username me is reserved and can not be used"  is displayed and application exits
 */
 
+
 class MockSocketWrapper : public ISocketWrapper
 {
 public:
@@ -52,48 +54,24 @@ public:
 
 };
 
-class Channel
-{
-public:
-    explicit Channel(ISocketWrapper& wrapper): m_wrapper(wrapper)  {}
-    void Send(const std::string& message) { m_wrapper.Write(message);}
-    void Receive(std::string& message) { m_wrapper.Read(message);}
-
-private:
-    ISocketWrapper& m_wrapper;
-};
-
-void ClientHandshake(Channel& channel, const std::string& login)
-{
-    std::string buffer;
-    channel.Send(login + ":HELLO");
-    channel.Receive(buffer);
-
-}
-
-void ServerHandshake(Channel& channel, const std::string& login)
-{
-    std::string buffer;
-    channel.Receive(buffer);
-    channel.Send(login + ":HELLO!");
-}
+typedef std::shared_ptr<MockSocketWrapper> MockSocketWrapperPtr;
 
 TEST(SocketWrapperTest, Sending)
 {
-    MockSocketWrapper socket;
+    MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
     Channel channel(socket);
 
-    EXPECT_CALL(socket, Write("Hello")).Times(1);
+    EXPECT_CALL(*socket, Write("Hello")).Times(1);
     channel.Send("Hello");
 }
 
 TEST(SocketWrapperTest, Receiving)
 {
-    MockSocketWrapper socket;
+    MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
     Channel channel(socket);
 
     std::string buffer;
-    EXPECT_CALL(socket, Read(_)).WillOnce(SetArgReferee<0>("Hello"));
+    EXPECT_CALL(*socket, Read(_)).WillOnce(SetArgReferee<0>("Hello"));
     channel.Receive(buffer);
 
     EXPECT_EQ("Hello", buffer);
@@ -101,21 +79,51 @@ TEST(SocketWrapperTest, Receiving)
 
 TEST(SocketWrapperTest, ClientHandshake)
 {
-    MockSocketWrapper socket;
+    MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
     Channel channel(socket);
     InSequence sequence;
-    EXPECT_CALL(socket, Write("metizik:HELLO")).Times(1);
-    EXPECT_CALL(socket, Read(_)).Times(1);
+    EXPECT_CALL(*socket, Write("metizik:HELLO")).Times(1);
+    EXPECT_CALL(*socket, Read(_)).Times(1);
     ClientHandshake(channel, "metizik");
 }
 
 TEST(SocketWrapperTest, ServerHandshake)
 {
-    MockSocketWrapper socket;
+    MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
     Channel channel(socket);
-    EXPECT_CALL(socket, Read(_)).Times(1);
-    EXPECT_CALL(socket, Write("user:HELLO!")).Times(1);
+    EXPECT_CALL(*socket, Read(_)).Times(1);
+    EXPECT_CALL(*socket, Write("user:HELLO!")).Times(1);
     ServerHandshake(channel, "user");
 }
 
+TEST(SocketWrapperTest, StartServerChannel)
+{
+    MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
+    EXPECT_CALL(*socket, Bind(host, port)).Times(1);
+    EXPECT_CALL(*socket, Listen()).Times(1);
+    EXPECT_CALL(*socket, Accept()).WillOnce(testing::Return(nullptr));
+
+    SetupServerChannel(socket);
+}
+
+TEST(SocketWrapperTest, StartClientChannel)
+{
+    MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
+    EXPECT_CALL(*socket, Connect(host, port)).WillOnce(testing::Return(nullptr));
+
+    SetupClientChannel(socket);
+}
+
+TEST(SocketWrapperTest, StartSession_SetupServer)
+{
+    MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
+
+    EXPECT_CALL(*socket, Connect(host, port)).WillOnce(testing::Throw(std::exception("")));
+    EXPECT_CALL(*socket, Bind(host, port)).Times(1);
+    EXPECT_CALL(*socket, Listen()).Times(1);
+    EXPECT_CALL(*socket, Accept()).WillOnce(testing::Return(nullptr));
+
+    EXPECT_NO_THROW(StartSession(socket));
+
+}
 
