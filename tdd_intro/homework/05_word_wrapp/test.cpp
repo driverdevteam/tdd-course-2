@@ -29,9 +29,24 @@ When pos is specified, the search only includes sequences of characters that beg
 
 using Strings_vt = std::vector<std::string>;
 
-std::string ClearPart(const std::string& part)
+bool ClearPart(const std::string& outPart)
 {
-    return part;
+    if(part == " ")
+    {
+        return false;
+    }
+
+    if(outPart.back() == ' ')
+    {
+        outPart.pop_back();
+    }
+
+    if(outPart[0] == ' ')
+    {
+        outPart = outPart.substr(1, outPart.size());
+    }
+
+    return true;
 }
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 {
@@ -53,19 +68,7 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
     {
         std::string part = data.substr(i,limit);
 
-        if(part == " ")
-        {
-            continue;
-        }
 
-        if(part.back() == ' ')
-        {
-            part.pop_back();
-        }
-        if(part[0] == ' ')
-        {
-            part = part.substr(1, part.size());
-        }
         result.push_back(part);
     }
 
