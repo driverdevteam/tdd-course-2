@@ -32,16 +32,20 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 {
 
     Strings_vt result;
-    if(data.empty())
+
+    if(data == "")
     {
         return result;
     }
-
-    if(data.back() == ' ')
+    if(limit > data.size())
     {
-        data = data.substr(0, data.size() - 1);
+        result.push_back(data);
     }
-    result.push_back(data);
+
+    for(int i=limit; i< data.size(); ++i)
+    {
+        result.push_back(data.substr(i, i));
+    }
 
 
     return result;
