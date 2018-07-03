@@ -31,24 +31,7 @@ using Strings_vt = std::vector<std::string>;
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 {
     Strings_vt result;
-    if (data.empty())
-    {
-        return result;
-    }
 
-    for (int pos = 0; pos < data.size(); pos += limit)
-    {
-
-        std::string word(data.substr(pos, limit));
-        if (word != " ")
-        {
-            if (word.back() == ' ')
-            {
-                word.pop_back();
-            }
-            result.push_back(word);
-        }
-    }
 
     return result;
 }
