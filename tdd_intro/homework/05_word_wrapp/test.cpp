@@ -28,6 +28,11 @@ When pos is specified, the search only includes sequences of characters that beg
 //10.
 
 using Strings_vt = std::vector<std::string>;
+
+std::string ClearPart(const std::string& part)
+{
+    return part;
+}
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 {
 
