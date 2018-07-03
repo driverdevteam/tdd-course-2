@@ -30,7 +30,14 @@ When pos is specified, the search only includes sequences of characters that beg
 using Strings_vt = std::vector<std::string>;
 std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
 {
+
     Strings_vt result;
+    if(data.empty())
+    {
+        return result;
+    }
+
+    result.push_back(data);
 
 
     return result;
