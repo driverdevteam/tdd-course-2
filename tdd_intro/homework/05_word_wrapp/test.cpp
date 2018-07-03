@@ -102,3 +102,8 @@ TEST(WordWrappTests, ThreeWordWithSingleSpaces)
 {
     EXPECT_EQ(Strings_vt({"012 3", "4567", "8"}), WordWrapp("012 3 45678", 5));
 }
+
+TEST(WordWrappTests, ClearPartWithOutSpaces)
+{
+    EXPECT_EQ("test", ClearPart("test"));
+}
