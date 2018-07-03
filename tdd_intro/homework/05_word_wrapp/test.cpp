@@ -37,6 +37,10 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
         return result;
     }
 
+    if(data.back() == ' ')
+    {
+        data = data.substr(0, data.size() - 1);
+    }
     result.push_back(data);
 
 
