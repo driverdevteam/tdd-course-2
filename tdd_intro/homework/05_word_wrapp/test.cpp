@@ -29,9 +29,9 @@ When pos is specified, the search only includes sequences of characters that beg
 
 using Strings_vt = std::vector<std::string>;
 
-bool ClearPart(const std::string& outPart)
+bool ClearPart(std::string& outPart)
 {
-    if(part == " ")
+    if(outPart == " ")
     {
         return false;
     }
@@ -68,10 +68,13 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
     {
         std::string part = data.substr(i,limit);
 
+        if(!ClearPart(part))
+        {
+            continue;
+        }
 
         result.push_back(part);
     }
-
 
     return result;
 }
@@ -113,10 +116,18 @@ TEST(WordWrappTests, ThreeWordWithSingleSpaces)
 
 TEST(WordWrappTests, ClearPartWithOutSpaces)
 {
-    EXPECT_EQ("test", ClearPart("test"));
+    std::string str = "test";
+    std::string expect = "test";
+    EXPECT_TRUE(ClearPart(std::string("test")));
+    EXPECT_EQ(expect, str);
 }
 
 TEST(WordWrappTests, ClearPartWithSpaceAfter)
 {
-    EXPECT_EQ("test", ClearPart("test "));
+    EXPECT_TRUE(ClearPart(std::string("test ")));
+}
+
+TEST(WordWrappTests, ClearPartWithSpaceBefore)
+{
+    EXPECT_TRUE(ClearPart(std::string(" test")));
 }
