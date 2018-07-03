@@ -37,14 +37,31 @@ std::vector<std::string> WordWrapp(std::string data, unsigned int limit)
     {
         return result;
     }
+
     if(limit > data.size())
     {
         result.push_back(data);
+        return result;
     }
 
-    for(int i=limit; i< data.size(); ++i)
+    for(int i=0; i< data.size(); i+=limit)
     {
-        result.push_back(data.substr(i, i));
+        std::string part = data.substr(i,limit);
+
+        if(part == " ")
+        {
+            continue;
+        }
+
+        if(part.back() == ' ')
+        {
+            part.pop_back();
+        }
+        if(part[0] == ' ')
+        {
+            part = part.substr(1, part.size());
+        }
+        result.push_back(part);
     }
 
 
@@ -83,5 +100,5 @@ TEST(WordWrappTests, TwoWordWithSpace)
 
 TEST(WordWrappTests, ThreeWordWithSingleSpaces)
 {
-    EXPECT_EQ(Strings_vt({"012 3", "45678"}), WordWrapp("012 3 45678", 5));
+    EXPECT_EQ(Strings_vt({"012 3", "4567", "8"}), WordWrapp("012 3 45678", 5));
 }
