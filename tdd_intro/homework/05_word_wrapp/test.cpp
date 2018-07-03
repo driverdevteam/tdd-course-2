@@ -112,3 +112,8 @@ TEST(WordWrappTests, ClearPartWithOutSpaces)
 {
     EXPECT_EQ("test", ClearPart("test"));
 }
+
+TEST(WordWrappTests, ClearPartWithSpaceAfter)
+{
+    EXPECT_EQ("test", ClearPart("test "));
+}
