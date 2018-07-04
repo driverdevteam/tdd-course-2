@@ -138,3 +138,10 @@ TEST(WordWrappTests, ClearPartWithSpaceBefore)
     EXPECT_STREQ(expect.c_str(), str.c_str());
 }
 
+TEST(WordWrappTests, TakeNumberStringWithSpaces_GetRightSplitted)
+{
+    const std::string txt = "12345 6 123456789 123456789";
+    Strings_vt res = {"12345", "6 1234", "56789", "123456", "789"};
+    EXPECT_EQ(res, WordWrapp(txt, 6));
+}
+
