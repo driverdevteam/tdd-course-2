@@ -1,15 +1,15 @@
 #include "chatutils.h"
+#include "serverhandshake.h"
 
 
-void ClientHandshake(Channel& channel, const std::string& login)
+void PerformClientHandshake(Channel& channel, const std::string& login)
 {
     std::string buffer;
     channel.Send(login + ":HELLO");
     channel.Receive(buffer);
-
 }
 
-void ServerHandshake(Channel& channel, const std::string& login)
+void PerformServerHandshake(Channel& channel, const std::string& login)
 {
     std::string buffer;
     channel.Receive(buffer);
@@ -20,12 +20,14 @@ Channel SetupServerChannel(ISocketWrapperPtr socket)
 {
     socket->Bind(host, port);
     socket->Listen();
-    return Channel(socket->Accept());
+    IHandshakePtr handshake(new ServerHandshake());
+    return Channel(socket->Accept(), handshake);
 }
 
 Channel SetupClientChannel(ISocketWrapperPtr socket)
 {
-    return Channel(socket->Connect(host, port));
+    IHandshakePtr handshake(new ServerHandshake());
+    return Channel(socket->Connect(host, port), handshake);
 }
 
 Channel StartSession(ISocketWrapperPtr socket)

@@ -8,7 +8,10 @@ CONFIG -= qt
 SOURCES += \
     test.cpp \
     socketwrapper.cpp \
-    chatutils.cpp
+    chatutils.cpp \
+    serverhandshake.cpp \
+    clienthandshake.cpp \
+    chat.cpp
 
 LIBS += \
     Ws2_32.lib \
@@ -18,4 +21,10 @@ LIBS += \
 HEADERS += \
     socketwrapper.h \
     chatutils.h \
-    channel.h
+    channel.h \
+    ihandshake.h \
+    serverhandshake.h \
+    clienthandshake.h \
+    chat.h \
+    igui.h \
+    ichannel.h

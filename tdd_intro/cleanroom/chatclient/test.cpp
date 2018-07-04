@@ -2,6 +2,8 @@
 #include <gmock/gmock.h>
 #include "socketwrapper.h"
 #include "chatutils.h"
+#include "ihandshake.h"
+#include "chat.h"
 
 using namespace testing;
 /*
@@ -54,12 +56,36 @@ public:
 
 };
 
+class MockIHandshake : public IHandshake
+{
+public:
+    MOCK_METHOD2(Handshake, std::string(Channel& channel, const std::string& nick));
+};
+
+class MockGui : public IGui
+{
+public:
+    MOCK_METHOD0(PrintPrompt, void());
+    MOCK_METHOD0(ReadMessage, std::string());
+    MOCK_METHOD1(DisplayMessage, void(const std::string&));
+};
+
+class MockChannel : public IChannel
+{
+public:
+    MOCK_METHOD1(Handshake, void(const std::string&));
+    MOCK_METHOD1(Send, void(const std::string&));
+    MOCK_METHOD1(Receive, void(std::string&));
+};
+
 typedef std::shared_ptr<MockSocketWrapper> MockSocketWrapperPtr;
+typedef std::shared_ptr<MockIHandshake> MockIHandshakePtr;
 
 TEST(SocketWrapperTest, Sending)
 {
     MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
-    Channel channel(socket);
+    IHandshakePtr mockHanshake(new MockIHandshake);
+    Channel channel(socket, mockHanshake);
 
     EXPECT_CALL(*socket, Write("Hello")).Times(1);
     channel.Send("Hello");
@@ -68,7 +94,8 @@ TEST(SocketWrapperTest, Sending)
 TEST(SocketWrapperTest, Receiving)
 {
     MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
-    Channel channel(socket);
+    IHandshakePtr mockHanshake(new MockIHandshake);
+    Channel channel(socket, mockHanshake);
 
     std::string buffer;
     EXPECT_CALL(*socket, Read(_)).WillOnce(SetArgReferee<0>("Hello"));
@@ -77,23 +104,25 @@ TEST(SocketWrapperTest, Receiving)
     EXPECT_EQ("Hello", buffer);
 }
 
-TEST(SocketWrapperTest, ClientHandshake)
+TEST(SocketWrapperTest, PerformClientHandshake)
 {
     MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
-    Channel channel(socket);
+    IHandshakePtr mockHanshake(new MockIHandshake);
+    Channel channel(socket, mockHanshake);
     InSequence sequence;
     EXPECT_CALL(*socket, Write("metizik:HELLO")).Times(1);
     EXPECT_CALL(*socket, Read(_)).Times(1);
-    ClientHandshake(channel, "metizik");
+    PerformClientHandshake(channel, "metizik");
 }
 
-TEST(SocketWrapperTest, ServerHandshake)
+TEST(SocketWrapperTest, PerformServerHandshake)
 {
     MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
-    Channel channel(socket);
+    IHandshakePtr mockHanshake(new MockIHandshake);
+    Channel channel(socket, mockHanshake);
     EXPECT_CALL(*socket, Read(_)).Times(1);
     EXPECT_CALL(*socket, Write("user:HELLO!")).Times(1);
-    ServerHandshake(channel, "user");
+    PerformServerHandshake(channel, "user");
 }
 
 TEST(SocketWrapperTest, StartServerChannel)
@@ -126,3 +155,48 @@ TEST(SocketWrapperTest, StartSession_SetupServer)
     EXPECT_NO_THROW(StartSession(socket));
 }
 
+TEST(SocketWrapperTest, ChannelPerfromHandshake)
+{
+    MockSocketWrapperPtr socket = std::make_shared<MockSocketWrapper>();
+    MockIHandshakePtr mockHanshake(new MockIHandshake);
+    Channel channel(socket, mockHanshake);
+    EXPECT_CALL(*mockHanshake, Handshake(_, _)).Times(1);
+    channel.Handshake("nick");
+}
+
+
+TEST(SocketWrapperTest, IGuiPrintPrompt)
+{
+    MockGui gui;
+    MockChannel channel;
+    Chat chat(gui, &channel);
+
+    EXPECT_CALL(gui, PrintPrompt()).Times(1);
+
+    chat.start();
+}
+
+TEST(SocketWrapperTest, ChatSendMessage)
+{
+    MockGui gui;
+    MockChannel channel;
+    Chat chat(gui, &channel);
+
+    EXPECT_CALL(gui, ReadMessage()).WillOnce(testing::Return("Message text"));
+    EXPECT_CALL(channel, Send("Message text")).Times(1);
+
+    chat.start();
+}
+
+TEST(SocketWrapperTest, ChatReceiveMessage)
+{
+    MockGui gui;
+    MockChannel channel;
+
+    Chat chat(gui, &channel);
+
+    EXPECT_CALL(channel, Receive(_)).WillOnce(SetArgReferee<0>("Message text"));
+    EXPECT_CALL(gui, DisplayMessage("server_nick: Message text")).Times(1);
+
+    chat.start();
+}
