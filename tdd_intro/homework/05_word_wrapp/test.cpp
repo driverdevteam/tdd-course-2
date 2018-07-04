@@ -43,7 +43,7 @@ bool ClearPart(std::string& outPart)
 
     if(outPart[0] == ' ')
     {
-        outPart = outPart.substr(1, outPart.size());
+        outPart = outPart.substr(1);
     }
 
     return true;
@@ -118,16 +118,23 @@ TEST(WordWrappTests, ClearPartWithOutSpaces)
 {
     std::string str = "test";
     std::string expect = "test";
-    EXPECT_TRUE(ClearPart(std::string("test")));
-    EXPECT_EQ(expect, str);
+    EXPECT_TRUE(ClearPart(std::string(str)));
+    EXPECT_STREQ(expect.c_str(), str.c_str());
 }
 
 TEST(WordWrappTests, ClearPartWithSpaceAfter)
 {
-    EXPECT_TRUE(ClearPart(std::string("test ")));
+    std::string str = "test ";
+    std::string expect = "test";
+    EXPECT_TRUE(ClearPart(str));
+    EXPECT_STREQ(expect.c_str(), str.c_str());
 }
 
 TEST(WordWrappTests, ClearPartWithSpaceBefore)
 {
-    EXPECT_TRUE(ClearPart(std::string(" test")));
+    std::string str = " test";
+    std::string expect = "test";
+    EXPECT_TRUE(ClearPart(str));
+    EXPECT_STREQ(expect.c_str(), str.c_str());
 }
+
