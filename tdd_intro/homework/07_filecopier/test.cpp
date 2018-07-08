@@ -121,3 +121,45 @@ TEST(FileCopierTests, CopySingleFile)
 
     fileCopier.copy(src_path, dst_path);
 }
+
+TEST(FileCopierTests, CopyFileRecursively)
+{
+    MockFileSystem filesystem;
+    FileCopier fileCopier(filesystem);
+    const std::string src_path = "G:\\1";
+    const std::string dst_path = "G:\\2";
+
+    StringVector foldersInParentDirectory{"folder1", "folder2"};
+    StringVector filesInFolder1{"file1", "file2"};
+    StringVector filesInFolder2{"file3", "file4"};
+
+
+    EXPECT_CALL(filesystem, isExist(src_path)).WillOnce(testing::Return(true));
+    EXPECT_CALL(filesystem, getChildList(src_path)).WillOnce(testing::Return(foldersInParentDirectory));
+    EXPECT_CALL(filesystem, getChildList(foldersInParentDirectory[0])).WillOnce(testing::Return(filesInFolder1));
+    EXPECT_CALL(filesystem, getChildList(foldersInParentDirectory[1])).WillOnce(testing::Return(filesInFolder2));
+
+    EXPECT_CALL(filesystem, isDirectory(foldersInParentDirectory[0])).WillOnce(testing::Return(true));
+    EXPECT_CALL(filesystem, isDirectory(foldersInParentDirectory[1])).WillOnce(testing::Return(true));
+
+
+    EXPECT_CALL(filesystem, isDirectory(filesInFolder1[0])).WillOnce(testing::Return(false));
+    EXPECT_CALL(filesystem, isDirectory(filesInFolder1[1])).WillOnce(testing::Return(false));
+    EXPECT_CALL(filesystem, isDirectory(filesInFolder2[0])).WillOnce(testing::Return(false));
+    EXPECT_CALL(filesystem, isDirectory(filesInFolder2[1])).WillOnce(testing::Return(false));
+
+    EXPECT_CALL(filesystem, copy(buildPath({src_path, foldersInParentDirectory[0], filesInFolder1[0]}),
+                                 buildPath({dst_path, foldersInParentDirectory[0], filesInFolder1[0]}))).Times(1);
+
+    EXPECT_CALL(filesystem, copy(buildPath({src_path, foldersInParentDirectory[0], filesInFolder1[1]}),
+                                 buildPath({dst_path, foldersInParentDirectory[0], filesInFolder1[1]}))).Times(1);
+
+    EXPECT_CALL(filesystem, copy(buildPath({src_path, foldersInParentDirectory[1], filesInFolder1[0]}),
+                                 buildPath({dst_path, foldersInParentDirectory[1], filesInFolder1[0]}))).Times(1);
+
+    EXPECT_CALL(filesystem, copy(buildPath({src_path, foldersInParentDirectory[1], filesInFolder1[1]}),
+                                 buildPath({dst_path, foldersInParentDirectory[1], filesInFolder1[1]}))).Times(1);
+
+    fileCopier.copy(src_path, dst_path);
+
+}
