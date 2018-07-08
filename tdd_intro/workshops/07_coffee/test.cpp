@@ -182,3 +182,15 @@ TEST(CoffeCoretest, CreateCappucinoLittle)
     machine.CreateCappucino();
 }
 
+TEST(CoffeCoretest, CreateCappucinoLittle_NoCup)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddWater(testing::_, testing::_)).Times(0);
+    EXPECT_CALL(mock, AddCoffee(testing::_)).Times(0);
+    EXPECT_CALL(mock, AddMilk(testing::_)).Times(0);
+    EXPECT_CALL(mock, AddMilkFoam(testing::_)).Times(0);
+    EXPECT_THROW(machine.CreateCappucino(), std::runtime_error);
+}
+
