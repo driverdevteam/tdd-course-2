@@ -70,3 +70,20 @@ TEST(FileCopierTests, CopyNonExistSingleFile)
     EXPECT_CALL(filesystem, isExist(file_path)).WillOnce(testing::Return(false));
     EXPECT_THROW(fileCopier.copy(file_path, "G:\\"), std::runtime_error);
 }
+
+TEST(FileCopierTests, CopySingleFile)
+{
+    MockFileSystem filesystem;
+    FileCopier fileCopier(filesystem);
+
+    const std::string src_path = "G:\\1";
+    const std::string dst_path = "G:\\2";
+    StringVector files = {"G:\\1.txt"};
+
+    EXPECT_CALL(filesystem, getChildList(src_path)).WillOnce(testing::Return(files));
+    EXPECT_CALL(filesystem, isDirectory(files[0])).WillOnce(testing::Return(false));
+
+    EXPECT_CALL(filesystem, copy(src_path + "\\" + files[0], dst_path + "\\" + files[0])).Times(1);
+
+    fileCopier.copy(src_path, dst_path);
+}
