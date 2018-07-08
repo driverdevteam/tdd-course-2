@@ -19,6 +19,11 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 */
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <vector>
+#include <string>
+#include <memory>
+#include "ifilecopier.h"
+#include "ifilesystem.h"
 
 //Checklist:
 //1. Check file on exist.
@@ -27,35 +32,41 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 //4. Copy empty directory.
 //5. Copy directory with another embeded directory.
 
-using StringVector = std::vector<std::string>;
-
-class IFileSystem
+class MockFileSystem: public IFileSystem
 {
 public:
-    virtual ~IFileSystem();
-    virtual bool isExist(const std::string& path) = 0;
-    virtual StringVector getChildList(const std::string& path) = 0;
-    virtual bool isDirectory(const std::string& path) = 0;
-    virtual void copy(const std::string& src, const std::string& dst) = 0;
+    virtual ~MockFileSystem() {}
+    MOCK_METHOD1(isExist, bool(const std::string&));
+    MOCK_METHOD1(getChildList, StringVector(const std::string&));
+    MOCK_METHOD1(isDirectory, bool(const std::string&));
+    MOCK_METHOD2(copy, void(const std::string&, const std::string&));
 };
 
-class IFileCopier
+class FileCopier: public IFileCopier
 {
 public:
-    virtual ~IFileCopier();
-    virtual void copy(const std::string& src, const std::string& dst) = 0;
+    virtual ~FileCopier() {}
+    FileCopier(IFileSystem& fs): filesystem(fs) {}
+    virtual void copy(const std::string &src, const std::string &dst) override;
+private:
+    IFileSystem& filesystem;
 };
 
-
+void FileCopier::copy(const std::string &src, const std::string &dst)
+{
+      if (!filesystem.isExist(src))
+      {
+          throw std::runtime_error("Can't copy a not exist file");
+      }
+}
 
 TEST(FileCopierTests, CopyNonExistSingleFile)
 {
     MockFileSystem filesystem;
-    FileCopier fileCopier(&fileSystem);
+    FileCopier fileCopier(filesystem);
 
     const std::string file_path = "some_path/to/folder";
 
-    EXPECT_CALL(filesystem, IsExist(file_path)).WillOnce(testing::Return(false));
-    EXPECT_THROW(fileCopier.Copy(file_path, "G:\\"), std::runtime_error);
+    EXPECT_CALL(filesystem, isExist(file_path)).WillOnce(testing::Return(false));
+    EXPECT_THROW(fileCopier.copy(file_path, "G:\\"), std::runtime_error);
 }
-
