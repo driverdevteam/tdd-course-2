@@ -27,19 +27,24 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 //4. Copy empty directory.
 //5. Copy directory with another embeded directory.
 
+using StringVector = std::vector<std::string>;
 
 class IFileSystem
 {
 public:
     virtual ~IFileSystem();
-    virtual std::vector<std::string> getChildList(const std::string& path) = 0;
-    virtual bool isDirectory() = 0;
-    virtual void Copy(const std::string& src, const std::string& dst) = 0;
+    virtual bool isExist(const std::string& path) = 0;
+    virtual StringVector getChildList(const std::string& path) = 0;
+    virtual bool isDirectory(const std::string& path) = 0;
+    virtual void copy(const std::string& src, const std::string& dst) = 0;
 };
 
 class IFileCopier
 {
 public:
-    virtual void Copy(const std::string& src, const std::string& dst) = 0;
+    virtual ~IFileCopier();
+    virtual void copy(const std::string& src, const std::string& dst) = 0;
 };
+
+
 

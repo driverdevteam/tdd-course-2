@@ -65,6 +65,12 @@
 #include "gtest/internal/gtest-filepath.h"
 #include "gtest/internal/gtest-type-util.h"
 
+
+enum RelationToSource {
+  kReference,  // The NativeArray references the native array.
+  kCopy           // The NativeArray makes a copy of the native array and
+                      // owns the copy.
+};
 // Due to C++ preprocessor weirdness, we need double indirection to
 // concatenate two tokens when one of them is __LINE__.  Writing
 //
