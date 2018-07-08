@@ -54,10 +54,20 @@ private:
 
 void FileCopier::copy(const std::string &src, const std::string &dst)
 {
-      if (!filesystem.isExist(src))
-      {
-          throw std::runtime_error("Can't copy a not exist file");
-      }
+    if (!filesystem.isExist(src))
+    {
+        throw std::runtime_error("Can't copy a not exist file");
+    }
+
+    std::vector<std::string> children = filesystem.getChildList(src);
+    for (const auto& child : children)
+    {
+        if  (!filesystem.isDirectory(child))
+        {
+            filesystem.copy(src + "\\" + child, dst + "\\" + child);
+        }
+
+    }
 }
 
 TEST(FileCopierTests, CopyNonExistSingleFile)
@@ -80,6 +90,7 @@ TEST(FileCopierTests, CopySingleFile)
     const std::string dst_path = "G:\\2";
     StringVector files = {"G:\\1.txt"};
 
+    EXPECT_CALL(filesystem, isExist(src_path)).WillOnce(testing::Return(true));
     EXPECT_CALL(filesystem, getChildList(src_path)).WillOnce(testing::Return(files));
     EXPECT_CALL(filesystem, isDirectory(files[0])).WillOnce(testing::Return(false));
 
