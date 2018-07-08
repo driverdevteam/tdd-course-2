@@ -112,6 +112,7 @@ void CoffeeMachine::CreateAmericano()
     m_core.AddCoffee(m_size / 2);
 }
 
+
 TEST(CoffeCoretest, CreateHotWater)
 {
     CoffeeCoreMock mock;
@@ -156,4 +157,16 @@ TEST(CoffeCoretest, CreateAmericanoLittle_NoCup)
     EXPECT_THROW(machine.CreateAmericano(), std::runtime_error);
 }
 
-// add other tests
+TEST(CoffeCoretest, CreateCappucinoLittle)
+{
+    CoffeeCoreMock mock;
+    CoffeeMachine machine(mock);
+
+    EXPECT_CALL(mock, AddWater(CupSizeLittle / 4, 80)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilk(CupSizeLittle / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(CupSizeLittle / 4)).Times(1);
+    machine.CreateLittleCup();
+    machine.CreateCappucino();
+}
+
