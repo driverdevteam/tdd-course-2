@@ -48,3 +48,14 @@ public:
 
 
 
+TEST(FileCopierTests, CopyNonExistSingleFile)
+{
+    MockFileSystem filesystem;
+    FileCopier fileCopier(&fileSystem);
+
+    const std::string file_path = "some_path/to/folder";
+
+    EXPECT_CALL(filesystem, IsExist(file_path)).WillOnce(testing::Return(false));
+    EXPECT_THROW(fileCopier.Copy(file_path, "G:\\"), std::runtime_error);
+}
+
