@@ -24,7 +24,7 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 #include <memory>
 #include "ifilecopier.h"
 #include "ifilesystem.h"
-
+#include <sstream>
 //Checklist:
 //1. Check file on exist.
 //2. Check if filetype is directory.
@@ -32,6 +32,29 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 //4. Copy empty directory.
 //5. Copy directory with another embeded directory.
 
+namespace
+{
+    const char pathSeparator =
+            #ifdef _WIN32
+            '\\';
+    #else
+            '/';
+    #endif
+    std::string buildPath(std::initializer_list<std::string> list)
+    {
+        std::stringstream ss;
+        for (auto el : list)
+        {
+            ss << el;
+            if (el.back() != pathSeparator)
+            {
+                ss << pathSeparator;
+            }
+        }
+        std::cout << ss.str();
+        return ss.str();
+    }
+}
 class MockFileSystem: public IFileSystem
 {
 public:
@@ -59,12 +82,12 @@ void FileCopier::copy(const std::string &src, const std::string &dst)
         throw std::runtime_error("Can't copy a not exist file");
     }
 
-    std::vector<std::string> children = filesystem.getChildList(src);
+    StringVector children = filesystem.getChildList(src);
     for (const auto& child : children)
     {
         if  (!filesystem.isDirectory(child))
         {
-            filesystem.copy(src + "\\" + child, dst + "\\" + child);
+            filesystem.copy(buildPath({src, child}), buildPath({dst, child}));
         }
 
     }
@@ -78,7 +101,7 @@ TEST(FileCopierTests, CopyNonExistSingleFile)
     const std::string file_path = "some_path/to/folder";
 
     EXPECT_CALL(filesystem, isExist(file_path)).WillOnce(testing::Return(false));
-    EXPECT_THROW(fileCopier.copy(file_path, "G:\\"), std::runtime_error);
+    EXPECT_THROW(fileCopier.copy(file_path, "G:"), std::runtime_error);
 }
 
 TEST(FileCopierTests, CopySingleFile)
@@ -94,7 +117,7 @@ TEST(FileCopierTests, CopySingleFile)
     EXPECT_CALL(filesystem, getChildList(src_path)).WillOnce(testing::Return(files));
     EXPECT_CALL(filesystem, isDirectory(files[0])).WillOnce(testing::Return(false));
 
-    EXPECT_CALL(filesystem, copy(src_path + "\\" + files[0], dst_path + "\\" + files[0])).Times(1);
+    EXPECT_CALL(filesystem, copy(buildPath({src_path, files[0]}), buildPath({dst_path, files[0]}))).Times(1);
 
     fileCopier.copy(src_path, dst_path);
 }
