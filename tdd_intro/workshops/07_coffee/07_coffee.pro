@@ -7,7 +7,3 @@ CONFIG -= qt
 
 SOURCES += \
     test.cpp
-
-HEADERS += \
-    ifilecopier.h \
-    ifilesystem.h

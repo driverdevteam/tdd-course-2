@@ -1,4 +1,4 @@
-include(../../gmock.pri)
+include(../../gtest.pri)
 
 TEMPLATE = app
 CONFIG += console c++11
@@ -7,7 +7,3 @@ CONFIG -= qt
 
 SOURCES += \
     test.cpp
-
-HEADERS += \
-    ifilecopier.h \
-    ifilesystem.h
