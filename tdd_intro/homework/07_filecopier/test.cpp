@@ -40,6 +40,12 @@ const std::string s_emptyFolderDstPath("D://emptyFolder");
 const std::string s_unexistantFolderSrcPath("C://unexistantFolder");
 const std::string s_unexistantFolderDstPath("D://unexistantFolder");
 
+const std::string s_singleFileFolderSrcPath("C://singleFileFolder");
+const std::string s_singleFileFolderDstPath("D://singleFileFolder");
+const std::string s_singleFileFolderFileName("file");
+const std::string s_singleFileFolderFileSrc("C://singleFileFolder//file");
+const std::string s_singleFileFolderFileDst("D://singleFileFolder//file");
+
 class IFileCopier
 {
 public:
@@ -142,4 +148,16 @@ TEST(FileCopier, CopyUnexistantFolder)
     fileCopier.Copy(s_unexistantFolderSrcPath, s_unexistantFolderDstPath);
 }
 
+TEST(FileCopier, CopyFolderWithSingleFile)
+{
+    FileCopierMock mock;
+    FileCopier fileCopier(mock);
+
+    EXPECT_CALL(mock, CheckIfExists(s_unexistantFolderSrcPath)).WillOnce(testing::Return(true));
+    EXPECT_CALL(mock, IsFolder(s_emptyFolderSrcPath)).WillOnce(testing::Return(true));
+    EXPECT_CALL(mock, CopyFolder(s_singleFileFolderSrcPath, s_singleFileFolderDstPath)).Times(1);
+    EXPECT_CALL(mock, CopyFile(s_singleFileFolderFileSrc, s_singleFileFolderFileDst)).Times(1);
+
+    fileCopier.Copy(s_singleFileFolderSrcPath, s_singleFileFolderDstPath);
+}
 
