@@ -98,90 +98,57 @@ Example input and output
    // - parse
 // parse several lines
 
-using Digit = std::vector<std::string>;
+using Digit = char[3][4];
 
-const Digit s_1({"   ",
-                 "  |",
-                 "  |"});
+const Digit s_0 = { " _ ",
+                    "| |",
+                    "|_|"
+                  };
+const Digit s_1 = { "   ",
+                    "  |",
+                    "  |"
+                  };
+const Digit s_2 = { " _ ",
+                    " _|",
+                    "|_ "
+                  };
+const Digit s_3 = { " _ ",
+                    " _|",
+                    " _|"
+                  };
+const Digit s_4 = { "   ",
+                    "|_|",
+                    "  |"
+                  };
+const Digit s_5 = { " _ ",
+                    "|_ ",
+                    " _|"
+                  };
+const Digit s_6 = { " _ ",
+                    "|_ ",
+                    "|_|"
+                  };
+const Digit s_7 = { " _ ",
+                    "  |",
+                    "  |"
+                  };
+const Digit s_8 = { " _ ",
+                    "|_|",
+                    "|_|"
+                  };
+const Digit s_9 = { " _ ",
+                    "|_|",
+                    " _|"
+                  };
 
-const Digit s_2({" _ ",
-                 " _|",
-                 "|_ "});
-
-std::vector<Digit> s_digits({
-
-});
-
-bool CheckMatrixDimension(const Digit& digit)
+using Number = unsigned char;
+Number DigitToNumber(const Digit& digit)
 {
-    const size_t prefferedSize = 3;
 
-    if (digit.size() != prefferedSize)
-    {
-        return false;
-    }
-
-    for (const std::string& line : digit)
-    {
-        if (line.size() != prefferedSize)
-        {
-            return false;
-        }
-    }
-
-    return true;
 }
 
-std::string ParseDigit(const Digit& digit)
-{
-    if (digit == Digit({"   ",
-                        "  |",
-                        "  |"}))
-    {
-        return "1";
-    }
-    else if (digit == Digit({" _ ",
-                             " _|",
-                             "|_ "}))
-    {
-        return "2";
-    }
 
-    return "8";
-}
-
-TEST(BankOCRTests, Check_Matrix_dimension_true)
+TEST(BankOCRTests, ParseDigit_0)
 {
-    Digit digit = {"   ", "   ", "   "};
-    EXPECT_TRUE(CheckMatrixDimension(digit));
-}
-
-TEST(BankOCRTests, Check_Matrix_dimension_false)
-{
-    Digit digit = {"  ", "!   ", " "};
-    EXPECT_FALSE(CheckMatrixDimension(digit));
-}
-
-TEST(BankOCRTests, ParseDigit_1)
-{
-    Digit digit = {"   ",
-                   "  |",
-                   "  |"};
-    EXPECT_EQ("1", ParseDigit(digit));
-}
-
-TEST(BankOCRTests, ParseDigit_2)
-{
-    Digit digit = {" _ ",
-                   " _|",
-                   "|_ "};
-    EXPECT_EQ("2", ParseDigit(digit));
-}
-
-TEST(BankOCRTests, ParseDigit_8)
-{
-    Digit digit = {" _ ",
-                   "|_|",
-                   "|_|"};
-    EXPECT_EQ("8", ParseDigit(digit));
+    EXPECT_EQ(0, DigitToNumber(s_0));
 }
