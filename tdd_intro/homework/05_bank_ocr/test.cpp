@@ -175,3 +175,12 @@ TEST(BankOCRTests, DigitToNumber_1)
                                      }
                                ));
 }
+
+TEST(BankOCRTests, DigitToNumber_2)
+{
+    EXPECT_EQ(1, DigitToNumber(Digit { " _ ",
+                                       " _|",
+                                       "|_ "
+                                     }
+                               ));
+}
