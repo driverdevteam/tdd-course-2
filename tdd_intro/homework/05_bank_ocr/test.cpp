@@ -98,9 +98,47 @@ Example input and output
    // - parse
 // parse several lines
 
-const unsigned char s_digitHeight = 3;
-const unsigned char s_digitWidth = 3;
-using Digit = char[s_digitHeight][s_digitWidth + 1]; // + 1 for the null terminator
+using DigitView = std::vector<std::string>;
+class Digit
+{
+public:
+    Digit(const std::initializer_list<std::string>& lst)
+    {
+        DigitView view;
+        for (const auto& line : lst) { view.push_back(line); }
+        Init(view);
+    }
+    Digit(const DigitView& view)
+    {
+        Init(view);
+    }
+
+    const DigitView& View() const { return m_view; }
+
+    static constexpr unsigned char Height() { return 3; }
+    static constexpr unsigned char Width() { return 3; }
+
+private:
+    void Init(const DigitView& view)
+    {
+        if (view.size() != Height())
+        {
+            throw std::runtime_error("Invalid digit view height");
+        }
+
+        for (const auto& line : view)
+        {
+            if (line.size() != Width())
+            {
+                throw std::runtime_error("Invalid digit view width");
+            }
+        }
+        m_view = view;
+    }
+
+private:
+    DigitView m_view;
+};
 
 const Digit s_0 = { " _ ",
                     "| |",
@@ -145,9 +183,14 @@ const Digit s_9 = { " _ ",
 
 bool DigitsAreEqual(const Digit& left, const Digit& right)
 {
-    return strcmp(left[0], right[0]) == 0 &&
-           strcmp(left[1], right[1]) == 0 &&
-           strcmp(left[2], right[2]) == 0;
+    for (unsigned char line = 0; line < Digit::Height(); ++line)
+    {
+        if (left.View().at(line) != right.View().at(line))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 using Number = unsigned char;
@@ -164,11 +207,50 @@ Number DigitToNumber(const Digit& digit)
     throw std::runtime_error("Digit could not be parsed");
 }
 
-const unsigned char s_numbersOnDisplay = 9;
-using DigitsDisplay = char[s_digitHeight][s_digitWidth * s_numbersOnDisplay + 1]; // + 1 for the null terminator
+using DigitsDisplayView = std::vector<std::string>;
+class DigitsDisplay
+{
+public:
+    DigitsDisplay(const std::initializer_list<std::string>& lst)
+    {
+        if (lst.size() != Digit::Height())
+        {
+            throw std::runtime_error("Invalid digit display view height");
+        }
+
+        for (const auto& line : lst)
+        {
+            if (line.size() != Width())
+            {
+                throw std::runtime_error("Invalid digit display view width");
+            }
+            m_view.push_back(line);
+        }
+    }
+
+    const DigitsDisplayView& View() const { return m_view; }
+
+    static constexpr unsigned char NumbersCount() { return 9; }
+    static constexpr unsigned char Height() { return Digit::Height(); }
+    static constexpr unsigned char Width() { return Digit::Width() * NumbersCount(); }
+
+private:
+    DigitsDisplayView m_view;
+};
+
 std::string ParseDisplay(const DigitsDisplay& display)
 {
-    return "000000000";
+    DigitView digitView(display.Height());
+    std::string res;
+    for (unsigned char digitPos = 0; digitPos < display.Width(); digitPos += Digit::Width())
+    {
+        for (unsigned char height = 0; height < display.Height(); ++height)
+        {
+            digitView.at(height) = display.View().at(height).substr(digitPos, Digit::Width());
+        }
+        res += std::to_string(DigitToNumber(Digit(digitView)));
+    }
+    return res;
 }
 
 TEST(BankOCRTests, DigitToNumber_0)
@@ -245,7 +327,6 @@ TEST(BankOCRTests, ParseDigits_000000000)
     };
     EXPECT_STREQ("000000000", ParseDisplay(nulls).c_str());
 }
-
 
 TEST(BankOCRTests, ParseDigits_111111111)
 {
