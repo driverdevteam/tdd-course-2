@@ -34,8 +34,7 @@ const std::string s_singleFileDstPath("D://singleFile");
 class IFileCopier
 {
 public:
-    ~IFileCopier();
-    virtual void Copy(const std::string& src, const std::string& dst) = 0;
+    ~IFileCopier(){}
     virtual void CopyFile(const std::string& src, const std::string& dst) = 0;
 };
 
@@ -46,10 +45,31 @@ public:
     MOCK_METHOD2(CopyFile, void(const std::string&, const std::string&));
 };
 
+class FileCopier
+{
+public:
+    FileCopier(IFileCopier& fileCopier);
+    void Copy(const std::string& src, const std::string& dst);
+private:
+    IFileCopier& m_fileCopier;
+};
+
+FileCopier::FileCopier(IFileCopier &fileCopier)
+    : m_fileCopier(fileCopier)
+{
+}
+
+void FileCopier::Copy(const std::string &src, const std::string &dst)
+{
+
+}
+
 TEST(FileCopier, CopySingleFile)
 {
     FileCopierMock mock;
+    FileCopier fileCopier(mock);
 
     EXPECT_CALL(mock, CopyFile(s_singleFileSrcPath, testing::_)).Times(1);
-    mock.Copy(s_singleFileSrcPath, s_singleFileDstPath);
+
+    fileCopier.Copy(s_singleFileSrcPath, s_singleFileDstPath);
 }
