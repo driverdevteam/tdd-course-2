@@ -98,7 +98,9 @@ Example input and output
    // - parse
 // parse several lines
 
-using Digit = char[3][4]; // 4 is 3 + 1 for the null terminator
+const unsigned char s_digitHeight = 3;
+const unsigned char s_digitWidth = 3;
+using Digit = char[s_digitHeight][s_digitWidth + 1]; // + 1 for the null terminator
 
 const Digit s_0 = { " _ ",
                     "| |",
@@ -141,8 +143,6 @@ const Digit s_9 = { " _ ",
                     " _|"
                   };
 
-const std::vector<const Digit*> s_possibleDigits = { &s_0, &s_1, &s_2, &s_3, &s_4, &s_5, &s_6, &s_7, &s_8, &s_9 };
-
 bool DigitsAreEqual(const Digit& left, const Digit& right)
 {
     return strcmp(left[0], right[0]) == 0 &&
@@ -153,6 +153,7 @@ bool DigitsAreEqual(const Digit& left, const Digit& right)
 using Number = unsigned char;
 Number DigitToNumber(const Digit& digit)
 {
+    static const std::vector<const Digit*> s_possibleDigits = { &s_0, &s_1, &s_2, &s_3, &s_4, &s_5, &s_6, &s_7, &s_8, &s_9 };
     for (Number n = 0; s_possibleDigits.size(); ++n)
     {
         if (DigitsAreEqual(digit, *s_possibleDigits.at(n)))
@@ -161,6 +162,13 @@ Number DigitToNumber(const Digit& digit)
         }
     }
     throw std::runtime_error("Digit could not be parsed");
+}
+
+const unsigned char s_numbersOnDisplay = 9;
+using DigitsDisplay = char[s_digitHeight][s_digitWidth * s_numbersOnDisplay + 1]; // + 1 for the null terminator
+std::string ParseDisplay(const DigitsDisplay& display)
+{
+    return "";
 }
 
 TEST(BankOCRTests, DigitToNumber_0)
@@ -227,4 +235,13 @@ TEST(BankOCRTests, DigitToNumber_Acceptance)
                                        " _|"
                                      }
                                ));
+}
+
+TEST(BankOCRTests, ParseDigits_000000000)
+{
+    DigitsDisplay nulls = { " _  _  _  _  _  _  _  _  _ ",
+                            "| || || || || || || || || |",
+                            "|_||_||_||_||_||_||_||_||_|"
+    };
+    EXPECT_STREQ("000000000", ParseDisplay(nulls).c_str());
 }
