@@ -28,15 +28,28 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
     6. Copy folder with several files
     7. Copy folder with several files and other folders */
 
+const std::string s_singleFileSrcPath("C://singleFile");
+const std::string s_singleFileDstPath("D://singleFile");
+
 class IFileCopier
 {
 public:
     ~IFileCopier();
     virtual void Copy(const std::string& src, const std::string& dst) = 0;
+    virtual void CopyFile(const std::string& src, const std::string& dst) = 0;
 };
 
 class FileCopierMock : public IFileCopier
 {
 public:
     MOCK_METHOD2(Copy, void(const std::string&, const std::string&));
+    MOCK_METHOD2(CopyFile, void(const std::string&, const std::string&));
 };
+
+TEST(FileCopier, CopySingleFile)
+{
+    FileCopierMock mock;
+
+    EXPECT_CALL(mock, CopyFile(s_singleFileSrcPath, testing::_)).Times(1);
+    mock.Copy(s_singleFileSrcPath, s_singleFileDstPath);
+}
