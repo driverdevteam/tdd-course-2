@@ -37,6 +37,9 @@ const std::string s_unexistantFileDstPath("D://unexistantFile");
 const std::string s_emptyFolderSrcPath("C://emptyFolder");
 const std::string s_emptyFolderDstPath("D://emptyFolder");
 
+const std::string s_unexistantFolderSrcPath("C://unexistantFolder");
+const std::string s_unexistantFolderDstPath("D://unexistantFolder");
+
 class IFileCopier
 {
 public:
@@ -122,3 +125,17 @@ TEST(FileCopier, CopyEmptyFolder)
 
     fileCopier.Copy(s_emptyFolderSrcPath, s_emptyFolderDstPath);
 }
+
+TEST(FileCopier, CopyUnexistantFolder)
+{
+    FileCopierMock mock;
+    FileCopier fileCopier(mock);
+
+    EXPECT_CALL(mock, CheckIfExists(s_unexistantFolderSrcPath)).WillOnce(testing::Return(false));
+    EXPECT_CALL(mock, IsFolder(testing::_)).Times(0);
+    EXPECT_CALL(mock, CopyFolder(s_unexistantFolderSrcPath, testing::_)).Times(0);
+
+    fileCopier.Copy(s_unexistantFolderSrcPath, s_unexistantFolderDstPath);
+}
+
+
