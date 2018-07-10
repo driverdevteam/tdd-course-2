@@ -245,3 +245,13 @@ TEST(BankOCRTests, ParseDigits_000000000)
     };
     EXPECT_STREQ("000000000", ParseDisplay(nulls).c_str());
 }
+
+
+TEST(BankOCRTests, ParseDigits_111111111)
+{
+    DigitsDisplay ones =  { "                           ",
+                            "  |  |  |  |  |  |  |  |  |",
+                            "  |  |  |  |  |  |  |  |  |"
+    };
+    EXPECT_STREQ("111111111", ParseDisplay(ones).c_str());
+}
