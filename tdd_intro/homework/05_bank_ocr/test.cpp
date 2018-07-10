@@ -98,7 +98,7 @@ Example input and output
    // - parse
 // parse several lines
 
-using Digit = char[3][4];
+using Digit = char[3][4]; // 4 is 3 + 1 for the null terminator
 
 const Digit s_0 = { " _ ",
                     "| |",
@@ -144,7 +144,7 @@ const Digit s_9 = { " _ ",
 using Number = unsigned char;
 Number DigitToNumber(const Digit& digit)
 {
-
+    return 0;
 }
 
 
