@@ -141,9 +141,20 @@ const Digit s_9 = { " _ ",
                     " _|"
                   };
 
+bool DigitsAreEqual(const Digit& left, const Digit& right)
+{
+    return strcmp(left[0], right[0]) == 0 &&
+           strcmp(left[1], right[1]) == 0 &&
+           strcmp(left[2], right[2]) == 0;
+}
+
 using Number = unsigned char;
 Number DigitToNumber(const Digit& digit)
 {
+    if (DigitsAreEqual(digit, s_1))
+    {
+        return 1;
+    }
     return 0;
 }
 
