@@ -61,7 +61,7 @@ FileCopier::FileCopier(IFileCopier &fileCopier)
 
 void FileCopier::Copy(const std::string &src, const std::string &dst)
 {
-
+    m_fileCopier.CopyFile(src, dst);
 }
 
 TEST(FileCopier, CopySingleFile)
