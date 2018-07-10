@@ -72,7 +72,7 @@ TEST(FileCopier, CopySingleFile)
     FileCopierMock mock;
     FileCopier fileCopier(mock);
 
-    EXPECT_CALL(mock, CopyFile(s_singleFileSrcPath, testing::_)).Times(1);
+    EXPECT_CALL(mock, CopyFile(s_singleFileSrcPath, s_singleFileDstPath)).Times(1);
 
     fileCopier.Copy(s_singleFileSrcPath, s_singleFileDstPath);
 }
