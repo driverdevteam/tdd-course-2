@@ -44,7 +44,6 @@ public:
 class FileCopierMock : public IFileCopier
 {
 public:
-    MOCK_METHOD2(Copy, void(const std::string&, const std::string&));
     MOCK_METHOD2(CopyFile, void(const std::string&, const std::string&));
 };
 
