@@ -98,6 +98,7 @@ TEST(FileCopier, CopySingleFile)
     EXPECT_CALL(mock, CheckIfExists(s_singleFileSrcPath)).WillOnce(testing::Return(true));
     EXPECT_CALL(mock, IsFolder(s_singleFileSrcPath)).WillOnce(testing::Return(false));
     EXPECT_CALL(mock, CopyFile(s_singleFileSrcPath, s_singleFileDstPath)).Times(1);
+    EXPECT_CALL(mock, CopyFolder(testing::_, testing::_)).Times(0);
 
     fileCopier.Copy(s_singleFileSrcPath, s_singleFileDstPath);
 }
@@ -109,7 +110,8 @@ TEST(FileCopier, CopyUnexistantFile)
 
     EXPECT_CALL(mock, CheckIfExists(s_unexistantFileSrcPath)).WillOnce(testing::Return(false));
     EXPECT_CALL(mock, IsFolder(testing::_)).Times(0);
-    EXPECT_CALL(mock, CopyFile(s_unexistantFileSrcPath, testing::_)).Times(0);
+    EXPECT_CALL(mock, CopyFile(testing::_, testing::_)).Times(0);
+    EXPECT_CALL(mock, CopyFolder(testing::_, testing::_)).Times(0);
 
     fileCopier.Copy(s_unexistantFileSrcPath, s_unexistantFileDstPath);
 }
@@ -121,6 +123,7 @@ TEST(FileCopier, CopyEmptyFolder)
 
     EXPECT_CALL(mock, CheckIfExists(s_emptyFolderSrcPath)).WillOnce(testing::Return(true));
     EXPECT_CALL(mock, IsFolder(s_emptyFolderSrcPath)).WillOnce(testing::Return(true));
+    EXPECT_CALL(mock, CopyFile(testing::_, testing::_)).Times(0);
     EXPECT_CALL(mock, CopyFolder(s_emptyFolderSrcPath, s_emptyFolderDstPath)).Times(1);
 
     fileCopier.Copy(s_emptyFolderSrcPath, s_emptyFolderDstPath);
@@ -133,7 +136,8 @@ TEST(FileCopier, CopyUnexistantFolder)
 
     EXPECT_CALL(mock, CheckIfExists(s_unexistantFolderSrcPath)).WillOnce(testing::Return(false));
     EXPECT_CALL(mock, IsFolder(testing::_)).Times(0);
-    EXPECT_CALL(mock, CopyFolder(s_unexistantFolderSrcPath, testing::_)).Times(0);
+    EXPECT_CALL(mock, CopyFile(testing::_, testing::_)).Times(0);
+    EXPECT_CALL(mock, CopyFolder(testing::_, testing::_)).Times(0);
 
     fileCopier.Copy(s_unexistantFolderSrcPath, s_unexistantFolderDstPath);
 }
