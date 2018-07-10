@@ -39,12 +39,14 @@ class IFileCopier
 public:
     ~IFileCopier(){}
     virtual void CopyFile(const std::string& src, const std::string& dst) = 0;
+    virtual bool CheckFileExists(const std::string& file) = 0;
 };
 
 class FileCopierMock : public IFileCopier
 {
 public:
     MOCK_METHOD2(CopyFile, void(const std::string&, const std::string&));
+    MOCK_METHOD1(CheckFileExists, bool(const std::string&));
 };
 
 class FileCopier
@@ -63,7 +65,10 @@ FileCopier::FileCopier(IFileCopier &fileCopier)
 
 void FileCopier::Copy(const std::string &src, const std::string &dst)
 {
-    m_fileCopier.CopyFile(src, dst);
+    if (m_fileCopier.CheckFileExists(src))
+    {
+        m_fileCopier.CopyFile(src, dst);
+    }
 }
 
 TEST(FileCopier, CopySingleFile)
@@ -81,6 +86,7 @@ TEST(FileCopier, CopyUnexistantFile)
     FileCopierMock mock;
     FileCopier fileCopier(mock);
 
+    EXPECT_CALL(mock, CheckFileExists(s_unexistantFileSrcPath)).WillOnce(testing::Return(false));
     EXPECT_CALL(mock, CopyFile(s_unexistantFileSrcPath, testing::_)).Times(0);
 
     fileCopier.Copy(s_unexistantFileSrcPath, s_unexistantFileDstPath);
