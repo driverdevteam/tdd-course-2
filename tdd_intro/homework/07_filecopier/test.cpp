@@ -20,6 +20,14 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+/*  1. Copy single file
+    2. Attempt to copy unexistant file
+    3. Copy folder with single file
+    4. Copy empty folder
+    5. Attempt to copy unexistant folder
+    6. Copy folder with several files
+    7. Copy folder with several files and other folders */
+
 class IFileCopier
 {
 public:
