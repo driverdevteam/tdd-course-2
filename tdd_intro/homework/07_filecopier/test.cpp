@@ -31,6 +31,9 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 const std::string s_singleFileSrcPath("C://singleFile");
 const std::string s_singleFileDstPath("D://singleFile");
 
+const std::string s_unexistantFileSrcPath("C://unexistantFile");
+const std::string s_unexistantFileDstPath("D://unexistantFile");
+
 class IFileCopier
 {
 public:
@@ -72,4 +75,14 @@ TEST(FileCopier, CopySingleFile)
     EXPECT_CALL(mock, CopyFile(s_singleFileSrcPath, testing::_)).Times(1);
 
     fileCopier.Copy(s_singleFileSrcPath, s_singleFileDstPath);
+}
+
+TEST(FileCopier, CopyUnexistantFile)
+{
+    FileCopierMock mock;
+    FileCopier fileCopier(mock);
+
+    EXPECT_CALL(mock, CopyFile(s_unexistantFileSrcPath, testing::_)).Times(0);
+
+    fileCopier.Copy(s_unexistantFileSrcPath, s_unexistantFileDstPath);
 }
