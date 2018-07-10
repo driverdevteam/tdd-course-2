@@ -147,8 +147,20 @@ Number DigitToNumber(const Digit& digit)
     return 0;
 }
 
-
-TEST(BankOCRTests, ParseDigit_0)
+TEST(BankOCRTests, DigitToNumber_0)
 {
-    EXPECT_EQ(0, DigitToNumber(s_0));
+    EXPECT_EQ(0, DigitToNumber(Digit { " _ ",
+                                       "| |",
+                                       "|_|"
+                                     }
+                               ));
+}
+
+TEST(BankOCRTests, DigitToNumber_1)
+{
+    EXPECT_EQ(1, DigitToNumber(Digit { "   ",
+                                       "  |",
+                                       "  |"
+                                     }
+                               ));
 }
