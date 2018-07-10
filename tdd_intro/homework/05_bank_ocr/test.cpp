@@ -98,90 +98,281 @@ Example input and output
    // - parse
 // parse several lines
 
-using Digit = std::vector<std::string>;
-
-const Digit s_1({"   ",
-                 "  |",
-                 "  |"});
-
-const Digit s_2({" _ ",
-                 " _|",
-                 "|_ "});
-
-std::vector<Digit> s_digits({
-
-});
-
-bool CheckMatrixDimension(const Digit& digit)
+using DigitView = std::vector<std::string>;
+class Digit
 {
-    const size_t prefferedSize = 3;
-
-    if (digit.size() != prefferedSize)
+public:
+    Digit(const std::initializer_list<std::string>& lst)
     {
-        return false;
+        DigitView view;
+        for (const auto& line : lst) { view.push_back(line); }
+        Init(view);
+    }
+    Digit(const DigitView& view)
+    {
+        Init(view);
     }
 
-    for (const std::string& line : digit)
+    const DigitView& View() const { return m_view; }
+
+    static constexpr unsigned char Height() { return 3; }
+    static constexpr unsigned char Width() { return 3; }
+
+private:
+    void Init(const DigitView& view)
     {
-        if (line.size() != prefferedSize)
+        if (view.size() != Height())
+        {
+            throw std::runtime_error("Invalid digit view height");
+        }
+
+        for (const auto& line : view)
+        {
+            if (line.size() != Width())
+            {
+                throw std::runtime_error("Invalid digit view width");
+            }
+        }
+        m_view = view;
+    }
+
+private:
+    DigitView m_view;
+};
+
+const Digit s_0 = { " _ ",
+                    "| |",
+                    "|_|"
+                  };
+const Digit s_1 = { "   ",
+                    "  |",
+                    "  |"
+                  };
+const Digit s_2 = { " _ ",
+                    " _|",
+                    "|_ "
+                  };
+const Digit s_3 = { " _ ",
+                    " _|",
+                    " _|"
+                  };
+const Digit s_4 = { "   ",
+                    "|_|",
+                    "  |"
+                  };
+const Digit s_5 = { " _ ",
+                    "|_ ",
+                    " _|"
+                  };
+const Digit s_6 = { " _ ",
+                    "|_ ",
+                    "|_|"
+                  };
+const Digit s_7 = { " _ ",
+                    "  |",
+                    "  |"
+                  };
+const Digit s_8 = { " _ ",
+                    "|_|",
+                    "|_|"
+                  };
+const Digit s_9 = { " _ ",
+                    "|_|",
+                    " _|"
+                  };
+
+bool DigitsAreEqual(const Digit& left, const Digit& right)
+{
+    for (unsigned char line = 0; line < Digit::Height(); ++line)
+    {
+        if (left.View().at(line) != right.View().at(line))
         {
             return false;
         }
     }
-
     return true;
 }
 
-std::string ParseDigit(const Digit& digit)
+using Number = unsigned char;
+Number DigitToNumber(const Digit& digit)
 {
-    if (digit == Digit({"   ",
-                        "  |",
-                        "  |"}))
+    static const std::vector<const Digit*> s_possibleDigits = { &s_0, &s_1, &s_2, &s_3, &s_4, &s_5, &s_6, &s_7, &s_8, &s_9 };
+    for (Number n = 0; s_possibleDigits.size(); ++n)
     {
-        return "1";
+        if (DigitsAreEqual(digit, *s_possibleDigits.at(n)))
+        {
+            return n;
+        }
     }
-    else if (digit == Digit({" _ ",
-                             " _|",
-                             "|_ "}))
+    throw std::runtime_error("Digit could not be parsed");
+}
+
+using DigitsDisplayView = std::vector<std::string>;
+class DigitsDisplay
+{
+public:
+    DigitsDisplay(const std::initializer_list<std::string>& lst)
     {
-        return "2";
+        if (lst.size() != Digit::Height())
+        {
+            throw std::runtime_error("Invalid digit display view height");
+        }
+
+        for (const auto& line : lst)
+        {
+            if (line.size() != Width())
+            {
+                throw std::runtime_error("Invalid digit display view width");
+            }
+            m_view.push_back(line);
+        }
     }
 
-    return "8";
+    const DigitsDisplayView& View() const { return m_view; }
+
+    static constexpr unsigned char NumbersCount() { return 9; }
+    static constexpr unsigned char Height() { return Digit::Height(); }
+    static constexpr unsigned char Width() { return Digit::Width() * NumbersCount(); }
+
+private:
+    DigitsDisplayView m_view;
+};
+
+std::string ParseDisplay(const DigitsDisplay& display)
+{
+    DigitView digitView(display.Height());
+    std::string res;
+    for (unsigned char digitPos = 0; digitPos < display.Width(); digitPos += Digit::Width())
+    {
+        for (unsigned char height = 0; height < display.Height(); ++height)
+        {
+            digitView.at(height) = display.View().at(height).substr(digitPos, Digit::Width());
+        }
+        res += std::to_string(DigitToNumber(Digit(digitView)));
+    }
+    return res;
 }
 
-TEST(BankOCRTests, Check_Matrix_dimension_true)
+TEST(BankOCRTests, DigitToNumber_0)
 {
-    Digit digit = {"   ", "   ", "   "};
-    EXPECT_TRUE(CheckMatrixDimension(digit));
+    EXPECT_EQ(0, DigitToNumber(Digit { " _ ",
+                                       "| |",
+                                       "|_|"
+                                     }
+                               ));
 }
 
-TEST(BankOCRTests, Check_Matrix_dimension_false)
+TEST(BankOCRTests, DigitToNumber_1)
 {
-    Digit digit = {"  ", "!   ", " "};
-    EXPECT_FALSE(CheckMatrixDimension(digit));
+    EXPECT_EQ(1, DigitToNumber(Digit { "   ",
+                                       "  |",
+                                       "  |"
+                                     }
+                               ));
 }
 
-TEST(BankOCRTests, ParseDigit_1)
+TEST(BankOCRTests, DigitToNumber_2)
 {
-    Digit digit = {"   ",
-                   "  |",
-                   "  |"};
-    EXPECT_EQ("1", ParseDigit(digit));
+    EXPECT_EQ(2, DigitToNumber(Digit { " _ ",
+                                       " _|",
+                                       "|_ "
+                                     }
+                               ));
 }
 
-TEST(BankOCRTests, ParseDigit_2)
+TEST(BankOCRTests, DigitToNumber_Acceptance)
 {
-    Digit digit = {" _ ",
-                   " _|",
-                   "|_ "};
-    EXPECT_EQ("2", ParseDigit(digit));
+    EXPECT_EQ(3, DigitToNumber(Digit { " _ ",
+                                       " _|",
+                                       " _|"
+                                     }
+                               ));
+    EXPECT_EQ(4, DigitToNumber(Digit { "   ",
+                                       "|_|",
+                                       "  |"
+                                     }
+                               ));
+    EXPECT_EQ(5, DigitToNumber(Digit { " _ ",
+                                       "|_ ",
+                                       " _|"
+                                     }
+                               ));
+    EXPECT_EQ(6, DigitToNumber(Digit { " _ ",
+                                       "|_ ",
+                                       "|_|"
+                                     }
+                               ));
+    EXPECT_EQ(7, DigitToNumber(Digit { " _ ",
+                                       "  |",
+                                       "  |"
+                                     }
+                               ));
+    EXPECT_EQ(8, DigitToNumber(Digit { " _ ",
+                                       "|_|",
+                                       "|_|"
+                                     }
+                               ));
+    EXPECT_EQ(9, DigitToNumber(Digit { " _ ",
+                                       "|_|",
+                                       " _|"
+                                     }
+                               ));
 }
 
-TEST(BankOCRTests, ParseDigit_8)
+TEST(BankOCRTests, ParseDigits_000000000)
 {
-    Digit digit = {" _ ",
-                   "|_|",
-                   "|_|"};
-    EXPECT_EQ("8", ParseDigit(digit));
+    DigitsDisplay nulls = { " _  _  _  _  _  _  _  _  _ ",
+                            "| || || || || || || || || |",
+                            "|_||_||_||_||_||_||_||_||_|"
+    };
+    EXPECT_STREQ("000000000", ParseDisplay(nulls).c_str());
+}
+
+TEST(BankOCRTests, ParseDigits_111111111)
+{
+    DigitsDisplay ones =  { "                           ",
+                            "  |  |  |  |  |  |  |  |  |",
+                            "  |  |  |  |  |  |  |  |  |"
+    };
+    EXPECT_STREQ("111111111", ParseDisplay(ones).c_str());
+}
+
+TEST(BankOCRTests, ParseDigits_Acceptance)
+{
+    EXPECT_STREQ("222222222", ParseDisplay({" _  _  _  _  _  _  _  _  _ ",
+                                            " _| _| _| _| _| _| _| _| _|",
+                                            "|_ |_ |_ |_ |_ |_ |_ |_ |_ "}
+                                           ).c_str());
+    EXPECT_STREQ("333333333", ParseDisplay({" _  _  _  _  _  _  _  _  _ ",
+                                            " _| _| _| _| _| _| _| _| _|",
+                                            " _| _| _| _| _| _| _| _| _|"}
+                                           ).c_str());
+    EXPECT_STREQ("444444444", ParseDisplay({"                           ",
+                                            "|_||_||_||_||_||_||_||_||_|",
+                                            "  |  |  |  |  |  |  |  |  |"}
+                                           ).c_str());
+    EXPECT_STREQ("555555555", ParseDisplay({" _  _  _  _  _  _  _  _  _ ",
+                                            "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
+                                            " _| _| _| _| _| _| _| _| _|"}
+                                           ).c_str());
+    EXPECT_STREQ("666666666", ParseDisplay({" _  _  _  _  _  _  _  _  _ ",
+                                            "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
+                                            "|_||_||_||_||_||_||_||_||_|"}
+                                           ).c_str());
+    EXPECT_STREQ("777777777", ParseDisplay({" _  _  _  _  _  _  _  _  _ ",
+                                            "  |  |  |  |  |  |  |  |  |",
+                                            "  |  |  |  |  |  |  |  |  |"}
+                                           ).c_str());
+    EXPECT_STREQ("888888888", ParseDisplay({" _  _  _  _  _  _  _  _  _ ",
+                                            "|_||_||_||_||_||_||_||_||_|",
+                                            "|_||_||_||_||_||_||_||_||_|"}
+                                           ).c_str());
+    EXPECT_STREQ("999999999", ParseDisplay({" _  _  _  _  _  _  _  _  _ ",
+                                            "|_||_||_||_||_||_||_||_||_|",
+                                            " _| _| _| _| _| _| _| _| _|"}
+                                           ).c_str());
+    EXPECT_STREQ("123456789", ParseDisplay({"    _  _     _  _  _  _  _ ",
+                                            "  | _| _||_||_ |_   ||_||_|",
+                                            "  ||_  _|  | _||_|  ||_| _|"}
+                                           ).c_str());
 }
