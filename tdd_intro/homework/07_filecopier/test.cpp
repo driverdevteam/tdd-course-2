@@ -76,6 +76,7 @@ TEST(FileCopier, CopySingleFile)
     FileCopierMock mock;
     FileCopier fileCopier(mock);
 
+    EXPECT_CALL(mock, CheckFileExists(s_singleFileSrcPath)).WillOnce(testing::Return(true));
     EXPECT_CALL(mock, CopyFile(s_singleFileSrcPath, s_singleFileDstPath)).Times(1);
 
     fileCopier.Copy(s_singleFileSrcPath, s_singleFileDstPath);
