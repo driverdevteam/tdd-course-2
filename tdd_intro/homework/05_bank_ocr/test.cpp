@@ -189,3 +189,42 @@ TEST(BankOCRTests, DigitToNumber_2)
                                      }
                                ));
 }
+
+TEST(BankOCRTests, DigitToNumber_Acceptance)
+{
+    EXPECT_EQ(3, DigitToNumber(Digit { " _ ",
+                                       " _|",
+                                       " _|"
+                                     }
+                               ));
+    EXPECT_EQ(4, DigitToNumber(Digit { "   ",
+                                       "|_|",
+                                       "  |"
+                                     }
+                               ));
+    EXPECT_EQ(5, DigitToNumber(Digit { " _ ",
+                                       "|_ ",
+                                       " _|"
+                                     }
+                               ));
+    EXPECT_EQ(6, DigitToNumber(Digit { " _ ",
+                                       "|_ ",
+                                       "|_|"
+                                     }
+                               ));
+    EXPECT_EQ(7, DigitToNumber(Digit { " _ ",
+                                       "  |",
+                                       "  |"
+                                     }
+                               ));
+    EXPECT_EQ(8, DigitToNumber(Digit { " _ ",
+                                       "|_|",
+                                       "|_|"
+                                     }
+                               ));
+    EXPECT_EQ(9, DigitToNumber(Digit { " _ ",
+                                       "|_|",
+                                       " _|"
+                                     }
+                               ));
+}
