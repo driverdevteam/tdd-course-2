@@ -168,7 +168,7 @@ const unsigned char s_numbersOnDisplay = 9;
 using DigitsDisplay = char[s_digitHeight][s_digitWidth * s_numbersOnDisplay + 1]; // + 1 for the null terminator
 std::string ParseDisplay(const DigitsDisplay& display)
 {
-    return "";
+    return "000000000";
 }
 
 TEST(BankOCRTests, DigitToNumber_0)
