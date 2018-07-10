@@ -141,6 +141,8 @@ const Digit s_9 = { " _ ",
                     " _|"
                   };
 
+const std::vector<const Digit*> s_possibleDigits = { &s_0, &s_1, &s_2, &s_3, &s_4, &s_5, &s_6, &s_7, &s_8, &s_9 };
+
 bool DigitsAreEqual(const Digit& left, const Digit& right)
 {
     return strcmp(left[0], right[0]) == 0 &&
@@ -151,15 +153,14 @@ bool DigitsAreEqual(const Digit& left, const Digit& right)
 using Number = unsigned char;
 Number DigitToNumber(const Digit& digit)
 {
-    if (DigitsAreEqual(digit, s_1))
+    for (Number n = 0; s_possibleDigits.size(); ++n)
     {
-        return 1;
+        if (DigitsAreEqual(digit, *s_possibleDigits.at(n)))
+        {
+            return n;
+        }
     }
-    else if (DigitsAreEqual(digit, s_2))
-    {
-        return 2;
-    }
-    return 0;
+    throw std::runtime_error("Digit could not be parsed");
 }
 
 TEST(BankOCRTests, DigitToNumber_0)
