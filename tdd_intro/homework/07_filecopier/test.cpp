@@ -44,7 +44,7 @@ public:
     virtual void CopyFile(const std::string& src, const std::string& dst) = 0;
     virtual void CopyFolder(const std::string& src, const std::string& dst) = 0;
 
-    virtual bool CheckFileExists(const std::string& file) = 0;
+    virtual bool CheckIfExists(const std::string& file) = 0;
     virtual bool IsFolder(const std::string& path) = 0;
 };
 
@@ -54,7 +54,7 @@ public:
     MOCK_METHOD2(CopyFile, void(const std::string&, const std::string&));
     MOCK_METHOD2(CopyFolder, void(const std::string&, const std::string&));
 
-    MOCK_METHOD1(CheckFileExists, bool(const std::string&));
+    MOCK_METHOD1(CheckIfExists, bool(const std::string&));
     MOCK_METHOD1(IsFolder, bool(const std::string&));
 };
 
@@ -74,14 +74,16 @@ FileCopier::FileCopier(IFileCopier &fileCopier)
 
 void FileCopier::Copy(const std::string &src, const std::string &dst)
 {
-    if (m_fileCopier.IsFolder(src))
+    if (m_fileCopier.CheckIfExists(src))
     {
-        m_fileCopier.CopyFolder(src, dst);
-    }
-
-    if (m_fileCopier.CheckFileExists(src))
-    {
-        m_fileCopier.CopyFile(src, dst);
+        if (m_fileCopier.IsFolder(src))
+        {
+            m_fileCopier.CopyFolder(src, dst);
+        }
+        else
+        {
+            m_fileCopier.CopyFile(src, dst);
+        }
     }
 }
 
@@ -90,7 +92,8 @@ TEST(FileCopier, CopySingleFile)
     FileCopierMock mock;
     FileCopier fileCopier(mock);
 
-    EXPECT_CALL(mock, CheckFileExists(s_singleFileSrcPath)).WillOnce(testing::Return(true));
+    EXPECT_CALL(mock, CheckIfExists(s_singleFileSrcPath)).WillOnce(testing::Return(true));
+    EXPECT_CALL(mock, IsFolder(s_singleFileSrcPath)).WillOnce(testing::Return(false));
     EXPECT_CALL(mock, CopyFile(s_singleFileSrcPath, s_singleFileDstPath)).Times(1);
 
     fileCopier.Copy(s_singleFileSrcPath, s_singleFileDstPath);
@@ -101,7 +104,8 @@ TEST(FileCopier, CopyUnexistantFile)
     FileCopierMock mock;
     FileCopier fileCopier(mock);
 
-    EXPECT_CALL(mock, CheckFileExists(s_unexistantFileSrcPath)).WillOnce(testing::Return(false));
+    EXPECT_CALL(mock, CheckIfExists(s_unexistantFileSrcPath)).WillOnce(testing::Return(false));
+    EXPECT_CALL(mock, IsFolder(testing::_)).Times(0);
     EXPECT_CALL(mock, CopyFile(s_unexistantFileSrcPath, testing::_)).Times(0);
 
     fileCopier.Copy(s_unexistantFileSrcPath, s_unexistantFileDstPath);
@@ -112,6 +116,7 @@ TEST(FileCopier, CopyEmptyFolder)
     FileCopierMock mock;
     FileCopier fileCopier(mock);
 
+    EXPECT_CALL(mock, CheckIfExists(s_emptyFolderSrcPath)).WillOnce(testing::Return(true));
     EXPECT_CALL(mock, IsFolder(s_emptyFolderSrcPath)).WillOnce(testing::Return(true));
     EXPECT_CALL(mock, CopyFolder(s_emptyFolderSrcPath, s_emptyFolderDstPath)).Times(1);
 
