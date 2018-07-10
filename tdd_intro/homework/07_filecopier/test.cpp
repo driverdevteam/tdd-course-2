@@ -22,9 +22,9 @@ You can start with GMock from https://goo.gl/j7EkQX, good luck!
 
 /*  1. Copy single file
     2. Attempt to copy unexistant file
-    3. Copy folder with single file
-    4. Copy empty folder
-    5. Attempt to copy unexistant folder
+    3. Copy empty folder
+    4. Attempt to copy unexistant folder
+    5. Copy folder with single file
     6. Copy folder with several files
     7. Copy folder with several files and other folders */
 
