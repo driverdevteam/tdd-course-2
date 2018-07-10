@@ -155,6 +155,10 @@ Number DigitToNumber(const Digit& digit)
     {
         return 1;
     }
+    else if (DigitsAreEqual(digit, s_2))
+    {
+        return 2;
+    }
     return 0;
 }
 
@@ -178,7 +182,7 @@ TEST(BankOCRTests, DigitToNumber_1)
 
 TEST(BankOCRTests, DigitToNumber_2)
 {
-    EXPECT_EQ(1, DigitToNumber(Digit { " _ ",
+    EXPECT_EQ(2, DigitToNumber(Digit { " _ ",
                                        " _|",
                                        "|_ "
                                      }
