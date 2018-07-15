@@ -28,16 +28,11 @@ typedef std::chrono::high_resolution_clock Clock;
 typedef Clock::duration Duration;
 typedef std::chrono::time_point<Clock> TimePoint;
 
-namespace
-{
-    const int64_t s_milliToNano = 1000000;
-}
-
 class ITimer {
 public:
   virtual ~ITimer() {}
 
-  virtual void Start(int64_t millis) = 0;
+  virtual void Start(int64_t nanos) = 0;
   virtual bool IsExpired() const = 0;
   virtual Duration TimeLeft() const = 0;
 };
@@ -47,14 +42,14 @@ public:
     virtual ~ICurrentTime() {}
 
     virtual void Reset() = 0;
-    virtual void AddTime(int64_t millis) = 0;
+    virtual void AddTime(int64_t nanos) = 0;
     virtual TimePoint GetTime() const = 0;
 };
 
 class CurrentTime : public ICurrentTime {
 public:
     void Reset() override;
-    void AddTime(int64_t millis) override;
+    void AddTime(int64_t nanos) override;
     TimePoint GetTime() const override;
 private:
     TimePoint m_time;
@@ -68,7 +63,7 @@ public:
     {
     }
 
-    void Start(int64_t millis) override;
+    void Start(int64_t nanos) override;
     bool IsExpired() const override;
     Duration TimeLeft() const override;
 private:
@@ -76,10 +71,10 @@ private:
     TimePoint m_expirationTime;
 };
 
-void Timer::Start(int64_t millis)
+void Timer::Start(int64_t nanos)
 {
     m_currentTime.Reset();
-    m_expirationTime = m_currentTime.GetTime() + Duration(millis * s_milliToNano);
+    m_expirationTime = m_currentTime.GetTime() + Duration(nanos);
 }
 
 bool Timer::IsExpired() const
@@ -97,9 +92,9 @@ void CurrentTime::Reset()
     m_time = Clock::now();
 }
 
-void CurrentTime::AddTime(int64_t millis)
+void CurrentTime::AddTime(int64_t nanos)
 {
-    m_time += Duration(millis * s_milliToNano);
+    m_time += Duration(nanos);
 }
 
 TimePoint CurrentTime::GetTime() const
@@ -158,4 +153,16 @@ TEST(Timer, AtLimit_NotExpired)
     currentTime.AddTime(timeToGo);
 
     EXPECT_FALSE(timer.IsExpired());
+}
+
+TEST(Timer, TimeLeft_WholeTimeLeft)
+{
+    CurrentTime currentTime;
+    Timer timer(currentTime);
+
+    const int64_t timeForTimer = 2000;
+
+    timer.Start(timeForTimer);
+
+    EXPECT_EQ(Duration(timeForTimer), timer.TimeLeft());
 }
