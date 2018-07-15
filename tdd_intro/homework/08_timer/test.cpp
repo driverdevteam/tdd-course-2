@@ -37,12 +37,35 @@ public:
   virtual Duration TimeLeft() const = 0;
 };
 
+class ICurrentTime {
+public:
+    virtual ~ICurrentTime() {}
+
+    virtual void Reset() = 0;
+    virtual void AddTime(int64_t millis) = 0;
+};
+
+class CurrentTime : public ICurrentTime {
+public:
+    void Reset() override;
+    void AddTime(int64_t millis) override;
+private:
+    TimePoint m_time;
+};
+
 class Timer : public ITimer
 {
 public:
+    Timer(CurrentTime& currentTime)
+        : m_currentTime(currentTime)
+    {
+    }
+
     void Start(int64_t millis) override;
     bool IsExpired() const override;
     Duration TimeLeft() const override;
+private:
+    CurrentTime& m_currentTime;
 };
 
 void Timer::Start(int64_t millis)
@@ -61,9 +84,25 @@ Duration Timer::TimeLeft() const
 
 TEST(Timer, IsExpired_NotExpired)
 {
-    Timer timer;
+    CurrentTime currentTime;
+    Timer timer(currentTime);
+
     const int64_t aLotOfTime = 5000;
 
     timer.Start(aLotOfTime);
     EXPECT_FALSE(timer.IsExpired());
+}
+
+TEST(Timer, IsExpired_Expired)
+{
+    CurrentTime currentTime;
+    Timer timer(currentTime);
+
+    const int64_t timeForTimer = 2000;
+    const int64_t timeToGo = 3000;
+
+    timer.Start(timeForTimer);
+    currentTime.AddTime(timeToGo);
+
+    EXPECT_TRUE(timer.IsExpired());
 }
