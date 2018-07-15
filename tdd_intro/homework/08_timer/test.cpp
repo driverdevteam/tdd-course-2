@@ -84,6 +84,11 @@ bool Timer::IsExpired() const
 
 Duration Timer::TimeLeft() const
 {
+    if (IsExpired())
+    {
+        return Duration(0);
+    }
+
     return m_expirationTime - m_currentTime.GetTime();
 }
 
