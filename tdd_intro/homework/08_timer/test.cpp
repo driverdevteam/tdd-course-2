@@ -145,3 +145,17 @@ TEST(Timer, IsExpired_NotExpired)
 
     EXPECT_FALSE(timer.IsExpired());
 }
+
+TEST(Timer, AtLimit_NotExpired)
+{
+    CurrentTime currentTime;
+    Timer timer(currentTime);
+
+    const int64_t timeForTimer = 2000;
+    const int64_t timeToGo = 2000;
+
+    timer.Start(timeForTimer);
+    currentTime.AddTime(timeToGo);
+
+    EXPECT_FALSE(timer.IsExpired());
+}
