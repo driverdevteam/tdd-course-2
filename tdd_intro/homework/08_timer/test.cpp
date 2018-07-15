@@ -32,7 +32,15 @@ class ITimer {
 public:
   virtual ~ITimer() {}
 
-  virtual void Start(int64_t time) = 0;
+  virtual void Start(int64_t millis) = 0;
   virtual bool IsExpired() const = 0;
   virtual Duration TimeLeft() const = 0;
 };
+
+class Timer : public ITimer
+{
+public:
+    void Start(int64_t millis) override;
+    bool IsExpired() const override;
+    Duration TimeLeft() const override;
+}
