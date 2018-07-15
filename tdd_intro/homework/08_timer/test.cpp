@@ -43,4 +43,13 @@ public:
     void Start(int64_t millis) override;
     bool IsExpired() const override;
     Duration TimeLeft() const override;
+};
+
+TEST(Timer, IsExpired_NotExpired)
+{
+    Timer timer;
+    const int64_t aLotOfTime = 5000;
+
+    timer.Start(aLotOfTime);
+    EXPECT_FALSE(timer.IsExpired());
 }
