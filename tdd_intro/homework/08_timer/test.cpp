@@ -45,6 +45,20 @@ public:
     Duration TimeLeft() const override;
 };
 
+void Timer::Start(int64_t millis)
+{
+}
+
+bool Timer::IsExpired() const
+{
+    return false;
+}
+
+Duration Timer::TimeLeft() const
+{
+    return Duration();
+}
+
 TEST(Timer, IsExpired_NotExpired)
 {
     Timer timer;
