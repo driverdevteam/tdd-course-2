@@ -199,3 +199,17 @@ TEST(Timer, TimeLeft_Expired)
 
     EXPECT_EQ(Duration(0), timer.TimeLeft());
 }
+
+TEST(Timer, TimeLeft_NoTimeLeft)
+{
+    CurrentTime currentTime;
+    Timer timer(currentTime);
+
+    const int64_t timeForTimer = 2000;
+    const int64_t timeToGo = 2000;
+
+    timer.Start(timeForTimer);
+    currentTime.AddTime(timeToGo);
+
+    EXPECT_EQ(Duration(0), timer.TimeLeft());
+}
