@@ -166,3 +166,17 @@ TEST(Timer, TimeLeft_WholeTimeLeft)
 
     EXPECT_EQ(Duration(timeForTimer), timer.TimeLeft());
 }
+
+TEST(Timer, TimeLeft_SomeTimeLeft)
+{
+    CurrentTime currentTime;
+    Timer timer(currentTime);
+
+    const int64_t timeForTimer = 2000;
+    const int64_t timeToGo = 1000;
+
+    timer.Start(timeForTimer);
+    currentTime.AddTime(timeToGo);
+
+    EXPECT_EQ(Duration(timeForTimer - timeToGo), timer.TimeLeft());
+}
