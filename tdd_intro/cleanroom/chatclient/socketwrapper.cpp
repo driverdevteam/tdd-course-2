@@ -16,11 +16,7 @@ namespace
 {
     std::string GetExceptionString(const std::string& message, int errorCode)
     {
-        std::stringstream stream;
-        stream << message;
-        stream << errorCode;
-        stream << std::endl;
-        return stream.str();
+        return message + " " + std::to_string(errorCode) + "\n";
     }
 }
 
@@ -71,7 +67,7 @@ ISocketWrapperPtr SocketWrapper::Accept()
     {
         throw std::runtime_error(GetExceptionString("Failed to connect to client.", WSAGetLastError()));
     }
-    return SocketWrapper(other);
+    return ISocketWrapperPtr(new SocketWrapper(other));
 }
 
 ISocketWrapperPtr SocketWrapper::Connect(const std::string& addr, int16_t port)
@@ -85,14 +81,14 @@ ISocketWrapperPtr SocketWrapper::Connect(const std::string& addr, int16_t port)
     {
         throw std::runtime_error(GetExceptionString("Failed to connect to server.", WSAGetLastError()));
     }
-    return SocketWrapper(other);
+    return ISocketWrapperPtr(new SocketWrapper(other));
 }
 
 void SocketWrapper::Read(std::string& buffer)
 {
     std::vector<char> bufferTmp;
     bufferTmp.resize(buffer.size());
-    if (SOCKET_ERROR == recv(m_socket, bufferTmp.data(), bufferTmp.size(), 0))
+    if (SOCKET_ERROR == recv(m_socket, bufferTmp.data(), static_cast<int>(bufferTmp.size()), 0))
     {
         throw std::runtime_error(GetExceptionString("Failed to connect to server.", WSAGetLastError()));
     }
@@ -101,5 +97,5 @@ void SocketWrapper::Read(std::string& buffer)
 
 void SocketWrapper::Write(const std::string& buffer)
 {
-    send(m_socket, buffer.data(), buffer.size(), 0);
+    send(m_socket, buffer.data(), static_cast<int>(buffer.size()), 0);
 }
