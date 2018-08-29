@@ -40,82 +40,8 @@ Implement chat application, that communicates via TCP sockets.
     * If user runs app with 'me' nickname - error with text "Username me is reserved and can not be used"  is displayed and application exits
 */
 
-class MockSocketWrapper : public ISocketWrapper
+class SocketWrapperMock : public ISocketWrapper
 {
 public:
-    MOCK_METHOD2(Bind, void(const std::string& addr, int16_t port));
-    MOCK_METHOD0(Listen, void());
-    MOCK_METHOD0(Accept, ISocketWrapperPtr());
-    MOCK_METHOD2(Connect, ISocketWrapperPtr(const std::string& addr, int16_t port));
-    MOCK_METHOD1(Read, void(std::string& buffer));
-    MOCK_METHOD1(Write, void(const std::string& buffer));
-
+    // Your mock methods should be here
 };
-
-class Channel
-{
-public:
-    explicit Channel(ISocketWrapper& wrapper): m_wrapper(wrapper)  {}
-    void Send(const std::string& message) { m_wrapper.Write(message);}
-    void Receive(std::string& message) { m_wrapper.Read(message);}
-
-private:
-    ISocketWrapper& m_wrapper;
-};
-
-void ClientHandshake(Channel& channel, const std::string& login)
-{
-    std::string buffer;
-    channel.Send(login + ":HELLO");
-    channel.Receive(buffer);
-
-}
-
-void ServerHandshake(Channel& channel, const std::string& login)
-{
-    std::string buffer;
-    channel.Receive(buffer);
-    channel.Send(login + ":HELLO!");
-}
-
-TEST(SocketWrapperTest, Sending)
-{
-    MockSocketWrapper socket;
-    Channel channel(socket);
-
-    EXPECT_CALL(socket, Write("Hello")).Times(1);
-    channel.Send("Hello");
-}
-
-TEST(SocketWrapperTest, Receiving)
-{
-    MockSocketWrapper socket;
-    Channel channel(socket);
-
-    std::string buffer;
-    EXPECT_CALL(socket, Read(_)).WillOnce(SetArgReferee<0>("Hello"));
-    channel.Receive(buffer);
-
-    EXPECT_EQ("Hello", buffer);
-}
-
-TEST(SocketWrapperTest, ClientHandshake)
-{
-    MockSocketWrapper socket;
-    Channel channel(socket);
-    InSequence sequence;
-    EXPECT_CALL(socket, Write("metizik:HELLO")).Times(1);
-    EXPECT_CALL(socket, Read(_)).Times(1);
-    ClientHandshake(channel, "metizik");
-}
-
-TEST(SocketWrapperTest, ServerHandshake)
-{
-    MockSocketWrapper socket;
-    Channel channel(socket);
-    EXPECT_CALL(socket, Read(_)).Times(1);
-    EXPECT_CALL(socket, Write("user:HELLO!")).Times(1);
-    ServerHandshake(channel, "user");
-}
-
-

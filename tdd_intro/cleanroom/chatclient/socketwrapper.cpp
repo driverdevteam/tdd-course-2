@@ -66,28 +66,26 @@ void SocketWrapper::Listen()
 
 ISocketWrapperPtr SocketWrapper::Accept()
 {
-//    SOCKET other = accept(m_socket, nullptr, nullptr);
-//    if (other == INVALID_SOCKET)
-//    {
-//        throw std::runtime_error(GetExceptionString("Failed to connect to client.", WSAGetLastError()));
-//    }
-//    return SocketWrapper(other);
-    return nullptr;
+    SOCKET other = accept(m_socket, nullptr, nullptr);
+    if (other == INVALID_SOCKET)
+    {
+        throw std::runtime_error(GetExceptionString("Failed to connect to client.", WSAGetLastError()));
+    }
+    return SocketWrapper(other);
 }
 
 ISocketWrapperPtr SocketWrapper::Connect(const std::string& addr, int16_t port)
 {
-//    sockaddr_in addres;
-//    addres.sin_family = AF_INET;
-//    addres.sin_addr.s_addr = inet_addr(addr.data());
-//    addres.sin_port = htons(port);
-//    SOCKET other = connect(m_socket, reinterpret_cast<sockaddr*>(&addres), sizeof(addres));
-//    if (other == INVALID_SOCKET)
-//    {
-//        throw std::runtime_error(GetExceptionString("Failed to connect to server.", WSAGetLastError()));
-//    }
-//    return SocketWrapper(other);
-    return nullptr;
+    sockaddr_in addres;
+    addres.sin_family = AF_INET;
+    addres.sin_addr.s_addr = inet_addr(addr.data());
+    addres.sin_port = htons(port);
+    SOCKET other = connect(m_socket, reinterpret_cast<sockaddr*>(&addres), sizeof(addres));
+    if (other == INVALID_SOCKET)
+    {
+        throw std::runtime_error(GetExceptionString("Failed to connect to server.", WSAGetLastError()));
+    }
+    return SocketWrapper(other);
 }
 
 void SocketWrapper::Read(std::string& buffer)
