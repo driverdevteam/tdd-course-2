@@ -10,55 +10,58 @@ All workshops sessions tasks are listed below in corresponding order
 
 ## FizzBuzz
 
-Nothing but classics. FizzBuzz is a most common kata in the world.
-
-### Task
-
 Write a program that prints the numbers from 1 to 100. But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz “.
 
-## Words Count
+### Bob
 
-### Task
+Bob is a lackadaisical teenager. In conversation, his responses are very limited.
 
-Given a phrase -> count the occurrences of each word in that phrase.
+Bob answers 'Sure.' if you ask him a question. (? in the end)
 
-For example for the input "olly olly in come free"
+He answers 'Whoa, chill out!' if you yell at him. (! in the end)
 
-```
-olly: 2
-in: 1
-come: 1
-free: 1
-```
+He says 'Fine. Be that way!' if you address him without actually saying anything.
 
-Example declaration of function required can be something like this:
+He answers 'Whatever.' to anything else.
 
-```
-std::map<std::string, int> WordsCount(std::string)
-```
-
-### Armstrong number 
-
-An Armstrong number is a number that is the sum of its own digits each raised to the power of the number of digits.
-
-For example:
-
-9 is an Armstrong number, because 9 = 9^1 = 9
-10 is not an Armstrong number, because 10 != 1^2 + 0^2 = 1
-153 is an Armstrong number, because: 153 = 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
-154 is not an Armstrong number, because: 154 != 1^3 + 5^3 + 4^3 = 1 + 125 + 64 = 190
-9474 is an Armstrong number
-
-Write some code to determine whether a number is an Armstrong number.
-
-Acceptance test
-5 - true
-100 - false
-9475 - false
-9926315 - true
-9926314 - false
+Implement Bob!
 
 _from http://exercism.io/_
+
+### Anagram
+
+Given a word and a list of possible anagrams, select the correct sublist.
+
+Given "listen" and a list of candidates like "enlists" "google" "inlets" "banana" the program should return a list containing "inlets".
+
+_from http://exercism.io/_
+
+
+### Allergies
+
+Given a person's allergy score, determine whether or not they're allergic to a given item, and their full list of allergies.
+An allergy test produces a single numeric score which contains the information about all the allergies the person has (that they were tested for).
+The list of items (and their value) that were tested are:
+    eggs (1)
+    peanuts (2)
+    shellfish (4)
+    strawberries (8)
+    tomatoes (16)
+    chocolate (32)
+    pollen (64)
+    cats (128)
+So if Tom is allergic to peanuts and chocolate, he gets a score of 34.
+
+Now, given just that score of 34, your program should be able:
+1. To say have Tom allergic to specific product or not.
+2. To give list of all allergens Tom is allergic to.
+
+Note: a given score may include allergens not listed above (i.e. allergens that score 256, 512, 1024, etc.). Your program should ignore those components of the score. For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
+
+_from http://exercism.io/_
+
+
+## Functionality decomposition training:
 
 ### Roman numerals
 
@@ -79,111 +82,30 @@ In Roman numerals 1990 is MCMXC:
 
 1998 is written as MCMXCVIII.
 
-## Functionality decomposition training:
+## Mocking & Faking training
 
-### Bank OCR
+### Timer
 
-Your manager has recently purchased a machine that assists in reading letters and faxes sent in by branch offices. The machine scans the paper documents, and produces a file with a number of entries. You will write a program to parse this file.
-
-#### Specification
-#### User Story 1
-
-The following format is created by the machine:
+Implement a timer class that implements a following interface:
 ```
-    _  _     _  _  _  _  _
-  | _| _||_||_ |_   ||_||_|
-  ||_  _|  | _||_|  ||_| _|
-```
-Each entry is 3 lines long, and each line has 27 characters. 3 lines of each entry contain an account number written using pipes and underscores.
+typedef std::chrono::high_resolution_clock Clock;
+typedef Clock::duration Duration;
+typedef std::chrono::time_point<Clock> TimePoint;
 
-Each account number should have 9 digits, all of which should be in the range 0-9. A normal file contains around 500 entries.
+class ITimer {
+public:
+  virtual ~ITimer() {}
 
-Write a program that can take this file and parse it into actual account numbers.
-
-Example input and output
-```
- _  _  _  _  _  _  _  _  _
-| || || || || || || || || |
-|_||_||_||_||_||_||_||_||_|
-
-=> 000000000
-
-  |  |  |  |  |  |  |  |  |
-  |  |  |  |  |  |  |  |  |
-
-=> 111111111
-
- _  _  _  _  _  _  _  _  _
- _| _| _| _| _| _| _| _| _|
-|_ |_ |_ |_ |_ |_ |_ |_ |_
-
-=> 222222222
-
- _  _  _  _  _  _  _  _  _
- _| _| _| _| _| _| _| _| _|
- _| _| _| _| _| _| _| _| _|
-
-=> 333333333
-
-|_||_||_||_||_||_||_||_||_|
-  |  |  |  |  |  |  |  |  |
-
-=> 444444444
-
- _  _  _  _  _  _  _  _  _
-|_ |_ |_ |_ |_ |_ |_ |_ |_
- _| _| _| _| _| _| _| _| _|
-
-=> 555555555
-
- _  _  _  _  _  _  _  _  _
-|_ |_ |_ |_ |_ |_ |_ |_ |_
-|_||_||_||_||_||_||_||_||_|
-
-=> 666666666
-
- _  _  _  _  _  _  _  _  _
-  |  |  |  |  |  |  |  |  |
-  |  |  |  |  |  |  |  |  |
-
-=> 777777777
-
- _  _  _  _  _  _  _  _  _
-|_||_||_||_||_||_||_||_||_|
-|_||_||_||_||_||_||_||_||_|
-
-=> 888888888
-
- _  _  _  _  _  _  _  _  _
-|_||_||_||_||_||_||_||_||_|
- _| _| _| _| _| _| _| _| _|
-
-=> 999999999
-
-    _  _     _  _  _  _  _
-  | _| _||_||_ |_   ||_||_|
-  ||_  _|  | _||_|  ||_| _|
-
-=> 123456789
+  virtual void Start() = 0;
+  virtual bool IsExpired() const = 0;
+  virtual Duration TimeLeft() const = 0;
+};
 ```
 
-### Word Wrapp
-
-Write a function, that is given a string and a length limit, splits provided string into sequence of string, where length of each string is not more, than provided limit. If there are spaces under provided limit - last space should be used to wrapp this line. If there are no spaces - wrapp it on provided length limit.
-
-As an acceptance test you can use this input:
-```
-When pos is specified, the search only includes sequences of characters that begin at or before position pos, ignoring any possible match beginning after pos.
-```
-It should be wrapped by length of 30 into this sequence of lines (ommiting quotes):
-```
-"When pos is specified, the",
-"search only includes sequences",
-"of characters that begin at or",
-"before position pos, ignoring",
-"any possible match beginning",
-"after pos."
-```
+Followed by this specification:
+* Timer allows to determine if specific period of time expired or not since Start was called last time
+* Timer allows to determine how much time left till period is expired
+* Timer can be started again any time, no metter in what state it is
 
 ### Coffee
 We have several coffee machines. We have to create class which makes a coffee.
