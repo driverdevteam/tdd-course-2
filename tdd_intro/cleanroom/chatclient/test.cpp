@@ -1,6 +1,4 @@
 ﻿#include <gtest/gtest.h>
-#include <gmock/gmock.h>
-#include "socketwrapper.h"
 
 using namespace testing;
 /*
@@ -40,8 +38,4 @@ Implement chat application, that communicates via TCP sockets.
     * If user runs app with 'me' nickname - error with text "Username me is reserved and can not be used"  is displayed and application exits
 */
 
-class SocketWrapperMock : public ISocketWrapper
-{
-public:
-    // Your mock methods should be here
-};
+#include "mocks.h"

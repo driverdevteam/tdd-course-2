@@ -1,14 +1,11 @@
 #define WIN32_LEAN_AND_MEAN
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
-#include <windows.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <exception>
 #include <vector>
-#include <string>
 #include <sstream>
-#include <memory>
 
 #include "SocketWrapper.h"
 
@@ -18,11 +15,46 @@ namespace
     {
         return message + " " + std::to_string(errorCode) + "\n";
     }
+
+    class WsaSubsystem
+    {
+    public:
+        static void Init()
+        {
+            if (!m_self)
+            {
+                m_self.reset(new WsaSubsystem);
+            }
+        }
+
+        ~WsaSubsystem()
+        {
+            ::WSACleanup(); // There is nothing to do with returned value
+        }
+
+    private:
+        WsaSubsystem()
+        {
+            auto startupResult = ::WSAStartup(MAKEWORD(2,2), &m_wsaData);
+            if (startupResult != 0)
+            {
+                throw std::runtime_error("WSAStartup failed: " + std::to_string(startupResult));
+            }
+        }
+
+    private:
+        WSADATA m_wsaData;
+        static std::unique_ptr<WsaSubsystem> m_self;
+    };
+
+    std::unique_ptr<WsaSubsystem> WsaSubsystem::m_self;
 }
 
 SocketWrapper::SocketWrapper()
     : m_socket(INVALID_SOCKET)
 {
+    WsaSubsystem::Init();
+
     m_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (m_socket == INVALID_SOCKET)
     {
@@ -33,6 +65,7 @@ SocketWrapper::SocketWrapper()
 SocketWrapper::SocketWrapper(SOCKET & other)
     : m_socket(other)
 {
+    WsaSubsystem::Init();
 }
 
 SocketWrapper::~SocketWrapper()
@@ -86,16 +119,23 @@ ISocketWrapperPtr SocketWrapper::Connect(const std::string& addr, int16_t port)
 
 void SocketWrapper::Read(std::string& buffer)
 {
-    std::vector<char> bufferTmp;
-    bufferTmp.resize(buffer.size());
-    if (SOCKET_ERROR == recv(m_socket, bufferTmp.data(), static_cast<int>(bufferTmp.size()), 0))
+    std::vector<char> bufferTmp(1024); // 1KB
+    int portionReceived = recv(m_socket, bufferTmp.data(), static_cast<int>(bufferTmp.size()), 0);
+    if (SOCKET_ERROR == portionReceived)
     {
-        throw std::runtime_error(GetExceptionString("Failed to connect to server.", WSAGetLastError()));
+        throw std::runtime_error(GetExceptionString("Failed to read data.", WSAGetLastError()));
     }
-    buffer.assign(bufferTmp.begin(), bufferTmp.end());
+    buffer.assign(bufferTmp.begin(), bufferTmp.begin() + portionReceived);
 }
 
 void SocketWrapper::Write(const std::string& buffer)
 {
-    send(m_socket, buffer.data(), static_cast<int>(buffer.size()), 0);
+    for (int dataSent = 0; dataSent < buffer.size();)
+    {
+        dataSent += send(m_socket, buffer.data() + dataSent, static_cast<int>(buffer.size() - dataSent), 0);
+        if (SOCKET_ERROR == dataSent)
+        {
+            throw std::runtime_error(GetExceptionString("Failed to send data.", WSAGetLastError()));
+        }
+    }
 }

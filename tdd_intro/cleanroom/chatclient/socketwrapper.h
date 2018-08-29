@@ -1,21 +1,6 @@
 #pragma once
-#include <cstdint>
-#include <windows.h>
-#include <memory>
-
-class ISocketWrapper;
-using ISocketWrapperPtr = std::shared_ptr<ISocketWrapper>;
-
-class ISocketWrapper
-{
-public:
-    virtual void Bind(const std::string& addr, int16_t port) = 0;
-    virtual void Listen()= 0;
-    virtual ISocketWrapperPtr Accept() = 0;
-    virtual ISocketWrapperPtr Connect(const std::string& addr, int16_t port)= 0;
-    virtual void Read(std::string& buffer)= 0;
-    virtual void Write(const std::string& buffer)= 0;
-};
+#include "isocketwrapper.h"
+#include <Windows.h>
 
 class SocketWrapper : public ISocketWrapper
 {
