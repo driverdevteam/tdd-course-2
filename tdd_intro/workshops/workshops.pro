@@ -1,10 +1,11 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    01_bob \
     01_fizz_buzz \
+    02_anagram \
     02_word_count \
-    03_armstrong_number \
-    04_roman_numerals \
-    05_word_wrapp \
-    05_bank_ocr\
-    07_coffee
+    03_allergies \
+    03_roman_numerals \
+    04_timer \
+    05_coffee
