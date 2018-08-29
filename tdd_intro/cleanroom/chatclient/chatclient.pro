@@ -18,4 +18,5 @@ LIBS += \
 HEADERS += \
     socketwrapper.h \
     mocks.h \
-    isocketwrapper.h
+    isocketwrapper.h \
+    igui.h

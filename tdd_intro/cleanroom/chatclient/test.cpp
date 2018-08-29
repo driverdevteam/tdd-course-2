@@ -11,8 +11,8 @@ Implement chat application, that communicates via TCP sockets.
     * if not - binds a port and waits for inbound connection
         * message "No one is here..." is displayed in UI
  * After establishing connection - handshake is performed:
-    * client writes message with it's nickname and ':HELLO!' string to socket ("metizik:HELLO!")
-    * server responses with it's nickname and ':HELLO!' magic ("user:HELLO!")
+    * client writes message with it's nickname and ':HELLO!' string to socket ("client:HELLO!")
+    * server responses with it's nickname and ':HELLO!' magic ("server:HELLO!")
         * if server receives malformated message - it drops connection with this client
         * if client receives malformated message - it drops connection and exits
             * Error message is shown
@@ -35,7 +35,7 @@ Implement chat application, that communicates via TCP sockets.
 
  OPTIONAL requirement:
     * If user enters '!exit!' message, application must close connection and exit
-    * If user runs app with 'me' nickname - error with text "Username me is reserved and can not be used"  is displayed and application exits
+    * If user runs app with 'me' nickname - error with text "Username me is reserved and can not be used" is displayed and application exits
 */
 
 #include "mocks.h"
