@@ -23,10 +23,7 @@ free: 1
 ```
 
 Example declaration of function required can be something like this:
-
-```
-std::map<std::string, int> WordsCount(std::string)
-```
+std::map<std::string, int> WordsCount(std::string);
 
 ### Leap Year
 
@@ -40,7 +37,7 @@ on every year that is evenly divisible by 4
 
 For example, 1997 is not a leap year, but 1996 is. 1900 is not a leap year, but 2000 is.
 
-If your language provides a method in the standard library that does this look-up, pretend it doesn't exist and implement it yourself.
+Do not consider the period Before Christ. 
 
 _from http://exercism.io/_
 
@@ -64,10 +61,10 @@ The last place in a trinary number is the 1's place. The second to last is the 3
 
 ### Bank OCR
 
-Your manager has recently purchased a machine that assists in reading letters and faxes sent in by branch offices. The machine scans the paper documents, and produces a file with a number of entries. You will write a program to parse this file.
+Your manager has recently purchased a machine that assists in reading letters and faxes sent in by branch offices.
+The machine scans the paper documents, and produces a file with a number of entries. You will write a program to parse this file.
 
 #### Specification
-#### User Story 1
 
 The following format is created by the machine:
 ```

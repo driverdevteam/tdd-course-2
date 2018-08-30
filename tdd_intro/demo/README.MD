@@ -1,14 +1,11 @@
-﻿# WorkShops
+﻿# Demo
 
-Workshop sessions is one of the core parts of the "Practicing TDD" course. This kind of sessions is implemented in specific way:
+Demo sessions is the part of the "Practicing TDD" course. This kind of sessions is implemented in specific way:
 
-Group of people sit in a room with PC and projector. Two men from group peek a task from provided list and implement it in _live_ mode using ping-pong technique. Rest of group observes this process and corrects their actions if they choose a wrong path, or avoiding TDD practicies.
+The tutor demonstrates a presentation with a step-by-step solution for the task. 
 
-Pairs of programmers switch from task to task.
-
-All workshops sessions tasks are listed below in corresponding order
-
-## FizzBuzz
+## Base practicies training:
+### FizzBuzz
 
 Write a program that prints the numbers from 1 to 100. But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz “.
 
@@ -33,30 +30,6 @@ _from http://exercism.io/_
 Given a word and a list of possible anagrams, select the correct sublist.
 
 Given "listen" and a list of candidates like "enlists" "google" "inlets" "banana" the program should return a list containing "inlets".
-
-_from http://exercism.io/_
-
-
-### Allergies
-
-Given a person's allergy score, determine whether or not they're allergic to a given item, and their full list of allergies.
-An allergy test produces a single numeric score which contains the information about all the allergies the person has (that they were tested for).
-The list of items (and their value) that were tested are:
-    eggs (1)
-    peanuts (2)
-    shellfish (4)
-    strawberries (8)
-    tomatoes (16)
-    chocolate (32)
-    pollen (64)
-    cats (128)
-So if Tom is allergic to peanuts and chocolate, he gets a score of 34.
-
-Now, given just that score of 34, your program should be able:
-1. To say have Tom allergic to specific product or not.
-2. To give list of all allergens Tom is allergic to.
-
-Note: a given score may include allergens not listed above (i.e. allergens that score 256, 512, 1024, etc.). Your program should ignore those components of the score. For example, if the allergy score is 257, your program should only report the eggs (1) allergy.
 
 _from http://exercism.io/_
 
