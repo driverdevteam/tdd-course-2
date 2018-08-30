@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    workshops \
+    demo \
     homework \
     3rd_party \
     cleanroom
