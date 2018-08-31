@@ -5,4 +5,5 @@ SUBDIRS += \
     02_leap_year \
     02_trinary_numbers \
     03_bank_ocr \
-    04_filecopier
+    04_weather_client \
+    05_coffee
