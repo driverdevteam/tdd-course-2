@@ -63,16 +63,25 @@ TEST(WordsCount, RepeatingWord)
     EXPECT_EQ(2, words["world"]);
 }
 
-TEST(SplitString, Single)
+TEST(WordsCount, SplitString_Single)
 {
     auto words = SplitString("Hello");
     EXPECT_STREQ("Hello", words.at(0).c_str());
 }
 
-TEST(SplitString, Several)
+TEST(WordsCount, SplitString_Several)
 {
     auto words = SplitString("Hello world world");
     EXPECT_STREQ("Hello", words.at(0).c_str());
     EXPECT_STREQ("world", words.at(1).c_str());
     EXPECT_STREQ("world", words.at(2).c_str());
+}
+
+TEST(WordsCount, Acceptance)
+{
+    auto words = WordsCount("olly olly in come free");
+    EXPECT_EQ(2, words["olly"]);
+    EXPECT_EQ(1, words["in"]);
+    EXPECT_EQ(1, words["come"]);
+    EXPECT_EQ(1, words["free"]);
 }
