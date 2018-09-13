@@ -27,3 +27,10 @@ TEST(WordsCount, Single)
     auto words = WordsCount(word);
     EXPECT_EQ(1, words[word]);
 }
+
+TEST(WordsCount, TwoDifferentWords)
+{
+    auto words = WordsCount("Hello world");
+    EXPECT_EQ(1, words["Hello"]);
+    EXPECT_EQ(1, words["world"]);
+}
