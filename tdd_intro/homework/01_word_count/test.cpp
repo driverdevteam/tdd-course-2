@@ -18,11 +18,12 @@ using MyMap = std::map<std::string, int>;
 
 MyMap WordsCount(const std::string& str)
 {
-    return MyMap { { "Hello", 1 } };
+    return MyMap { { str, 1 } };
 }
 
 TEST(WordsCount, Single)
 {
-    auto words = WordsCount("Hello");
-    EXPECT_EQ(1, words["Hello"]);
+    std::string word = "Hello";
+    auto words = WordsCount(word);
+    EXPECT_EQ(1, words[word]);
 }
