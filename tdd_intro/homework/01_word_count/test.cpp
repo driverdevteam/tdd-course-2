@@ -34,3 +34,10 @@ TEST(WordsCount, TwoDifferentWords)
     EXPECT_EQ(1, words["Hello"]);
     EXPECT_EQ(1, words["world"]);
 }
+
+TEST(WordsCount, RepeatingWord)
+{
+    auto words = WordsCount("Hello world world");
+    EXPECT_EQ(1, words["Hello"]);
+    EXPECT_EQ(2, words["world"]);
+}
