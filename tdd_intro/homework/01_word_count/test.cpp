@@ -19,16 +19,14 @@ using MyMap = std::map<std::string, int>;
 std::vector<std::string> SplitString(const std::string& str)
 {
     std::vector<std::string> tokens;
-    for (size_t prevSpace = 0, spacePos = str.find(' '); spacePos != std::string::npos;
-         prevSpace = spacePos, spacePos = str.find(' ', spacePos + 1))
-    {
-         tokens.push_back(str.substr(prevSpace, spacePos - prevSpace));
-    }
 
-    if (tokens.empty() && !str.empty())
+    size_t prevSpace = 0;
+    for (size_t spacePos = str.find(' '); spacePos != std::string::npos;
+         prevSpace = spacePos + 1, spacePos = str.find(' ', prevSpace))
     {
-        tokens.push_back(str);
+        tokens.push_back(str.substr(prevSpace, spacePos - prevSpace));
     }
+    tokens.push_back(str.substr(prevSpace, str.size() - prevSpace));
 
     return tokens;
 }
