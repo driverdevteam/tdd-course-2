@@ -33,14 +33,13 @@ std::vector<std::string> SplitString(const std::string& str)
 
 MyMap WordsCount(const std::string& str)
 {
-    if (str == "Hello world world")
+    auto words = SplitString(str);
+    MyMap countedWords;
+    for (auto word : words)
     {
-        return MyMap { { "Hello", 1 }, { "world", 2 } };
+        ++countedWords[word];
     }
-    else
-    {
-        return MyMap { { "Hello", 1 }, { "world", 1 } };
-    }
+    return countedWords;
 }
 
 TEST(WordsCount, Single)
