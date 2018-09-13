@@ -71,3 +71,11 @@ TEST(SplitString, Single)
     auto words = SplitString("Hello");
     EXPECT_STREQ("Hello", words.at(0).c_str());
 }
+
+TEST(SplitString, Several)
+{
+    auto words = SplitString("Hello world world");
+    EXPECT_STREQ("Hello", words.at(0).c_str());
+    EXPECT_STREQ("world", words.at(1).c_str());
+    EXPECT_STREQ("world", words.at(2).c_str());
+}
