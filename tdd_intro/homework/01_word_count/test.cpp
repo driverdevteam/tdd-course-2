@@ -18,7 +18,7 @@ using MyMap = std::map<std::string, int>;
 
 MyMap WordsCount(const std::string& str)
 {
-    return MyMap { { str, 1 } };
+    return MyMap { { "Hello", 1 }, { "world", 1 } };
 }
 
 TEST(WordsCount, Single)
