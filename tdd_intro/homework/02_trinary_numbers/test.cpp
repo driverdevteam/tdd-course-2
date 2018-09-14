@@ -52,3 +52,8 @@ TEST(TernaryNumbers, Value_20)
     EXPECT_EQ(6, TernaryToDecimal("20"));
 }
 
+TEST(TernaryNumbers, Value_21)
+{
+    EXPECT_EQ(7, TernaryToDecimal("21"));
+}
+
