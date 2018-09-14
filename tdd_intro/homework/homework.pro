@@ -1,9 +1,8 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    01_word_count \
-    02_leap_year \
-    02_trinary_numbers \
+    01_leap_year \
+    02_ternary_numbers \
     03_bank_ocr \
     04_weather_client \
     05_coffee
