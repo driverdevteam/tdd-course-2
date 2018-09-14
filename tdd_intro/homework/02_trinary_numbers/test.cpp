@@ -50,3 +50,8 @@ TEST(TernaryNumbers, Value_10)
     EXPECT_EQ(3, TernaryToDecimal("10"));
 }
 
+TEST(TernaryNumbers, Value_20)
+{
+    EXPECT_EQ(6, TernaryToDecimal("20"));
+}
+
