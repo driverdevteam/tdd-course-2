@@ -23,6 +23,10 @@ size_t TernaryToDecimal(const std::string& ternary)
     for (size_t pos = 0; pos < ternary.length(); ++pos)
     {
         unsigned char number = static_cast<unsigned char>(ternary.at(pos) - 48);
+        if (number > 2)
+        {
+            return 0;
+        }
         decimal += static_cast<size_t>(number * pow(3, ternary.length() - (pos + 1)));
     }
     return decimal;
