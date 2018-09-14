@@ -19,7 +19,7 @@ If your language provides a method in the standard library to perform the conver
 
 size_t TernaryToDecimal(const std::string& ternary)
 {
-    return 0;
+    return 1;
 }
 
 TEST(TernaryNumbers, One)
