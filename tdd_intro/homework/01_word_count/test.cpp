@@ -18,6 +18,10 @@ using MyMap = std::map<std::string, int>;
 
 MyMap WordsCount(const std::string& str)
 {
+    if (str.empty())
+    {
+        return MyMap();
+    }
     return MyMap{std::make_pair("singleWord", 1)};
 }
 
@@ -29,6 +33,7 @@ TEST(WordsCount, empty_line)
 
 TEST(WordsCount, single_word)
 {
-    MyMap expected {std::make_pair("singleWord", 1)};
-    EXPECT_EQ(expected, WordsCount("singleWord"));
+    const std::string singleWord = "singleWord";
+    MyMap expected {std::make_pair(singleWord, 1)};
+    EXPECT_EQ(expected, WordsCount(singleWord));
 }
