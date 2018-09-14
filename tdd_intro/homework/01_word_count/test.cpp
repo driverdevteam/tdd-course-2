@@ -26,3 +26,9 @@ TEST(WordsCount, empty_line)
 {
     EXPECT_TRUE(WordsCount("").empty());
 }
+
+TEST(WordsCount, single_word)
+{
+    MyMap expected {std::make_pair("singleWord", 1)};
+    EXPECT_EQ(expected, WordsCount("singleWord"));
+}
