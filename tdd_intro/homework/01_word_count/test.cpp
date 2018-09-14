@@ -19,11 +19,6 @@ using MyMap = std::map<std::string, int>;
 
 MyMap WordsCount(const std::string& str)
 {
-    if (str == "word_1 word_1")
-    {
-        return {std::make_pair("word_1", 2)};
-    }
-
     if (str.empty())
     {
         return MyMap();
@@ -36,7 +31,7 @@ MyMap WordsCount(const std::string& str)
 
     while(std::getline(stream, token, ' '))
     {
-        result[token] = 1;
+        ++result[token];
     }
 
     return result;
