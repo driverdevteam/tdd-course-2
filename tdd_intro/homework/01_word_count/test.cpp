@@ -22,7 +22,7 @@ MyMap WordsCount(const std::string& str)
     {
         return MyMap();
     }
-    return MyMap{std::make_pair("singleWord", 1)};
+    return MyMap{std::make_pair(str, 1)};
 }
 
 
