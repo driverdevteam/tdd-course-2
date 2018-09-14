@@ -20,20 +20,10 @@ If your language provides a method in the standard library to perform the conver
 size_t TernaryToDecimal(const std::string& ternary)
 {
     size_t decimal = 0;
-    if (ternary.length() == 2)
+    for (size_t pos = 0; pos < ternary.length(); ++pos)
     {
-        std::string firstNumber(1, ternary[0]);
-        decimal = static_cast<size_t>(pow((3 * std::stoul(firstNumber)), 1));
-        std::string secondNumber(1, ternary[1]);
-        decimal += std::stoul(secondNumber);
-    }
-    else if (ternary.length() == 3)
-    {
-        decimal = 16;
-    }
-    else
-    {
-        decimal = std::stoul(ternary);
+        unsigned char number = static_cast<unsigned char>(ternary.at(pos) - 48);
+        decimal += static_cast<size_t>(number * pow(3, ternary.length() - (pos + 1)));
     }
     return decimal;
 }
