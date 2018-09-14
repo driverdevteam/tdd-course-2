@@ -16,7 +16,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(int year)
 {
-    return year % 4 == 0 && year != 100;
+    return year % 4 == 0 && year != 100 && year != 200;
 }
 
 TEST(LeapYear, Zero)
