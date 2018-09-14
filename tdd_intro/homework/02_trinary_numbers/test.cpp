@@ -19,19 +19,12 @@ If your language provides a method in the standard library to perform the conver
 
 size_t TernaryToDecimal(const std::string& ternary)
 {
-    if (ternary.length() < 2)
+    if (ternary.length() == 2)
     {
-        return std::stoul(ternary);
+        std::string firstNumber(1, ternary[0]);
+        return static_cast<size_t>(pow((3 * std::stoul(firstNumber)), 1));
     }
-    else if (ternary == "10")
-    {
-        return 3;
-    }
-    else if (ternary == "20")
-    {
-        return 6;
-    }
-    return 0;
+    return std::stoul(ternary);
 }
 
 TEST(TernaryNumbers, One)
