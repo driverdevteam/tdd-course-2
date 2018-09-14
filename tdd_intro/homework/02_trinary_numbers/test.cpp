@@ -44,3 +44,9 @@ TEST(TernaryNumbers, Two)
 {
     EXPECT_EQ(2, TernaryToDecimal("2"));
 }
+
+TEST(TernaryNumbers, Value_10)
+{
+    EXPECT_EQ(3, TernaryToDecimal("10"));
+}
+
