@@ -18,7 +18,7 @@ using MyMap = std::map<std::string, int>;
 
 MyMap WordsCount(const std::string& str)
 {
-    return MyMap();
+    return MyMap{std::make_pair("singleWord", 1)};
 }
 
 
