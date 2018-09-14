@@ -72,3 +72,12 @@ TEST(WordsCount, two_different_words_with_double_space)
                     std::make_pair("word_2", 1)};
     EXPECT_EQ(expected, WordsCount("word_1  word_2"));
 }
+
+TEST(WordsCount, acceptance)
+{
+    MyMap expected {std::make_pair("olly", 2),
+                    std::make_pair("in", 1),
+                    std::make_pair("come", 1),
+                    std::make_pair("free", 1)};
+    EXPECT_EQ(expected, WordsCount("olly olly in come free"));
+}
