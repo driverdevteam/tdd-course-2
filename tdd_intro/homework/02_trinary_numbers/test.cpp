@@ -36,3 +36,7 @@ TEST(TernaryNumbers, Zero)
     EXPECT_EQ(0, TernaryToDecimal("0"));
 }
 
+TEST(TernaryNumbers, Two)
+{
+    EXPECT_EQ(2, TernaryToDecimal("2"));
+}
