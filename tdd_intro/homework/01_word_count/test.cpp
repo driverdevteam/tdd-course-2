@@ -37,3 +37,10 @@ TEST(WordsCount, single_word)
     MyMap expected {std::make_pair(singleWord, 1)};
     EXPECT_EQ(expected, WordsCount(singleWord));
 }
+
+TEST(WordsCount, two_different_words)
+{
+    MyMap expected {std::make_pair("word_1", 1),
+                    std::make_pair("word_2", 1)};
+    EXPECT_EQ(expected, WordsCount("word_1 word_2"));
+}
