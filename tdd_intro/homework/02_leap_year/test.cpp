@@ -33,3 +33,8 @@ TEST(LeapYear, Four)
 {
     EXPECT_TRUE(IsLeapYear(4));
 }
+
+TEST(LeapYear, Hundred)
+{
+    EXPECT_FALSE(IsLeapYear(100));
+}
