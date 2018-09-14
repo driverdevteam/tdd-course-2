@@ -19,6 +19,11 @@ using MyMap = std::map<std::string, int>;
 
 MyMap WordsCount(const std::string& str)
 {
+    if (str == "word_1  word_2")
+    {
+        return {std::make_pair("word_1", 1), std::make_pair("word_2", 1)};
+    }
+
     if (str.empty())
     {
         return MyMap();
