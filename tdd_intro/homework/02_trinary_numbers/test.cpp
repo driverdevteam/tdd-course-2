@@ -26,3 +26,9 @@ TEST(TernaryNumbers, One)
 {
     EXPECT_EQ(1, TernaryToDecimal("1"));
 }
+
+TEST(TernaryNumbers, Zero)
+{
+    EXPECT_EQ(0, TernaryToDecimal("0"));
+}
+
