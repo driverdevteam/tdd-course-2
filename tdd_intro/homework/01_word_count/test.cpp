@@ -20,3 +20,9 @@ MyMap WordsCount(const std::string& str)
 {
 
 }
+
+
+TEST(WordsCount, empty_line)
+{
+    EXPECT_TRUE(WordsCount("").empty());
+}
