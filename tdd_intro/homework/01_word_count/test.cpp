@@ -13,6 +13,7 @@ free: 1
 #include <gtest/gtest.h>
 #include <map>
 #include <string>
+#include <sstream>
 
 using MyMap = std::map<std::string, int>;
 
@@ -23,13 +24,18 @@ MyMap WordsCount(const std::string& str)
         return MyMap();
     }
 
-    if (str == "singleWord")
+    MyMap result;
+
+    std::istringstream stream(str);
+    std::string token;
+
+    while(std::getline(stream, token, ' '))
     {
-        return MyMap{std::make_pair(str, 1)};
+        result[token] = 1;
     }
 
-    return MyMap {std::make_pair("word_1", 1),
-                  std::make_pair("word_2", 1)};
+
+    return result;
 }
 
 
