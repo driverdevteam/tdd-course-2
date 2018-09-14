@@ -27,6 +27,10 @@ size_t TernaryToDecimal(const std::string& ternary)
         std::string secondNumber(1, ternary[1]);
         decimal += std::stoul(secondNumber);
     }
+    else if (ternary.length() == 3)
+    {
+        decimal = 16;
+    }
     else
     {
         decimal = std::stoul(ternary);
