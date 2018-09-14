@@ -38,3 +38,9 @@ TEST(LeapYear, Hundred)
 {
     EXPECT_FALSE(IsLeapYear(100));
 }
+
+TEST(LeapYear, TwoHundreds)
+{
+    EXPECT_FALSE(IsLeapYear(200));
+}
+
