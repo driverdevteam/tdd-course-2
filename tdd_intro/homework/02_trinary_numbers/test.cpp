@@ -27,6 +27,10 @@ size_t TernaryToDecimal(const std::string& ternary)
     {
         return 3;
     }
+    else if (ternary == "20")
+    {
+        return 6;
+    }
     return 0;
 }
 
