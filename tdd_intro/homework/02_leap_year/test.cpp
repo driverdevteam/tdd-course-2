@@ -29,3 +29,7 @@ TEST(LeapYear, One)
     EXPECT_FALSE(IsLeapYear(1));
 }
 
+TEST(LeapYear, Four)
+{
+    EXPECT_TRUE(IsLeapYear(4));
+}
