@@ -19,13 +19,9 @@ If your language provides a method in the standard library to perform the conver
 
 size_t TernaryToDecimal(const std::string& ternary)
 {
-    if (ternary == "1")
+    if (ternary.length() < 2)
     {
-        return 1;
-    }
-    else if (ternary == "2")
-    {
-        return 2;
+        return std::stoul(ternary);
     }
     else if (ternary == "10")
     {
