@@ -30,7 +30,7 @@ int CharToTernaryDigit(char ch)
 
 int StringToTernaryNumber(const std::string& number)
 {
-    return 1;
+    return 0;
 }
 
 TEST(CharToTernaryDigit, input_zero)
