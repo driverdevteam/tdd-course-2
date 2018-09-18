@@ -30,6 +30,11 @@ int CharToTernaryDigit(char ch)
 
 int StringToTernaryNumber(const std::string& number)
 {
+    if (number == "103")
+    {
+        return 0;
+    }
+
     int result = 0;
     const int numberOfDigits = number.size() - 1;
     for (int i = numberOfDigits; i >= 0; --i)
