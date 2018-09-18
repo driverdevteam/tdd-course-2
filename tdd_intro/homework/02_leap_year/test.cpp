@@ -28,3 +28,8 @@ TEST(IsYearLeap, hundred_return_false)
 {
     EXPECT_FALSE(IsLeapYear(100));
 }
+
+TEST(IsYearLeap, four_hundred_return_true)
+{
+    EXPECT_TRUE(IsLeapYear(400));
+}
