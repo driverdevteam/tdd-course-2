@@ -20,7 +20,7 @@ If your language provides a method in the standard library to perform the conver
 
 int CharToTernaryDigit(char ch)
 {
-    return 0;
+    return ch - '0';
 }
 
 TEST(CharToTernaryDigit, input_zero)
