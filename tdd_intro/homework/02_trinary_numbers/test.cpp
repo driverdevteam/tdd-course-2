@@ -20,11 +20,7 @@ If your language provides a method in the standard library to perform the conver
 
 int CharToTernaryDigit(char ch)
 {
-    if (ch == '/')
-    {
-        throw std::runtime_error("non ternary");
-    }
-    if (ch < '3')
+    if (ch >= '0' && ch < '3')
     {
         return ch - '0';
     }
