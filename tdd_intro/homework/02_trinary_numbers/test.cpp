@@ -20,12 +20,12 @@ If your language provides a method in the standard library to perform the conver
 
 int CharToTernaryDigit(char ch)
 {
-    if (ch == '4')
+    if (ch < '3')
     {
-        throw std::runtime_error("non ternary");
+        return ch - '0';
     }
 
-    return ch - '0';
+    throw std::runtime_error("non ternary");
 }
 
 TEST(CharToTernaryDigit, input_zero)
