@@ -62,3 +62,8 @@ TEST(StringToTernaryNumber, input_empty_string)
 {
     EXPECT_EQ(0, StringToTernaryNumber(""));
 }
+
+TEST(StringToTernaryNumber, input_10)
+{
+    EXPECT_EQ(3, StringToTernaryNumber("10"));
+}
