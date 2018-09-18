@@ -72,3 +72,8 @@ TEST(StringToTernaryNumber, input_10)
 {
     EXPECT_EQ(3, StringToTernaryNumber("10"));
 }
+
+TEST(StringToTernaryNumber, input_invalid_number)
+{
+    EXPECT_EQ(0, StringToTernaryNumber("103"));
+}
