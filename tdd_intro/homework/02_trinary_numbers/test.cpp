@@ -18,7 +18,12 @@ If your language provides a method in the standard library to perform the conver
 */
 
 
-TEST(CharToTernary, zero)
+int CharToTernaryDigit(char ch)
+{
+    return 1;
+}
+
+TEST(CharToTernaryDigit, input_zero)
 {
     EXPECT_EQ(0, CharToTernaryDigit('0'));
 }
