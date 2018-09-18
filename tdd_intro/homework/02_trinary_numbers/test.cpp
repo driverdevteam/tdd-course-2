@@ -37,3 +37,8 @@ TEST(CharToTernaryDigit, input_four_throw)
 {
     EXPECT_THROW(CharToTernaryDigit('4'), std::runtime_error);
 }
+
+TEST(CharToTernaryDigit, input_47_throw)
+{
+    EXPECT_THROW(CharToTernaryDigit('/'), std::runtime_error);
+}
