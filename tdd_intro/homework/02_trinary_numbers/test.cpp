@@ -30,16 +30,16 @@ int CharToTernaryDigit(char ch)
 
 int StringToTernaryNumber(const std::string& number)
 {
-    if (number == "10")
+    int result = 0;
+    for (int i = number.size() - 1; i >= 0; --i)
     {
-        return 3;
-    }
-    if (!number.empty())
-    {
-        return CharToTernaryDigit(number[0]);
+        if (!number.empty())
+        {
+            result += CharToTernaryDigit(number[i]) * (std::pow(3, number.size() - i - 1));
+        }
     }
 
-    return 0;
+    return result;
 }
 
 TEST(CharToTernaryDigit, input_zero)
