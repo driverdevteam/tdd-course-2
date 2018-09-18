@@ -27,3 +27,8 @@ TEST(CharToTernaryDigit, input_zero)
 {
     EXPECT_EQ(0, CharToTernaryDigit('0'));
 }
+
+TEST(CharToTernaryDigit, input_four_throw)
+{
+    EXPECT_THROW(CharToTernaryDigit('4'), std::runtime_error);
+}
