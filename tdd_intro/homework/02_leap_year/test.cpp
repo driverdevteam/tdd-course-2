@@ -33,3 +33,11 @@ TEST(IsYearLeap, four_hundred_return_true)
 {
     EXPECT_TRUE(IsLeapYear(400));
 }
+
+TEST(IsYearLeap, acceptance)
+{
+    EXPECT_FALSE(IsLeapYear(1900));
+    EXPECT_TRUE(IsLeapYear(1996));
+    EXPECT_FALSE(IsLeapYear(1997));
+    EXPECT_TRUE(IsLeapYear(2000));
+}
