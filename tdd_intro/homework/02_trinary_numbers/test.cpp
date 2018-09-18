@@ -31,11 +31,12 @@ int CharToTernaryDigit(char ch)
 int StringToTernaryNumber(const std::string& number)
 {
     int result = 0;
-    for (int i = number.size() - 1; i >= 0; --i)
+    const int numberOfDigits = number.size() - 1;
+    for (int i = numberOfDigits; i >= 0; --i)
     {
         if (!number.empty())
         {
-            result += CharToTernaryDigit(number[i]) * (std::pow(3, number.size() - i - 1));
+            result += CharToTernaryDigit(number[i]) * (std::pow(3, numberOfDigits - i));
         }
     }
 
