@@ -28,6 +28,11 @@ int CharToTernaryDigit(char ch)
     throw std::runtime_error("non ternary");
 }
 
+int StringToTernaryNumber(const std::string& number)
+{
+    return 1;
+}
+
 TEST(CharToTernaryDigit, input_zero)
 {
     EXPECT_EQ(0, CharToTernaryDigit('0'));
