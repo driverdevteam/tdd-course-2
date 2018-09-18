@@ -20,6 +20,11 @@ If your language provides a method in the standard library to perform the conver
 
 int CharToTernaryDigit(char ch)
 {
+    if (ch == '4')
+    {
+        throw std::runtime_error("non ternary");
+    }
+
     return ch - '0';
 }
 
