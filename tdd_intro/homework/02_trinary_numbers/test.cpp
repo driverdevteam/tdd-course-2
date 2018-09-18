@@ -30,6 +30,10 @@ int CharToTernaryDigit(char ch)
 
 int StringToTernaryNumber(const std::string& number)
 {
+    if (number == "10")
+    {
+        return 3;
+    }
     if (!number.empty())
     {
         return CharToTernaryDigit(number[0]);
