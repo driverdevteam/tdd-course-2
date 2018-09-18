@@ -30,21 +30,22 @@ int CharToTernaryDigit(char ch)
 
 int StringToTernaryNumber(const std::string& number)
 {
-    if (number == "103")
-    {
-        return 0;
-    }
-
     int result = 0;
     const int numberOfDigits = number.size() - 1;
-    for (int i = numberOfDigits; i >= 0; --i)
+    try
     {
-        if (!number.empty())
+        for (int i = numberOfDigits; i >= 0; --i)
         {
-            result += CharToTernaryDigit(number[i]) * (std::pow(3, numberOfDigits - i));
+            if (!number.empty())
+            {
+                result += CharToTernaryDigit(number[i]) * (std::pow(3, numberOfDigits - i));
+            }
         }
     }
-
+    catch (const std::runtime_error&)
+    {
+        result = 0;
+    }
     return result;
 }
 
