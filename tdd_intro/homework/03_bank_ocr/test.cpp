@@ -369,3 +369,9 @@ TEST(BankOCR, CalculateDisplayChecksumNulls)
     size_t checksum = CalculateDisplayChecksum("000000000");
     EXPECT_EQ(0, checksum);
 }
+
+TEST(BankOCR, CalculateDisplayChecksumOnes)
+{
+    size_t checksum = CalculateDisplayChecksum("111111111");
+    EXPECT_EQ(45, checksum);
+}
