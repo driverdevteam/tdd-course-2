@@ -235,7 +235,7 @@ Number DigitToNumber(const Digit& digit)
 
 std::string DisplayToNumber(const Display& display)
 {
-    return {};
+    return { "000000000" };
 }
 
 TEST(BankOCR, Zero)
