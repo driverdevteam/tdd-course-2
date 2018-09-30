@@ -223,6 +223,10 @@ Number DigitToNumber(const Digit& digit)
     {
         return 1;
     }
+    else if (AreDigitsEqual(digit, s_digit2))
+    {
+        return 2;
+    }
     return 0;
 }
 
