@@ -87,6 +87,15 @@ Example input and output
 #include <gtest/gtest.h>
 #include <string>
 
+/*
+ * Plan:
+ * 1. Test each single digit
+ * 2. Test invalid digit
+ * 3. Test full sequence of single digit
+ * 4. Test all digits in single sequence
+ * 5. Acceptance
+*/
+
 const unsigned short g_linesInDigit = 3;
 struct Digit
 {
