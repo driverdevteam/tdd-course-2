@@ -207,6 +207,13 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 
 Number DigitToNumber(const Digit& digit)
 {
+    for (size_t digitLine = 0; digitLine < g_linesInDigit; ++digitLine)
+    {
+        if (digit.lines[digitLine] != s_digit0.lines[digitLine])
+        {
+            return 1;
+        }
+    }
     return 0;
 }
 
@@ -214,4 +221,10 @@ TEST(BankOCR, Zero)
 {
     Number num = DigitToNumber(s_digit0);
     ASSERT_EQ(0, num);
+}
+
+TEST(BankOCR, One)
+{
+    Number num = DigitToNumber(s_digit1);
+    ASSERT_EQ(1, num);
 }
