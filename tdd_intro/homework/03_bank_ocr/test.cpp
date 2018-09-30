@@ -318,3 +318,8 @@ TEST(BankOCR, DisplayOfSingleDigitAcceptance)
     EXPECT_EQ("888888888", DisplayToNumber(s_displayAll8));
     EXPECT_EQ("999999999", DisplayToNumber(s_displayAll9));
 }
+
+TEST(BankOCR, DisplayOfAllDigits)
+{
+    ASSERT_EQ("123456789", DisplayToNumber(s_display123456789));
+}
