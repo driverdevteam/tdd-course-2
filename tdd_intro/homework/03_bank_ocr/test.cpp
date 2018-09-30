@@ -358,3 +358,9 @@ TEST(BankOCR, UserStory1Acceptance)
  * 2. Calculate checksum of the display with MOD
  * 3. Implement display parsing with checksum
 */
+
+TEST(BankOCR, CalculateDisplayChecksum)
+{
+    size_t checksum = CalculateDisplayChecksum("000000000");
+    EXPECT_EQ(0, checksum);
+}
