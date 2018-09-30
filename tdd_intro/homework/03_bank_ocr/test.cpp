@@ -233,6 +233,11 @@ Number DigitToNumber(const Digit& digit)
     throw std::runtime_error("Digit was not recognized");
 }
 
+std::string DisplayToNumber(const Display& display)
+{
+    return {};
+}
+
 TEST(BankOCR, Zero)
 {
     Number num = DigitToNumber(s_digit0);
@@ -271,4 +276,10 @@ TEST(BankOCR, InvalidDigit)
     };
 
     EXPECT_ANY_THROW(DigitToNumber(invalidDigit));
+}
+
+TEST(BankOCR, DisplayToNumber_Nulls)
+{
+    std::string num = DisplayToNumber(s_displayAll0);
+    EXPECT_EQ("000000000", num);
 }
