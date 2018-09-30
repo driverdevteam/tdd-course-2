@@ -330,3 +330,24 @@ TEST(BankOCR, DisplayOfAllDigits)
 {
     ASSERT_EQ("123456789", DisplayToNumber(s_display123456789));
 }
+
+TEST(BankOCR, UserStory1Acceptance)
+{
+    const Display s_displayRnd1 = { "       _  _  _  _  _  _  _ ",
+                                    "  |  | _| _||_ |_   |  ||_|",
+                                    "  |  | _| _| _| _|  |  | _|"
+                                  };
+    EXPECT_EQ("113355779", DisplayToNumber(s_displayRnd1));
+
+    const Display s_displayRnd2 = { " _  _  _  _  _     _  _    ",
+                                    "|_||_|  ||_ |_ |_| _| _|  |",
+                                    " _||_|  ||_| _|  | _||_   |"
+                                  };
+    EXPECT_EQ("987654321", DisplayToNumber(s_displayRnd2));
+
+    const Display s_displayRnd3 = { "    _  _  _  _  _  _     _ ",
+                                    "  || || ||_ | || | _||_||_|",
+                                    "  ||_||_| _||_||_| _|  ||_|"
+                                  };
+    EXPECT_EQ("100500348", DisplayToNumber(s_displayRnd3));
+}
