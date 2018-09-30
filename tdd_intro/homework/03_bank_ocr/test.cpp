@@ -397,3 +397,13 @@ TEST(BankOCR, IsChecksumValid)
 {
     ASSERT_TRUE(IsChecksumValid("731111111"));
 }
+
+TEST(BankOCR, IsChecksumValidAcceptance)
+{
+    EXPECT_TRUE(IsChecksumValid("011111111"));
+    EXPECT_TRUE(IsChecksumValid("491867715"));
+
+    EXPECT_FALSE(IsChecksumValid("888888888"));
+    EXPECT_FALSE(IsChecksumValid("490067715"));
+    EXPECT_FALSE(IsChecksumValid("012345678"));
+}
