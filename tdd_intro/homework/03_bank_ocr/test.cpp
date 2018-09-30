@@ -351,3 +351,10 @@ TEST(BankOCR, UserStory1Acceptance)
                                   };
     EXPECT_EQ("100500348", DisplayToNumber(s_displayRnd3));
 }
+
+/*
+ * Plan for User Story 2:
+ * 1. Calculate checksum of the display without MOD
+ * 2. Calculate checksum of the display with MOD
+ * 3. Implement display parsing with checksum
+*/
