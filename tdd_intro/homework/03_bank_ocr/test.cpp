@@ -361,15 +361,12 @@ TEST(BankOCR, UserStory1Acceptance)
 
 size_t CalculateDisplayChecksum(const std::string& display)
 {
-    if (display == "000000000")
+    size_t result = 0;
+    for (size_t digitPos = 0; digitPos < g_digitsOnDisplay; ++digitPos)
     {
-        return 0;
+        result += (display.at(digitPos) - 48) * (digitPos + 1);
     }
-    else if (display == "111111111")
-    {
-        return 45;
-    }
-    return 9;
+    return result;
 }
 
 TEST(BankOCR, CalculateDisplayChecksumNulls)
