@@ -261,3 +261,14 @@ TEST(BankOCR, EachSingleDigitAcceptance)
     EXPECT_EQ(8, DigitToNumber(s_digit8));
     EXPECT_EQ(9, DigitToNumber(s_digit9));
 }
+
+TEST(BankOCR, InvalidDigit)
+{
+    Digit invalidDigit = {
+        " _ ",
+        " _|"
+        "|_|"
+    };
+
+    EXPECT_ANY_THROW(DigitToNumber(invalidDigit));
+}
