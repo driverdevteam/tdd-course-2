@@ -219,13 +219,16 @@ bool AreDigitsEqual(const Digit& digit1, const Digit& digit2)
 
 Number DigitToNumber(const Digit& digit)
 {
-    if (AreDigitsEqual(digit, s_digit1))
+    static const Digit s_possibleDigit[] = {
+        s_digit0, s_digit1, s_digit2, s_digit3, s_digit4, s_digit5, s_digit6, s_digit7, s_digit8, s_digit9
+    };
+
+    for (Number number = 0; number < 10; ++number)
     {
-        return 1;
-    }
-    else if (AreDigitsEqual(digit, s_digit2))
-    {
-        return 2;
+        if (AreDigitsEqual(digit, s_possibleDigit[number]))
+        {
+            return number;
+        }
     }
     return 0;
 }
