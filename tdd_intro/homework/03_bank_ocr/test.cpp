@@ -205,14 +205,23 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
-Number DigitToNumber(const Digit& digit)
+bool AreDigitsEqual(const Digit& digit1, const Digit& digit2)
 {
     for (size_t digitLine = 0; digitLine < g_linesInDigit; ++digitLine)
     {
-        if (digit.lines[digitLine] != s_digit0.lines[digitLine])
+        if (digit1.lines[digitLine] != digit2.lines[digitLine])
         {
-            return 1;
+            return false;
         }
+    }
+    return true;
+}
+
+Number DigitToNumber(const Digit& digit)
+{
+    if (AreDigitsEqual(digit, s_digit1))
+    {
+        return 1;
     }
     return 0;
 }
