@@ -303,3 +303,9 @@ TEST(BankOCR, DisplayToNumber_Ones)
     std::string num = DisplayToNumber(s_displayAll1);
     EXPECT_EQ("111111111", num);
 }
+
+TEST(BankOCR, DisplayToNumber_Twos)
+{
+    std::string num = DisplayToNumber(s_displayAll2);
+    EXPECT_EQ("222222222", num);
+}
