@@ -369,6 +369,12 @@ size_t CalculateDisplayChecksum(const std::string& display)
     return result;
 }
 
+bool IsChecksumValid(const std::string& display)
+{
+    const size_t M = 11; // Checking constant for account number for FRS
+    return CalculateDisplayChecksum(display) % M == 0;
+}
+
 TEST(BankOCR, CalculateDisplayChecksumNulls)
 {
     size_t checksum = CalculateDisplayChecksum("000000000");
