@@ -359,7 +359,12 @@ TEST(BankOCR, UserStory1Acceptance)
  * 3. Implement display parsing with checksum
 */
 
-TEST(BankOCR, CalculateDisplayChecksum)
+size_t CalculateDisplayChecksum(const std::string& display)
+{
+    return 0;
+}
+
+TEST(BankOCR, CalculateDisplayChecksumNulls)
 {
     size_t checksum = CalculateDisplayChecksum("000000000");
     EXPECT_EQ(0, checksum);
