@@ -101,6 +101,7 @@ struct Digit
 {
     std::string lines[3];
 };
+using Number = uint64_t;
 
 const unsigned short g_digitsOnDisplay = 9;
 struct Display
@@ -203,3 +204,9 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+TEST(BankOCR, Zero)
+{
+    Number num = DigitToNumber(s_digit0);
+    ASSERT_EQ(0, num);
+}
