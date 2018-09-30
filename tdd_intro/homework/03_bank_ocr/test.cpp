@@ -250,3 +250,14 @@ TEST(BankOCR, Two)
     Number num = DigitToNumber(s_digit2);
     ASSERT_EQ(2, num);
 }
+
+TEST(BankOCR, EachSingleDigitAcceptance)
+{
+    EXPECT_EQ(3, DigitToNumber(s_digit3));
+    EXPECT_EQ(4, DigitToNumber(s_digit4));
+    EXPECT_EQ(5, DigitToNumber(s_digit5));
+    EXPECT_EQ(6, DigitToNumber(s_digit6));
+    EXPECT_EQ(7, DigitToNumber(s_digit7));
+    EXPECT_EQ(8, DigitToNumber(s_digit8));
+    EXPECT_EQ(9, DigitToNumber(s_digit9));
+}
