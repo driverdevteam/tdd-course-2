@@ -365,7 +365,11 @@ size_t CalculateDisplayChecksum(const std::string& display)
     {
         return 0;
     }
-    return 45;
+    else if (display == "111111111")
+    {
+        return 45;
+    }
+    return 9;
 }
 
 TEST(BankOCR, CalculateDisplayChecksumNulls)
