@@ -230,7 +230,7 @@ Number DigitToNumber(const Digit& digit)
             return number;
         }
     }
-    return 0;
+    throw std::runtime_error("Digit was not recognized");
 }
 
 TEST(BankOCR, Zero)
