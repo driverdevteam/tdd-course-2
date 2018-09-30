@@ -246,15 +246,8 @@ Digit ExtractDigitFromDisplay(const Display& display)
 std::string DisplayToNumber(const Display& display)
 {
     Digit firstDigit = ExtractDigitFromDisplay(display);
-    if (AreDigitsEqual(firstDigit, s_digit0))
-    {
-        return "000000000";
-    }
-    else if (AreDigitsEqual(firstDigit, s_digit2))
-    {
-        return "222222222";
-    }
-    return "111111111";
+    Number firstNumber = DigitToNumber(firstDigit);
+    return std::string(g_digitsOnDisplay, std::to_string(firstNumber).front());
 }
 
 TEST(BankOCR, Zero)
