@@ -96,17 +96,18 @@ Example input and output
  * 5. Acceptance
 */
 
+const unsigned short g_digitLen = 3;
 const unsigned short g_linesInDigit = 3;
 struct Digit
 {
-    std::string lines[3];
+    std::string lines[g_linesInDigit];
 };
 using Number = uint64_t;
 
 const unsigned short g_digitsOnDisplay = 9;
 struct Display
 {
-    std::string lines[3];
+    std::string lines[g_linesInDigit];
 };
 
 const Digit s_digit0 = { " _ ",
@@ -233,13 +234,14 @@ Number DigitToNumber(const Digit& digit)
     throw std::runtime_error("Digit was not recognized");
 }
 
-Digit ExtractDigitFromDisplay(const Display& display)
+Digit ExtractDigitFromDisplay(const Display& display, size_t digitNum = 0)
 {
     Digit firstDigit;
-    firstDigit.lines[0] = display.lines[0].substr(0, g_linesInDigit);
-    firstDigit.lines[1] = display.lines[1].substr(0, g_linesInDigit);
-    firstDigit.lines[2] = display.lines[2].substr(0, g_linesInDigit);
-
+    size_t startPos = digitNum * g_digitLen;
+    for (size_t line = 0; line < g_linesInDigit; ++line)
+    {
+        firstDigit.lines[line] = display.lines[line].substr(startPos, g_digitLen);
+    }
     return firstDigit;
 }
 
