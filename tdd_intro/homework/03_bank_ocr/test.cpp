@@ -233,13 +233,19 @@ Number DigitToNumber(const Digit& digit)
     throw std::runtime_error("Digit was not recognized");
 }
 
-std::string DisplayToNumber(const Display& display)
+Digit ExtractDigitFromDisplay(const Display& display)
 {
     Digit firstDigit;
     firstDigit.lines[0] = display.lines[0].substr(0, g_linesInDigit);
     firstDigit.lines[1] = display.lines[1].substr(0, g_linesInDigit);
     firstDigit.lines[2] = display.lines[2].substr(0, g_linesInDigit);
-    if (AreDigitsEqual(firstDigit, s_digit0))
+
+    return firstDigit;
+}
+
+std::string DisplayToNumber(const Display& display)
+{
+    if (AreDigitsEqual(ExtractDigitFromDisplay(display), s_digit0))
     {
         return "000000000";
     }
