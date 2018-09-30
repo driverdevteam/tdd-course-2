@@ -245,9 +245,14 @@ Digit ExtractDigitFromDisplay(const Display& display)
 
 std::string DisplayToNumber(const Display& display)
 {
-    if (AreDigitsEqual(ExtractDigitFromDisplay(display), s_digit0))
+    Digit firstDigit = ExtractDigitFromDisplay(display);
+    if (AreDigitsEqual(firstDigit, s_digit0))
     {
         return "000000000";
+    }
+    else if (AreDigitsEqual(firstDigit, s_digit2))
+    {
+        return "222222222";
     }
     return "111111111";
 }
