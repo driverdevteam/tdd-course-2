@@ -235,7 +235,15 @@ Number DigitToNumber(const Digit& digit)
 
 std::string DisplayToNumber(const Display& display)
 {
-    return { "000000000" };
+    Digit firstDigit;
+    firstDigit.lines[0] = display.lines[0].substr(0, g_linesInDigit);
+    firstDigit.lines[1] = display.lines[1].substr(0, g_linesInDigit);
+    firstDigit.lines[2] = display.lines[2].substr(0, g_linesInDigit);
+    if (AreDigitsEqual(firstDigit, s_digit0))
+    {
+        return "000000000";
+    }
+    return "111111111";
 }
 
 TEST(BankOCR, Zero)
