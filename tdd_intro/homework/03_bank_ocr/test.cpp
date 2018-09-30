@@ -307,3 +307,14 @@ TEST(BankOCR, DisplayToNumber_Twos)
     std::string num = DisplayToNumber(s_displayAll2);
     EXPECT_EQ("222222222", num);
 }
+
+TEST(BankOCR, DisplayOfSingleDigitAcceptance)
+{
+    EXPECT_EQ("333333333", DisplayToNumber(s_displayAll3));
+    EXPECT_EQ("444444444", DisplayToNumber(s_displayAll4));
+    EXPECT_EQ("555555555", DisplayToNumber(s_displayAll5));
+    EXPECT_EQ("666666666", DisplayToNumber(s_displayAll6));
+    EXPECT_EQ("777777777", DisplayToNumber(s_displayAll7));
+    EXPECT_EQ("888888888", DisplayToNumber(s_displayAll8));
+    EXPECT_EQ("999999999", DisplayToNumber(s_displayAll9));
+}
