@@ -247,9 +247,14 @@ Digit ExtractDigitFromDisplay(const Display& display, size_t digitNum = 0)
 
 std::string DisplayToNumber(const Display& display)
 {
-    Digit firstDigit = ExtractDigitFromDisplay(display);
-    Number firstNumber = DigitToNumber(firstDigit);
-    return std::string(g_digitsOnDisplay, std::to_string(firstNumber).front());
+    std::string result;
+    for (size_t digitNum = 0; digitNum < g_digitsOnDisplay; ++digitNum)
+    {
+        Digit digit = ExtractDigitFromDisplay(display, digitNum);
+        Number firstNumber = DigitToNumber(digit);
+        result += std::to_string(firstNumber);
+    }
+    return result;
 }
 
 TEST(BankOCR, Zero)
