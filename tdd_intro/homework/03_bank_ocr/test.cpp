@@ -237,3 +237,9 @@ TEST(BankOCR, One)
     Number num = DigitToNumber(s_digit1);
     ASSERT_EQ(1, num);
 }
+
+TEST(BankOCR, Two)
+{
+    Number num = DigitToNumber(s_digit2);
+    ASSERT_EQ(2, num);
+}
