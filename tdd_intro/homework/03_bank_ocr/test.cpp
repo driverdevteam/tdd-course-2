@@ -205,6 +205,11 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
+Number DigitToNumber(const Digit& digit)
+{
+    return 0;
+}
+
 TEST(BankOCR, Zero)
 {
     Number num = DigitToNumber(s_digit0);
