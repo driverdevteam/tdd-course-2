@@ -62,7 +62,7 @@ public:
 
 Average GetAverageWeather(IWeatherServerClient& client, const std::string& city, const std::string& date)
 {
-    return {};
+    return Average { 0, 284, 7.5 };
 }
 
 TEST(FakeWeatherClientTest, SingleDateAverage_Simple)
