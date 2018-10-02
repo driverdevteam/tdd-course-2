@@ -41,3 +41,13 @@ struct Average
 // Stage 2 (optional): Get the average weather statistics for the given period of time
 using Averages = std::map<std::string, Average>; // <date, Average>
 
+class FakeWeatherClient: public IWeatherServerClient
+{
+public:
+    FakeWeatherClient();
+
+    // Returns raw statistics for the given day
+    virtual std::string GetWeather(const std::string& city, const std::string& date);
+    // Returns raw statistics for the given period of time
+    virtual std::string GetWeather(const std::string& city, const std::string& startDate, const std::string& endDate);
+};
