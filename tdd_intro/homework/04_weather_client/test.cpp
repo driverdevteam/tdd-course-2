@@ -35,7 +35,9 @@ public:
 // Stage 1: Get the average weather statistics for the single day
 struct Average
 {
-    // Your fields goes here
+    short int temperature = 0;
+    unsigned short windForce = 0;
+    unsigned short windDirection = 0;
 };
 
 // Stage 2 (optional): Get the average weather statistics for the given period of time
