@@ -44,13 +44,24 @@ using Averages = std::map<std::string, Average>; // <date, Average>
 class FakeWeatherClient: public IWeatherServerClient
 {
 public:
-    FakeWeatherClient();
+    FakeWeatherClient() { }
 
     // Returns raw statistics for the given day
-    virtual std::string GetWeather(const std::string& city, const std::string& date);
+    virtual std::string GetWeather(const std::string& city, const std::string& date)
+    {
+        return {};
+    }
     // Returns raw statistics for the given period of time
-    virtual std::string GetWeather(const std::string& city, const std::string& startDate, const std::string& endDate);
+    virtual std::string GetWeather(const std::string& city, const std::string& startDate, const std::string& endDate)
+    {
+        return {};
+    }
 };
+
+Average GetAverageWeather(IWeatherServerClient& client, const std::string& city, const std::string& date)
+{
+    return {};
+}
 
 TEST(FakeWeatherClientTest, SingleDateAverage_Simple)
 {
