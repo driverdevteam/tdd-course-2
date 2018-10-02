@@ -35,6 +35,15 @@ public:
 // Stage 1: Get the average weather statistics for the single day
 struct Average
 {
+    Average(short int temperature, unsigned short windDirection, float windForce)
+        : temperature(temperature)
+        , windDirection(windDirection)
+        , windForce(windForce)
+    { }
+    Average(short int temperature, unsigned short windDirection, double windForce)
+        : Average(temperature, windDirection, static_cast<float>(windForce))
+    { }
+
     short int temperature = 0;
     unsigned short windDirection = 0;
     float windForce = 0;
@@ -64,9 +73,9 @@ Average GetAverageWeather(IWeatherServerClient& client, const std::string& city,
 {
     if (city == "Geneve")
     {
-        return Average { 25, 131, static_cast<float>(4.7) };
+        return Average(25, 131, 4.7);
     }
-    return Average { 0, 284, 7.5 };
+    return Average(0, 284, 7.5);
 }
 
 TEST(FakeWeatherClientTest, SingleDateAverage_Simple)
