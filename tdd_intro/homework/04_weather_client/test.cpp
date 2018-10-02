@@ -27,9 +27,9 @@ class IWeatherServerClient
 public:
     virtual ~IWeatherServerClient() { }
     // Returns raw statistics for the given day
-    std::string GetWeather(const std::string& city, const std::string& date);
+    virtual std::string GetWeather(const std::string& city, const std::string& date) = 0;
     // Returns raw statistics for the given period of time
-    std::string GetWeather(const std::string& city, const std::string& startDate, const std::string& endDate);
+    virtual std::string GetWeather(const std::string& city, const std::string& startDate, const std::string& endDate) = 0;
 };
 
 // Stage 1: Get the average weather statistics for the single day
