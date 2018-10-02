@@ -51,3 +51,9 @@ public:
     // Returns raw statistics for the given period of time
     virtual std::string GetWeather(const std::string& city, const std::string& startDate, const std::string& endDate);
 };
+
+TEST(FakeWeatherClientTest, SingleDateAverage_Simple)
+{
+    FakeWeatherClient client;
+    Average avg = GetAverageWeather(client, "PokrovCity", "03.02.1990");
+}
