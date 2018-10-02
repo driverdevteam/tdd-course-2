@@ -126,3 +126,13 @@ TEST(FakeWeatherClientTest, SingleDateAverage_AllWeather2)
     EXPECT_EQ(10, avg.windDirection);
     EXPECT_FLOAT_EQ(3.2, avg.windForce);
 }
+
+TEST(FakeWeatherClientTest, ParseWeatherForDay)
+{
+    std::string weatherForDay = "31.08.2018;03:00;20;181:5.1\n31.08.2018;09:00;23;204:4.9\n31.08.2018;15:00;33;193:4.3\n31.08.2018;21:00;46;179:4.5";
+    WeatherHistory history = ParseWeatherHistory(weatherForDay);
+    Weather weather = history["31.08.2018"]["09:00"];
+    EXPECT_EQ(23, weather.temperature);
+    EXPECT_EQ(204, weather.windDirection);
+    EXPECT_FLOAT_EQ(4.9, weather.windForce);
+}
