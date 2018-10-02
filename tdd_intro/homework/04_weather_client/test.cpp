@@ -68,3 +68,10 @@ TEST(FakeWeatherClientTest, SingleDateAverage_Simple)
     FakeWeatherClient client;
     Average avg = GetAverageWeather(client, "PokrovCity", "03.02.1990");
 }
+
+TEST(FakeWeatherClientTest, SingleDateAverage_CheckTemperature)
+{
+    FakeWeatherClient client;
+    Average avg = GetAverageWeather(client, "PokrovCity", "03.02.1990");
+    EXPECT_EQ(0, avg.temperature);
+}
