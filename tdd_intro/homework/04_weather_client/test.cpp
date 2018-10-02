@@ -86,3 +86,13 @@ TEST(FakeWeatherClientTest, SingleDateAverage_CheckWind)
     EXPECT_FLOAT_EQ(7.5, avg.windForce);
     EXPECT_EQ(284, avg.windDirection);
 }
+
+TEST(FakeWeatherClientTest, SingleDateAverage_AllWeather1)
+{
+    FakeWeatherClient client;
+    Average avg = GetAverageWeather(client, "Geneve", "01.08.1991");
+
+    EXPECT_EQ(25, avg.temperature);
+    EXPECT_FLOAT_EQ(4.7, avg.windForce);
+    EXPECT_EQ(131, avg.windDirection);
+}
