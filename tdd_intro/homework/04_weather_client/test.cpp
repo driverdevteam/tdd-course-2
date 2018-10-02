@@ -35,6 +35,7 @@ public:
 // Stage 1: Get the average weather statistics for the single day
 struct Average
 {
+    Average() { };
     Average(short int temperature, unsigned short windDirection, float windForce)
         : temperature(temperature)
         , windDirection(windDirection)
@@ -48,6 +49,9 @@ struct Average
     unsigned short windDirection = 0;
     float windForce = 0;
 };
+
+using Weather = Average;
+using WeatherHistory = std::map<std::string, std::map<std::string, Weather>>;
 
 // Stage 2 (optional): Get the average weather statistics for the given period of time
 using Averages = std::map<std::string, Average>; // <date, Average>
@@ -83,6 +87,13 @@ Average GetAverageWeather(IWeatherServerClient& client, const std::string& city,
         }
     }
     return Average(0, 284, 7.5);
+}
+
+WeatherHistory ParseWeatherHistory(std::string& rawView)
+{
+    WeatherHistory history;
+    history["31.08.2018"]["09:00"] = Weather(23, 204, 4.9);
+    return history;
 }
 
 TEST(FakeWeatherClientTest, SingleDateAverage_Simple)
