@@ -12,7 +12,10 @@ The server answers with text of this format:
     31.08.2018;21:00;46;179:4.5
     Where each line represents the time of the day and contains the next information: "<date>;<time>;<air_temperature_in_celsius>;<wind_direction_in_degrees>:<wind_speed>". Wind direction value may be in range from 0 to 359 inclusively, temperature may be negative.
 
-Your program should parse the answers from weather server and collect the average values of temperature, wind direction and speed for the given period of time. For the start, you have to implement the function which collect statistics for a single day for a given city. If you want to make your program more useful, implement the function which collects the statistics for the certain period of time.
+Your program should parse the answers from weather server and collect the average values of temperature, wind direction and speed for the given period of time.
+
+Stage 1: For the start, you have to implement the function which collect statistics for a single day for a given city.
+Stage 2 (optional): If you want to make your program more useful, implement the function which collects the statistics for the certain period of time.
 */
 
 #include <gtest/gtest.h>
