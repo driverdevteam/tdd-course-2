@@ -36,8 +36,8 @@ public:
 struct Average
 {
     short int temperature = 0;
-    unsigned short windForce = 0;
     unsigned short windDirection = 0;
+    float windForce = 0;
 };
 
 // Stage 2 (optional): Get the average weather statistics for the given period of time
@@ -76,4 +76,13 @@ TEST(FakeWeatherClientTest, SingleDateAverage_CheckTemperature)
     FakeWeatherClient client;
     Average avg = GetAverageWeather(client, "PokrovCity", "03.02.1990");
     EXPECT_EQ(0, avg.temperature);
+}
+
+TEST(FakeWeatherClientTest, SingleDateAverage_CheckWind)
+{
+    FakeWeatherClient client;
+    Average avg = GetAverageWeather(client, "PokrovCity", "03.02.1990");
+
+    EXPECT_FLOAT_EQ(7.5, avg.windForce);
+    EXPECT_EQ(284, avg.windDirection);
 }
