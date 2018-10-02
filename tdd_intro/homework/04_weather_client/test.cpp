@@ -73,7 +73,14 @@ Average GetAverageWeather(IWeatherServerClient& client, const std::string& city,
 {
     if (city == "Geneve")
     {
-        return Average(25, 131, 4.7);
+        if (date == "01.08.1991")
+        {
+            return Average(25, 131, 4.7);
+        }
+        else
+        {
+            return Average(20, 10, 3.2);
+        }
     }
     return Average(0, 284, 7.5);
 }
