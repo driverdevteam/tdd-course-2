@@ -62,6 +62,10 @@ public:
 
 Average GetAverageWeather(IWeatherServerClient& client, const std::string& city, const std::string& date)
 {
+    if (city == "Geneve")
+    {
+        return Average { 25, 131, static_cast<float>(4.7) };
+    }
     return Average { 0, 284, 7.5 };
 }
 
@@ -93,6 +97,6 @@ TEST(FakeWeatherClientTest, SingleDateAverage_AllWeather1)
     Average avg = GetAverageWeather(client, "Geneve", "01.08.1991");
 
     EXPECT_EQ(25, avg.temperature);
-    EXPECT_FLOAT_EQ(4.7, avg.windForce);
     EXPECT_EQ(131, avg.windDirection);
+    EXPECT_FLOAT_EQ(4.7, avg.windForce);
 }
