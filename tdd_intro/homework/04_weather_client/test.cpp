@@ -119,3 +119,14 @@ TEST(WeatherClient, CalculateAverageTemperature)
     double avg = CalculateAverageTemperature(weathers);
     ASSERT_DOUBLE_EQ(25.5, avg);
 }
+
+TEST(WeatherClient, CalculateAverageTemperature2)
+{
+    std::vector<Weather> weathers = {
+        { 20, 181, 5.1 },
+        { 26, 179, 4.5 }
+    };
+
+    double avg = CalculateAverageTemperature(weathers);
+    ASSERT_DOUBLE_EQ(23, avg);
+}
