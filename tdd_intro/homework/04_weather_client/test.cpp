@@ -201,3 +201,10 @@ TEST(WeatherClient, GetWeathersForADay)
     std::vector<Weather> weathers = GetWeathersForADay(server, "31.08.2018");
     EXPECT_TRUE(std::equal(weathers.begin(), weathers.end(), expectedWeathers.begin(), expectedWeathers.end()));
 }
+
+TEST(WeatherClient, GetAverageTemperature)
+{
+    FakeWeatherServer server;
+    double avg = GetAverageTemperature(server, "31.08.2018");
+    ASSERT_EQ(25.5, avg);
+}
