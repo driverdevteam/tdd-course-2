@@ -114,13 +114,17 @@ double CalculateAverageTemperature(const std::vector<Weather>& weathers)
 
 std::vector<Weather> GetWeathersForADay(IWeatherServer& server, const std::string& date)
 {
-    std::vector<Weather> expectedWeathers = {
-        { 20, 181, 5.1 },
-        { 23, 204, 4.9 },
-        { 33, 193, 4.3 },
-        { 26, 179, 4.5 }
-    };
-    return expectedWeathers;
+    auto w3AMstr = server.GetWeather(date + ";03:00");
+    auto w9AMstr = server.GetWeather(date + ";09:00");
+    auto w3PMstr = server.GetWeather(date + ";15:00");
+    auto w9PMstr = server.GetWeather(date + ";21:00");
+
+    std::vector<Weather> weathers;
+    weathers.push_back(ParseResponse(w3AMstr));
+    weathers.push_back(ParseResponse(w9AMstr));
+    weathers.push_back(ParseResponse(w3PMstr));
+    weathers.push_back(ParseResponse(w9PMstr));
+    return weathers;
 }
 
 class FakeWeatherServer: public IWeatherServer
@@ -129,6 +133,10 @@ public:
     // Returns raw statistics for the given day
     virtual std::string GetWeather(const std::string& dateTime)
     {
+        if (dateTime == "31.08.2018;03:00") return "20;181;5.1";
+        if (dateTime == "31.08.2018;09:00") return "23;204;4.9";
+        if (dateTime == "31.08.2018;15:00") return "33;193;4.3";
+        if (dateTime == "31.08.2018;21:00") return "26;179;4.5";
         return "";
     }
 };
