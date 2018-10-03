@@ -77,3 +77,11 @@ TEST(WeatherClient, ParseResponse1)
     EXPECT_EQ(181, weather.windDirection);
     EXPECT_FLOAT_EQ(5.1, weather.windForce);
 }
+
+TEST(WeatherClient, ParseResponse2)
+{
+    Weather weather = ParseResponse("23;204;4.9");
+    EXPECT_EQ(23, weather.temperature);
+    EXPECT_EQ(204, weather.windDirection);
+    EXPECT_FLOAT_EQ(4.9, weather.windForce);
+}
