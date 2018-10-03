@@ -86,6 +86,11 @@ Weather ParseResponse(const std::string& response)
     throw std::runtime_error("Invalid response");
 }
 
+double CalculateAverageTemperature(const std::vector<Weather>& weathers)
+{
+    return 25.5;
+}
+
 TEST(WeatherClient, ParseResponse1)
 {
     Weather weather = ParseResponse("20;181;5.1");
