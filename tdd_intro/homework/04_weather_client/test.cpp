@@ -89,11 +89,14 @@ Weather ParseResponse(const std::string& response)
 
 double CalculateAverageTemperature(const std::vector<Weather>& weathers)
 {
-    if (weathers.size() == 2)
+    double avg = 0;
+    if (!weathers.empty())
     {
-        return 23;
+        avg = std::accumulate(weathers.begin(), weathers.end(), 0.0,
+            [](double sum, const Weather& weather) { return sum + weather.temperature; }
+        ) / weathers.size();
     }
-    return 25.5;
+    return avg;
 }
 
 TEST(WeatherClient, ParseResponse1)
