@@ -9,7 +9,7 @@ The server answers with text of this format:
     31.08.2018;03:00;20;181:5.1
     31.08.2018;09:00;23;204:4.9
     31.08.2018;15:00;33;193:4.3
-    31.08.2018;21:00;46;179:4.5
+    31.08.2018;21:00;26;179:4.5
     Where each line represents the time of the day and contains the next information: "<date>;<time>;<air_temperature_in_celsius>;<wind_direction_in_degrees>:<wind_speed>". Wind direction value may be in range from 0 to 359 inclusively, temperature may be negative.
 
 Your program should parse the answers from weather server and collect the average values of temperature, wind direction and speed for the given period of time.
@@ -36,17 +36,14 @@ public:
 struct Average
 {
     Average() { };
-    Average(short int temperature, unsigned short windDirection, float windForce)
-        : temperature(temperature)
-        , windDirection(windDirection)
-        , windForce(windForce)
-    { }
-    Average(short int temperature, unsigned short windDirection, double windForce)
-        : Average(temperature, windDirection, static_cast<float>(windForce))
+    Average(double temperature, double windDirection, double windForce)
+        : temperature(static_cast<float>(temperature))
+        , windDirection(static_cast<float>(windDirection))
+        , windForce(static_cast<float>(windForce))
     { }
 
-    short int temperature = 0;
-    unsigned short windDirection = 0;
+    float temperature = 0;
+    float windDirection = 0;
     float windForce = 0;
 };
 
@@ -138,7 +135,7 @@ TEST(FakeWeatherClientTest, SingleDateAverage_AllWeather2)
     EXPECT_FLOAT_EQ(3.2, avg.windForce);
 }
 
-std::string weatherForDay31082018 = "31.08.2018;03:00;20;181:5.1\n31.08.2018;09:00;23;204:4.9\n31.08.2018;15:00;33;193:4.3\n31.08.2018;21:00;46;179:4.5";
+std::string weatherForDay31082018 = "31.08.2018;03:00;20;181:5.1\n31.08.2018;09:00;23;204:4.9\n31.08.2018;15:00;33;193:4.3\n31.08.2018;21:00;26;179:4.5";
 
 TEST(FakeWeatherClientTest, ParseWeatherForDay1)
 {
@@ -149,11 +146,26 @@ TEST(FakeWeatherClientTest, ParseWeatherForDay1)
     EXPECT_FLOAT_EQ(4.9, weather.windForce);
 }
 
-TEST(FakeWeatherClientTest, CalculateAverageForHistory)
+TEST(FakeWeatherClientTest, ParseWeatherForDay2)
 {
     WeatherHistory history = ParseWeatherHistory(weatherForDay31082018);
-    Average avg = CalculateAverageForHistory(history);
-    EXPECT_FLOAT_EQ(30.5, avg.temperature);
-    EXPECT_FLOAT_EQ(189.25, avg.windDirection);
-    EXPECT_FLOAT_EQ(4.7, avg.windForce);
+    Weather weather = history["31.08.2018"]["03:00"];
+    EXPECT_EQ(20, weather.temperature);
+    EXPECT_EQ(181, weather.windDirection);
+    EXPECT_FLOAT_EQ(5.1, weather.windForce);
+
+    weather = history["31.08.2018"]["09:00"];
+    EXPECT_EQ(23, weather.temperature);
+    EXPECT_EQ(204, weather.windDirection);
+    EXPECT_FLOAT_EQ(4.9, weather.windForce);
+
+    weather = history["31.08.2018"]["15:00"];
+    EXPECT_EQ(33, weather.temperature);
+    EXPECT_EQ(193, weather.windDirection);
+    EXPECT_FLOAT_EQ(4.3, weather.windForce);
+
+    weather = history["31.08.2018"]["21:00"];
+    EXPECT_EQ(26, weather.temperature);
+    EXPECT_EQ(179, weather.windDirection);
+    EXPECT_FLOAT_EQ(4.5, weather.windForce);
 }
