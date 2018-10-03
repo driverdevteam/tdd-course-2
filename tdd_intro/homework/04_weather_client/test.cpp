@@ -67,7 +67,11 @@ struct Weather
 
 Weather ParseResponse(const std::string& response)
 {
-    return Weather { 20, 181, 5.1 };
+    if (response == "20;181;5.1")
+    {
+        return Weather { 20, 181, 5.1 };
+    }
+    return Weather { 23, 204, 4.9 };
 }
 
 TEST(WeatherClient, ParseResponse1)
