@@ -58,10 +58,22 @@ public:
     virtual std::string GetWeather(const std::string& dateTime) = 0;
 };
 
-TEST(WeatherServer, ParseResponse1)
+struct Weather
+{
+    short temperature = 0;
+    unsigned short windDirection = 0;
+    double windForce = 0;
+};
+
+Weather ParseResponse(const std::string& response)
+{
+    return Weather { 20, 181, 5.1 };
+}
+
+TEST(WeatherClient, ParseResponse1)
 {
     Weather weather = ParseResponse("20;181;5.1");
-    EXPECT_FLOAT_EQ(20, weather.temperature);
-    EXPECT_FLOAT_EQ(181, weather.windDirection);
+    EXPECT_EQ(20, weather.temperature);
+    EXPECT_EQ(181, weather.windDirection);
     EXPECT_FLOAT_EQ(5.1, weather.windForce);
 }
