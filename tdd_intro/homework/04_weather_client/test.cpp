@@ -67,11 +67,20 @@ struct Weather
 
 Weather ParseResponse(const std::string& response)
 {
-    if (response == "20;181;5.1")
+    Weather weather;
+    auto sep1 = response.find_first_of(";");
+    if (sep1 != std::string::npos)
     {
-        return Weather { 20, 181, 5.1 };
+        weather.temperature = static_cast<short>(atoi(response.substr(0, sep1).c_str()));
+        auto sep2 = response.find_first_of(";", sep1 + 1);
+        if (sep2 != std::string::npos)
+        {
+            weather.windDirection = static_cast<unsigned short>(atoi(response.substr(sep1 + 1, sep2 - sep1).c_str()));
+            weather.windForce = atof(response.substr(sep2 + 1).c_str());
+            return weather;
+        }
     }
-    return Weather { 23, 204, 4.9 };
+    throw std::runtime_error("Invalid response");
 }
 
 TEST(WeatherClient, ParseResponse1)
