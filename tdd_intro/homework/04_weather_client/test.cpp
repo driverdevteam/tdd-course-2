@@ -25,7 +25,7 @@ because interacting with real network is inacceptable within the unit tests.
 - Minimum temperature
 - Maximum temperature
 - Average wind direction
-- Maximum wind force
+- Maximum wind speed
   
 You've collected some results for the several dates from the weather server.
 Use this information to implement the tests for your program. Each line means "<request>" : "<response>":
@@ -62,11 +62,18 @@ public:
     virtual std::string GetWeather(const std::string& dateTime) = 0;
 };
 
+// Implement these functions:
+double GetAverageTemperature(IWeatherServer& server, std::string& date);
+double GetMinimumTemperature(IWeatherServer& server, std::string& date);
+double GetMaximumTemperature(IWeatherServer& server, std::string& date);
+double GetAverageWindDirection(IWeatherServer& server, std::string& date);
+double GetMaximumWindSpeed(IWeatherServer& server, std::string& date);
+
 struct Weather
 {
     short temperature = 0;
     unsigned short windDirection = 0;
-    double windForce = 0;
+    double windSpeed = 0;
 };
 
 Weather ParseResponse(const std::string& response)
@@ -80,7 +87,7 @@ Weather ParseResponse(const std::string& response)
         if (sep2 != std::string::npos)
         {
             weather.windDirection = static_cast<unsigned short>(atoi(response.substr(sep1 + 1, sep2 - sep1).c_str()));
-            weather.windForce = atof(response.substr(sep2 + 1).c_str());
+            weather.windSpeed = atof(response.substr(sep2 + 1).c_str());
             return weather;
         }
     }
@@ -104,7 +111,7 @@ TEST(WeatherClient, ParseResponse1)
     Weather weather = ParseResponse("20;181;5.1");
     EXPECT_EQ(20, weather.temperature);
     EXPECT_EQ(181, weather.windDirection);
-    EXPECT_FLOAT_EQ(5.1, weather.windForce);
+    EXPECT_FLOAT_EQ(5.1, weather.windSpeed);
 }
 
 TEST(WeatherClient, ParseResponse2)
@@ -112,7 +119,7 @@ TEST(WeatherClient, ParseResponse2)
     Weather weather = ParseResponse("23;204;4.9");
     EXPECT_EQ(23, weather.temperature);
     EXPECT_EQ(204, weather.windDirection);
-    EXPECT_FLOAT_EQ(4.9, weather.windForce);
+    EXPECT_FLOAT_EQ(4.9, weather.windSpeed);
 }
 
 TEST(WeatherClient, CalculateAverageTemperature)
