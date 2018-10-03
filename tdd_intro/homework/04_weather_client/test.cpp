@@ -63,11 +63,11 @@ public:
 };
 
 // Implement these functions:
-double GetAverageTemperature(IWeatherServer& server, std::string& date);
-double GetMinimumTemperature(IWeatherServer& server, std::string& date);
-double GetMaximumTemperature(IWeatherServer& server, std::string& date);
-double GetAverageWindDirection(IWeatherServer& server, std::string& date);
-double GetMaximumWindSpeed(IWeatherServer& server, std::string& date);
+double GetAverageTemperature(IWeatherServer& server, const std::string& date);
+double GetMinimumTemperature(IWeatherServer& server, const std::string& date);
+double GetMaximumTemperature(IWeatherServer& server, const std::string& date);
+double GetAverageWindDirection(IWeatherServer& server, const std::string& date);
+double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date);
 
 struct Weather
 {
@@ -144,4 +144,17 @@ TEST(WeatherClient, CalculateAverageTemperature2)
 
     double avg = CalculateAverageTemperature(weathers);
     ASSERT_DOUBLE_EQ(23, avg);
+}
+
+TEST(WeatherClient, GetWeathersForADay)
+{
+    FakeWeatherServer server;
+    std::vector<Weather> expectedWeathers = {
+        { 20, 181, 5.1 },
+        { 23, 204, 4.9 },
+        { 33, 193, 4.3 },
+        { 26, 179, 4.5 }
+    };
+    std::vector<Weather> weathers = GetWeathersForADay(server, "31.08.2018");
+    EXPECT_EQ(expectedWeathers, weathers);
 }
