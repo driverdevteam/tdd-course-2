@@ -74,6 +74,12 @@ struct Weather
     short temperature = 0;
     unsigned short windDirection = 0;
     double windSpeed = 0;
+    bool operator==(const Weather& right)
+    {
+        return temperature == right.temperature &&
+               windDirection == right.windDirection &&
+               std::abs(windSpeed - right.windSpeed) < 0.01;
+    }
 };
 
 Weather ParseResponse(const std::string& response)
@@ -105,6 +111,27 @@ double CalculateAverageTemperature(const std::vector<Weather>& weathers)
     }
     return avg;
 }
+
+std::vector<Weather> GetWeathersForADay(IWeatherServer& server, const std::string& date)
+{
+    std::vector<Weather> expectedWeathers = {
+        { 20, 181, 5.1 },
+        { 23, 204, 4.9 },
+        { 33, 193, 4.3 },
+        { 26, 179, 4.5 }
+    };
+    return expectedWeathers;
+}
+
+class FakeWeatherServer: public IWeatherServer
+{
+public:
+    // Returns raw statistics for the given day
+    virtual std::string GetWeather(const std::string& dateTime)
+    {
+        return "";
+    }
+};
 
 TEST(WeatherClient, ParseResponse1)
 {
@@ -156,5 +183,5 @@ TEST(WeatherClient, GetWeathersForADay)
         { 26, 179, 4.5 }
     };
     std::vector<Weather> weathers = GetWeathersForADay(server, "31.08.2018");
-    EXPECT_EQ(expectedWeathers, weathers);
+    EXPECT_TRUE(std::equal(weathers.begin(), weathers.end(), expectedWeathers.begin(), expectedWeathers.end()));
 }
