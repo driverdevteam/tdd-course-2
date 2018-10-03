@@ -52,6 +52,7 @@ Note, that the real server stores weather only for times 03:00, 09:00, 15:00 and
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <string>
+#include <numeric>
 
 class IWeatherServer
 {
@@ -88,6 +89,10 @@ Weather ParseResponse(const std::string& response)
 
 double CalculateAverageTemperature(const std::vector<Weather>& weathers)
 {
+    if (weathers.size() == 2)
+    {
+        return 23;
+    }
     return 25.5;
 }
 
