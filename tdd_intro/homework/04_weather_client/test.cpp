@@ -20,7 +20,7 @@ Wind direction value may be in range from 0 to 359 inclusively, temperature may 
 The task:
 1. Implement the parsing of raw server response. To do this, you need to implement fake server,
 because interacting with real network is inacceptable within the unit tests.
-2. Using IWeatherServer interface, implement functions for collecting statistics for the certain period of time:
+2. Using IWeatherServer interface, implement functions for collecting statistics for the certain day:
 - Average temperature
 - Minimum temperature
 - Maximum temperature
@@ -44,6 +44,9 @@ Use this information to implement the tests for your program. Each line means "<
 "02.09.2018;09:00" : "25;201;3.5"
 "02.09.2018;15:00" : "34;258;3.7"
 "02.09.2018;21:00" : "27;299;4.0"
+
+Server returns empty string if request is invalid.
+Note, that the real server stores weather only for times 03:00, 09:00, 15:00 and 21:00 for every date.
 */
 
 #include <gtest/gtest.h>
@@ -97,4 +100,17 @@ TEST(WeatherClient, ParseResponse2)
     EXPECT_EQ(23, weather.temperature);
     EXPECT_EQ(204, weather.windDirection);
     EXPECT_FLOAT_EQ(4.9, weather.windForce);
+}
+
+TEST(WeatherClient, CalculateAverageTemperature)
+{
+    std::vector<Weather> weathers = {
+        { 20, 181, 5.1 },
+        { 23, 204, 4.9 },
+        { 33, 193, 4.3 },
+        { 26, 179, 4.5 }
+    };
+
+    double avg = CalculateAverageTemperature(weathers);
+    ASSERT_DOUBLE_EQ(25.5, avg);
 }
