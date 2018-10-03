@@ -137,6 +137,14 @@ public:
         if (dateTime == "31.08.2018;09:00") return "23;204;4.9";
         if (dateTime == "31.08.2018;15:00") return "33;193;4.3";
         if (dateTime == "31.08.2018;21:00") return "26;179;4.5";
+        if (dateTime == "01.09.2018;03:00") return "19;176;4.2";
+        if (dateTime == "01.09.2018;09:00") return "22;131;4.1";
+        if (dateTime == "01.09.2018;15:00") return "31;109;4.0";
+        if (dateTime == "01.09.2018;21:00") return "24;127;4.1";
+        if (dateTime == "02.09.2018;03:00") return "21;158;3.8";
+        if (dateTime == "02.09.2018;09:00") return "25;201;3.5";
+        if (dateTime == "02.09.2018;15:00") return "34;258;3.7";
+        if (dateTime == "02.09.2018;21:00") return "27;299;4.0";
         return "";
     }
 };
