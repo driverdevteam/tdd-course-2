@@ -62,13 +62,6 @@ public:
     virtual std::string GetWeather(const std::string& dateTime) = 0;
 };
 
-// Implement these functions:
-double GetAverageTemperature(IWeatherServer& server, const std::string& date);
-double GetMinimumTemperature(IWeatherServer& server, const std::string& date);
-double GetMaximumTemperature(IWeatherServer& server, const std::string& date);
-double GetAverageWindDirection(IWeatherServer& server, const std::string& date);
-double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date);
-
 struct Weather
 {
     short temperature = 0;
@@ -126,6 +119,18 @@ std::vector<Weather> GetWeathersForADay(IWeatherServer& server, const std::strin
     weathers.push_back(ParseResponse(w9PMstr));
     return weathers;
 }
+
+// Implement these functions:
+double GetAverageTemperature(IWeatherServer& server, const std::string& date)
+{
+    auto weathers = GetWeathersForADay(server, date);
+    return CalculateAverageTemperature(weathers);
+}
+double GetMinimumTemperature(IWeatherServer& server, const std::string& date);
+double GetMaximumTemperature(IWeatherServer& server, const std::string& date);
+double GetAverageWindDirection(IWeatherServer& server, const std::string& date);
+double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date);
+
 
 class FakeWeatherServer: public IWeatherServer
 {
