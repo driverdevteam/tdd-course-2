@@ -33,7 +33,7 @@ public:
     virtual void AddWater(int gram, int temperature) = 0;
     virtual void AddSugar(int gram) = 0;
     virtual void AddCoffee(int gram) = 0;
-    virtual void AddMilk(int gram) = 0;
+    virtual void AddMilk(int gram, int temperature) = 0;
     virtual void AddMilkFoam(int gram) = 0;
     virtual void AddChocolate(int gram) = 0;
     virtual void AddCream(int gram) = 0;
@@ -46,7 +46,7 @@ public:
     MOCK_METHOD2(AddWater, void(int, int));
     MOCK_METHOD1(AddSugar, void(int));
     MOCK_METHOD1(AddCoffee, void(int));
-    MOCK_METHOD1(AddMilk, void(int));
+    MOCK_METHOD2(AddMilk, void(int, int));
     MOCK_METHOD1(AddMilkFoam, void(int));
     MOCK_METHOD1(AddChocolate, void(int));
     MOCK_METHOD1(AddCream, void(int));
@@ -82,7 +82,10 @@ public:
 
     void MakeLatte(CupSize cupSize)
     {
-
+        m_source.SetCupSize(cupSize);
+        m_source.AddMilk(cupSize/4, 90);
+        m_source.AddCoffee(cupSize/2);
+        m_source.AddMilkFoam(cupSize/4);
     }
 
 private:
