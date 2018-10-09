@@ -68,3 +68,16 @@ TEST(CoffeeMachine, CreateMachine)
     MockSource source;
     CoffeeMachine machine(source);
 }
+
+TEST(CoffeeMachine, MakeAmericano)
+{
+    MockSource source;
+    CoffeeMachine machine(source);
+
+    EXPECT_CALL(source, SetCupSize(100)).Times(1);
+    EXPECT_CALL(source, AddCoffee(100/3)).Times(1);
+    EXPECT_CALL(source, AddWater(100 - 100/3, 60)).Times(1);
+
+    machine.CreateCappucino(100);
+}
+
