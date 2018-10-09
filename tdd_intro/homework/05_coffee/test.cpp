@@ -88,3 +88,15 @@ TEST(CoffeeMachine, MakeAmericano)
     machine.CreateCappucino(100);
 }
 
+TEST(CoffeeMachine, MakeBigAmericano)
+{
+    MockSource source;
+    CoffeeMachine machine(source);
+
+    EXPECT_CALL(source, SetCupSize(160)).Times(1);
+    EXPECT_CALL(source, AddCoffee(160/3)).Times(1);
+    EXPECT_CALL(source, AddWater(160 - 160/3, 60)).Times(1);
+
+    machine.CreateCappucino(160);
+}
+
