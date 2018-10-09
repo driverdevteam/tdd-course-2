@@ -74,7 +74,10 @@ public:
 
     void MakeCappuccino(CupSize cupSize)
     {
-
+        m_source.SetCupSize(cupSize);
+        m_source.AddWater(cupSize/3, 80);
+        m_source.AddCoffee(cupSize/3);
+        m_source.AddMilkFoam(cupSize/3);
     }
 
 private:
@@ -121,6 +124,6 @@ TEST(CoffeeMachine, MakeCappuccino)
     EXPECT_CALL(source, AddWater(LittleCup/3, 80)).Times(1);
     EXPECT_CALL(source, AddMilkFoam(LittleCup/3)).Times(1);
 
-    machine.MakeCappuccino(BigCup);
+    machine.MakeCappuccino(LittleCup);
 }
 
