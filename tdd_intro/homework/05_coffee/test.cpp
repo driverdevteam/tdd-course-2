@@ -52,6 +52,17 @@ public:
     MOCK_METHOD1(AddCream, void(int));
 };
 
+class CoffeeMachine
+{
+public:
+    CoffeeMachine(ISourceOfIngredients& source)
+        : m_source(source)
+    { }
+
+private:
+    ISourceOfIngredients& m_source;
+};
+
 TEST(CoffeeMachine, CreateMachine)
 {
     MockSource source;
