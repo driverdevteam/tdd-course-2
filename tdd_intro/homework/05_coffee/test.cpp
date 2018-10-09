@@ -65,11 +65,16 @@ public:
         : m_source(source)
     { }
 
-    void CreateCappucino(CupSize cupSize)
+    void MakeAmericano(CupSize cupSize)
     {
         m_source.SetCupSize(cupSize);
         m_source.AddWater(cupSize - (cupSize / 3), 60);
         m_source.AddCoffee(cupSize / 3);
+    }
+
+    void MakeCappuccino(CupSize cupSize)
+    {
+
     }
 
 private:
@@ -91,7 +96,7 @@ TEST(CoffeeMachine, MakeAmericano)
     EXPECT_CALL(source, AddCoffee(LittleCup/3)).Times(1);
     EXPECT_CALL(source, AddWater(LittleCup - LittleCup/3, 60)).Times(1);
 
-    machine.CreateCappucino(LittleCup);
+    machine.MakeAmericano(LittleCup);
 }
 
 TEST(CoffeeMachine, MakeBigAmericano)
@@ -103,6 +108,19 @@ TEST(CoffeeMachine, MakeBigAmericano)
     EXPECT_CALL(source, AddCoffee(BigCup/3)).Times(1);
     EXPECT_CALL(source, AddWater(BigCup - BigCup/3, 60)).Times(1);
 
-    machine.CreateCappucino(BigCup);
+    machine.MakeAmericano(BigCup);
+}
+
+TEST(CoffeeMachine, MakeCappuccino)
+{
+    MockSource source;
+    CoffeeMachine machine(source);
+
+    EXPECT_CALL(source, SetCupSize(LittleCup)).Times(1);
+    EXPECT_CALL(source, AddCoffee(LittleCup/3)).Times(1);
+    EXPECT_CALL(source, AddWater(LittleCup/3, 80)).Times(1);
+    EXPECT_CALL(source, AddMilkFoam(LittleCup/3)).Times(1);
+
+    machine.MakeCappuccino(BigCup);
 }
 
