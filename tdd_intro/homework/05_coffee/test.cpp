@@ -90,7 +90,10 @@ public:
 
     void MakeMarocino(CupSize cupSize)
     {
-
+        m_source.SetCupSize(cupSize);
+        m_source.AddChocolate(cupSize/4);
+        m_source.AddCoffee(cupSize/4);
+        m_source.AddMilkFoam(cupSize/4);
     }
 
 private:
