@@ -16,8 +16,6 @@ Implement worked coffee machine using ISourceOfIngredients to controll the proce
 
 /*
  * Tests:
- * Make little cup of hot water
- * Make big cup of hot water
  * Make americano
  * Make cappuccino
  * Make latte
@@ -53,3 +51,9 @@ public:
     MOCK_METHOD1(AddChocolate, void(int));
     MOCK_METHOD1(AddCream, void(int));
 };
+
+TEST(CoffeeMachine, CreateMachine)
+{
+    MockSource source;
+    CoffeeMachine machine(source);
+}
