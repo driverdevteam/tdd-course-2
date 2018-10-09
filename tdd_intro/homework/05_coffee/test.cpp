@@ -14,6 +14,16 @@ We have 2 possible sizes of the cup:
 Implement worked coffee machine using ISourceOfIngredients to controll the process of coffee production.
 */
 
+/*
+ * Tests:
+ * Make little cup of hot water
+ * Make big cup of hot water
+ * Make americano
+ * Make cappuccino
+ * Make latte
+ * Make marochino
+*/
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
