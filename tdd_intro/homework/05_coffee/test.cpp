@@ -59,6 +59,13 @@ public:
         : m_source(source)
     { }
 
+    void CreateCappucino(int cupSize)
+    {
+        m_source.SetCupSize(cupSize);
+        m_source.AddWater(cupSize - (cupSize / 3), 60);
+        m_source.AddCoffee(cupSize / 3);
+    }
+
 private:
     ISourceOfIngredients& m_source;
 };
