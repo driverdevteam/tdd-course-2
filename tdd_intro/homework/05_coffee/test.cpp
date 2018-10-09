@@ -52,6 +52,12 @@ public:
     MOCK_METHOD1(AddCream, void(int));
 };
 
+enum CupSize
+{
+    LittleCup = 100,
+    BigCup = 160
+};
+
 class CoffeeMachine
 {
 public:
@@ -59,7 +65,7 @@ public:
         : m_source(source)
     { }
 
-    void CreateCappucino(int cupSize)
+    void CreateCappucino(CupSize cupSize)
     {
         m_source.SetCupSize(cupSize);
         m_source.AddWater(cupSize - (cupSize / 3), 60);
@@ -81,11 +87,11 @@ TEST(CoffeeMachine, MakeAmericano)
     MockSource source;
     CoffeeMachine machine(source);
 
-    EXPECT_CALL(source, SetCupSize(100)).Times(1);
-    EXPECT_CALL(source, AddCoffee(100/3)).Times(1);
-    EXPECT_CALL(source, AddWater(100 - 100/3, 60)).Times(1);
+    EXPECT_CALL(source, SetCupSize(LittleCup)).Times(1);
+    EXPECT_CALL(source, AddCoffee(LittleCup/3)).Times(1);
+    EXPECT_CALL(source, AddWater(LittleCup - LittleCup/3, 60)).Times(1);
 
-    machine.CreateCappucino(100);
+    machine.CreateCappucino(LittleCup);
 }
 
 TEST(CoffeeMachine, MakeBigAmericano)
@@ -93,10 +99,10 @@ TEST(CoffeeMachine, MakeBigAmericano)
     MockSource source;
     CoffeeMachine machine(source);
 
-    EXPECT_CALL(source, SetCupSize(160)).Times(1);
-    EXPECT_CALL(source, AddCoffee(160/3)).Times(1);
-    EXPECT_CALL(source, AddWater(160 - 160/3, 60)).Times(1);
+    EXPECT_CALL(source, SetCupSize(BigCup)).Times(1);
+    EXPECT_CALL(source, AddCoffee(BigCup/3)).Times(1);
+    EXPECT_CALL(source, AddWater(BigCup - BigCup/3, 60)).Times(1);
 
-    machine.CreateCappucino(160);
+    machine.CreateCappucino(BigCup);
 }
 
