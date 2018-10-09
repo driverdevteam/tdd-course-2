@@ -88,6 +88,11 @@ public:
         m_source.AddMilkFoam(cupSize/4);
     }
 
+    void MakeMarocino(CupSize cupSize)
+    {
+
+    }
+
 private:
     ISourceOfIngredients& m_source;
 };
@@ -146,4 +151,17 @@ TEST(CoffeeMachine, MakeLatte)
     EXPECT_CALL(source, AddMilkFoam(BigCup/4)).Times(1);
 
     machine.MakeLatte(BigCup);
+}
+
+TEST(CoffeeMachine, MakeMarocino)
+{
+    MockSource source;
+    CoffeeMachine machine(source);
+
+    EXPECT_CALL(source, SetCupSize(LittleCup)).Times(1);
+    EXPECT_CALL(source, AddChocolate(LittleCup/4)).Times(1);
+    EXPECT_CALL(source, AddCoffee(LittleCup/4)).Times(1);
+    EXPECT_CALL(source, AddMilkFoam(LittleCup/4)).Times(1);
+
+    machine.MakeMarocino(LittleCup);
 }
