@@ -16,7 +16,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(int)
 {
-    return false;
+    return true;
 }
 
 TEST(IsLeapYear, check_LeapYear)
