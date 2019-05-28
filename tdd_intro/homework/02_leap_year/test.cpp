@@ -14,9 +14,9 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
-bool IsLeapYear(int)
+bool IsLeapYear(int year)
 {
-    return true;
+    return (year % 4) == 0;
 }
 
 TEST(IsLeapYear, check_LeapYear)
