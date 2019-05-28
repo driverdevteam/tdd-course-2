@@ -62,3 +62,8 @@ TEST(IsLeapYear, check_LeapYear_ForZerro)
 {
     EXPECT_TRUE(IsLeapYear(0));
 }
+
+TEST(IsLeapYear, check_LeapYear_ForNegativeNumber)
+{
+    EXPECT_THROW(IsLeapYear(-4), std::runtime_error);
+}
