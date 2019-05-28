@@ -14,9 +14,22 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
+bool IsDivisibleBy4(int year)
+{
+    return (year % 4) == 0;
+}
+
+bool IsDivisibleBy100(int year)
+{
+    return (year % 100) == 0;
+}
+
 bool IsLeapYear(int year)
 {
-    return (year % 4) == 0 && (year % 100) != 0;
+    bool result = true;
+    result &= IsDivisibleBy4(year);
+    result &= !IsDivisibleBy100(year);
+    return result;
 }
 
 TEST(IsLeapYear, check_LeapYear)
