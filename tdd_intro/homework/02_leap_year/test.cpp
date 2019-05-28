@@ -29,6 +29,10 @@ bool IsLeapYear(int year)
     bool result = true;
     result &= IsDivisibleBy4(year);
     result &= !IsDivisibleBy100(year);
+    if((year % 400) == 0 )
+    {
+        return true;
+    }
     return result;
 }
 
