@@ -13,3 +13,61 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+bool IsDivisibleBy4(int year)
+{
+    return (year % 4) == 0;
+}
+
+bool IsDivisibleBy100(int year)
+{
+    return (year % 100) == 0;
+}
+
+bool IsDivisibleBy400(int year)
+{
+    return (year % 400) == 0;
+}
+
+bool IsLeapYear(int year)
+{
+    if(year < 0)
+    {
+        throw std::runtime_error("incorrect input data");
+    }
+    bool result = true;
+    result &= IsDivisibleBy4(year);
+    result &= IsDivisibleBy400(year) || !IsDivisibleBy100(year);
+
+    return result;
+}
+
+TEST(IsLeapYear, check_LeapYear)
+{
+    EXPECT_TRUE(IsLeapYear(2016));
+}
+
+TEST(IsLeapYear, check_NotLeapYear)
+{
+    EXPECT_FALSE(IsLeapYear(2017));
+}
+
+TEST(IsLeapYear, check_NotLeapYear_ForDivisibleBy100)
+{
+    EXPECT_FALSE(IsLeapYear(1900));
+}
+
+TEST(IsLeapYear, check_LeapYear_ForDivisibleBy400)
+{
+    EXPECT_TRUE(IsLeapYear(2000));
+}
+
+TEST(IsLeapYear, check_LeapYear_ForZerro)
+{
+    EXPECT_TRUE(IsLeapYear(0));
+}
+
+TEST(IsLeapYear, check_LeapYear_ForNegativeNumber)
+{
+    EXPECT_THROW(IsLeapYear(-4), std::runtime_error);
+}
