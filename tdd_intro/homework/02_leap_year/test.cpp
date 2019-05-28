@@ -31,6 +31,10 @@ bool IsDivisibleBy400(int year)
 
 bool IsLeapYear(int year)
 {
+    if(year < 0)
+    {
+        throw std::runtime_error("incorrect input data");
+    }
     bool result = true;
     result &= IsDivisibleBy4(year);
     result &= IsDivisibleBy400(year) || !IsDivisibleBy100(year);
