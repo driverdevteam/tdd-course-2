@@ -57,3 +57,8 @@ TEST(IsLeapYear, check_LeapYear_ForDivisibleBy400)
 {
     EXPECT_TRUE(IsLeapYear(2000));
 }
+
+TEST(IsLeapYear, check_LeapYear_ForZerro)
+{
+    EXPECT_TRUE(IsLeapYear(0));
+}
