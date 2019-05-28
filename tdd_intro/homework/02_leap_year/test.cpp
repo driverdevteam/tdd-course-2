@@ -24,15 +24,17 @@ bool IsDivisibleBy100(int year)
     return (year % 100) == 0;
 }
 
+bool IsDivisibleBy400(int year)
+{
+    return (year % 400) == 0;
+}
+
 bool IsLeapYear(int year)
 {
     bool result = true;
     result &= IsDivisibleBy4(year);
-    result &= !IsDivisibleBy100(year);
-    if((year % 400) == 0 )
-    {
-        return true;
-    }
+    result &= IsDivisibleBy400(year) || !IsDivisibleBy100(year);
+
     return result;
 }
 
